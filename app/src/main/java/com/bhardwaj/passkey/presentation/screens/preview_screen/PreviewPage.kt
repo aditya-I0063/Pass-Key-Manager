@@ -1,5 +1,6 @@
 package com.bhardwaj.passkey.presentation.screens.preview_screen
 
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import android.os.Build
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -39,7 +40,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -58,6 +58,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.bhardwaj.passkey.presentation.screens.common.ObserveAsEvents
 import com.bhardwaj.passkey.R
 import com.bhardwaj.passkey.presentation.screens.common.labelRes
 import com.bhardwaj.passkey.presentation.screens.preview_screen.PreviewEvents
@@ -84,18 +85,18 @@ fun PreviewScreen(
     onNavigate: (UiEvents.Navigate) -> Unit,
     viewModel: PreviewViewModel = hiltViewModel()
 ) {
-    val categoryName by viewModel.categoryName.collectAsState()
+    val categoryName by viewModel.categoryName.collectAsStateWithLifecycle()
     // Localized display names come from Category.labelRes, which the bottom navigation
     // also uses, so the two can no longer drift apart.
     val categoryNameMap = Category.entries.associate { it.name to stringResource(it.labelRes()) }
 
-    val previewHeading by viewModel.previewHeading.collectAsState()
-    val isEditingSheet by viewModel.isEditingSheet.collectAsState()
+    val previewHeading by viewModel.previewHeading.collectAsStateWithLifecycle()
+    val isEditingSheet by viewModel.isEditingSheet.collectAsStateWithLifecycle()
     // Resolved here rather than in the ViewModel so it follows the app locale.
     val bottomSheetHeading =
         stringResource(if (isEditingSheet) R.string.edit else R.string.add)
-    val searchText by viewModel.searchText.collectAsState()
-    val previews by viewModel.previews.collectAsState()
+    val searchText by viewModel.searchText.collectAsStateWithLifecycle()
+    val previews by viewModel.previews.collectAsStateWithLifecycle()
 
     var selectedIndex by rememberSaveable { mutableIntStateOf(0) }
 
@@ -112,8 +113,7 @@ fun PreviewScreen(
 
     val context = LocalContext.current
 
-    LaunchedEffect(key1 = true) {
-        viewModel.uiEvents.collect { event ->
+    ObserveAsEvents(viewModel.uiEvents) { event ->
             when (event) {
                 is UiEvents.Navigate -> onNavigate(event)
                 is UiEvents.ShowSnackBar -> {
@@ -143,7 +143,6 @@ fun PreviewScreen(
 
                 else -> Unit
             }
-        }
     }
 
     Scaffold(

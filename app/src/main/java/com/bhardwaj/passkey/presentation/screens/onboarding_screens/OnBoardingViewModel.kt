@@ -17,7 +17,10 @@ class OnBoardingViewModel @Inject constructor(
     private val preferences: PreferencesRepository
 ) : ViewModel() {
 
-    private val _uiEvents = Channel<UiEvents>()
+    // BUFFERED, not the RENDEZVOUS default: with lifecycle-aware collection a backgrounded
+    // screen has no active collector, and a rendezvous channel would suspend the coroutine
+    // that emitted the effect until the user came back.
+    private val _uiEvents = Channel<UiEvents>(Channel.BUFFERED)
     val uiEvents = _uiEvents.receiveAsFlow()
 
     fun onEvent(event: OnBoardingEvents) {

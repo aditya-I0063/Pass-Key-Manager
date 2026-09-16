@@ -32,7 +32,10 @@ class DetailViewModel @Inject constructor(
     private val repository: PasskeyRepository,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-    private val _uiEvents = Channel<UiEvents>()
+    // BUFFERED, not the RENDEZVOUS default: with lifecycle-aware collection a backgrounded
+    // screen has no active collector, and a rendezvous channel would suspend the coroutine
+    // that emitted the effect until the user came back.
+    private val _uiEvents = Channel<UiEvents>(Channel.BUFFERED)
     val uiEvents = _uiEvents.receiveAsFlow()
 
     // Deliberately NOT in SavedStateHandle. That is serialized into the saved-instance-state

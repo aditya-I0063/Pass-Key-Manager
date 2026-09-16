@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.bhardwaj.passkey.presentation.screens.common.ObserveAsEvents
 import com.bhardwaj.passkey.R
 import com.bhardwaj.passkey.presentation.screens.splash_screen.SplashEvents
 import com.bhardwaj.passkey.presentation.screens.splash_screen.SplashViewModel
@@ -44,13 +45,11 @@ fun SplashPage(
         Animatable(0.3F)
     }
 
-    LaunchedEffect(key1 = true) {
-        viewModel.uiEvents.collect { event ->
+    ObserveAsEvents(viewModel.uiEvents) { event ->
             when (event) {
                 is UiEvents.Navigate -> onNavigate(event)
                 else -> Unit
             }
-        }
     }
 
     LaunchedEffect(key1 = true) {

@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.bhardwaj.passkey.presentation.screens.common.ObserveAsEvents
 import com.bhardwaj.passkey.R
 import com.bhardwaj.passkey.presentation.screens.onboarding_screens.OnBoardingEvents
 import com.bhardwaj.passkey.presentation.screens.onboarding_screens.OnBoardingViewModel
@@ -51,13 +52,11 @@ fun OnBoardingScreen(
         )
     )
 
-    LaunchedEffect(key1 = true) {
-        viewModel.uiEvents.collect { event ->
+    ObserveAsEvents(viewModel.uiEvents) { event ->
             when (event) {
                 is UiEvents.Navigate -> onNavigate(event)
                 else -> Unit
             }
-        }
     }
     Column(
         modifier = Modifier

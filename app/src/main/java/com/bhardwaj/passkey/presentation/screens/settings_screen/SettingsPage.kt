@@ -53,6 +53,7 @@ import java.util.Date
 import java.util.Locale
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.bhardwaj.passkey.presentation.screens.settings_screen.components.AutoLockDialog
+import com.bhardwaj.passkey.presentation.screens.common.ObserveAsEvents
 import com.bhardwaj.passkey.R
 import com.bhardwaj.passkey.presentation.screens.settings_screen.SettingsEvents
 import com.bhardwaj.passkey.presentation.screens.settings_screen.SettingsViewModel
@@ -163,22 +164,20 @@ fun SettingsScreen(
     val isAnalysisSheetOpen = viewModel.isAnalysisSheetOpen
     val analysisResult = viewModel.analysisResult
 
-    LaunchedEffect(key1 = true) {
-        viewModel.uiEvents.collect { event ->
-            when (event) {
-                is UiEvents.PopBackStack -> onPopBackStack()
-                is UiEvents.Navigate -> onNavigate(event.route)
-                is UiEvents.ShowSnackBar -> {
-                    scope.launch {
-                        snackBarHostState.showSnackbar(
-                            message = event.message.asString(context),
-                            actionLabel = event.action?.asString(context)
-                        )
-                    }
+    ObserveAsEvents(viewModel.uiEvents) { event ->
+        when (event) {
+            is UiEvents.PopBackStack -> onPopBackStack()
+            is UiEvents.Navigate -> onNavigate(event.route)
+            is UiEvents.ShowSnackBar -> {
+                scope.launch {
+                    snackBarHostState.showSnackbar(
+                        message = event.message.asString(context),
+                        actionLabel = event.action?.asString(context)
+                    )
                 }
-
-                else -> Unit
             }
+
+            else -> Unit
         }
     }
 

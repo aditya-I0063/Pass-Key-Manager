@@ -1,5 +1,6 @@
 package com.bhardwaj.passkey.presentation.screens.detail_screen
 
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import android.os.Build
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -31,7 +32,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -47,6 +47,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.bhardwaj.passkey.presentation.screens.common.ObserveAsEvents
 import com.bhardwaj.passkey.R
 import com.bhardwaj.passkey.presentation.screens.detail_screen.DetailEvents
 import com.bhardwaj.passkey.presentation.screens.detail_screen.DetailViewModel
@@ -71,14 +72,14 @@ fun DetailScreen(
     onPopBackStack: () -> Unit,
     viewModel: DetailViewModel = hiltViewModel()
 ) {
-    val detailTitle by viewModel.detailTitle.collectAsState()
-    val detailResponse by viewModel.detailResponse.collectAsState()
-    val isEditingSheet by viewModel.isEditingSheet.collectAsState()
+    val detailTitle by viewModel.detailTitle.collectAsStateWithLifecycle()
+    val detailResponse by viewModel.detailResponse.collectAsStateWithLifecycle()
+    val isEditingSheet by viewModel.isEditingSheet.collectAsStateWithLifecycle()
     // Resolved here rather than in the ViewModel so it follows the app locale.
     val bottomSheetHeading =
         stringResource(if (isEditingSheet) R.string.edit else R.string.add)
-    val searchText by viewModel.searchText.collectAsState()
-    val details by viewModel.details.collectAsState(initial = emptyList())
+    val searchText by viewModel.searchText.collectAsStateWithLifecycle()
+    val details by viewModel.details.collectAsStateWithLifecycle()
 
     val snackBarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
@@ -94,8 +95,7 @@ fun DetailScreen(
 
     val context = LocalContext.current
 
-    LaunchedEffect(key1 = true) {
-        viewModel.uiEvents.collect { event ->
+    ObserveAsEvents(viewModel.uiEvents) { event ->
             when (event) {
                 is UiEvents.PopBackStack -> onPopBackStack()
                 is UiEvents.ShowSnackBar -> {
@@ -125,7 +125,6 @@ fun DetailScreen(
 
                 else -> Unit
             }
-        }
     }
 
     Scaffold(
