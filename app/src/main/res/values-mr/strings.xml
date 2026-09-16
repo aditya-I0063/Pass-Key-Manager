@@ -153,4 +153,13 @@
     <string name="device_lock_required_title">उपकरण लॉक आवश्यक</string>
     <string name="device_lock_required_message">PassKey तुमची व्हॉल्ट उपकरणाच्या स्क्रीन लॉकने सुरक्षित ठेवते. पुढे जाण्यासाठी पिन, पॅटर्न, पासवर्ड किंवा बायोमेट्रिक सेट करा.</string>
     <string name="device_lock_open_settings">सेटिंग्ज उघडा</string>
+    <string name="change_recovery_password">पुनर्प्राप्ती पासवर्ड बदला</string>
+    <string name="recovery_change_current_title">सध्याच्या पासवर्डची पुष्टी करा</string>
+    <string name="recovery_change_current_message">तुम्हीच आहात हे सिद्ध करण्यासाठी सध्याचा पुनर्प्राप्ती पासवर्ड टाका.</string>
+    <string name="recovery_change_new_title">नवीन पुनर्प्राप्ती पासवर्ड निवडा</string>
+    <string name="recovery_change_new_message">हा तुमच्या जुन्या पुनर्प्राप्ती पासवर्डची जागा घेतो. तो रीसेट करता येत नाही, सुरक्षित ठिकाणी ठेवा.</string>
+    <string name="recovery_change_done">पुनर्प्राप्ती पासवर्ड बदलला.</string>
+    <string name="recovery_change_failed">तो पासवर्ड बरोबर नव्हता.</string>
+    <string name="migration_export_first">आधी बॅकअप घ्या</string>
+    <string name="migration_export_now">माझी व्हॉल्ट आता निर्यात करा</string>
 </resources>

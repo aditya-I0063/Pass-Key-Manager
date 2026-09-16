@@ -154,4 +154,13 @@
     <string name="device_lock_required_title">Bloqueio de tela necessário</string>
     <string name="device_lock_required_message">O PassKey protege seu cofre com o bloqueio de tela do aparelho. Configure PIN, padrão, senha ou biometria para continuar.</string>
     <string name="device_lock_open_settings">Abrir configurações</string>
+    <string name="change_recovery_password">Alterar senha de recuperação</string>
+    <string name="recovery_change_current_title">Confirme a senha atual</string>
+    <string name="recovery_change_current_message">Digite sua senha de recuperação atual para provar que é você.</string>
+    <string name="recovery_change_new_title">Escolha uma nova senha de recuperação</string>
+    <string name="recovery_change_new_message">Ela substitui sua senha de recuperação antiga. Não pode ser redefinida, guarde-a em local seguro.</string>
+    <string name="recovery_change_done">Senha de recuperação alterada.</string>
+    <string name="recovery_change_failed">Essa senha não estava correta.</string>
+    <string name="migration_export_first">Exportar um backup antes</string>
+    <string name="migration_export_now">Exportar meu cofre agora</string>
 </resources>

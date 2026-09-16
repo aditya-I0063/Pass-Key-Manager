@@ -152,4 +152,13 @@
     <string name="device_lock_required_title">需要设备锁</string>
     <string name="device_lock_required_message">PassKey 使用设备的屏幕锁保护你的密码库。请设置 PIN、图案、密码或生物识别以继续。</string>
     <string name="device_lock_open_settings">打开设置</string>
+    <string name="change_recovery_password">更改恢复密码</string>
+    <string name="recovery_change_current_title">确认当前密码</string>
+    <string name="recovery_change_current_message">请输入现有的恢复密码以证明是你本人。</string>
+    <string name="recovery_change_new_title">设置新的恢复密码</string>
+    <string name="recovery_change_new_message">这将替换你原来的恢复密码。它无法重置，请妥善保管。</string>
+    <string name="recovery_change_done">恢复密码已更改。</string>
+    <string name="recovery_change_failed">该密码不正确。</string>
+    <string name="migration_export_first">先导出备份</string>
+    <string name="migration_export_now">立即导出我的密码库</string>
 </resources>

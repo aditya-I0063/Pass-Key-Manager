@@ -154,4 +154,13 @@
     <string name="device_lock_required_title">Gerätesperre erforderlich</string>
     <string name="device_lock_required_message">PassKey schützt deinen Tresor mit der Bildschirmsperre deines Geräts. Richte PIN, Muster, Passwort oder Biometrie ein, um fortzufahren.</string>
     <string name="device_lock_open_settings">Einstellungen öffnen</string>
+    <string name="change_recovery_password">Wiederherstellungspasswort ändern</string>
+    <string name="recovery_change_current_title">Aktuelles Passwort bestätigen</string>
+    <string name="recovery_change_current_message">Gib dein bisheriges Wiederherstellungspasswort ein, um dich auszuweisen.</string>
+    <string name="recovery_change_new_title">Neues Wiederherstellungspasswort wählen</string>
+    <string name="recovery_change_new_message">Das ersetzt dein bisheriges Wiederherstellungspasswort. Es lässt sich nicht zurücksetzen, bewahre es sicher auf.</string>
+    <string name="recovery_change_done">Wiederherstellungspasswort geändert.</string>
+    <string name="recovery_change_failed">Das Passwort war nicht korrekt.</string>
+    <string name="migration_export_first">Zuerst ein Backup exportieren</string>
+    <string name="migration_export_now">Tresor jetzt exportieren</string>
 </resources>

@@ -143,7 +143,7 @@ class DatabaseKeyManager @Inject constructor(
     ): UnlockResult? {
         val slot = file.slot(SlotId.BIO) as? KeySlot.Keystore ?: return null
         val cipher = try {
-            keyStore.initDecryptCipher(slot.alias, slot.ivB64.decodeB64())
+            keyStore.initDecryptCipher(slot.alias)
         } catch (_: KeyPermanentlyInvalidatedException) {
             return null   // enrollment changed - fall through to CRED
         } catch (_: Exception) {
@@ -183,7 +183,7 @@ class DatabaseKeyManager @Inject constructor(
 
         return try {
             // Must happen inside the key's validity window opened by the prompt above.
-            val cipher = keyStore.initDecryptCipher(slot.alias, slot.ivB64.decodeB64())
+            val cipher = keyStore.initDecryptCipher(slot.alias)
             val dek = cipher.doFinal(slot.wrappedKeyB64.decodeB64())
             repairBiometricSlot(file, dek)
             UnlockResult.Success(dek)
@@ -221,11 +221,42 @@ class DatabaseKeyManager @Inject constructor(
         }
     }
 
-    suspend fun changeRecoveryPassword(dek: ByteArray, newPassword: CharArray) =
-        mutex.withLock {
-            val file = slotStore.load() ?: return@withLock
-            slotStore.save(file.withSlot(wrapWithPassword(SlotId.REC, dek, newPassword)))
+    /**
+     * Re-wraps the key under a new recovery password.
+     *
+     * The current password is required rather than reusing an in-memory key: proving knowledge
+     * of the old password is what stops someone who picks up an unlocked phone from silently
+     * replacing the recovery credential with one of their own. It also means the key never has
+     * to be retained in memory for the lifetime of the session.
+     */
+    suspend fun changeRecoveryPassword(
+        currentPassword: CharArray,
+        newPassword: CharArray
+    ): Boolean = mutex.withLock {
+        withContext(Dispatchers.IO) {
+            val file = slotStore.load() ?: return@withContext false
+            val slot = file.slot(SlotId.REC) as? KeySlot.Password ?: return@withContext false
+
+            val wrappingKey = keyDerivation.derive(currentPassword, slot.kdf)
+            val dek = try {
+                AesGcm.decrypt(
+                    key = wrappingKey,
+                    iv = slot.ivB64.decodeB64(),
+                    ciphertext = slot.wrappedKeyB64.decodeB64()
+                )
+            } finally {
+                Arrays.fill(wrappingKey, 0)
+            } ?: return@withContext false
+
+            try {
+                if (dekCheck(dek) != file.dekCheck) return@withContext false
+                slotStore.save(file.withSlot(wrapWithPassword(SlotId.REC, dek, newPassword)))
+                true
+            } finally {
+                Arrays.fill(dek, 0)
+            }
         }
+    }
 
     suspend fun markMigrationState(state: MigrationState) = mutex.withLock {
         slotStore.load()?.let { slotStore.save(it.copy(migrationState = state)) }
@@ -259,13 +290,14 @@ class DatabaseKeyManager @Inject constructor(
     }
 
     private fun wrapWithKeystore(id: SlotId, alias: String, dek: ByteArray): KeySlot.Keystore {
+        // Public-key encryption, so this needs no authentication and can run during setup.
         val cipher: Cipher = keyStore.initEncryptCipher(alias)
-        val wrapped = cipher.doFinal(dek)
         return KeySlot.Keystore(
             id = id,
             alias = alias,
-            ivB64 = cipher.iv.encodeB64(),
-            wrappedKeyB64 = wrapped.encodeB64()
+            // RSA-OAEP carries no IV; the field stays for the password slots.
+            ivB64 = "",
+            wrappedKeyB64 = cipher.doFinal(dek).encodeB64()
         )
     }
 

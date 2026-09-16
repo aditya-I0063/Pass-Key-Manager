@@ -3,6 +3,8 @@ package com.bhardwaj.passkey.domain.viewModels
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import android.net.Uri
+import com.bhardwaj.passkey.data.backup.BackupRepository
 import com.bhardwaj.passkey.data.local.VaultDatabaseProvider
 import com.bhardwaj.passkey.data.security.DatabaseKeyManager
 import com.bhardwaj.passkey.data.security.MigrationState
@@ -24,6 +26,7 @@ import javax.inject.Inject
 class VaultGateViewModel @Inject constructor(
     private val keyManager: DatabaseKeyManager,
     private val migration: VaultMigration,
+    private val backupRepository: BackupRepository,
     private val vault: VaultDatabaseProvider,
     private val session: VaultSession
 ) : ViewModel() {
@@ -54,6 +57,10 @@ class VaultGateViewModel @Inject constructor(
 
     private val _state = MutableStateFlow<State>(State.Checking)
     val state: StateFlow<State> = _state.asStateFlow()
+
+    /** null = nothing to report, true/false = the outcome of a rescue export. */
+    private val _exportResult = MutableStateFlow<Boolean?>(null)
+    val exportResult: StateFlow<Boolean?> = _exportResult.asStateFlow()
 
     /** Set when a wrong recovery password was entered, so the UI can say so. */
     private val _recoveryFailed = MutableStateFlow(false)
@@ -126,6 +133,27 @@ class VaultGateViewModel @Inject constructor(
     }
 
     fun onRetry() = start()
+
+    /**
+     * Exports the un-migrated vault by reading it through the legacy key.
+     *
+     * Offered before the re-key and again if it fails. The point is that a user is never stuck
+     * behind a migration they cannot complete: the original database is untouched by a failed
+     * export, so its contents can always be written out to a backup they control.
+     */
+    fun onExportLegacyVault(uri: Uri, password: CharArray) {
+        viewModelScope.launch {
+            val previews = migration.readLegacyVault()
+            val success = previews != null &&
+                backupRepository.exportPreviews(uri, password, previews).isSuccess
+            Arrays.fill(password, NUL)
+            _exportResult.value = success
+        }
+    }
+
+    fun onExportResultShown() {
+        _exportResult.value = null
+    }
 
     /**
      * The re-key runs after unlock, because the new key must be wrapped by an auth-bound

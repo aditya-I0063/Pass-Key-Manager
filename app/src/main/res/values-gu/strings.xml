@@ -152,4 +152,13 @@
     <string name="device_lock_required_title">ઉપકરણ લૉક જરૂરી</string>
     <string name="device_lock_required_message">PassKey તમારી વૉલ્ટને ઉપકરણના સ્ક્રીન લૉકથી સુરક્ષિત રાખે છે. ચાલુ રાખવા પિન, પૅટર્ન, પાસવર્ડ કે બાયોમેટ્રિક સેટ કરો.</string>
     <string name="device_lock_open_settings">સેટિંગ્સ ખોલો</string>
+    <string name="change_recovery_password">પુનઃપ્રાપ્તિ પાસવર્ડ બદલો</string>
+    <string name="recovery_change_current_title">વર્તમાન પાસવર્ડની પુષ્ટિ કરો</string>
+    <string name="recovery_change_current_message">તમે જ છો તે સાબિત કરવા હાલનો પુનઃપ્રાપ્તિ પાસવર્ડ દાખલ કરો.</string>
+    <string name="recovery_change_new_title">નવો પુનઃપ્રાપ્તિ પાસવર્ડ પસંદ કરો</string>
+    <string name="recovery_change_new_message">આ તમારા જૂના પુનઃપ્રાપ્તિ પાસવર્ડની જગ્યા લે છે. તે રીસેટ થઈ શકતો નથી, સુરક્ષિત જગ્યાએ રાખો.</string>
+    <string name="recovery_change_done">પુનઃપ્રાપ્તિ પાસવર્ડ બદલાયો.</string>
+    <string name="recovery_change_failed">એ પાસવર્ડ સાચો ન હતો.</string>
+    <string name="migration_export_first">પહેલાં બૅકઅપ લો</string>
+    <string name="migration_export_now">હમણાં મારી વૉલ્ટ નિકાસ કરો</string>
 </resources>

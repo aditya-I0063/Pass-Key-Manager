@@ -152,4 +152,13 @@
     <string name="device_lock_required_title">기기 잠금 필요</string>
     <string name="device_lock_required_message">PassKey는 기기의 화면 잠금으로 보관함을 보호합니다. 계속하려면 PIN, 패턴, 비밀번호 또는 생체 인증을 설정하세요.</string>
     <string name="device_lock_open_settings">설정 열기</string>
+    <string name="change_recovery_password">복구 비밀번호 변경</string>
+    <string name="recovery_change_current_title">현재 비밀번호 확인</string>
+    <string name="recovery_change_current_message">본인 확인을 위해 기존 복구 비밀번호를 입력하세요.</string>
+    <string name="recovery_change_new_title">새 복구 비밀번호 설정</string>
+    <string name="recovery_change_new_message">기존 복구 비밀번호를 대체합니다. 재설정할 수 없으니 안전한 곳에 보관하세요.</string>
+    <string name="recovery_change_done">복구 비밀번호를 변경했습니다.</string>
+    <string name="recovery_change_failed">비밀번호가 올바르지 않습니다.</string>
+    <string name="migration_export_first">먼저 백업 내보내기</string>
+    <string name="migration_export_now">지금 보관함 내보내기</string>
 </resources>

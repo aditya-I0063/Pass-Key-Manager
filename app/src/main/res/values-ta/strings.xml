@@ -152,4 +152,13 @@
     <string name="device_lock_required_title">சாதனப் பூட்டு தேவை</string>
     <string name="device_lock_required_message">PassKey உங்கள் பெட்டகத்தை சாதனத்தின் திரைப் பூட்டால் பாதுகாக்கிறது. தொடர பின், வடிவம், கடவுச்சொல் அல்லது உயிரியல் அடையாளத்தை அமைக்கவும்.</string>
     <string name="device_lock_open_settings">அமைப்புகளைத் திற</string>
+    <string name="change_recovery_password">மீட்பு கடவுச்சொல்லை மாற்று</string>
+    <string name="recovery_change_current_title">தற்போதைய கடவுச்சொல்லை உறுதிப்படுத்து</string>
+    <string name="recovery_change_current_message">நீங்கள்தான் என்பதை நிரூபிக்க தற்போதைய மீட்பு கடவுச்சொல்லை உள்ளிடவும்.</string>
+    <string name="recovery_change_new_title">புதிய மீட்பு கடவுச்சொல்லைத் தேர்ந்தெடு</string>
+    <string name="recovery_change_new_message">இது உங்கள் பழைய மீட்பு கடவுச்சொல்லை மாற்றும். இதை மீட்டமைக்க முடியாது, பாதுகாப்பாக வைக்கவும்.</string>
+    <string name="recovery_change_done">மீட்பு கடவுச்சொல் மாற்றப்பட்டது.</string>
+    <string name="recovery_change_failed">அந்தக் கடவுச்சொல் சரியில்லை.</string>
+    <string name="migration_export_first">முதலில் காப்புப்பிரதி எடு</string>
+    <string name="migration_export_now">என் பெட்டகத்தை இப்போது ஏற்றுமதி செய்</string>
 </resources>

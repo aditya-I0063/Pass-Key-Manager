@@ -154,4 +154,13 @@
     <string name="device_lock_required_title">Нужна блокировка устройства</string>
     <string name="device_lock_required_message">PassKey защищает хранилище блокировкой экрана. Задайте PIN, графический ключ, пароль или биометрию, чтобы продолжить.</string>
     <string name="device_lock_open_settings">Открыть настройки</string>
+    <string name="change_recovery_password">Изменить пароль восстановления</string>
+    <string name="recovery_change_current_title">Подтвердите текущий пароль</string>
+    <string name="recovery_change_current_message">Введите нынешний пароль восстановления, чтобы подтвердить, что это вы.</string>
+    <string name="recovery_change_new_title">Задайте новый пароль восстановления</string>
+    <string name="recovery_change_new_message">Он заменит прежний пароль восстановления. Сбросить его нельзя, храните в надёжном месте.</string>
+    <string name="recovery_change_done">Пароль восстановления изменён.</string>
+    <string name="recovery_change_failed">Этот пароль неверен.</string>
+    <string name="migration_export_first">Сначала выгрузить копию</string>
+    <string name="migration_export_now">Выгрузить хранилище сейчас</string>
 </resources>

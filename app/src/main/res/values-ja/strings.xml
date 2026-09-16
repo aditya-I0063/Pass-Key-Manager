@@ -151,4 +151,13 @@
     <string name="device_lock_required_title">端末ロックが必要です</string>
     <string name="device_lock_required_message">PassKey は端末の画面ロックで保管庫を保護します。続けるには PIN、パターン、パスワード、または生体認証を設定してください。</string>
     <string name="device_lock_open_settings">設定を開く</string>
+    <string name="change_recovery_password">復旧用パスワードを変更</string>
+    <string name="recovery_change_current_title">現在のパスワードを確認</string>
+    <string name="recovery_change_current_message">本人確認のため、現在の復旧用パスワードを入力してください。</string>
+    <string name="recovery_change_new_title">新しい復旧用パスワードを設定</string>
+    <string name="recovery_change_new_message">以前の復旧用パスワードと置き換わります。再発行はできませんので安全な場所に保管してください。</string>
+    <string name="recovery_change_done">復旧用パスワードを変更しました。</string>
+    <string name="recovery_change_failed">パスワードが正しくありませんでした。</string>
+    <string name="migration_export_first">先にバックアップを書き出す</string>
+    <string name="migration_export_now">今すぐ保管庫を書き出す</string>
 </resources>

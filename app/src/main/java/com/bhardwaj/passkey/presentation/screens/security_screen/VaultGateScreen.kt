@@ -1,5 +1,15 @@
 package com.bhardwaj.passkey.presentation.screens.security_screen
 
+import android.net.Uri
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import android.content.Intent
 import android.provider.Settings
 import androidx.activity.compose.LocalActivity
@@ -50,6 +60,39 @@ fun VaultGateScreen(
     val promptSubtitle = stringResource(R.string.security_description)
     val promptNegative = stringResource(R.string.cancel)
 
+    // Rescue export: reads the un-migrated vault through the legacy key so a user is never
+    // stuck behind a re-key they cannot complete.
+    var pendingExportUri by remember { mutableStateOf<Uri?>(null) }
+    var showRecoverySetupDialog by remember { mutableStateOf(false) }
+    val exportResult by viewModel.exportResult.collectAsStateWithLifecycle()
+    val exportLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.CreateDocument("application/octet-stream")
+    ) { uri -> pendingExportUri = uri }
+
+    val exportSucceededText = stringResource(R.string.export_success)
+    val exportFailedText = stringResource(R.string.export_failed)
+    LaunchedEffect(exportResult) {
+        exportResult?.let { succeeded ->
+            Toast.makeText(
+                context,
+                if (succeeded) exportSucceededText else exportFailedText,
+                Toast.LENGTH_LONG
+            ).show()
+            viewModel.onExportResultShown()
+        }
+    }
+
+    pendingExportUri?.let { uri ->
+        BackupPasswordDialog(
+            confirmMode = true,
+            onDismiss = { pendingExportUri = null },
+            onConfirm = { password ->
+                pendingExportUri = null
+                viewModel.onExportLegacyVault(uri, password)
+            }
+        )
+    }
+
     LaunchedEffect(Unit) { viewModel.start() }
 
     LaunchedEffect(state) {
@@ -64,18 +107,34 @@ fun VaultGateScreen(
     }
 
     when (val current = state) {
-        is VaultGateViewModel.State.SetUpRecovery -> BackupPasswordDialog(
-            confirmMode = true,
-            titleRes = R.string.recovery_setup_title,
-            messageRes = if (current.isExistingVault) {
-                R.string.recovery_setup_message_upgrade
+        is VaultGateViewModel.State.SetUpRecovery -> {
+            // A fresh install has nothing to back up, so it goes straight to the dialog. An
+            // upgrading user gets a screen first, because the "export a backup" offer has to be
+            // reachable - and the dialog itself is deliberately non-dismissible.
+            if (!current.isExistingVault || showRecoverySetupDialog) {
+                BackupPasswordDialog(
+                    confirmMode = true,
+                    titleRes = R.string.recovery_setup_title,
+                    messageRes = if (current.isExistingVault) {
+                        R.string.recovery_setup_message_upgrade
+                    } else {
+                        R.string.recovery_setup_message_new
+                    },
+                    dismissible = false,
+                    onDismiss = {},
+                    onConfirm = viewModel::onRecoveryPasswordChosen
+                )
             } else {
-                R.string.recovery_setup_message_new
-            },
-            dismissible = false,
-            onDismiss = {},
-            onConfirm = viewModel::onRecoveryPasswordChosen
-        )
+                GateMessage(
+                    title = stringResource(R.string.recovery_setup_title),
+                    message = stringResource(R.string.recovery_setup_message_upgrade),
+                    primaryLabel = stringResource(R.string.backup_confirm),
+                    onPrimary = { showRecoverySetupDialog = true },
+                    secondaryLabel = stringResource(R.string.migration_export_first),
+                    onSecondary = { exportLauncher.launch(defaultRescueFileName()) }
+                )
+            }
+        }
 
         VaultGateViewModel.State.NeedsRecoveryPassword -> BackupPasswordDialog(
             confirmMode = false,
@@ -109,7 +168,13 @@ fun VaultGateScreen(
                 stringResource(R.string.migration_failed_message)
             },
             primaryLabel = stringResource(R.string.migration_retry),
-            onPrimary = viewModel::onRetry
+            onPrimary = viewModel::onRetry,
+            secondaryLabel = if (current.canExportVault) {
+                stringResource(R.string.migration_export_now)
+            } else {
+                null
+            },
+            onSecondary = { exportLauncher.launch(defaultRescueFileName()) }
         )
 
         VaultGateViewModel.State.NeedsDeviceLock -> GateMessage(
@@ -146,6 +211,11 @@ fun VaultGateScreen(
 
         VaultGateViewModel.State.Unlocked -> Unit
     }
+}
+
+private fun defaultRescueFileName(): String {
+    val stamp = SimpleDateFormat("yyyyMMdd_HHmm", Locale.US).format(Date())
+    return "passkey_backup_$stamp.pkbak"
 }
 
 @Composable

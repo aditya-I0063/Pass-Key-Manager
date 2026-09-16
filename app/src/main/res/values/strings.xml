@@ -225,4 +225,15 @@ Questions: contact <xliff:g id="email" example="name@example.com">yrkkh.cclub@gm
     <string name="device_lock_required_title">Device lock required</string>
     <string name="device_lock_required_message">PassKey protects your vault with your device\'s screen lock. Set a PIN, pattern, password or biometric to continue.</string>
     <string name="device_lock_open_settings">Open settings</string>
+
+    <string name="change_recovery_password">Change recovery password</string>
+    <string name="recovery_change_current_title">Confirm current password</string>
+    <string name="recovery_change_current_message">Enter your existing recovery password to prove it is you.</string>
+    <string name="recovery_change_new_title">Choose a new recovery password</string>
+    <string name="recovery_change_new_message">This replaces your old recovery password. It cannot be reset, so store it somewhere safe.</string>
+    <string name="recovery_change_done">Recovery password changed.</string>
+    <string name="recovery_change_failed">That password was not correct.</string>
+
+    <string name="migration_export_first">Export a backup first</string>
+    <string name="migration_export_now">Export my vault now</string>
 </resources>

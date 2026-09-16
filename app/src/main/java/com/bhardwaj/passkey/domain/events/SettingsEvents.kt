@@ -45,6 +45,21 @@ sealed interface SettingsEvents {
     data object OnAnalyzePasswordsClick : SettingsEvents
     data object OnDismissAnalysisSheet : SettingsEvents
     data object OnAutoLockClick : SettingsEvents
+    data object OnChangeRecoveryPasswordClick : SettingsEvents
+    data object OnDismissRecoveryChange : SettingsEvents
+    data class OnCurrentRecoveryPasswordEntered(val password: CharArray) : SettingsEvents {
+        override fun equals(other: Any?) = this === other ||
+            (other is OnCurrentRecoveryPasswordEntered && password.contentEquals(other.password))
+
+        override fun hashCode() = password.contentHashCode()
+    }
+
+    data class OnNewRecoveryPasswordEntered(val password: CharArray) : SettingsEvents {
+        override fun equals(other: Any?) = this === other ||
+            (other is OnNewRecoveryPasswordEntered && password.contentEquals(other.password))
+
+        override fun hashCode() = password.contentHashCode()
+    }
     data object OnDismissAutoLockDialog : SettingsEvents
     data class OnAutoLockTimeoutChange(val timeout: AutoLockTimeout) : SettingsEvents
 }

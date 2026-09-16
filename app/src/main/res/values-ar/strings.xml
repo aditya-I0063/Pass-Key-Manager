@@ -157,4 +157,13 @@
     <string name="device_lock_required_title">قفل الجهاز مطلوب</string>
     <string name="device_lock_required_message">يحمي PassKey خزنتك بقفل شاشة جهازك. عيّن رمز PIN أو نمطًا أو كلمة مرور أو بصمة للمتابعة.</string>
     <string name="device_lock_open_settings">فتح الإعدادات</string>
+    <string name="change_recovery_password">تغيير كلمة مرور الاسترداد</string>
+    <string name="recovery_change_current_title">تأكيد كلمة المرور الحالية</string>
+    <string name="recovery_change_current_message">أدخل كلمة مرور الاسترداد الحالية لإثبات هويتك.</string>
+    <string name="recovery_change_new_title">اختر كلمة مرور استرداد جديدة</string>
+    <string name="recovery_change_new_message">تحل هذه محل كلمة مرور الاسترداد القديمة. لا يمكن إعادة تعيينها، فاحفظها في مكان آمن.</string>
+    <string name="recovery_change_done">تم تغيير كلمة مرور الاسترداد.</string>
+    <string name="recovery_change_failed">كلمة المرور غير صحيحة.</string>
+    <string name="migration_export_first">صدّر نسخة احتياطية أولًا</string>
+    <string name="migration_export_now">صدّر خزنتي الآن</string>
 </resources>

@@ -154,4 +154,13 @@
     <string name="device_lock_required_title">Blocco del dispositivo necessario</string>
     <string name="device_lock_required_message">PassKey protegge la cassaforte con il blocco schermo del dispositivo. Imposta PIN, sequenza, password o biometria per continuare.</string>
     <string name="device_lock_open_settings">Apri impostazioni</string>
+    <string name="change_recovery_password">Cambia password di recupero</string>
+    <string name="recovery_change_current_title">Conferma la password attuale</string>
+    <string name="recovery_change_current_message">Inserisci la password di recupero attuale per dimostrare che sei tu.</string>
+    <string name="recovery_change_new_title">Scegli una nuova password di recupero</string>
+    <string name="recovery_change_new_message">Sostituisce la tua vecchia password di recupero. Non può essere reimpostata, conservala al sicuro.</string>
+    <string name="recovery_change_done">Password di recupero cambiata.</string>
+    <string name="recovery_change_failed">Quella password non era corretta.</string>
+    <string name="migration_export_first">Esporta prima un backup</string>
+    <string name="migration_export_now">Esporta la mia cassaforte ora</string>
 </resources>

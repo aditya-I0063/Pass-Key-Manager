@@ -3,6 +3,8 @@ package com.bhardwaj.passkey.data.security
 import android.content.Context
 import android.os.StatFs
 import com.bhardwaj.passkey.BuildConfig
+import com.bhardwaj.passkey.data.backup.BackupDetail
+import com.bhardwaj.passkey.data.backup.BackupPreview
 import com.bhardwaj.passkey.data.local.toSqlCipherRawKey
 import com.bhardwaj.passkey.utils.Constants
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -147,6 +149,57 @@ class VaultMigration @Inject constructor(
     fun discardBackup() {
         val original = context.getDatabasePath(Constants.PASS_KEY_DATABASE)
         File(original.parentFile, "${Constants.PASS_KEY_DATABASE}.bak").delete()
+    }
+
+    /**
+     * Reads the un-migrated vault straight through the legacy key.
+     *
+     * This is what makes a failed migration recoverable rather than a dead end: the original
+     * database is untouched by a failed export, so its contents can still be written out to an
+     * encrypted backup the user controls.
+     */
+    internal suspend fun readLegacyVault(): List<BackupPreview>? = withContext(Dispatchers.IO) {
+        val original = context.getDatabasePath(Constants.PASS_KEY_DATABASE)
+        if (!original.exists()) return@withContext null
+        val db = openWithAnyLegacyKey(original) ?: return@withContext null
+        try {
+            val details = mutableMapOf<Long, MutableList<BackupDetail>>()
+            db.rawQuery(
+                "SELECT previewId, question, answer, sequence FROM ${Constants.DETAILS_TABLE}",
+                null
+            ).use { cursor ->
+                while (cursor.moveToNext()) {
+                    details.getOrPut(cursor.getLong(0)) { mutableListOf() }.add(
+                        BackupDetail(
+                            question = cursor.getString(1),
+                            answer = cursor.getString(2),
+                            sequence = cursor.getLong(3)
+                        )
+                    )
+                }
+            }
+            db.rawQuery(
+                "SELECT previewId, heading, categoryName, sequence FROM ${Constants.PREVIEW_TABLE}",
+                null
+            ).use { cursor ->
+                buildList {
+                    while (cursor.moveToNext()) {
+                        add(
+                            BackupPreview(
+                                heading = cursor.getString(1),
+                                categoryName = cursor.getString(2),
+                                sequence = cursor.getLong(3),
+                                details = details[cursor.getLong(0)].orEmpty()
+                            )
+                        )
+                    }
+                }
+            }
+        } catch (_: Exception) {
+            null
+        } finally {
+            runCatching { db.close() }
+        }
     }
 
     /**

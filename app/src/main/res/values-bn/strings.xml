@@ -153,4 +153,13 @@
     <string name="device_lock_required_title">ডিভাইস লক প্রয়োজন</string>
     <string name="device_lock_required_message">PassKey আপনার ভল্ট ডিভাইসের স্ক্রিন লক দিয়ে সুরক্ষিত রাখে। চালিয়ে যেতে পিন, প্যাটার্ন, পাসওয়ার্ড বা বায়োমেট্রিক সেট করুন।</string>
     <string name="device_lock_open_settings">সেটিংস খুলুন</string>
+    <string name="change_recovery_password">পুনরুদ্ধার পাসওয়ার্ড বদলান</string>
+    <string name="recovery_change_current_title">বর্তমান পাসওয়ার্ড নিশ্চিত করুন</string>
+    <string name="recovery_change_current_message">আপনিই যে তা প্রমাণ করতে বর্তমান পুনরুদ্ধার পাসওয়ার্ড দিন।</string>
+    <string name="recovery_change_new_title">নতুন পুনরুদ্ধার পাসওয়ার্ড বাছুন</string>
+    <string name="recovery_change_new_message">এটি আপনার পুরনো পুনরুদ্ধার পাসওয়ার্ড প্রতিস্থাপন করে। এটি রিসেট করা যায় না, তাই নিরাপদে রাখুন।</string>
+    <string name="recovery_change_done">পুনরুদ্ধার পাসওয়ার্ড বদলানো হয়েছে।</string>
+    <string name="recovery_change_failed">পাসওয়ার্ডটি সঠিক ছিল না।</string>
+    <string name="migration_export_first">আগে ব্যাকআপ নিন</string>
+    <string name="migration_export_now">এখনই আমার ভল্ট রপ্তানি করুন</string>
 </resources>

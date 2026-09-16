@@ -152,5 +152,14 @@
     <string name="device_lock_required_title">పరికర లాక్ అవసరం</string>
     <string name="device_lock_required_message">PassKey మీ వాల్ట్‌ను పరికర స్క్రీన్ లాక్‌తో కాపాడుతుంది. కొనసాగించడానికి పిన్, నమూనా, పాస్‌వర్డ్ లేదా బయోమెట్రిక్ సెట్ చేయండి.</string>
     <string name="device_lock_open_settings">సెట్టింగ్‌లు తెరువు</string>
+    <string name="change_recovery_password">రికవరీ పాస్‌వర్డ్ మార్చు</string>
+    <string name="recovery_change_current_title">ప్రస్తుత పాస్‌వర్డ్‌ను నిర్ధారించండి</string>
+    <string name="recovery_change_current_message">మీరేనని నిరూపించడానికి ప్రస్తుత రికవరీ పాస్‌వర్డ్‌ను నమోదు చేయండి.</string>
+    <string name="recovery_change_new_title">కొత్త రికవరీ పాస్‌వర్డ్ ఎంచుకోండి</string>
+    <string name="recovery_change_new_message">ఇది మీ పాత రికవరీ పాస్‌వర్డ్‌ను భర్తీ చేస్తుంది. దీన్ని రీసెట్ చేయలేరు, సురక్షితంగా ఉంచండి.</string>
+    <string name="recovery_change_done">రికవరీ పాస్‌వర్డ్ మార్చబడింది.</string>
+    <string name="recovery_change_failed">ఆ పాస్‌వర్డ్ సరైనది కాదు.</string>
+    <string name="migration_export_first">ముందు బ్యాకప్ తీసుకోండి</string>
+    <string name="migration_export_now">నా వాల్ట్‌ను ఇప్పుడే ఎగుమతి చేయి</string>
 </resources>
 

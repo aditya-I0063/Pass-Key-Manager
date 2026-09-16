@@ -154,4 +154,13 @@
     <string name="device_lock_required_title">Verrouillage de l\'appareil requis</string>
     <string name="device_lock_required_message">PassKey protège votre coffre avec le verrouillage d\'écran. Configurez un code, un schéma, un mot de passe ou la biométrie pour continuer.</string>
     <string name="device_lock_open_settings">Ouvrir les paramètres</string>
+    <string name="change_recovery_password">Changer le mot de passe de secours</string>
+    <string name="recovery_change_current_title">Confirmez le mot de passe actuel</string>
+    <string name="recovery_change_current_message">Saisissez votre mot de passe de secours actuel pour prouver que c\'est bien vous.</string>
+    <string name="recovery_change_new_title">Choisissez un nouveau mot de passe de secours</string>
+    <string name="recovery_change_new_message">Il remplace votre ancien mot de passe de secours. Il ne peut pas être réinitialisé, conservez-le en lieu sûr.</string>
+    <string name="recovery_change_done">Mot de passe de secours modifié.</string>
+    <string name="recovery_change_failed">Ce mot de passe n\'était pas correct.</string>
+    <string name="migration_export_first">Exporter une sauvegarde d\'abord</string>
+    <string name="migration_export_now">Exporter mon coffre maintenant</string>
 </resources>

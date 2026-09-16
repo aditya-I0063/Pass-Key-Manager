@@ -154,4 +154,13 @@
     <string name="device_lock_required_title">Se requiere bloqueo de dispositivo</string>
     <string name="device_lock_required_message">PassKey protege tu caja fuerte con el bloqueo de pantalla. Configura un PIN, patrón, contraseña o biometría para continuar.</string>
     <string name="device_lock_open_settings">Abrir ajustes</string>
+    <string name="change_recovery_password">Cambiar contraseña de recuperación</string>
+    <string name="recovery_change_current_title">Confirma la contraseña actual</string>
+    <string name="recovery_change_current_message">Introduce tu contraseña de recuperación actual para demostrar que eres tú.</string>
+    <string name="recovery_change_new_title">Elige una nueva contraseña de recuperación</string>
+    <string name="recovery_change_new_message">Sustituye a tu contraseña de recuperación anterior. No se puede restablecer, guárdala en un lugar seguro.</string>
+    <string name="recovery_change_done">Contraseña de recuperación cambiada.</string>
+    <string name="recovery_change_failed">Esa contraseña no era correcta.</string>
+    <string name="migration_export_first">Exportar una copia primero</string>
+    <string name="migration_export_now">Exportar mi caja fuerte ahora</string>
 </resources>

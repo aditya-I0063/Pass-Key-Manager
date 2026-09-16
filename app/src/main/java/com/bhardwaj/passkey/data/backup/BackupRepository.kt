@@ -52,36 +52,53 @@ class BackupRepository @Inject constructor(
     private val json = Json { ignoreUnknownKeys = false }
 
     suspend fun export(uri: Uri, password: CharArray): Result<Unit> = withContext(Dispatchers.IO) {
-        try {
-            val previews = repository.getPreviews().first()
-            val payload = BackupPayload(
-                exportedAt = System.currentTimeMillis(),
-                appVersion = BuildConfig.VERSION_NAME,
-                previews = previews.map { preview ->
-                    val details = repository.getDetailsByPreviewId(preview.previewId!!).first()
-                    BackupPreview(
-                        heading = preview.heading,
-                        categoryName = preview.categoryName.name,
-                        sequence = preview.sequence,
-                        details = details.map {
-                            BackupDetail(it.question, it.answer, it.sequence)
-                        }
-                    )
-                }
-            )
-            val plaintext = gzip(json.encodeToString(payload).toByteArray(Charsets.UTF_8))
-            val encrypted = try {
-                BackupCrypto.encrypt(plaintext, password)
-            } finally {
-                Arrays.fill(plaintext, 0)
+        val previews = runCatching {
+            repository.getPreviews().first().map { preview ->
+                BackupPreview(
+                    heading = preview.heading,
+                    categoryName = preview.categoryName.name,
+                    sequence = preview.sequence,
+                    details = repository.getDetailsByPreviewId(preview.previewId!!).first()
+                        .map { BackupDetail(it.question, it.answer, it.sequence) }
+                )
             }
-            // "wt" truncates: CreateDocument can hand back an existing file.
-            context.contentResolver.openOutputStream(uri, "wt")?.use { it.write(encrypted) }
-                ?: return@withContext Result.failure(BackupException(BackupError.WriteFailed))
-            Result.success(Unit)
-        } catch (_: Exception) {
-            Result.failure(BackupException(BackupError.WriteFailed))
+        }.getOrElse { return@withContext Result.failure(BackupException(BackupError.ReadFailed)) }
+        writeEncrypted(uri, password, previews)
+    }
+
+    /**
+     * Writes a backup assembled outside the normal repository path.
+     *
+     * Used by the migration failure screen, which reads the un-migrated vault through the legacy
+     * key so a user whose re-key could not complete can still get their data out.
+     */
+    internal suspend fun exportPreviews(
+        uri: Uri,
+        password: CharArray,
+        previews: List<BackupPreview>
+    ): Result<Unit> = withContext(Dispatchers.IO) { writeEncrypted(uri, password, previews) }
+
+    private fun writeEncrypted(
+        uri: Uri,
+        password: CharArray,
+        previews: List<BackupPreview>
+    ): Result<Unit> = try {
+        val payload = BackupPayload(
+            exportedAt = System.currentTimeMillis(),
+            appVersion = BuildConfig.VERSION_NAME,
+            previews = previews
+        )
+        val plaintext = gzip(json.encodeToString(payload).toByteArray(Charsets.UTF_8))
+        val encrypted = try {
+            BackupCrypto.encrypt(plaintext, password)
+        } finally {
+            Arrays.fill(plaintext, 0)
         }
+        context.contentResolver.openOutputStream(uri, "wt")?.use { it.write(encrypted) }
+            ?: return Result.failure(BackupException(BackupError.WriteFailed))
+        Result.success(Unit)
+    } catch (_: Exception) {
+        Result.failure(BackupException(BackupError.WriteFailed))
     }
 
     suspend fun import(

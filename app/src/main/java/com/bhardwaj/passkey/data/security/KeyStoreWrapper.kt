@@ -7,16 +7,24 @@ import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import android.security.keystore.StrongBoxUnavailableException
 import dagger.hilt.android.qualifiers.ApplicationContext
+import java.security.KeyPairGenerator
 import java.security.KeyStore
+import java.security.spec.MGF1ParameterSpec
 import javax.crypto.Cipher
-import javax.crypto.KeyGenerator
-import javax.crypto.SecretKey
-import javax.crypto.spec.GCMParameterSpec
+import javax.crypto.spec.OAEPParameterSpec
+import javax.crypto.spec.PSource
 import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
  * Creates and uses the AndroidKeyStore keys that wrap the vault's data encryption key.
+ *
+ * These are **RSA key pairs, not AES keys**, and that is the whole point. An auth-bound symmetric
+ * key requires authentication for *every* operation including encryption, so wrapping the vault
+ * key at provisioning time would throw UserNotAuthenticatedException - there is nothing to
+ * authenticate against yet, and prompting during setup would be the wrong moment. With a key
+ * pair, the public key encrypts with no authentication at all, while the private key requires it
+ * to decrypt. Wrapping is free; unwrapping is gated.
  *
  * Two aliases exist, deliberately with different auth properties:
  *
@@ -36,11 +44,8 @@ class KeyStoreWrapper @Inject constructor(
         const val ALIAS_CRED = "passkey_dek_wrap_cred"
 
         private const val PROVIDER = "AndroidKeyStore"
-        private const val TRANSFORMATION =
-            "${KeyProperties.KEY_ALGORITHM_AES}/${KeyProperties.BLOCK_MODE_GCM}/" +
-                "${KeyProperties.ENCRYPTION_PADDING_NONE}"
-        private const val GCM_TAG_BITS = 128
-        private const val KEY_BITS = 256
+        private const val TRANSFORMATION = "RSA/ECB/OAEPWithSHA-256AndMGF1Padding"
+        private const val KEY_BITS = 2048
 
         /** Seconds the credential-backed key stays usable after a successful auth. */
         const val CRED_VALIDITY_SECONDS = 30
@@ -53,41 +58,59 @@ class KeyStoreWrapper @Inject constructor(
     fun exists(alias: String): Boolean = runCatching { keyStore.containsAlias(alias) }
         .getOrDefault(false)
 
-    fun getOrNull(alias: String): SecretKey? = runCatching {
-        keyStore.getKey(alias, null) as? SecretKey
-    }.getOrNull()
-
     fun delete(alias: String) {
         runCatching { keyStore.deleteEntry(alias) }
     }
 
-    fun createBiometricKey(): SecretKey = generate(ALIAS_BIO, biometricOnly = true)
+    fun createBiometricKey() = generate(ALIAS_BIO, biometricOnly = true)
 
-    fun createCredentialKey(): SecretKey = generate(ALIAS_CRED, biometricOnly = false)
+    fun createCredentialKey() = generate(ALIAS_CRED, biometricOnly = false)
 
     /**
+     * Encryption uses the public key, which is never auth-gated, so this can be called at
+     * provisioning time without a prompt.
+     */
+    fun initEncryptCipher(alias: String): Cipher {
+        val certificate = keyStore.getCertificate(alias)
+            ?: error("Keystore alias $alias is missing")
+        return Cipher.getInstance(TRANSFORMATION).apply {
+            init(Cipher.ENCRYPT_MODE, certificate.publicKey, oaepSpec())
+        }
+    }
+
+    /**
+     * Decryption uses the private key and therefore requires authentication.
+     *
      * @throws android.security.keystore.KeyPermanentlyInvalidatedException when the enrollment
-     *   backing the key has changed. Thrown by init, *before* any prompt is shown, which is what
+     *   backing the key has changed. Thrown here, *before* any prompt is shown, which is what
      *   lets the caller fall through to another slot without the user seeing a broken prompt.
      */
-    fun initEncryptCipher(alias: String): Cipher =
-        Cipher.getInstance(TRANSFORMATION).apply {
-            init(Cipher.ENCRYPT_MODE, requireKey(alias))
+    fun initDecryptCipher(alias: String): Cipher {
+        val privateKey = keyStore.getKey(alias, null)
+            ?: error("Keystore alias $alias is missing")
+        return Cipher.getInstance(TRANSFORMATION).apply {
+            init(Cipher.DECRYPT_MODE, privateKey, oaepSpec())
         }
+    }
 
-    /** @throws android.security.keystore.KeyPermanentlyInvalidatedException — see above. */
-    fun initDecryptCipher(alias: String, iv: ByteArray): Cipher =
-        Cipher.getInstance(TRANSFORMATION).apply {
-            init(Cipher.DECRYPT_MODE, requireKey(alias), GCMParameterSpec(GCM_TAG_BITS, iv))
-        }
+    /**
+     * MGF1 is pinned to SHA-1 even though the digest is SHA-256.
+     *
+     * AndroidKeyStore only records a single digest for the key and applies it to OAEP itself;
+     * passing MGF1ParameterSpec.SHA256 here makes init fail with an unsupported-MGF error on
+     * several OEM implementations. This is the combination the platform actually accepts.
+     */
+    private fun oaepSpec() = OAEPParameterSpec(
+        "SHA-256",
+        "MGF1",
+        MGF1ParameterSpec.SHA1,
+        PSource.PSpecified.DEFAULT
+    )
 
-    private fun requireKey(alias: String): SecretKey =
-        getOrNull(alias) ?: error("Keystore alias $alias is missing")
-
-    private fun generate(alias: String, biometricOnly: Boolean): SecretKey {
-        // StrongBox can throw at generateKey() even when the feature flag is advertised, so it
-        // is attempted and then abandoned rather than trusted.
-        return runCatching { generate(alias, biometricOnly, strongBox = supportsStrongBox()) }
+    private fun generate(alias: String, biometricOnly: Boolean) {
+        // StrongBox can throw at generation even when the feature flag is advertised, and it
+        // frequently does not support RSA at all, so it is attempted and then abandoned.
+        runCatching { generate(alias, biometricOnly, strongBox = supportsStrongBox()) }
             .recoverCatching { error ->
                 if (error is StrongBoxUnavailableException) {
                     delete(alias)
@@ -99,15 +122,14 @@ class KeyStoreWrapper @Inject constructor(
             .getOrThrow()
     }
 
-    private fun generate(alias: String, biometricOnly: Boolean, strongBox: Boolean): SecretKey {
+    private fun generate(alias: String, biometricOnly: Boolean, strongBox: Boolean) {
         val builder = KeyGenParameterSpec.Builder(
             alias,
             KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
         )
-            .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
-            .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
             .setKeySize(KEY_BITS)
-            .setRandomizedEncryptionRequired(true)
+            .setDigests(KeyProperties.DIGEST_SHA256)
+            .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_RSA_OAEP)
             .setUserAuthenticationRequired(true)
             // API 28 exactly, which is this app's minSdk: the key is unusable while the device
             // is locked, so a stolen unlocked-but-idle phone is not a bypass.
@@ -141,9 +163,9 @@ class KeyStoreWrapper @Inject constructor(
             builder.setIsStrongBoxBacked(true)
         }
 
-        return KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, PROVIDER).apply {
-            init(builder.build())
-        }.generateKey()
+        KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_RSA, PROVIDER).apply {
+            initialize(builder.build())
+        }.generateKeyPair()
     }
 
     private fun supportsStrongBox(): Boolean =

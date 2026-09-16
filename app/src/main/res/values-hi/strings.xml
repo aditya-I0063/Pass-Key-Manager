@@ -153,4 +153,13 @@
     <string name="device_lock_required_title">डिवाइस लॉक ज़रूरी है</string>
     <string name="device_lock_required_message">PassKey आपकी वॉल्ट को डिवाइस के स्क्रीन लॉक से सुरक्षित रखता है। जारी रखने के लिए पिन, पैटर्न, पासवर्ड या बायोमेट्रिक सेट करें।</string>
     <string name="device_lock_open_settings">सेटिंग्स खोलें</string>
+    <string name="change_recovery_password">पुनर्प्राप्ति पासवर्ड बदलें</string>
+    <string name="recovery_change_current_title">मौजूदा पासवर्ड की पुष्टि करें</string>
+    <string name="recovery_change_current_message">यह आप ही हैं, यह साबित करने के लिए मौजूदा पुनर्प्राप्ति पासवर्ड डालें।</string>
+    <string name="recovery_change_new_title">नया पुनर्प्राप्ति पासवर्ड चुनें</string>
+    <string name="recovery_change_new_message">यह आपके पुराने पुनर्प्राप्ति पासवर्ड की जगह लेगा। इसे रीसेट नहीं किया जा सकता, सुरक्षित जगह रखें।</string>
+    <string name="recovery_change_done">पुनर्प्राप्ति पासवर्ड बदल दिया गया।</string>
+    <string name="recovery_change_failed">वह पासवर्ड सही नहीं था।</string>
+    <string name="migration_export_first">पहले बैकअप निर्यात करें</string>
+    <string name="migration_export_now">मेरी वॉल्ट अभी निर्यात करें</string>
 </resources>
