@@ -28,7 +28,6 @@
     <string name="search">অনুসন্ধান</string>
     <string name="title">শিরোনাম</string>
     <string name="response">প্রতিক্রিয়া</string>
-    <string name="export_download">ফাইলটি ডাউনলোড ফোল্ডারে রপ্ত হয়েছে।</string>
     <string name="rate_app">অ্যাপ রেটিং</string>
     <string name="change_language">ভাষা পরিবর্তন</string>
     <string name="privacy">গোপনীয়তা</string>
@@ -99,4 +98,19 @@
         <item quantity="one">%1$d বার ব্যবহৃত</item>
         <item quantity="other">%1$d বার ব্যবহৃত</item>
     </plurals>
+    <string name="export_success">এনক্রিপ্ট করা ব্যাকআপ সংরক্ষিত হয়েছে।</string>
+    <string name="export_failed">ব্যাকআপ সংরক্ষণ করা যায়নি।</string>
+    <string name="import_summary">%1$d এন্ট্রি ও %2$d বিবরণ আমদানি হয়েছে।</string>
+    <string name="import_wrong_password">ভুল পাসওয়ার্ড, অথবা ফাইলটি ক্ষতিগ্রস্ত।</string>
+    <string name="import_file_too_large">PassKey ব্যাকআপ হিসেবে ফাইলটি অনেক বড়।</string>
+    <string name="import_unsupported_version">এই ব্যাকআপ PassKey-এর নতুন সংস্করণে তৈরি।</string>
+    <string name="backup_password_title">আপনার ব্যাকআপ সুরক্ষিত করুন</string>
+    <string name="backup_password_message">এই ব্যাকআপ ফাইলের জন্য একটি পাসওয়ার্ড বেছে নিন। এটিই পুনরুদ্ধারের একমাত্র উপায়, এবং এটি ফিরে পাওয়া যায় না।</string>
+    <string name="backup_password_hint">ব্যাকআপ পাসওয়ার্ড</string>
+    <string name="backup_password_confirm_hint">পাসওয়ার্ড নিশ্চিত করুন</string>
+    <string name="backup_password_mismatch">পাসওয়ার্ড মিলছে না।</string>
+    <string name="backup_password_too_short">অন্তত ৮টি অক্ষর ব্যবহার করুন।</string>
+    <string name="restore_password_title">ব্যাকআপ পুনরুদ্ধার</string>
+    <string name="restore_password_message">ব্যাকআপ ফাইল তৈরির সময় যে পাসওয়ার্ড বেছেছিলেন তা লিখুন।</string>
+    <string name="backup_confirm">চালিয়ে যান</string>
 </resources>

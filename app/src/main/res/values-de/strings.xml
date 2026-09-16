@@ -28,7 +28,6 @@
     <string name="search">Suche</string>
     <string name="title">Titel</string>
     <string name="response">Antwort</string>
-    <string name="export_download">Datei wurde in den Downloads-Ordner exportiert.</string>
     <string name="rate_app">App bewerten</string>
     <string name="change_language">Sprache ändern</string>
     <string name="privacy">Datenschutz</string>
@@ -99,4 +98,19 @@
         <item quantity="one">%1$d Mal verwendet</item>
         <item quantity="other">%1$d Mal verwendet</item>
     </plurals>
+    <string name="export_success">Verschlüsseltes Backup gespeichert.</string>
+    <string name="export_failed">Backup konnte nicht gespeichert werden.</string>
+    <string name="import_summary">%1$d Einträge und %2$d Details importiert.</string>
+    <string name="import_wrong_password">Falsches Passwort oder beschädigte Datei.</string>
+    <string name="import_file_too_large">Diese Datei ist zu groß für ein PassKey-Backup.</string>
+    <string name="import_unsupported_version">Dieses Backup stammt aus einer neueren PassKey-Version.</string>
+    <string name="backup_password_title">Backup schützen</string>
+    <string name="backup_password_message">Wähle ein Passwort für diese Backup-Datei. Es ist der einzige Weg zur Wiederherstellung und kann nicht zurückgesetzt werden.</string>
+    <string name="backup_password_hint">Backup-Passwort</string>
+    <string name="backup_password_confirm_hint">Passwort bestätigen</string>
+    <string name="backup_password_mismatch">Passwörter stimmen nicht überein.</string>
+    <string name="backup_password_too_short">Mindestens 8 Zeichen verwenden.</string>
+    <string name="restore_password_title">Backup wiederherstellen</string>
+    <string name="restore_password_message">Gib das Passwort ein, das du beim Erstellen dieser Backup-Datei gewählt hast.</string>
+    <string name="backup_confirm">Weiter</string>
 </resources>

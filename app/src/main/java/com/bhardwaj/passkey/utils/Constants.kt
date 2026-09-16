@@ -7,10 +7,6 @@ class Constants {
         const val TEMP_DETAILS_TABLE = "temp_details_table"
         const val TEMP_PREVIEW_TABLE = "temp_preview_table"
         const val PASS_KEY_DATABASE = "passkey_database"
-        const val FILE_NAME = "passkey_backup"
-        const val FILE_TYPE = "passkey"
-        const val FILE_PICKER_TYPE = "application/passkey"
-        const val FILE_HEADER = "category,heading,question,answer\n"
 
         // SaveState Constants.
         const val PREVIEW_HEADING = "preview_heading"

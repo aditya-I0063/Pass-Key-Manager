@@ -28,7 +28,6 @@
     <string name="search">खोज</string>
     <string name="title">शीर्षक</string>
     <string name="response">उत्तर</string>
-    <string name="export_download">फ़ाइल डाउनलोड फ़ोल्डर में निर्यात की गई।</string>
     <string name="rate_app">ऐप रेटिंग</string>
     <string name="change_language">भाषा बदलें</string>
     <string name="privacy">प्राइवेसी</string>
@@ -99,4 +98,19 @@
         <item quantity="one">%1$d बार इस्तेमाल हुआ</item>
         <item quantity="other">%1$d बार इस्तेमाल हुआ</item>
     </plurals>
+    <string name="export_success">एन्क्रिप्टेड बैकअप सहेजा गया।</string>
+    <string name="export_failed">बैकअप सहेजा नहीं जा सका।</string>
+    <string name="import_summary">%1$d प्रविष्टियाँ और %2$d विवरण आयात किए गए।</string>
+    <string name="import_wrong_password">गलत पासवर्ड, या फ़ाइल खराब है।</string>
+    <string name="import_file_too_large">यह फ़ाइल PassKey बैकअप के लिए बहुत बड़ी है।</string>
+    <string name="import_unsupported_version">यह बैकअप PassKey के नए संस्करण से बना है।</string>
+    <string name="backup_password_title">अपना बैकअप सुरक्षित करें</string>
+    <string name="backup_password_message">इस बैकअप फ़ाइल के लिए पासवर्ड चुनें। इसे पुनर्स्थापित करने का यही एकमात्र तरीका है, और इसे वापस नहीं पाया जा सकता।</string>
+    <string name="backup_password_hint">बैकअप पासवर्ड</string>
+    <string name="backup_password_confirm_hint">पासवर्ड की पुष्टि करें</string>
+    <string name="backup_password_mismatch">पासवर्ड मेल नहीं खाते।</string>
+    <string name="backup_password_too_short">कम से कम 8 अक्षर इस्तेमाल करें।</string>
+    <string name="restore_password_title">बैकअप पुनर्स्थापित करें</string>
+    <string name="restore_password_message">इस बैकअप फ़ाइल को बनाते समय चुना गया पासवर्ड दर्ज करें।</string>
+    <string name="backup_confirm">जारी रखें</string>
 </resources>

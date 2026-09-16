@@ -28,7 +28,6 @@
     <string name="search">Buscar</string>
     <string name="title">Título</string>
     <string name="response">Resposta</string>
-    <string name="export_download">Arquivo exportado para a pasta de downloads.</string>
     <string name="rate_app">Avaliar Aplicativo</string>
     <string name="change_language">Alterar Idioma</string>
     <string name="privacy">Privacidade</string>
@@ -100,4 +99,19 @@
         <item quantity="many">Usada %1$d vezes</item>
         <item quantity="other">Usada %1$d vezes</item>
     </plurals>
+    <string name="export_success">Backup criptografado salvo.</string>
+    <string name="export_failed">Não foi possível salvar o backup.</string>
+    <string name="import_summary">Importados %1$d itens e %2$d detalhes.</string>
+    <string name="import_wrong_password">Senha incorreta ou arquivo danificado.</string>
+    <string name="import_file_too_large">Esse arquivo é grande demais para ser um backup do PassKey.</string>
+    <string name="import_unsupported_version">Este backup foi criado por uma versão mais recente do PassKey.</string>
+    <string name="backup_password_title">Proteja seu backup</string>
+    <string name="backup_password_message">Escolha uma senha para este arquivo de backup. É a única forma de restaurá-lo e ela não pode ser recuperada.</string>
+    <string name="backup_password_hint">Senha do backup</string>
+    <string name="backup_password_confirm_hint">Confirmar senha</string>
+    <string name="backup_password_mismatch">As senhas não coincidem.</string>
+    <string name="backup_password_too_short">Use pelo menos 8 caracteres.</string>
+    <string name="restore_password_title">Restaurar backup</string>
+    <string name="restore_password_message">Digite a senha escolhida ao criar este arquivo de backup.</string>
+    <string name="backup_confirm">Continuar</string>
 </resources>

@@ -3,6 +3,7 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose.compiler)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.room)
@@ -155,8 +156,11 @@ dependencies {
     implementation(libs.sqlcipher.android)
     implementation(libs.sqlcipher.sqlite)
 
-    // Open CSV - Import/ Export Data
+    // Open CSV - used by the read-only legacy .passkey CSV importer
     implementation(libs.opencsv)
+
+    // Backup payload serialization
+    implementation(libs.kotlinx.serialization.json)
 
     // Reordering Lazy Columns
     implementation(libs.reorderable)

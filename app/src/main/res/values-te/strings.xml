@@ -28,7 +28,6 @@
     <string name="search">శోధన</string>
     <string name="title">శీర్షిక</string>
     <string name="response">సమాధానం</string>
-    <string name="export_download">ఫైల్‌ను డౌన్‌లోడ్లు ఫోల్డర్‌కు ఎగురుతున్నది.</string>
     <string name="rate_app">అనువర్తనం రేట్ చేయండి</string>
     <string name="change_language">భాషను మార్చు</string>
     <string name="privacy">గౌప్యం</string>
@@ -99,5 +98,20 @@
         <item quantity="one">%1$d సారి ఉపయోగించబడింది</item>
         <item quantity="other">%1$d సార్లు ఉపయోగించబడింది</item>
     </plurals>
+    <string name="export_success">ఎన్‌క్రిప్ట్ చేసిన బ్యాకప్ సేవ్ చేయబడింది.</string>
+    <string name="export_failed">బ్యాకప్‌ను సేవ్ చేయలేకపోయాం.</string>
+    <string name="import_summary">%1$d ఎంట్రీలు, %2$d వివరాలు దిగుమతి అయ్యాయి.</string>
+    <string name="import_wrong_password">తప్పు పాస్‌వర్డ్, లేదా ఫైల్ పాడైంది.</string>
+    <string name="import_file_too_large">ఈ ఫైల్ PassKey బ్యాకప్‌కి చాలా పెద్దది.</string>
+    <string name="import_unsupported_version">ఈ బ్యాకప్ PassKey కొత్త వెర్షన్‌తో రూపొందించబడింది.</string>
+    <string name="backup_password_title">మీ బ్యాకప్‌ను రక్షించండి</string>
+    <string name="backup_password_message">ఈ బ్యాకప్ ఫైల్‌కు పాస్‌వర్డ్ ఎంచుకోండి. పునరుద్ధరించడానికి ఇదే ఏకైక మార్గం, దీన్ని తిరిగి పొందలేరు.</string>
+    <string name="backup_password_hint">బ్యాకప్ పాస్‌వర్డ్</string>
+    <string name="backup_password_confirm_hint">పాస్‌వర్డ్‌ను నిర్ధారించండి</string>
+    <string name="backup_password_mismatch">పాస్‌వర్డ్‌లు సరిపోలడం లేదు.</string>
+    <string name="backup_password_too_short">కనీసం 8 అక్షరాలు వాడండి.</string>
+    <string name="restore_password_title">బ్యాకప్‌ను పునరుద్ధరించు</string>
+    <string name="restore_password_message">ఈ బ్యాకప్ ఫైల్‌ను సృష్టించినప్పుడు ఎంచుకున్న పాస్‌వర్డ్‌ను నమోదు చేయండి.</string>
+    <string name="backup_confirm">కొనసాగించు</string>
 </resources>
 

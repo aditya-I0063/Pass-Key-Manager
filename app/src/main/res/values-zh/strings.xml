@@ -28,7 +28,6 @@
     <string name="search">搜索</string>
     <string name="title">标题</string>
     <string name="response">响应</string>
-    <string name="export_download">文件已导出到下载文件夹。</string>
     <string name="rate_app">评价应用</string>
     <string name="change_language">更改语言</string>
     <string name="privacy">隐私</string>
@@ -98,4 +97,19 @@
     <plurals name="password_used_times">
         <item quantity="other">已使用 %1$d 次</item>
     </plurals>
+    <string name="export_success">已保存加密备份。</string>
+    <string name="export_failed">无法保存备份。</string>
+    <string name="import_summary">已导入 %1$d 个条目和 %2$d 条详情。</string>
+    <string name="import_wrong_password">密码错误，或文件已损坏。</string>
+    <string name="import_file_too_large">该文件过大，不像是 PassKey 备份。</string>
+    <string name="import_unsupported_version">此备份由更新版本的 PassKey 创建。</string>
+    <string name="backup_password_title">保护你的备份</string>
+    <string name="backup_password_message">为此备份文件设置密码。这是恢复它的唯一方式，且无法找回。</string>
+    <string name="backup_password_hint">备份密码</string>
+    <string name="backup_password_confirm_hint">确认密码</string>
+    <string name="backup_password_mismatch">两次输入的密码不一致。</string>
+    <string name="backup_password_too_short">请至少使用 8 个字符。</string>
+    <string name="restore_password_title">恢复备份</string>
+    <string name="restore_password_message">请输入创建此备份文件时设置的密码。</string>
+    <string name="backup_confirm">继续</string>
 </resources>

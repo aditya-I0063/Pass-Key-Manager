@@ -28,7 +28,6 @@
     <string name="search">Rechercher</string>
     <string name="title">Titre</string>
     <string name="response">Réponse</string>
-    <string name="export_download">Fichier exporté dans le dossier Téléchargements.</string>
     <string name="rate_app">Noter l\'application</string>
     <string name="change_language">Changer de langue</string>
     <string name="privacy">Confidentialité</string>
@@ -100,4 +99,19 @@
         <item quantity="many">Utilisé %1$d fois</item>
         <item quantity="other">Utilisé %1$d fois</item>
     </plurals>
+    <string name="export_success">Sauvegarde chiffrée enregistrée.</string>
+    <string name="export_failed">Impossible d\'enregistrer la sauvegarde.</string>
+    <string name="import_summary">%1$d entrées et %2$d détails importés.</string>
+    <string name="import_wrong_password">Mot de passe incorrect ou fichier endommagé.</string>
+    <string name="import_file_too_large">Ce fichier est trop volumineux pour une sauvegarde PassKey.</string>
+    <string name="import_unsupported_version">Cette sauvegarde provient d\'une version plus récente de PassKey.</string>
+    <string name="backup_password_title">Protégez votre sauvegarde</string>
+    <string name="backup_password_message">Choisissez un mot de passe pour ce fichier. C\'est le seul moyen de le restaurer et il ne peut pas être récupéré.</string>
+    <string name="backup_password_hint">Mot de passe de sauvegarde</string>
+    <string name="backup_password_confirm_hint">Confirmer le mot de passe</string>
+    <string name="backup_password_mismatch">Les mots de passe ne correspondent pas.</string>
+    <string name="backup_password_too_short">Utilisez au moins 8 caractères.</string>
+    <string name="restore_password_title">Restaurer la sauvegarde</string>
+    <string name="restore_password_message">Saisissez le mot de passe choisi lors de la création de ce fichier.</string>
+    <string name="backup_confirm">Continuer</string>
 </resources>

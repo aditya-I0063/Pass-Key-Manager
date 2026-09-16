@@ -3,16 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
-    <uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="28" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="28" />
+
+    <!--
+        INTERNET is declared explicitly rather than being merged in silently. The app itself
+        makes no network calls, but Firebase Analytics/Crashlytics/Performance and the Play
+        in-app-update library all require it, and hiding that in a library manifest is how the
+        README and privacy policy came to claim the app needs no internet permission.
+    -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".PasskeyApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -20,11 +22,11 @@
         android:localeConfig="@xml/locales_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PassKey"
-        tools:targetApi="34">
+        android:theme="@style/Theme.PassKey">
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.PassKey">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

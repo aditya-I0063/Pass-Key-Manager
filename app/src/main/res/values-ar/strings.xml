@@ -28,7 +28,6 @@
     <string name="search">بحث</string>
     <string name="title">العنوان</string>
     <string name="response">الرد</string>
-    <string name="export_download">تم تصدير الملف إلى مجلد التنزيلات.</string>
     <string name="rate_app">تقييم التطبيق</string>
     <string name="change_language">تغيير اللغة</string>
     <string name="privacy">الخصوصية</string>
@@ -103,4 +102,19 @@
         <item quantity="many">استُخدمت %1$d مرة</item>
         <item quantity="other">استُخدمت %1$d مرة</item>
     </plurals>
+    <string name="export_success">تم حفظ النسخة الاحتياطية المشفّرة.</string>
+    <string name="export_failed">تعذّر حفظ النسخة الاحتياطية.</string>
+    <string name="import_summary">تم استيراد %1$d إدخالًا و%2$d تفصيلًا.</string>
+    <string name="import_wrong_password">كلمة المرور خاطئة، أو الملف تالف.</string>
+    <string name="import_file_too_large">هذا الملف أكبر من أن يكون نسخة احتياطية لـ PassKey.</string>
+    <string name="import_unsupported_version">أُنشئت هذه النسخة بإصدار أحدث من PassKey.</string>
+    <string name="backup_password_title">احمِ نسختك الاحتياطية</string>
+    <string name="backup_password_message">اختر كلمة مرور لملف النسخة الاحتياطية. إنها الطريقة الوحيدة لاستعادته، ولا يمكن استرجاعها.</string>
+    <string name="backup_password_hint">كلمة مرور النسخة الاحتياطية</string>
+    <string name="backup_password_confirm_hint">تأكيد كلمة المرور</string>
+    <string name="backup_password_mismatch">كلمتا المرور غير متطابقتين.</string>
+    <string name="backup_password_too_short">استخدم 8 أحرف على الأقل.</string>
+    <string name="restore_password_title">استعادة النسخة الاحتياطية</string>
+    <string name="restore_password_message">أدخل كلمة المرور التي اخترتها عند إنشاء ملف النسخة الاحتياطية.</string>
+    <string name="backup_confirm">متابعة</string>
 </resources>

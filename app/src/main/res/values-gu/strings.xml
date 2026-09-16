@@ -28,7 +28,6 @@
     <string name="search">શોધો</string>
     <string name="title">શીર્ષક</string>
     <string name="response">જવાબ</string>
-    <string name="export_download">ફાઇલ ડાઉનલોડ કરી ગઈ છે.</string>
     <string name="rate_app">એપ્લિકેશન રેટ કરો</string>
     <string name="change_language">ભાષા બદલો</string>
     <string name="privacy">ગોપનીયતા</string>
@@ -99,4 +98,19 @@
         <item quantity="one">%1$d વાર વપરાયેલ</item>
         <item quantity="other">%1$d વાર વપરાયેલ</item>
     </plurals>
+    <string name="export_success">એન્ક્રિપ્ટેડ બૅકઅપ સાચવ્યું.</string>
+    <string name="export_failed">બૅકઅપ સાચવી શકાયું નહીં.</string>
+    <string name="import_summary">%1$d એન્ટ્રી અને %2$d વિગતો આયાત થઈ.</string>
+    <string name="import_wrong_password">ખોટો પાસવર્ડ, અથવા ફાઇલ બગડેલી છે.</string>
+    <string name="import_file_too_large">આ ફાઇલ PassKey બૅકઅપ માટે ઘણી મોટી છે.</string>
+    <string name="import_unsupported_version">આ બૅકઅપ PassKey ના નવા સંસ્કરણથી બન્યું છે.</string>
+    <string name="backup_password_title">તમારું બૅકઅપ સુરક્ષિત કરો</string>
+    <string name="backup_password_message">આ બૅકઅપ ફાઇલ માટે પાસવર્ડ પસંદ કરો. પુનઃસ્થાપનનો આ એકમાત્ર રસ્તો છે, અને તે પાછો મેળવી શકાતો નથી.</string>
+    <string name="backup_password_hint">બૅકઅપ પાસવર્ડ</string>
+    <string name="backup_password_confirm_hint">પાસવર્ડની પુષ્ટિ કરો</string>
+    <string name="backup_password_mismatch">પાસવર્ડ મેળ ખાતા નથી.</string>
+    <string name="backup_password_too_short">ઓછામાં ઓછા 8 અક્ષર વાપરો.</string>
+    <string name="restore_password_title">બૅકઅપ પુનઃસ્થાપિત કરો</string>
+    <string name="restore_password_message">આ બૅકઅપ ફાઇલ બનાવતી વખતે પસંદ કરેલો પાસવર્ડ દાખલ કરો.</string>
+    <string name="backup_confirm">ચાલુ રાખો</string>
 </resources>

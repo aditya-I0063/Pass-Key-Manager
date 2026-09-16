@@ -28,7 +28,6 @@
     <string name="search">検索</string>
     <string name="title">タイトル</string>
     <string name="response">応答</string>
-    <string name="export_download">ファイルがダウンロードフォルダにエクスポートされました。</string>
     <string name="rate_app">アプリを評価</string>
     <string name="change_language">言語を変更</string>
     <string name="privacy">プライバシー</string>
@@ -98,4 +97,19 @@
     <plurals name="password_used_times">
         <item quantity="other">%1$d 回使用</item>
     </plurals>
+    <string name="export_success">暗号化バックアップを保存しました。</string>
+    <string name="export_failed">バックアップを保存できませんでした。</string>
+    <string name="import_summary">%1$d 件の項目と %2$d 件の詳細をインポートしました。</string>
+    <string name="import_wrong_password">パスワードが違うか、ファイルが破損しています。</string>
+    <string name="import_file_too_large">このファイルは PassKey のバックアップにしては大きすぎます。</string>
+    <string name="import_unsupported_version">このバックアップは新しいバージョンの PassKey で作成されています。</string>
+    <string name="backup_password_title">バックアップを保護</string>
+    <string name="backup_password_message">このバックアップファイルのパスワードを設定してください。復元する唯一の手段であり、再発行はできません。</string>
+    <string name="backup_password_hint">バックアップのパスワード</string>
+    <string name="backup_password_confirm_hint">パスワードの確認</string>
+    <string name="backup_password_mismatch">パスワードが一致しません。</string>
+    <string name="backup_password_too_short">8 文字以上で入力してください。</string>
+    <string name="restore_password_title">バックアップを復元</string>
+    <string name="restore_password_message">このバックアップファイルを作成したときに設定したパスワードを入力してください。</string>
+    <string name="backup_confirm">続行</string>
 </resources>
