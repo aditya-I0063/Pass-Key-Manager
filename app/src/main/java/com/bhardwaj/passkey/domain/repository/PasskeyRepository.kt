@@ -2,7 +2,10 @@ package com.bhardwaj.passkey.domain.repository
 
 import com.bhardwaj.passkey.domain.model.Category
 import com.bhardwaj.passkey.domain.model.Detail
+import com.bhardwaj.passkey.domain.model.PasswordHistoryEntry
 import com.bhardwaj.passkey.domain.model.Preview
+import com.bhardwaj.passkey.domain.model.TotpEntry
+import com.bhardwaj.passkey.domain.totp.TotpConfig
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -57,6 +60,21 @@ interface PasskeyRepository {
     suspend fun deleteDetailsByPreviewId(previewId: Long)
 
     suspend fun updateDetailSequence(detailId: Long, sequence: Long)
+
+    // Authenticator codes
+
+    fun getTotpByPreviewId(previewId: Long): Flow<List<TotpEntry>>
+
+    suspend fun createTotp(previewId: Long, label: String, config: TotpConfig): Long
+
+    suspend fun deleteTotp(entry: TotpEntry)
+
+    // Password history
+
+    fun getHistoryForDetail(detailId: Long): Flow<List<PasswordHistoryEntry>>
+
+    /** When this secret last changed, or null if it has never been edited. */
+    suspend fun lastChangedAt(detailId: Long): Long?
 
     // Cross-cutting
 

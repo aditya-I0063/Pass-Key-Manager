@@ -2,8 +2,11 @@ package com.bhardwaj.passkey
 
 import com.bhardwaj.passkey.domain.model.Category
 import com.bhardwaj.passkey.domain.model.Detail
+import com.bhardwaj.passkey.domain.model.PasswordHistoryEntry
 import com.bhardwaj.passkey.domain.model.Preview
+import com.bhardwaj.passkey.domain.model.TotpEntry
 import com.bhardwaj.passkey.domain.repository.PasskeyRepository
+import com.bhardwaj.passkey.domain.totp.TotpConfig
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
@@ -19,7 +22,12 @@ class FakePasskeyRepository : PasskeyRepository {
 
     private val previews = MutableStateFlow<List<Preview>>(emptyList())
     private val details = MutableStateFlow<List<Detail>>(emptyList())
+    private val totps = MutableStateFlow<List<TotpEntry>>(emptyList())
+    private val history = MutableStateFlow<List<PasswordHistoryEntry>>(emptyList())
     private var nextId = 1L
+
+    /** Mirrors the real repository, which writes history itself rather than trusting callers. */
+    var clock: Long = 1_700_000_000_000L
 
     /** Counts writes so tests can assert nothing touched the database. */
     var writeCount = 0
@@ -98,6 +106,12 @@ class FakePasskeyRepository : PasskeyRepository {
 
     override suspend fun updateDetail(detail: Detail) {
         writeCount++
+        val existing = details.value.firstOrNull { it.id == detail.id }
+        if (existing != null && (existing.isSecret || detail.isSecret) &&
+            existing.answer != detail.answer && existing.answer.isNotBlank()
+        ) {
+            history.value += PasswordHistoryEntry(nextId++, detail.id, existing.answer, clock)
+        }
         details.value = details.value.map { if (it.id == detail.id) detail else it }
     }
 
@@ -118,11 +132,38 @@ class FakePasskeyRepository : PasskeyRepository {
         }
     }
 
+    fun currentTotps(): List<TotpEntry> = totps.value
+
+    override fun getTotpByPreviewId(previewId: Long): Flow<List<TotpEntry>> =
+        totps.map { list -> list.filter { it.previewId == previewId } }
+
+    override suspend fun createTotp(previewId: Long, label: String, config: TotpConfig): Long {
+        writeCount++
+        val id = nextId++
+        totps.value += TotpEntry(id, previewId, label, config)
+        return id
+    }
+
+    override suspend fun deleteTotp(entry: TotpEntry) {
+        writeCount++
+        totps.value = totps.value.filterNot { it.id == entry.id }
+    }
+
+    override fun getHistoryForDetail(detailId: Long): Flow<List<PasswordHistoryEntry>> =
+        history.map { list ->
+            list.filter { it.detailId == detailId }.sortedByDescending { it.changedAt }
+        }
+
+    override suspend fun lastChangedAt(detailId: Long): Long? =
+        history.value.filter { it.detailId == detailId }.maxOfOrNull { it.changedAt }
+
     override suspend fun <R> runInTransaction(block: suspend () -> R): R = block()
 
     override suspend fun deleteAll() {
         writeCount++
         previews.value = emptyList()
         details.value = emptyList()
+        totps.value = emptyList()
+        history.value = emptyList()
     }
 }

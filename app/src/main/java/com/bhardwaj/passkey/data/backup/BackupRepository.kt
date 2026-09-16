@@ -11,6 +11,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
+import com.bhardwaj.passkey.domain.totp.Base32
+import com.bhardwaj.passkey.domain.totp.TotpAlgorithm
+import com.bhardwaj.passkey.domain.totp.TotpConfig
 import kotlinx.serialization.json.Json
 import java.util.Arrays
 import java.util.zip.GZIPInputStream
@@ -59,7 +62,17 @@ class BackupRepository @Inject constructor(
                     categoryName = preview.category.name,
                     sequence = preview.sequence,
                     details = repository.getDetailsByPreviewId(preview.id).first()
-                        .map { BackupDetail(it.question, it.answer, it.sequence) }
+                        .map { BackupDetail(it.question, it.answer, it.sequence, it.isSecret) },
+                    totp = repository.getTotpByPreviewId(preview.id).first().map {
+                        BackupTotp(
+                            label = it.label,
+                            secret = Base32.encode(it.config.secret),
+                            issuer = it.config.issuer,
+                            algorithm = it.config.algorithm.name,
+                            digits = it.config.digits,
+                            periodSeconds = it.config.periodSeconds
+                        )
+                    }
                 )
             }
         }.getOrElse { return@withContext Result.failure(BackupException(BackupError.ReadFailed)) }
@@ -200,10 +213,41 @@ class BackupRepository @Inject constructor(
                                 previewId = previewId,
                                 question = question,
                                 answer = answer,
-                                sequence = detail.sequence
+                                sequence = detail.sequence,
+                                isSecret = detail.isSecret
                             )
                             detailsAdded++
                         }
+                    }
+
+                    backupPreview.totp.forEach { totp ->
+                        // A secret that will not decode produces codes that never verify, with
+                        // nothing on screen to say why. Skip the row and count it instead.
+                        val secret = totp.secret
+                            .takeIf { it.length <= BackupPayload.MAX_SECRET_CHARS }
+                            ?.let { Base32.decode(it) }
+                        val label = totp.label.trim()
+                        if (secret == null || label.isEmpty() ||
+                            label.length > BackupPayload.MAX_HEADING_CHARS
+                        ) {
+                            skipped++
+                            return@forEach
+                        }
+                        repository.createTotp(
+                            previewId = previewId,
+                            label = label,
+                            config = TotpConfig(
+                                secret = secret,
+                                issuer = totp.issuer,
+                                account = label,
+                                algorithm = TotpAlgorithm.fromNameOrDefault(totp.algorithm),
+                                digits = totp.digits.takeIf { it in TotpConfig.DIGIT_RANGE }
+                                    ?: TotpConfig.DEFAULT_DIGITS,
+                                periodSeconds = totp.periodSeconds
+                                    .takeIf { it in TotpConfig.PERIOD_RANGE }
+                                    ?: TotpConfig.DEFAULT_PERIOD_SECONDS
+                            )
+                        )
                     }
                 }
             }

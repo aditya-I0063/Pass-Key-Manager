@@ -1,0 +1,247 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 4,
+    "identityHash": "01a625472fb625a013b3a9b98c929b5e",
+    "entities": [
+      {
+        "tableName": "preview_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`previewId` INTEGER PRIMARY KEY AUTOINCREMENT, `heading` TEXT NOT NULL, `categoryName` TEXT NOT NULL, `sequence` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "previewId",
+            "columnName": "previewId",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "heading",
+            "columnName": "heading",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "categoryName",
+            "columnName": "categoryName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sequence",
+            "columnName": "sequence",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "previewId"
+          ]
+        }
+      },
+      {
+        "tableName": "details_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`detailsId` INTEGER PRIMARY KEY AUTOINCREMENT, `previewId` INTEGER NOT NULL, `question` TEXT NOT NULL, `answer` TEXT NOT NULL, `sequence` INTEGER NOT NULL, `isSecret` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "detailsId",
+            "columnName": "detailsId",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "previewId",
+            "columnName": "previewId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "question",
+            "columnName": "question",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "answer",
+            "columnName": "answer",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sequence",
+            "columnName": "sequence",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isSecret",
+            "columnName": "isSecret",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "detailsId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_details_table_previewId",
+            "unique": false,
+            "columnNames": [
+              "previewId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_details_table_previewId` ON `${TABLE_NAME}` (`previewId`)"
+          }
+        ]
+      },
+      {
+        "tableName": "totp_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`totpId` INTEGER PRIMARY KEY AUTOINCREMENT, `previewId` INTEGER NOT NULL, `label` TEXT NOT NULL, `secret` TEXT NOT NULL, `issuer` TEXT, `algorithm` TEXT NOT NULL, `digits` INTEGER NOT NULL, `periodSeconds` INTEGER NOT NULL, FOREIGN KEY(`previewId`) REFERENCES `preview_table`(`previewId`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "totpId",
+            "columnName": "totpId",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "previewId",
+            "columnName": "previewId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "label",
+            "columnName": "label",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "secret",
+            "columnName": "secret",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "issuer",
+            "columnName": "issuer",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "algorithm",
+            "columnName": "algorithm",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "digits",
+            "columnName": "digits",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "periodSeconds",
+            "columnName": "periodSeconds",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "totpId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_totp_table_previewId",
+            "unique": false,
+            "columnNames": [
+              "previewId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_totp_table_previewId` ON `${TABLE_NAME}` (`previewId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "preview_table",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "previewId"
+            ],
+            "referencedColumns": [
+              "previewId"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "detail_history_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`historyId` INTEGER PRIMARY KEY AUTOINCREMENT, `detailsId` INTEGER NOT NULL, `answer` TEXT NOT NULL, `changedAt` INTEGER NOT NULL, FOREIGN KEY(`detailsId`) REFERENCES `details_table`(`detailsId`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "historyId",
+            "columnName": "historyId",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "detailsId",
+            "columnName": "detailsId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "answer",
+            "columnName": "answer",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "changedAt",
+            "columnName": "changedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "historyId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_detail_history_table_detailsId",
+            "unique": false,
+            "columnNames": [
+              "detailsId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_detail_history_table_detailsId` ON `${TABLE_NAME}` (`detailsId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "details_table",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "detailsId"
+            ],
+            "referencedColumns": [
+              "detailsId"
+            ]
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '01a625472fb625a013b3a9b98c929b5e')"
+    ]
+  }
+}

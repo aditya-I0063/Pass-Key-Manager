@@ -7,8 +7,12 @@ import com.bhardwaj.passkey.data.mapper.toDomain
 import com.bhardwaj.passkey.data.mapper.toEntity
 import com.bhardwaj.passkey.domain.model.Category
 import com.bhardwaj.passkey.domain.model.Detail
+import com.bhardwaj.passkey.data.local.entity.DetailHistoryEntity
+import com.bhardwaj.passkey.domain.model.PasswordHistoryEntry
 import com.bhardwaj.passkey.domain.model.Preview
+import com.bhardwaj.passkey.domain.model.TotpEntry
 import com.bhardwaj.passkey.domain.repository.PasskeyRepository
+import com.bhardwaj.passkey.domain.totp.TotpConfig
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
@@ -17,8 +21,15 @@ import kotlinx.coroutines.flow.map
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class PasskeyRepositoryImpl(
-    private val vault: VaultDatabaseProvider
+    private val vault: VaultDatabaseProvider,
+    /** Injected so history timestamps are assertable; production reads the wall clock. */
+    private val now: () -> Long = System::currentTimeMillis
 ) : PasskeyRepository {
+
+    private companion object {
+        /** History is a convenience, not an archive. */
+        const val HISTORY_PER_DETAIL = 10
+    }
 
     /**
      * Room Flows are resolved through the vault's *current* database rather than a DAO captured
@@ -94,8 +105,32 @@ class PasskeyRepositoryImpl(
         ).toEntity()
     )
 
+    /**
+     * Records the previous value before overwriting a secret.
+     *
+     * Done here rather than at the call sites because there is more than one of them - the
+     * editor, import, and autofill's save - and a history that depends on every one of them
+     * remembering is a history with holes in it.
+     */
     override suspend fun updateDetail(detail: Detail) {
-        vault.requireDb().detailsDao.upsertDetails(detail.toEntity())
+        val db = vault.requireDb()
+        db.withTransaction {
+            val existing = db.detailsDao.getDetailById(detail.id)
+            val wasSecret = existing?.isSecret == true || detail.isSecret
+            if (existing != null && wasSecret && existing.answer != detail.answer &&
+                existing.answer.isNotBlank()
+            ) {
+                db.historyDao.insert(
+                    DetailHistoryEntity(
+                        detailsId = detail.id,
+                        answer = existing.answer,
+                        changedAt = now()
+                    )
+                )
+                db.historyDao.trim(detail.id, HISTORY_PER_DETAIL)
+            }
+            db.detailsDao.upsertDetails(detail.toEntity())
+        }
     }
 
     override suspend fun deleteDetail(detail: Detail) {
@@ -110,11 +145,36 @@ class PasskeyRepositoryImpl(
         vault.requireDb().detailsDao.updateDetailSequence(detailId, sequence)
     }
 
+    override fun getTotpByPreviewId(previewId: Long): Flow<List<TotpEntry>> =
+        vault.database.flatMapLatest { db ->
+            db?.totpDao?.getByPreviewId(previewId)?.map { rows -> rows.mapNotNull { it.toDomain() } }
+                ?: flowOf(emptyList())
+        }
+
+    override suspend fun createTotp(previewId: Long, label: String, config: TotpConfig): Long =
+        vault.requireDb().totpDao.upsert(
+            TotpEntry(id = 0, previewId = previewId, label = label, config = config).toEntity()
+        )
+
+    override suspend fun deleteTotp(entry: TotpEntry) {
+        vault.requireDb().totpDao.delete(entry.toEntity())
+    }
+
+    override fun getHistoryForDetail(detailId: Long): Flow<List<PasswordHistoryEntry>> =
+        vaultFlow({ it.historyDao.getForDetail(detailId) }) { it.toDomain() }
+
+    override suspend fun lastChangedAt(detailId: Long): Long? =
+        vault.requireDb().historyDao.lastChangedAt(detailId)
+
     override suspend fun <R> runInTransaction(block: suspend () -> R): R =
         vault.requireDb().withTransaction { block() }
 
     override suspend fun deleteAll() {
         val db = vault.requireDb()
+        // Children first: the foreign keys cascade, but deleteAll is also used on a database
+        // where foreign keys may be off during an import transaction.
+        db.historyDao.deleteAll()
+        db.totpDao.deleteAll()
         db.detailsDao.deleteAllDetails()
         db.previewDao.deleteAllPreviews()
     }

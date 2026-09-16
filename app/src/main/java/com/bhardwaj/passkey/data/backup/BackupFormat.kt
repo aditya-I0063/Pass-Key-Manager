@@ -28,7 +28,12 @@ internal object BackupFormat {
 
     val MAGIC = "PKBACKUP".toByteArray(Charsets.US_ASCII)
 
-    const val FORMAT_VERSION = 2
+    /**
+     * 3 carries payload schema 2 (isSecret and authenticators). Bumped alongside the payload so
+     * an older build says "made by a newer version of PassKey" instead of failing to parse an
+     * unknown key and blaming the password.
+     */
+    const val FORMAT_VERSION = 3
     const val KDF_PBKDF2_HMAC_SHA512 = 1
 
     const val SALT_BYTES = 16

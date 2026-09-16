@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.bhardwaj.passkey.utils.Constants
 import com.bhardwaj.passkey.utils.MIGRATION_1_2
 import com.bhardwaj.passkey.utils.MIGRATION_2_3
+import com.bhardwaj.passkey.utils.MIGRATION_3_4
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -49,7 +50,7 @@ class VaultDatabaseProvider @Inject constructor(
                 klass = PasskeyDatabase::class.java,
                 name = Constants.PASS_KEY_DATABASE
             )
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                 .openHelperFactory(
                     // clearPassphrase = false: the default zeroes the array after the first
                     // open, and Room may reopen the helper (after close, or a migration), which
