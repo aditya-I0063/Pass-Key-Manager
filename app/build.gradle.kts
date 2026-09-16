@@ -78,6 +78,11 @@ android {
             jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
         }
     }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
     buildFeatures {
         compose = true
         buildConfig = true
@@ -186,6 +191,9 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockk)
     testImplementation(libs.turbine)
+    // Only DetailViewModelTest needs this: SavedStateHandle.toRoute builds an android.os.Bundle
+    // internally, which a plain JVM test cannot. Every other unit test runs without it.
+    testImplementation(libs.robolectric)
     androidTestImplementation(libs.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

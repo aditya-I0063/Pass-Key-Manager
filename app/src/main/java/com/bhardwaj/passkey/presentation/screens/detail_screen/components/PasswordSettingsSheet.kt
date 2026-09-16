@@ -1,5 +1,7 @@
 package com.bhardwaj.passkey.presentation.screens.detail_screen.components
 
+import com.bhardwaj.passkey.domain.model.PasswordCharacterClass
+import com.bhardwaj.passkey.domain.model.PasswordPolicy
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -34,14 +36,10 @@ import com.bhardwaj.passkey.presentation.theme.Poppins
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PasswordSettingsSheet(
-    length: Float,
-    includeUpper: Boolean,
-    includeLower: Boolean,
-    includeNumbers: Boolean,
-    includeSpecial: Boolean,
+    policy: PasswordPolicy,
     onDismissPasswordSettings: () -> Unit,
-    onPasswordLengthChange: (length: Float) -> Unit,
-    onTogglePasswordOption: (type: String, checked: Boolean) -> Unit
+    onPasswordLengthChange: (length: Int) -> Unit,
+    onToggleCharacterClass: (PasswordCharacterClass, Boolean) -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState()
 
@@ -70,15 +68,15 @@ fun PasswordSettingsSheet(
             )
 
             Text(
-                text = stringResource(R.string.password_length, length.toInt()),
+                text = stringResource(R.string.password_length, policy.length),
                 fontFamily = Poppins,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onBackground
             )
             Slider(
-                value = length,
-                onValueChange = { onPasswordLengthChange(it) },
-                valueRange = 4f..32f,
+                value = policy.length.toFloat(),
+                onValueChange = { onPasswordLengthChange(it.toInt()) },
+                valueRange = PasswordPolicy.MIN_LENGTH.toFloat()..PasswordPolicy.MAX_LENGTH.toFloat(),
                 steps = 27,
                 colors = SliderDefaults.colors(
                     thumbColor = MaterialTheme.colorScheme.primary,
@@ -90,20 +88,20 @@ fun PasswordSettingsSheet(
 
             PasswordToggleRow(
                 "A-Z",
-                includeUpper
-            ) { onTogglePasswordOption("Upper", it) }
+                policy.includeUppercase
+            ) { onToggleCharacterClass(PasswordCharacterClass.UPPERCASE, it) }
             PasswordToggleRow(
                 "a-z",
-                includeLower
-            ) { onTogglePasswordOption("Lower", it) }
+                policy.includeLowercase
+            ) { onToggleCharacterClass(PasswordCharacterClass.LOWERCASE, it) }
             PasswordToggleRow(
                 "0-9",
-                includeNumbers
-            ) { onTogglePasswordOption("Number", it) }
+                policy.includeDigits
+            ) { onToggleCharacterClass(PasswordCharacterClass.DIGITS, it) }
             PasswordToggleRow(
                 "!@#",
-                includeSpecial
-            ) { onTogglePasswordOption("Special", it) }
+                policy.includeSymbols
+            ) { onToggleCharacterClass(PasswordCharacterClass.SYMBOLS, it) }
         }
     }
 }
