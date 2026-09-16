@@ -39,10 +39,7 @@ fun NavGraph(navController: NavHostController) {
         }
 
         composable<NavRoute.Settings> {
-            SettingsScreen(
-                onPopBackStack = { navController.popBackStack() },
-                onNavigate = { navController.navigate(it) }
-            )
+            SettingsScreen(onNavigate = { navController.navigate(it) })
         }
     }
 }

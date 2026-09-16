@@ -64,7 +64,6 @@
     <string name="security_heading">PassKeyはロックされています</string>
     <string name="security_description">PassKeyアプリにアクセスするには認証が必要です。</string>
     <string name="security_button">今すぐアンロック</string>
-    <string name="coming_soon">近日公開</string>
     <string name="confirm_delete_title">削除を確認</string>
     <string name="confirm_delete_description_question">本当に質問を削除しますか？</string>
     <string name="confirm_delete_description_heading">本当に見出しを削除しますか？</string>
@@ -160,4 +159,5 @@
     <string name="recovery_change_failed">パスワードが正しくありませんでした。</string>
     <string name="migration_export_first">先にバックアップを書き出す</string>
     <string name="migration_export_now">今すぐ保管庫を書き出す</string>
+    <string name="store_unavailable">このデバイスでは Google Play を利用できません。</string>
 </resources>

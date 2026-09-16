@@ -64,7 +64,6 @@
     <string name="security_heading">تم قفل PassKey</string>
     <string name="security_description">المصادقة مطلوبة للوصول إلى تطبيق PassKey.</string>
     <string name="security_button">فتح الآن</string>
-    <string name="coming_soon">قريبًا</string>
     <string name="confirm_delete_title">تأكيد الحذف</string>
     <string name="confirm_delete_description_question">هل أنت متأكد أنك تريد حذف السؤال؟</string>
     <string name="confirm_delete_description_heading">هل أنت متأكد أنك تريد حذف العنوان؟</string>
@@ -166,4 +165,5 @@
     <string name="recovery_change_failed">كلمة المرور غير صحيحة.</string>
     <string name="migration_export_first">صدّر نسخة احتياطية أولًا</string>
     <string name="migration_export_now">صدّر خزنتي الآن</string>
+    <string name="store_unavailable">خدمة Google Play غير متوفرة على هذا الجهاز.</string>
 </resources>

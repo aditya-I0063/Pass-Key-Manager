@@ -64,7 +64,6 @@
     <string name="security_heading">PassKey লক হয়েছে</string>
     <string name="security_description">PassKey অ্যাপ্লিকেশনে অ্যাক্সেস করতে প্রাধিকারীকরণ প্রয়োজন।</string>
     <string name="security_button">এখন আনলক করুন</string>
-    <string name="coming_soon">শীঘ্রই আসছে</string>
     <string name="confirm_delete_title">মুছে ফেলার নিশ্চিতকরণ</string>
     <string name="confirm_delete_description_question">আপনি কি নিশ্চিত যে আপনি প্রশ্নটি মুছে ফেলতে চান?</string>
     <string name="confirm_delete_description_heading">আপনি কি নিশ্চিত যে আপনি শিরোনামটি মুছে ফেলতে চান?</string>
@@ -162,4 +161,5 @@
     <string name="recovery_change_failed">পাসওয়ার্ডটি সঠিক ছিল না।</string>
     <string name="migration_export_first">আগে ব্যাকআপ নিন</string>
     <string name="migration_export_now">এখনই আমার ভল্ট রপ্তানি করুন</string>
+    <string name="store_unavailable">এই ডিভাইসে Google Play উপলব্ধ নেই।</string>
 </resources>

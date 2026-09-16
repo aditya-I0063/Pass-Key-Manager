@@ -64,7 +64,6 @@
     <string name="security_heading">पासकी ताला बंद है</string>
     <string name="security_description">पासकी ऐप्प तक पहुँचने के लिए प्रमाणीकरण की आवश्यकता है।</string>
     <string name="security_button">अब खोलें</string>
-    <string name="coming_soon">जल्द ही आ रहा है</string>
     <string name="confirm_delete_title">हटाने की पुष्टि करें</string>
     <string name="confirm_delete_description_question">क्या आप वाकई प्रश्न हटाना चाहते हैं?</string>
     <string name="confirm_delete_description_heading">क्या आप वाकई शीर्षक हटाना चाहते हैं?</string>
@@ -162,4 +161,5 @@
     <string name="recovery_change_failed">वह पासवर्ड सही नहीं था।</string>
     <string name="migration_export_first">पहले बैकअप निर्यात करें</string>
     <string name="migration_export_now">मेरी वॉल्ट अभी निर्यात करें</string>
+    <string name="store_unavailable">इस डिवाइस पर Google Play उपलब्ध नहीं है।</string>
 </resources>

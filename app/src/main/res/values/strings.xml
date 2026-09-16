@@ -114,7 +114,6 @@ Questions: contact <xliff:g id="email" example="name@example.com">yrkkh.cclub@gm
     <string name="security_heading">PassKey is locked</string>
     <string name="security_description">Authentication is required to access the PassKey app.</string>
     <string name="security_button">Unlock now</string>
-    <string name="coming_soon">Coming Soon</string>
     <string name="confirm_delete_title">Confirm delete</string>
     <string name="confirm_delete_description_question">Are you sure you want to delete question?</string>
     <string name="confirm_delete_description_heading">Are you sure you want to delete heading?</string>
@@ -236,4 +235,5 @@ Questions: contact <xliff:g id="email" example="name@example.com">yrkkh.cclub@gm
 
     <string name="migration_export_first">Export a backup first</string>
     <string name="migration_export_now">Export my vault now</string>
+    <string name="store_unavailable">Google Play is not available on this device.</string>
 </resources>

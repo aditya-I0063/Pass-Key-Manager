@@ -64,7 +64,6 @@
     <string name="security_heading">PassKey заблокирован</string>
     <string name="security_description">Для доступа к приложению PassKey требуется аутентификация.</string>
     <string name="security_button">Разблокировать сейчас</string>
-    <string name="coming_soon">Скоро</string>
     <string name="confirm_delete_title">Подтвердите удаление</string>
     <string name="confirm_delete_description_question">Вы уверены, что хотите удалить вопрос?</string>
     <string name="confirm_delete_description_heading">Вы уверены, что хотите удалить заголовок?</string>
@@ -163,4 +162,5 @@
     <string name="recovery_change_failed">Этот пароль неверен.</string>
     <string name="migration_export_first">Сначала выгрузить копию</string>
     <string name="migration_export_now">Выгрузить хранилище сейчас</string>
+    <string name="store_unavailable">Google Play недоступен на этом устройстве.</string>
 </resources>

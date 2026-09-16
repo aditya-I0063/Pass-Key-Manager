@@ -64,7 +64,6 @@
     <string name="security_heading">PassKey已锁定</string>
     <string name="security_description">需要验证才能访问PassKey应用。</string>
     <string name="security_button">立即解锁</string>
-    <string name="coming_soon">即将推出</string>
     <string name="confirm_delete_title">确认删除</string>
     <string name="confirm_delete_description_question">您确定要删除问题吗？</string>
     <string name="confirm_delete_description_heading">您确定要删除标题吗？</string>
@@ -161,4 +160,5 @@
     <string name="recovery_change_failed">该密码不正确。</string>
     <string name="migration_export_first">先导出备份</string>
     <string name="migration_export_now">立即导出我的密码库</string>
+    <string name="store_unavailable">此设备上无法使用 Google Play。</string>
 </resources>

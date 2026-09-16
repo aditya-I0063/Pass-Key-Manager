@@ -1,11 +1,9 @@
 package com.bhardwaj.passkey.presentation.screens.settings_screen
 
-import com.bhardwaj.passkey.presentation.navigation.NavRoute
-import com.bhardwaj.passkey.domain.model.AutoLockTimeout
-import android.content.ContentResolver
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
-import android.provider.OpenableColumns
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -13,30 +11,29 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.BottomSheetScaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.ui.window.SecureFlagPolicy
-import androidx.compose.material3.ModalBottomSheetProperties
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SheetValue
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberBottomSheetScaffoldState
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
@@ -45,41 +42,45 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.bhardwaj.passkey.R
 import com.bhardwaj.passkey.data.backup.BackupFormat
 import com.bhardwaj.passkey.data.backup.ImportMode
-import com.bhardwaj.passkey.presentation.screens.settings_screen.components.BackupPasswordDialog
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.bhardwaj.passkey.presentation.screens.settings_screen.components.AutoLockDialog
+import com.bhardwaj.passkey.presentation.navigation.NavRoute
 import com.bhardwaj.passkey.presentation.screens.common.ObserveAsEvents
-import com.bhardwaj.passkey.R
-import com.bhardwaj.passkey.presentation.screens.settings_screen.SettingsEvents
-import com.bhardwaj.passkey.presentation.screens.settings_screen.SettingsViewModel
 import com.bhardwaj.passkey.presentation.screens.settings_screen.components.AnalysisBottomSheet
+import com.bhardwaj.passkey.presentation.screens.settings_screen.components.AutoLockDialog
+import com.bhardwaj.passkey.presentation.screens.settings_screen.components.BackupPasswordDialog
 import com.bhardwaj.passkey.presentation.screens.settings_screen.components.FaqItem
 import com.bhardwaj.passkey.presentation.screens.settings_screen.components.LanguageBottomSheet
 import com.bhardwaj.passkey.presentation.screens.settings_screen.components.SettingsText
 import com.bhardwaj.passkey.presentation.theme.BebasNeue
 import com.bhardwaj.passkey.presentation.theme.Poppins
+import com.bhardwaj.passkey.utils.UiText
 import com.bhardwaj.passkey.utils.asString
-import com.bhardwaj.passkey.utils.UiEvents
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    onPopBackStack: () -> Unit,
     onNavigate: (NavRoute) -> Unit,
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    // A bound method reference allocates a new object on every recomposition, so the lambda
+    // parameter would never be equal and the whole subtree would recompose needlessly.
+    val onIntent = remember(viewModel) { viewModel::onIntent }
+
     val snackBarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberBottomSheetScaffoldState()
-
     val context = LocalContext.current
+
     // Backup file selection. The password is collected only after a destination or source is
     // chosen, so the user is never asked for one and then cancels out of the picker.
     var pendingExportUri by remember { mutableStateOf<Uri?>(null) }
@@ -97,44 +98,55 @@ fun SettingsScreen(
                 pendingImportUri = it
             } else {
                 // A legacy plaintext .passkey CSV needs no password; restore it directly.
-                viewModel.onEvent(
-                    SettingsEvents.OnImportFileChosen(
-                        uri = it,
-                        password = null,
-                        mode = ImportMode.MERGE
-                    )
-                )
+                onIntent(SettingsIntent.ImportFileChosen(it, password = null, mode = ImportMode.MERGE))
             }
         }
     }
 
+    // The sheet's openness follows the state rather than each click site launching its own
+    // expand(), so there is one place where the two can no longer disagree.
+    LaunchedEffect(state.sheet) {
+        if (state.sheet == null) {
+            scaffoldState.bottomSheetState.partialExpand()
+        } else {
+            scaffoldState.bottomSheetState.expand()
+        }
+    }
+
+    // ...and a swipe down is a dismissal like any other, so the state hears about it.
+    val sheetValue = scaffoldState.bottomSheetState.currentValue
+    LaunchedEffect(sheetValue) {
+        if (sheetValue == SheetValue.PartiallyExpanded) {
+            onIntent(SettingsIntent.SheetDismissed)
+        }
+    }
+
     // Two steps: prove the current password, then choose the new one. Reuses the same dialog.
-    when (viewModel.recoveryChangeStep) {
-        false -> BackupPasswordDialog(
+    when (state.recoveryChange) {
+        RecoveryChangeStep.CURRENT_PASSWORD -> BackupPasswordDialog(
             confirmMode = false,
             titleRes = R.string.recovery_change_current_title,
             messageRes = R.string.recovery_change_current_message,
-            onDismiss = { viewModel.onEvent(SettingsEvents.OnDismissRecoveryChange) },
-            onConfirm = { viewModel.onEvent(SettingsEvents.OnCurrentRecoveryPasswordEntered(it)) }
+            onDismiss = { onIntent(SettingsIntent.RecoveryChangeDismissed) },
+            onConfirm = { onIntent(SettingsIntent.CurrentRecoveryPasswordEntered(it)) }
         )
 
-        true -> BackupPasswordDialog(
+        RecoveryChangeStep.NEW_PASSWORD -> BackupPasswordDialog(
             confirmMode = true,
             titleRes = R.string.recovery_change_new_title,
             messageRes = R.string.recovery_change_new_message,
-            onDismiss = { viewModel.onEvent(SettingsEvents.OnDismissRecoveryChange) },
-            onConfirm = { viewModel.onEvent(SettingsEvents.OnNewRecoveryPasswordEntered(it)) }
+            onDismiss = { onIntent(SettingsIntent.RecoveryChangeDismissed) },
+            onConfirm = { onIntent(SettingsIntent.NewRecoveryPasswordEntered(it)) }
         )
 
         null -> Unit
     }
 
-    val autoLockTimeout by viewModel.autoLockTimeout.collectAsStateWithLifecycle()
-    if (viewModel.isAutoLockDialogOpen) {
+    if (state.isAutoLockDialogOpen) {
         AutoLockDialog(
-            current = autoLockTimeout,
-            onDismiss = { viewModel.onEvent(SettingsEvents.OnDismissAutoLockDialog) },
-            onSelect = { viewModel.onEvent(SettingsEvents.OnAutoLockTimeoutChange(it)) }
+            current = state.autoLockTimeout,
+            onDismiss = { onIntent(SettingsIntent.AutoLockDismissed) },
+            onSelect = { onIntent(SettingsIntent.AutoLockTimeoutSelected(it)) }
         )
     }
 
@@ -144,7 +156,7 @@ fun SettingsScreen(
             onDismiss = { pendingExportUri = null },
             onConfirm = { password ->
                 pendingExportUri = null
-                viewModel.onEvent(SettingsEvents.OnExportFileChosen(uri, password))
+                onIntent(SettingsIntent.ExportFileChosen(uri, password))
             }
         )
     }
@@ -155,30 +167,38 @@ fun SettingsScreen(
             onDismiss = { pendingImportUri = null },
             onConfirm = { password ->
                 pendingImportUri = null
-                viewModel.onEvent(
-                    SettingsEvents.OnImportFileChosen(uri, password, ImportMode.MERGE)
-                )
+                onIntent(SettingsIntent.ImportFileChosen(uri, password, ImportMode.MERGE))
             }
         )
     }
 
-    val isAnalysisSheetOpen = viewModel.isAnalysisSheetOpen
-    val analysisResult = viewModel.analysisResult
+    ObserveAsEvents(viewModel.effects) { effect ->
+        when (effect) {
+            is SettingsEffect.Navigate -> onNavigate(effect.route)
 
-    ObserveAsEvents(viewModel.uiEvents) { event ->
-        when (event) {
-            is UiEvents.PopBackStack -> onPopBackStack()
-            is UiEvents.Navigate -> onNavigate(event.route)
-            is UiEvents.ShowSnackBar -> {
-                scope.launch {
-                    snackBarHostState.showSnackbar(
-                        message = event.message.asString(context),
-                        actionLabel = event.action?.asString(context)
-                    )
-                }
+            is SettingsEffect.ShowSnackbar -> scope.launch {
+                snackBarHostState.showSnackbar(message = effect.message.asString(context))
             }
 
-            else -> Unit
+            // Started from the Activity context, and guarded: a device without the Play Store
+            // used to take an unhandled ActivityNotFoundException straight to a crash.
+            SettingsEffect.OpenStoreListing -> {
+                val opened = runCatching {
+                    context.startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            "https://play.google.com/store/apps/details?id=${context.packageName}".toUri()
+                        )
+                    )
+                }.isSuccess
+                if (!opened) {
+                    scope.launch {
+                        snackBarHostState.showSnackbar(
+                            UiText.StringResource(R.string.store_unavailable).asString(context)
+                        )
+                    }
+                }
+            }
         }
     }
 
@@ -193,32 +213,19 @@ fun SettingsScreen(
             sheetSwipeEnabled = true,
             sheetDragHandle = {},
             sheetContent = {
-                if (viewModel.isSheetOpen) {
-                    val sheetState = rememberModalBottomSheetState()
-                    ModalBottomSheet(
-                        properties = ModalBottomSheetProperties(
-                            securePolicy = SecureFlagPolicy.SecureOn
-                        ),
-                        sheetState = sheetState,
-                        onDismissRequest = { viewModel.onEvent(SettingsEvents.OnDismissBottomSheet) },
-                        dragHandle = {},
-                        shape = RectangleShape,
-                    ) {
-                        LanguageBottomSheet(
-                            onLanguageChange = {
-                                viewModel.onEvent(
-                                    SettingsEvents.OnLanguageChange(
-                                        newLanguage = it
-                                    )
-                                )
-                            },
-                            onBackIconClick = {
-                                viewModel.onEvent(SettingsEvents.OnDismissBottomSheet)
-                            }
-                        )
-                    }
-                } else {
-                    FaqItem(openedBy = viewModel.bottomSheetOpenedBy)
+                // Rendered inside the scaffold's own sheet rather than in a nested
+                // ModalBottomSheet: that put a second window in front of an empty expanded
+                // sheet, and only the activity window carries FLAG_SECURE reliably.
+                when (val sheet = state.sheet) {
+                    SettingsState.Sheet.Language -> LanguageBottomSheet(
+                        onLanguageChange = { onIntent(SettingsIntent.LanguageSelected(it)) },
+                        onBackIconClick = { onIntent(SettingsIntent.SheetDismissed) }
+                    )
+
+                    is SettingsState.Sheet.Info -> FaqItem(openedBy = sheet.topic)
+
+                    // A sheet needs measurable content even while collapsed.
+                    null -> Spacer(modifier = Modifier.fillMaxWidth().height(1.dp))
                 }
             }
         ) {
@@ -259,22 +266,21 @@ fun SettingsScreen(
                                 .padding(top = 16.dp, start = 16.dp, end = 16.dp),
                         ) {
                             SettingsText(text = stringResource(id = R.string.change_language)) {
-                                viewModel.onEvent(SettingsEvents.OnLanguageClick)
-                                scope.launch { scaffoldState.bottomSheetState.expand() }
+                                onIntent(SettingsIntent.LanguageClicked)
                             }
                             SettingsText(text = stringResource(id = R.string.analyze_passwords)) {
-                                viewModel.onEvent(SettingsEvents.OnAnalyzePasswordsClick)
+                                onIntent(SettingsIntent.AnalyzeClicked)
                             }
                             SettingsText(text = stringResource(id = R.string.rate_app)) {
-                                viewModel.onEvent(SettingsEvents.OnRateAppClick)
+                                onIntent(SettingsIntent.RateAppClicked)
                             }
                             SettingsText(text = stringResource(id = R.string.auto_lock)) {
-                                viewModel.onEvent(SettingsEvents.OnAutoLockClick)
+                                onIntent(SettingsIntent.AutoLockClicked)
                             }
                             SettingsText(
                                 text = stringResource(id = R.string.change_recovery_password)
                             ) {
-                                viewModel.onEvent(SettingsEvents.OnChangeRecoveryPasswordClick)
+                                onIntent(SettingsIntent.ChangeRecoveryPasswordClicked)
                             }
                             SettingsText(text = stringResource(id = R.string.import_data)) {
                                 importLauncher.launch(arrayOf("*/*"))
@@ -283,22 +289,19 @@ fun SettingsScreen(
                                 exportLauncher.launch(defaultBackupFileName())
                             }
                             SettingsText(text = stringResource(id = R.string.privacy)) {
-                                viewModel.onEvent(SettingsEvents.OnPrivacyClick)
-                                scope.launch { scaffoldState.bottomSheetState.expand() }
+                                onIntent(SettingsIntent.PrivacyClicked)
                             }
                             SettingsText(text = stringResource(id = R.string.terms_n_condition)) {
-                                viewModel.onEvent(SettingsEvents.OnTermsAndConditionClick)
-                                scope.launch { scaffoldState.bottomSheetState.expand() }
+                                onIntent(SettingsIntent.TermsClicked)
                             }
                             SettingsText(text = stringResource(id = R.string.about)) {
-                                viewModel.onEvent(SettingsEvents.OnAboutClick)
-                                scope.launch { scaffoldState.bottomSheetState.expand() }
+                                onIntent(SettingsIntent.AboutClicked)
                             }
                         }
                     }
                     Text(
                         modifier = Modifier.fillMaxWidth(),
-                        text = stringResource(id = R.string.app_version, viewModel.appVersion),
+                        text = stringResource(id = R.string.app_version, state.appVersion),
                         fontFamily = Poppins,
                         fontSize = 12.sp,
                         color = MaterialTheme.colorScheme.outline,
@@ -308,12 +311,13 @@ fun SettingsScreen(
             }
         }
     }
-    if (isAnalysisSheetOpen) {
+
+    state.analysis?.let { analysis ->
         AnalysisBottomSheet(
-            result = analysisResult,
-            onDismiss = { viewModel.onEvent(SettingsEvents.OnDismissAnalysisSheet) },
+            result = analysis,
+            onDismiss = { onIntent(SettingsIntent.AnalysisDismissed) },
             onDetailClick = { detail ->
-                viewModel.onEvent(SettingsEvents.OnAnalysisItemClick(detail))
+                onIntent(SettingsIntent.AnalysisItemClicked(detail.previewId))
             }
         )
     }

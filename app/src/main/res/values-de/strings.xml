@@ -64,7 +64,6 @@
     <string name="security_heading">PassKey ist gesperrt</string>
     <string name="security_description">Zur Nutzung der PassKey-App ist eine Authentifizierung erforderlich.</string>
     <string name="security_button">Jetzt entsperren</string>
-    <string name="coming_soon">Demnächst verfügbar</string>
     <string name="confirm_delete_title">Bestätigen Sie die Löschung.</string>
     <string name="confirm_delete_description_question">Sind Sie sicher, dass Sie die Frage löschen möchten?</string>
     <string name="confirm_delete_description_heading">Sind Sie sicher, dass Sie die Überschrift löschen möchten?</string>
@@ -163,4 +162,5 @@
     <string name="recovery_change_failed">Das Passwort war nicht korrekt.</string>
     <string name="migration_export_first">Zuerst ein Backup exportieren</string>
     <string name="migration_export_now">Tresor jetzt exportieren</string>
+    <string name="store_unavailable">Google Play ist auf diesem Gerät nicht verfügbar.</string>
 </resources>

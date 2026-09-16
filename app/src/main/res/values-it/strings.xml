@@ -64,7 +64,6 @@
     <string name="security_heading">PassKey è bloccato</string>
     <string name="security_description">È necessaria un\'autenticazione per accedere all\'app PassKey.</string>
     <string name="security_button">Sblocca ora</string>
-    <string name="coming_soon">Prossimamente</string>
     <string name="confirm_delete_title">Conferma eliminazione</string>
     <string name="confirm_delete_description_question">Sei sicuro di voler eliminare la domanda?</string>
     <string name="confirm_delete_description_heading">Sei sicuro di voler eliminare l\'intestazione?</string>
@@ -163,4 +162,5 @@
     <string name="recovery_change_failed">Quella password non era corretta.</string>
     <string name="migration_export_first">Esporta prima un backup</string>
     <string name="migration_export_now">Esporta la mia cassaforte ora</string>
+    <string name="store_unavailable">Google Play non è disponibile su questo dispositivo.</string>
 </resources>

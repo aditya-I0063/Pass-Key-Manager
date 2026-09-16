@@ -64,7 +64,6 @@
     <string name="security_heading">पासकी लॉक केला गेला आहे</string>
     <string name="security_description">पासकी अ‍ॅपमध्ये प्रवेश करण्यासाठी प्रमाणीकरण आवश्यक आहे.</string>
     <string name="security_button">आता अनलॉक करा</string>
-    <string name="coming_soon">शीघ्र येत आहे</string>
     <string name="confirm_delete_title">हटवण्याची पुष्टी</string>
     <string name="confirm_delete_description_question">तुम्ही का प्रश्न हटवू इच्छिता?</string>
     <string name="confirm_delete_description_heading">तुम्ही का शीर्षक हटवू इच्छिता?</string>
@@ -162,4 +161,5 @@
     <string name="recovery_change_failed">तो पासवर्ड बरोबर नव्हता.</string>
     <string name="migration_export_first">आधी बॅकअप घ्या</string>
     <string name="migration_export_now">माझी व्हॉल्ट आता निर्यात करा</string>
+    <string name="store_unavailable">या डिव्हाइसवर Google Play उपलब्ध नाही.</string>
 </resources>

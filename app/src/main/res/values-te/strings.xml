@@ -64,7 +64,6 @@
     <string name="security_heading">పాస్‌కీ లాక్ చేయబడింది</string>
     <string name="security_description">పాస్‌కీ అనువర్తనంకు ప్రవేశించడానికి ధృవీకరణ అవసరం.</string>
     <string name="security_button">ఇప్పుడు అన్‌లాక్ చేయండి</string>
-    <string name="coming_soon">త్వరలో</string>
     <string name="confirm_delete_title">తొలగించు నిర్ధారించండి</string>
     <string name="confirm_delete_description_question">ఖచ్చితంగా మీరు ప్రశ్నను తొలగించాలా?</string>
     <string name="confirm_delete_description_heading">ఖచ్చితంగా మీరు శీర్షికను తొలగించాలా?</string>
@@ -161,5 +160,6 @@
     <string name="recovery_change_failed">ఆ పాస్‌వర్డ్ సరైనది కాదు.</string>
     <string name="migration_export_first">ముందు బ్యాకప్ తీసుకోండి</string>
     <string name="migration_export_now">నా వాల్ట్‌ను ఇప్పుడే ఎగుమతి చేయి</string>
+    <string name="store_unavailable">ఈ పరికరంలో Google Play అందుబాటులో లేదు.</string>
 </resources>
 

@@ -1,49 +1,36 @@
 package com.bhardwaj.passkey.presentation.screens.settings_screen
 
-import com.bhardwaj.passkey.presentation.navigation.NavRoute
-import android.app.Application
-import android.app.LocaleManager
-import android.content.Intent
-import android.os.Build
-import android.os.LocaleList
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.core.net.toUri
-import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bhardwaj.passkey.R
+import com.bhardwaj.passkey.data.AppInfo
+import com.bhardwaj.passkey.data.analysis.SecretKeywordProvider
 import com.bhardwaj.passkey.data.backup.BackupError
 import com.bhardwaj.passkey.data.backup.BackupException
 import com.bhardwaj.passkey.data.backup.BackupRepository
-import com.bhardwaj.passkey.domain.model.AutoLockTimeout
+import com.bhardwaj.passkey.data.locale.AppLocaleManager
 import com.bhardwaj.passkey.data.security.DatabaseKeyManager
-import com.bhardwaj.passkey.domain.repository.PreferencesRepository
+import com.bhardwaj.passkey.di.DefaultDispatcher
 import com.bhardwaj.passkey.domain.repository.PasskeyRepository
-import com.bhardwaj.passkey.presentation.screens.settings_screen.SettingsEvents
-import com.bhardwaj.passkey.utils.AlertBy.ABOUT
-import com.bhardwaj.passkey.utils.AlertBy.PRIVACY
-import com.bhardwaj.passkey.utils.AlertBy.TERMS_N_CONDITIONS
-import com.bhardwaj.passkey.domain.model.Category
+import com.bhardwaj.passkey.domain.repository.PreferencesRepository
+import com.bhardwaj.passkey.presentation.navigation.NavRoute
+import com.bhardwaj.passkey.utils.AlertBy
 import com.bhardwaj.passkey.utils.PasswordAnalysisResult
 import com.bhardwaj.passkey.utils.PasswordAnalyzer
-import com.bhardwaj.passkey.utils.UiEvents
 import com.bhardwaj.passkey.utils.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Arrays
 import javax.inject.Inject
 
 @HiltViewModel
@@ -52,186 +39,163 @@ class SettingsViewModel @Inject constructor(
     private val preferences: PreferencesRepository,
     private val backupRepository: BackupRepository,
     private val keyManager: DatabaseKeyManager,
-    private val appContext: Application
+    private val localeManager: AppLocaleManager,
+    private val secretKeywords: SecretKeywordProvider,
+    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
+    appInfo: AppInfo
 ) : ViewModel() {
+
     // BUFFERED, not the RENDEZVOUS default: with lifecycle-aware collection a backgrounded
     // screen has no active collector, and a rendezvous channel would suspend the coroutine
     // that emitted the effect until the user came back.
-    private val _uiEvents = Channel<UiEvents>(Channel.BUFFERED)
-    val uiEvents = _uiEvents.receiveAsFlow()
+    private val _effects = Channel<SettingsEffect>(Channel.BUFFERED)
+    val effects = _effects.receiveAsFlow()
 
-    var appVersion: String by mutableStateOf(
-        appContext.packageManager.getPackageInfo(
-            appContext.packageName,
-            0
-        ).versionName ?: "1.0.0"
+    private val transient = MutableStateFlow(TransientState())
+
+    private data class TransientState(
+        val sheet: SettingsState.Sheet? = null,
+        val isAutoLockDialogOpen: Boolean = false,
+        val analysis: PasswordAnalysisResult? = null,
+        val recoveryChange: RecoveryChangeStep? = null
     )
-        private set
 
-    var bottomSheetOpenedBy by mutableStateOf(PRIVACY)
-        private set
-
-    var isSheetOpen by mutableStateOf(false)
-        private set
-
-    var isAnalysisSheetOpen by mutableStateOf(false)
-        private set
-
-    var analysisResult by mutableStateOf(PasswordAnalysisResult())
-        private set
-
-    var isAutoLockDialogOpen by mutableStateOf(false)
-        private set
-
-    /** null = closed, false = asking for the current password, true = asking for the new one. */
-    var recoveryChangeStep by mutableStateOf<Boolean?>(null)
-        private set
-
-    /** Held only between the two dialog steps, then zeroed. */
+    /**
+     * Held only between the two recovery dialog steps, then zeroed - never in [SettingsState],
+     * which the composition retains.
+     */
     private var pendingCurrentRecoveryPassword: CharArray? = null
 
-    val autoLockTimeout: StateFlow<AutoLockTimeout> = preferences.autoLockTimeout
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), AutoLockTimeout.DEFAULT)
+    private val appVersion = appInfo.versionName
 
-    fun onEvent(event: SettingsEvents) {
-        when (event) {
-            SettingsEvents.OnLanguageClick -> {
-                isSheetOpen = true
+    val state: StateFlow<SettingsState> = combine(
+        transient,
+        preferences.autoLockTimeout
+    ) { ui, timeout ->
+        SettingsState(
+            appVersion = appVersion,
+            autoLockTimeout = timeout,
+            sheet = ui.sheet,
+            isAutoLockDialogOpen = ui.isAutoLockDialogOpen,
+            analysis = ui.analysis,
+            recoveryChange = ui.recoveryChange
+        )
+    }.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5_000),
+        SettingsState(appVersion = appVersion)
+    )
+
+    fun onIntent(intent: SettingsIntent) {
+        when (intent) {
+            SettingsIntent.LanguageClicked ->
+                transient.update { it.copy(sheet = SettingsState.Sheet.Language) }
+
+            SettingsIntent.PrivacyClicked -> openInfo(AlertBy.PRIVACY)
+            SettingsIntent.TermsClicked -> openInfo(AlertBy.TERMS_N_CONDITIONS)
+            SettingsIntent.AboutClicked -> openInfo(AlertBy.ABOUT)
+
+            SettingsIntent.SheetDismissed -> transient.update { it.copy(sheet = null) }
+
+            is SettingsIntent.LanguageSelected -> {
+                transient.update { it.copy(sheet = null) }
+                viewModelScope.launch { localeManager.apply(intent.language.languageId) }
             }
 
-            SettingsEvents.OnDismissBottomSheet -> {
-                isSheetOpen = false
-            }
+            SettingsIntent.RateAppClicked -> emit(SettingsEffect.OpenStoreListing)
 
-            SettingsEvents.OnRateAppClick -> {
-                val appPackageName = appContext.packageName
-                val intent =
-                    Intent(
-                        Intent.ACTION_VIEW,
-                        "https://play.google.com/store/apps/details?id=$appPackageName".toUri()
-                    )
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                appContext.startActivity(intent)
-            }
-
-            SettingsEvents.OnPrivacyClick -> {
-                bottomSheetOpenedBy = PRIVACY
-            }
-
-            SettingsEvents.OnTermsAndConditionClick -> {
-                bottomSheetOpenedBy = TERMS_N_CONDITIONS
-            }
-
-            SettingsEvents.OnAboutClick -> {
-                bottomSheetOpenedBy = ABOUT
-            }
-
-            is SettingsEvents.OnLanguageChange -> {
-                isSheetOpen = false
-                if (event.newLanguage.comingSoon) {
-                    sendUiEvents(
-                        UiEvents.ShowSnackBar(
-                            message = UiText.StringResource(R.string.coming_soon)
+            is SettingsIntent.ExportFileChosen -> viewModelScope.launch {
+                val result = backupRepository.export(intent.uri, intent.password)
+                Arrays.fill(intent.password, Char(0))
+                emit(
+                    SettingsEffect.ShowSnackbar(
+                        UiText.StringResource(
+                            if (result.isSuccess) R.string.export_success
+                            else R.string.export_failed
                         )
                     )
-                } else {
-                    viewModelScope.launch {
-                        preferences.setSelectedLanguageTag(event.newLanguage.languageId)
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                            appContext.getSystemService(LocaleManager::class.java).applicationLocales =
-                                LocaleList.forLanguageTags(event.newLanguage.languageId)
-                        } else {
-                            AppCompatDelegate.setApplicationLocales(
-                                LocaleListCompat.forLanguageTags(
-                                    event.newLanguage.languageId
-                                )
-                            )
-                        }
-                    }
-                }
+                )
             }
 
-            is SettingsEvents.OnExportFileChosen -> {
-                viewModelScope.launch {
-                    val result = backupRepository.export(event.uri, event.password)
-                    java.util.Arrays.fill(event.password, '\u0000')
-                    sendUiEvents(
-                        UiEvents.ShowSnackBar(
-                            message = UiText.StringResource(
-                                if (result.isSuccess) R.string.export_success
-                                else R.string.export_failed
+            is SettingsIntent.ImportFileChosen -> viewModelScope.launch {
+                val result = backupRepository.import(intent.uri, intent.password, intent.mode)
+                intent.password?.let { Arrays.fill(it, Char(0)) }
+                result.fold(
+                    onSuccess = { summary ->
+                        emit(
+                            SettingsEffect.ShowSnackbar(
+                                UiText.StringResource(
+                                    R.string.import_summary,
+                                    listOf(summary.previewsAdded, summary.detailsAdded)
+                                )
                             )
                         )
-                    )
-                }
-            }
-
-            is SettingsEvents.OnImportFileChosen -> {
-                viewModelScope.launch {
-                    val result = backupRepository.import(event.uri, event.password, event.mode)
-                    event.password?.let { java.util.Arrays.fill(it, '\u0000') }
-                    result.fold(
-                        onSuccess = { summary ->
-                            sendUiEvents(
-                                UiEvents.ShowSnackBar(
-                                    message = UiText.StringResource(
-                                        R.string.import_summary,
-                                        listOf(summary.previewsAdded, summary.detailsAdded)
-                                    )
-                                )
-                            )
-                        },
-                        onFailure = { error ->
-                            val message = when ((error as? BackupException)?.error) {
-                                BackupError.WrongPasswordOrCorrupt -> R.string.import_wrong_password
-                                BackupError.FileTooLarge -> R.string.import_file_too_large
-                                is BackupError.UnsupportedVersion -> R.string.import_unsupported_version
-                                else -> R.string.import_failed
-                            }
-                            sendUiEvents(UiEvents.ShowSnackBar(UiText.StringResource(message)))
+                    },
+                    onFailure = { error ->
+                        val message = when ((error as? BackupException)?.error) {
+                            BackupError.WrongPasswordOrCorrupt -> R.string.import_wrong_password
+                            BackupError.FileTooLarge -> R.string.import_file_too_large
+                            is BackupError.UnsupportedVersion -> R.string.import_unsupported_version
+                            else -> R.string.import_failed
                         }
-                    )
-                }
-            }
-
-            SettingsEvents.OnAnalyzePasswordsClick -> {
-                viewModelScope.launch {
-                    val allDetails = repository.getDetails().first()
-                    val keywords = secretFieldKeywords()
-                    val result = withContext(Dispatchers.IO) {
-                        PasswordAnalyzer.analyze(allDetails, keywords)
+                        emit(SettingsEffect.ShowSnackbar(UiText.StringResource(message)))
                     }
-                    analysisResult = result
-                    isAnalysisSheetOpen = true
+                )
+            }
+
+            SettingsIntent.AnalyzeClicked -> viewModelScope.launch {
+                val allDetails = repository.getDetails().first()
+                val keywords = secretKeywords.keywords()
+                // Analysis walks the whole vault, so it is moved off the main thread.
+                val result = withContext(defaultDispatcher) {
+                    PasswordAnalyzer.analyze(allDetails, keywords)
                 }
+                transient.update { it.copy(analysis = result) }
             }
 
-            SettingsEvents.OnChangeRecoveryPasswordClick -> {
-                recoveryChangeStep = false
+            SettingsIntent.AnalysisDismissed -> transient.update { it.copy(analysis = null) }
+
+            is SettingsIntent.AnalysisItemClicked -> {
+                transient.update { it.copy(analysis = null) }
+                emit(SettingsEffect.Navigate(NavRoute.Details(previewId = intent.previewId)))
             }
 
-            SettingsEvents.OnDismissRecoveryChange -> {
-                pendingCurrentRecoveryPassword?.let { java.util.Arrays.fill(it, Char(0)) }
-                pendingCurrentRecoveryPassword = null
-                recoveryChangeStep = null
+            SettingsIntent.AutoLockClicked ->
+                transient.update { it.copy(isAutoLockDialogOpen = true) }
+
+            SettingsIntent.AutoLockDismissed ->
+                transient.update { it.copy(isAutoLockDialogOpen = false) }
+
+            is SettingsIntent.AutoLockTimeoutSelected -> {
+                transient.update { it.copy(isAutoLockDialogOpen = false) }
+                viewModelScope.launch { preferences.setAutoLockTimeout(intent.timeout) }
             }
 
-            is SettingsEvents.OnCurrentRecoveryPasswordEntered -> {
-                pendingCurrentRecoveryPassword = event.password
-                recoveryChangeStep = true
+            SettingsIntent.ChangeRecoveryPasswordClicked ->
+                transient.update { it.copy(recoveryChange = RecoveryChangeStep.CURRENT_PASSWORD) }
+
+            SettingsIntent.RecoveryChangeDismissed -> {
+                clearPendingRecoveryPassword()
+                transient.update { it.copy(recoveryChange = null) }
             }
 
-            is SettingsEvents.OnNewRecoveryPasswordEntered -> {
+            is SettingsIntent.CurrentRecoveryPasswordEntered -> {
+                clearPendingRecoveryPassword()
+                pendingCurrentRecoveryPassword = intent.password
+                transient.update { it.copy(recoveryChange = RecoveryChangeStep.NEW_PASSWORD) }
+            }
+
+            is SettingsIntent.NewRecoveryPasswordEntered -> {
                 val current = pendingCurrentRecoveryPassword
                 pendingCurrentRecoveryPassword = null
-                recoveryChangeStep = null
+                transient.update { it.copy(recoveryChange = null) }
                 viewModelScope.launch {
                     val changed = current != null &&
-                        keyManager.changeRecoveryPassword(current, event.password)
-                    current?.let { java.util.Arrays.fill(it, Char(0)) }
-                    java.util.Arrays.fill(event.password, Char(0))
-                    sendUiEvents(
-                        UiEvents.ShowSnackBar(
+                        keyManager.changeRecoveryPassword(current, intent.password)
+                    current?.let { Arrays.fill(it, Char(0)) }
+                    Arrays.fill(intent.password, Char(0))
+                    emit(
+                        SettingsEffect.ShowSnackbar(
                             UiText.StringResource(
                                 if (changed) R.string.recovery_change_done
                                 else R.string.recovery_change_failed
@@ -240,58 +204,32 @@ class SettingsViewModel @Inject constructor(
                     )
                 }
             }
-
-            SettingsEvents.OnAutoLockClick -> {
-                isAutoLockDialogOpen = true
-            }
-
-            SettingsEvents.OnDismissAutoLockDialog -> {
-                isAutoLockDialogOpen = false
-            }
-
-            is SettingsEvents.OnAutoLockTimeoutChange -> {
-                isAutoLockDialogOpen = false
-                viewModelScope.launch {
-                    preferences.setAutoLockTimeout(event.timeout)
-                }
-            }
-
-            SettingsEvents.OnDismissAnalysisSheet -> {
-                isAnalysisSheetOpen = false
-            }
-
-            is SettingsEvents.OnAnalysisItemClick -> {
-                isAnalysisSheetOpen = false
-                sendUiEvents(
-                    UiEvents.Navigate(NavRoute.Details(previewId = event.detail.previewId))
-                )
-            }
         }
     }
 
     /**
-     * Union of the default-locale and current-locale keyword lists. A vault may hold entries
-     * labelled before the user switched language, so matching only the current locale would
-     * silently stop classifying them.
+     * Abandoning the flow half-way used to leave the entered password in memory for the
+     * ViewModel's remaining life.
      */
-    private fun secretFieldKeywords(): Set<String> {
-        val current = appContext.resources.getStringArray(R.array.secret_field_keywords).toSet()
-        val defaultLocaleConfig = android.content.res.Configuration(appContext.resources.configuration)
-        defaultLocaleConfig.setLocale(java.util.Locale.ENGLISH)
-        val fallback = appContext.createConfigurationContext(defaultLocaleConfig)
-            .resources.getStringArray(R.array.secret_field_keywords).toSet()
-        return current + fallback
+    override fun onCleared() {
+        clearPendingRecoveryPassword()
+        super.onCleared()
     }
 
-    private fun sendUiEvents(events: UiEvents) {
-        viewModelScope.launch {
-            _uiEvents.send(events)
-        }
+    private fun clearPendingRecoveryPassword() {
+        pendingCurrentRecoveryPassword?.let { Arrays.fill(it, Char(0)) }
+        pendingCurrentRecoveryPassword = null
     }
 
+    private fun openInfo(topic: AlertBy) {
+        transient.update { it.copy(sheet = SettingsState.Sheet.Info(topic)) }
+    }
 
+    private fun emit(effect: SettingsEffect) {
+        viewModelScope.launch { _effects.send(effect) }
+    }
+}
 
-
-
-
+private inline fun <T> MutableStateFlow<T>.update(transform: (T) -> T) {
+    value = transform(value)
 }

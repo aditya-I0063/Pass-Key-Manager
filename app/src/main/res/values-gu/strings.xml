@@ -64,7 +64,6 @@
     <string name="security_heading">પાસકી લોકાંતિક છે</string>
     <string name="security_description">પાસકી એપ્લિકેશન એક્સેસ માટે પ્રમાણીકરણ જરૂરી છે.</string>
     <string name="security_button">હાલ ખોલો</string>
-    <string name="coming_soon">શીઘ્રવાર આવી રહ્યું છે</string>
     <string name="confirm_delete_title">ડિલીટ કન્ફર્મ કરો</string>
     <string name="confirm_delete_description_question">શું તમે ખાતરી છો કે તમે પ્રશ્ન ડિલીટ કરવા માંગો છો?</string>
     <string name="confirm_delete_description_heading">શું તમે ખાતરી છો કે તમે શીર્ષક ડિલીટ કરવા માંગો છો?</string>
@@ -161,4 +160,5 @@
     <string name="recovery_change_failed">એ પાસવર્ડ સાચો ન હતો.</string>
     <string name="migration_export_first">પહેલાં બૅકઅપ લો</string>
     <string name="migration_export_now">હમણાં મારી વૉલ્ટ નિકાસ કરો</string>
+    <string name="store_unavailable">આ ઉપકરણ પર Google Play ઉપલબ્ધ નથી.</string>
 </resources>

@@ -64,7 +64,6 @@
     <string name="security_heading">பாஸ்கீ பாதுகாப்பு முதல் செயல்</string>
     <string name="security_description">பாஸ்கீ பயன்பாட்டில் அணுகுமுறை தேவைப்படுகின்றது.</string>
     <string name="security_button">இப்போது விடுக</string>
-    <string name="coming_soon">விரைவில் வருகின்றது</string>
     <string name="confirm_delete_title">நீக்குவதை உறுதிப்படுத்தவும்</string>
     <string name="confirm_delete_description_question">நீங்கள் கேள்வியை நீக்க உறுதியாக உள்ளீர்களா?</string>
     <string name="confirm_delete_description_heading">நீங்கள் தலைப்புயை நீக்க உறுதியாக உள்ளீர்களா?</string>
@@ -161,4 +160,5 @@
     <string name="recovery_change_failed">அந்தக் கடவுச்சொல் சரியில்லை.</string>
     <string name="migration_export_first">முதலில் காப்புப்பிரதி எடு</string>
     <string name="migration_export_now">என் பெட்டகத்தை இப்போது ஏற்றுமதி செய்</string>
+    <string name="store_unavailable">இந்தச் சாதனத்தில் Google Play கிடைக்கவில்லை.</string>
 </resources>
