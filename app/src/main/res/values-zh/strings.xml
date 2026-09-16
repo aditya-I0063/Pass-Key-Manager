@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="no_previews_found">暂无条目</string>
+    <string name="no_details_found">暂无详情</string>
+    <!--    Splash Screen    -->
+    <string name="app_version">应用版本 <xliff:g id="version" example="5.5.1">%1$s</xliff:g></string>
+    <string name="app_description">你唯一需要的密码管理器</string>
+
+    <!--    OnBoarding Screens    -->
+    <!--    Keep the 
+ line breaks and the [[ ]] highlight markers.    -->
+    <string name="skip">跳过</string>
+    <string name="next">下一步</string>
+    <string name="first_heading">生成\n[[安全]]\n密码。</string>
+    <string name="second_heading">你的所有\n[[密码]]\n都在这里。</string>
+    <string name="third_heading">无需输入，\n[[自动填充]]\n你的凭据。</string>
+    <string name="first_description">别再为在线账户使用不安全的密码，用 PassKey 更进一步。获取最安全、最难破解的密码。</string>
+    <string name="second_description">在一个地方存储和管理你的所有密码。不必记住几百个密码，只需记住一个。</string>
+    <string name="third_description">不要在公共场合输入密码而让它们暴露风险，让 PassKey 自动填充，保护你的凭据安全。</string>
+
     <!-- Main Screens -->
     <string name="banks">银行</string>
     <string name="mails">邮件</string>
@@ -20,7 +38,6 @@
     <string name="export_data">导出数据</string>
 
     <!-- Edit Text Hints -->
-    <string name="type_here">在此输入…</string>
     <string name="type_your_title_here">在此输入您的标题…</string>
     <string name="type_your_response_here">在此输入您的响应…</string>
     <string name="type_your_heading_here">在此输入您的标题…</string>
@@ -35,12 +52,7 @@
 
     <!-- Authentication Screen -->
     <string name="welcome_to_pass_key">欢迎使用PassKey Manager</string>
-    <string name="authentication_failed">身份验证失败。</string>
     <string name="something_went_wrong">出了点问题..</string>
-    <string name="set_password">请先为您的设备设置密码。</string>
-    <string name="permission_required">需要访问存储空间以导出数据库。</string>
-    <string name="permission_denied">权限被拒绝</string>
-    <string name="ok">确定</string>
 
     <!-- Dialogs and Requests -->
     <string name="change">更改</string>
@@ -62,15 +74,11 @@
     <!-- Password Health Report -->
     <string name="analyze_passwords">安全状态</string>
     <string name="security_analysis">安全分析</string>
-    <string name="security_score">安全评分</string>
     <string name="weak_passwords">弱密码</string>
     <string name="reused_passwords">重复使用的密码</string>
-    <string name="safe_passwords">安全密码</string>
     <string name="excellent">优秀</string>
     <string name="needs_attention">需要注意</string>
     <string name="critical">严重</string>
-    <string name="found_weak">发现 %1$d 个弱密码</string>
-    <string name="found_reused">发现 %1$d 个重复使用的密码</string>
     <string name="used_times">已使用 %1$d 次</string>
     <string name="no_issues">未发现问题。干得好！</string>
 </resources>

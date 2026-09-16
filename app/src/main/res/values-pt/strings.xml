@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="no_previews_found">Nenhum item ainda</string>
+    <string name="no_details_found">Nenhum detalhe ainda</string>
+    <!--    Splash Screen    -->
+    <string name="app_version">Versão do app <xliff:g id="version" example="5.5.1">%1$s</xliff:g></string>
+    <string name="app_description">O único gerenciador de senhas que você vai precisar</string>
+
+    <!--    OnBoarding Screens    -->
+    <!--    Keep the 
+ line breaks and the [[ ]] highlight markers.    -->
+    <string name="skip">Pular</string>
+    <string name="next">Avançar</string>
+    <string name="first_heading">Crie\nsenhas\n[[seguras]].</string>
+    <string name="second_heading">Todas as suas\n[[senhas]]\nestão aqui.</string>
+    <string name="third_heading">Não digite,\n[[preencha]]\nsuas credenciais.</string>
+    <string name="first_description">Pare de usar senhas inseguras nas suas contas online e avance com o PassKey. Tenha senhas muito seguras e difíceis de quebrar.</string>
+    <string name="second_description">Guarde e gerencie todas as suas senhas em um só lugar. Não decore centenas de senhas, memorize apenas uma.</string>
+    <string name="third_description">Não comprometa suas senhas digitando-as em público; deixe o PassKey preencher tudo automaticamente e manter suas credenciais seguras.</string>
+
     <!-- Main Screens -->
     <string name="banks">Bancos</string>
     <string name="mails">Correios</string>
@@ -20,7 +38,6 @@
     <string name="export_data">Exportar Dados</string>
 
     <!-- Edit Text Hints -->
-    <string name="type_here">Digite aqui…</string>
     <string name="type_your_title_here">Digite seu título aqui…</string>
     <string name="type_your_response_here">Digite sua resposta aqui…</string>
     <string name="type_your_heading_here">Digite seu título aqui…</string>
@@ -35,12 +52,7 @@
 
     <!-- Authentication Screen -->
     <string name="welcome_to_pass_key">Bem-vindo ao Gerenciador de Senhas</string>
-    <string name="authentication_failed">Autenticação Falhou.</string>
     <string name="something_went_wrong">Algo deu errado..</string>
-    <string name="set_password">Por favor, defina uma senha para o seu dispositivo primeiro.</string>
-    <string name="permission_required">Acesso ao armazenamento é necessário para exportar o banco de dados.</string>
-    <string name="permission_denied">Permissão Negada</string>
-    <string name="ok">OK</string>
 
     <!-- Dialogs and Requests -->
     <string name="change">Alterar</string>
@@ -62,15 +74,11 @@
     <!-- Password Health Report -->
     <string name="analyze_passwords">Status de Segurança</string>
     <string name="security_analysis">Análise de Segurança</string>
-    <string name="security_score">Pontuação de Segurança</string>
     <string name="weak_passwords">Senhas Fracas</string>
     <string name="reused_passwords">Senhas Reutilizadas</string>
-    <string name="safe_passwords">Senhas Seguras</string>
     <string name="excellent">Excelente</string>
     <string name="needs_attention">Requer Atenção</string>
     <string name="critical">Crítico</string>
-    <string name="found_weak">%1$d senhas fracas encontradas</string>
-    <string name="found_reused">%1$d senhas reutilizadas encontradas</string>
     <string name="used_times">Usado %1$d vezes</string>
     <string name="no_issues">Nenhum problema encontrado. Bom trabalho!</string>
 </resources>

@@ -161,8 +161,10 @@ class DetailViewModel @Inject constructor(
                         repository.upsertDetails(
                             it.copy(
                                 previewId = previewId,
-                                question = detailTitle.value,
-                                answer = detailResponse.value,
+                                // Trimmed to match the create path above. A trailing space in a
+                                // stored password fails silently wherever it is pasted.
+                                question = newDetail.question,
+                                answer = newDetail.answer,
                             )
                         )
                     } ?: repository.upsertDetails(newDetail)

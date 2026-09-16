@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="no_previews_found">अद्याप कोणतीही नोंद नाही</string>
+    <string name="no_details_found">अद्याप कोणताही तपशील नाही</string>
+    <!--    Splash Screen    -->
+    <string name="app_version">ॲप आवृत्ती <xliff:g id="version" example="5.5.1">%1$s</xliff:g></string>
+    <string name="app_description">तुम्हाला लागणारा एकमेव पासवर्ड व्यवस्थापक</string>
+
+    <!--    OnBoarding Screens    -->
+    <!--    Keep the 
+ line breaks and the [[ ]] highlight markers.    -->
+    <string name="skip">वगळा</string>
+    <string name="next">पुढे</string>
+    <string name="first_heading">तयार करा\n[[सुरक्षित]]\nपासवर्ड.</string>
+    <string name="second_heading">तुमचे सर्व\n[[पासवर्ड]]\nइथेच आहेत.</string>
+    <string name="third_heading">टाइप नको,\nमाहिती\n[[ऑटोफिल]] करा.</string>
+    <string name="first_description">तुमच्या ऑनलाइन खात्यांसाठी असुरक्षित पासवर्ड वापरणे थांबवा, PassKey सोबत पुढे जा. सर्वात सुरक्षित आणि तोडायला कठीण पासवर्ड मिळवा.</string>
+    <string name="second_description">तुमचे सर्व पासवर्ड एकाच ठिकाणी साठवा आणि व्यवस्थापित करा. शेकडो पासवर्ड नको, फक्त एकच लक्षात ठेवा.</string>
+    <string name="third_description">सार्वजनिक ठिकाणी टाइप करून तुमचे पासवर्ड धोक्यात आणू नका, PassKey ला ते ऑटोफिल करू द्या आणि तुमची माहिती सुरक्षित ठेवा.</string>
+
     <!-- Main Screens -->
     <string name="banks">बँक</string>
     <string name="mails">पत्र</string>
@@ -20,7 +38,6 @@
     <string name="export_data">डेटा निर्यात करा</string>
 
     <!-- Edit Text Hints -->
-    <string name="type_here">येथे टाईप करा…</string>
     <string name="type_your_title_here">आपले शीर्षक येथे टाईप करा…</string>
     <string name="type_your_response_here">आपला प्रतिसाद येथे टाईप करा…</string>
     <string name="type_your_heading_here">आपले शीर्षक येथे टाईप करा…</string>
@@ -35,12 +52,7 @@
 
     <!-- Authentication Screen -->
     <string name="welcome_to_pass_key">पासकी मॅनेजरमध्ये आपले स्वागत आहे</string>
-    <string name="authentication_failed">प्रमाणीकरण अयशस्वी झाले.</string>
     <string name="something_went_wrong">काहीतरी चुकलं आहे..</string>
-    <string name="set_password">कृपया प्रथम आपल्या डिव्हाइससाठी संकेतशब्द सेट करा.</string>
-    <string name="permission_required">डेटाबेस निर्यात करण्यासाठी स्टोरेज प्रवेश आवश्यक आहे.</string>
-    <string name="permission_denied">परवानगी नकारली</string>
-    <string name="ok">ठीक आहे</string>
 
     <!-- Dialogs and Requests -->
     <string name="change">बदला</string>
@@ -62,15 +74,11 @@
     <!-- Password Health Report -->
     <string name="analyze_passwords">सुरक्षा स्थिती</string>
     <string name="security_analysis">सुरक्षा विश्लेषण</string>
-    <string name="security_score">सुरक्षा स्कोअर</string>
     <string name="weak_passwords">कमकुवत पासवर्ड</string>
     <string name="reused_passwords">पुन्हा वापरलेले पासवर्ड</string>
-    <string name="safe_passwords">सुरक्षित पासवर्ड</string>
     <string name="excellent">उत्कृष्ट</string>
     <string name="needs_attention">लक्ष देणे आवश्यक आहे</string>
     <string name="critical">गंभीर</string>
-    <string name="found_weak">%1$d कमकुवत पासवर्ड आढळले</string>
-    <string name="found_reused">%1$d पुन्हा वापरलेले पासवर्ड आढळले</string>
     <string name="used_times">%1$d वेळा वापरले</string>
     <string name="no_issues">कोणतीही समस्या आढळली नाही. छान!</string>
 </resources>

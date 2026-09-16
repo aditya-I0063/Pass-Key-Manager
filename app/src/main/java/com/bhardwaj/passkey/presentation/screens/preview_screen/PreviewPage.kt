@@ -78,12 +78,9 @@ fun PreviewScreen(
     viewModel: PreviewViewModel = hiltViewModel()
 ) {
     val categoryName by viewModel.categoryName.collectAsState()
-    val categoryNameMap = mapOf(
-        Categories.BANKS.name to stringResource(id = R.string.banks),
-        Categories.APPS.name to stringResource(id = R.string.apps),
-        Categories.MAILS.name to stringResource(id = R.string.mails),
-        Categories.OTHERS.name to stringResource(id = R.string.others),
-    )
+    // Localized display names come from Categories.labelRes, which the bottom navigation
+    // also uses, so the two can no longer drift apart.
+    val categoryNameMap = Categories.entries.associate { it.name to stringResource(it.labelRes) }
 
     val previewHeading by viewModel.previewHeading.collectAsState()
     val bottomSheetHeading by viewModel.bottomSheetHeading.collectAsState()
@@ -212,7 +209,7 @@ fun PreviewScreen(
                             .fillMaxWidth()
                             .padding(16.dp),
                         painter = painterResource(id = R.drawable.icon_empty_list),
-                        contentDescription = "No Previews Found"
+                        contentDescription = stringResource(id = R.string.no_previews_found)
                     )
                 } else {
                     LazyColumn(

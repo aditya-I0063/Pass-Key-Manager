@@ -20,5 +20,13 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class net.sqlcipher.** { *; }
--keep class net.sqlcipher.database.* { *; }
+# SQLCipher.
+# The shipped artifact is net.zetetic:sqlcipher-android, whose classes live in
+# net.zetetic.database.sqlcipher.**. This module's own AAR supplies consumer ProGuard rules
+# (keeping native methods, constructors and mNativeHandle), so no app-side keep rules are
+# needed here - verified against app/build/outputs/mapping/release/mapping.txt, where all 61
+# net.zetetic classes are kept unrenamed.
+#
+# The previous rules in this file referenced the legacy `net.sqlcipher.**` package, which this
+# app has not used since migrating to sqlcipher-android. They matched nothing and were removed
+# so they cannot be mistaken for load-bearing configuration.

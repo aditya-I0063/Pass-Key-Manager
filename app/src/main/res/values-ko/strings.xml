@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="no_previews_found">아직 항목이 없습니다</string>
+    <string name="no_details_found">아직 세부 정보가 없습니다</string>
+    <!--    Splash Screen    -->
+    <string name="app_version">앱 버전 <xliff:g id="version" example="5.5.1">%1$s</xliff:g></string>
+    <string name="app_description">당신에게 필요한 단 하나의 비밀번호 관리자</string>
+
+    <!--    OnBoarding Screens    -->
+    <!--    Keep the 
+ line breaks and the [[ ]] highlight markers.    -->
+    <string name="skip">건너뛰기</string>
+    <string name="next">다음</string>
+    <string name="first_heading">[[안전한]]\n비밀번호를\n만드세요.</string>
+    <string name="second_heading">모든\n[[비밀번호]]가\n여기에.</string>
+    <string name="third_heading">입력하지 말고\n자격 증명을\n[[자동 완성]].</string>
+    <string name="first_description">온라인 계정에 취약한 비밀번호를 쓰지 마세요. PassKey로 한 단계 올라서세요. 가장 안전하고 뚫기 어려운 비밀번호를 만들어 드립니다.</string>
+    <string name="second_description">모든 비밀번호를 한곳에서 저장하고 관리하세요. 수백 개를 외울 필요 없이 하나만 기억하면 됩니다.</string>
+    <string name="third_description">사람들 앞에서 입력하다 비밀번호를 노출하지 마세요. PassKey가 자동으로 채워 자격 증명을 안전하게 지켜 드립니다.</string>
+
     <!--    Main Screens    -->
     <string name="banks">은행</string>
     <string name="mails">메일</string>
@@ -20,7 +38,6 @@
     <string name="export_data">데이터 내보내기</string>
 
     <!--    Edit Text Hints    -->
-    <string name="type_here">여기에 입력…</string>
     <string name="type_your_title_here">여기에 제목 입력…</string>
     <string name="type_your_response_here">여기에 응답 입력…</string>
     <string name="type_your_heading_here">여기에 제목 입력…</string>
@@ -35,12 +52,7 @@
 
     <!--    Authentication Screen    -->
     <string name="welcome_to_pass_key">PassKey Manager에 오신 것을 환영합니다</string>
-    <string name="authentication_failed">인증 실패했습니다.</string>
     <string name="something_went_wrong">문제가 발생했습니다..</string>
-    <string name="set_password">먼저 장치의 비밀번호를 설정하십시오.</string>
-    <string name="permission_required">데이터베이스를 내보내려면 저장소 액세스가 필요합니다.</string>
-    <string name="permission_denied">허가가 거부되었습니다</string>
-    <string name="ok">확인</string>
 
     <!--    Dialogs and Requests    -->
     <string name="change">변경</string>
@@ -62,15 +74,11 @@
     <!-- Password Health Report -->
     <string name="analyze_passwords">안전 상태</string>
     <string name="security_analysis">보안 분석</string>
-    <string name="security_score">보안 점수</string>
     <string name="weak_passwords">취약한 비밀번호</string>
     <string name="reused_passwords">재사용된 비밀번호</string>
-    <string name="safe_passwords">안전한 비밀번호</string>
     <string name="excellent">훌륭함</string>
     <string name="needs_attention">주의 필요</string>
     <string name="critical">심각함</string>
-    <string name="found_weak">%1$d개의 취약한 비밀번호 발견</string>
-    <string name="found_reused">%1$d개의 재사용된 비밀번호 발견</string>
     <string name="used_times">%1$d회 사용됨</string>
     <string name="no_issues">문제가 발견되지 않았습니다. 잘하셨습니다!</string>
 </resources>

@@ -1,22 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!--    Not to Be translated    -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!--    Splash Screen    -->
-    <string name="app_version" translatable="false">App Version %1$s</string>
+    <!--    app_name is the product/brand name and is deliberately never translated.    -->
     <string name="app_name" translatable="false">PassKey</string>
-    <string name="app_description" translatable="false">The only password manager you\'ll ever need</string>
+    <string name="app_version">App Version <xliff:g id="version" example="5.5.1">%1$s</xliff:g></string>
+    <string name="app_description">The only password manager you\'ll ever need</string>
 
     <!--    OnBoarding Screens    -->
-    <string name="skip" translatable="false">Skip</string>
-    <string name="next" translatable="false">Next</string>
-    <string name="first_heading" translatable="false">Generate\nSecure\nPasswords.</string>
-    <string name="second_heading" translatable="false">All Your\nPasswords Are\nHere.</string>
-    <string name="third_heading" translatable="false">Don\'t Type,\nAutofill Your\nCredentials.</string>
-    <string name="first_description" translatable="false">Stop using unsecure passwords for your online accounts, level up with PassKey. Get the most secure and difficult-to-crack passwords.</string>
-    <string name="second_description" translatable="false">Store and manage all of your passwords from one place. Don’t remember hundreds of passwords, just remember one.</string>
-    <string name="third_description" translatable="false">Don’t compromise your passwords by typing them in public, let PassKey autofill those and keep your credentials secure.</string>
+    <!--
+        Translators: the three headings below are rendered on three lines at a large display
+        size. Keep the \n line breaks, but choose break points that suit your own word lengths.
+        Wrap the single word you want emphasised in [[ ]] — it is drawn in the accent colour.
+        The markers are stripped before display; if you omit them the heading simply renders
+        without an accent.
+    -->
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="first_heading">Generate\n[[Secure]]\nPasswords.</string>
+    <string name="second_heading">All Your\n[[Passwords]] Are\nHere.</string>
+    <string name="third_heading">Don\'t Type,\n[[Autofill]] Your\nCredentials.</string>
+    <string name="first_description">Stop using unsecure passwords for your online accounts, level up with PassKey. Get the most secure and difficult-to-crack passwords.</string>
+    <string name="second_description">Store and manage all of your passwords from one place. Don’t remember hundreds of passwords, just remember one.</string>
+    <string name="third_description">Don’t compromise your passwords by typing them in public, let PassKey autofill those and keep your credentials secure.</string>
 
     <!--    Dialogs and Requests    -->
+    <!--
+        about_message / privacy_message / terms_n_condition_message are intentionally still
+        translatable="false". Their current text is factually inaccurate (it claims no internet
+        permission and no third-party sharing, while Firebase Analytics/Crashlytics/Performance
+        and Play in-app-updates are linked). Rewrite them first, then translate — translating
+        incorrect legal copy into 16 languages would multiply the problem.
+    -->
     <string name="about_message" translatable="false">Welcome to Passkey: Password Manager, the ultimate solution for managing all your passwords and private information securely!\n\nAre you tired of remembering multiple passwords or annoyed of forgetting them? Passkey: Password Manager helps you store all your logins, passwords, and other private information safe and secure in an encrypted database.\n\nPasskey: Password Manager is an open-source application developed by Aditya Bhardwaj. It is designed to provide a secure way to manage all your passwords without worrying about data leaks. With Passkey: Password Manager, you can store your passwords locally on your device, and the application does not require internet permissions, making it even more secure.\n\nPasskey: Password Manager features an encrypted database to store your passwords, and biometric authentication is used to access your information. The application supports dark mode, and screenshot blocking features to ensure that your information is not accessible by unauthorized persons.\n\nThe application uses Drag &amp; Drop and Swipe to Delete features, providing a user-friendly interface to manage all your passwords easily. The application also has a Separation of Content feature, which allows you to categorize your passwords into different sections for easy management.\n\nPasskey: Password Manager uses LiveData and MVVM architecture to ensure that the application is scalable, maintainable, and easy to use. SQL Cipher is used for Room DB Backup Encryption and Decryption, and Dagger-Hilt is used for dependency injection.\n\nIn conclusion, Passkey: Password Manager is a must-have application for everyone who wants to manage their passwords securely. With its features and user-friendly interface, you can keep all your passwords and private information safe and secure. Download Passkey: Password Manager now, and never worry about forgetting your passwords again!</string>
     <string name="privacy_message" translatable="false">At Passkey: Password Manager, we are committed to protecting your privacy. This privacy policy explains how we collect, use, and share your personal information when you use our application.\n\nInformation we collect: We do not collect any of your passwords or private information that you store in the Passkey: Password Manager application. Your information is stored locally on your phone and encrypted for added security.\n\nHow we use your information: We use your information to store your passwords and private information securely in an encrypted database. We do not share your information with any third-party.\n\nHow we protect your information: We use encrypted database storage to protect your information, and biometric authentication is used to access your information.\n\nHow we share your information: We do not share your information with any third-party.\n\nChanges to our privacy policy: We reserve the right to modify this privacy policy at any time without prior notice.\n\nIf you have any questions or concerns about our terms and conditions or privacy policy, please contact us at yrkkh.cclub@gmail.com\n\nWe hope you enjoy using Passkey: Password Manager to store your passwords and private information securely.</string>
     <string name="terms_n_condition_message" translatable="false">Welcome to Passkey: Password Manager! By downloading and using this application, you agree to comply with and be bound by the following terms and conditions:\n\n1. Passkey: Password Manager is an application developed by Aditya Bhardwaj, and the intellectual property rights are owned by Aditya Bhardwaj.\n\n2. The Passkey: Password Manager application is designed to store your passwords and private information securely in an encrypted database.\n\n3. The Passkey: Password Manager application does not store your credentials on servers, so your passwords and private information are in your hands.\n\n4. The Passkey: Password Manager application does not require any internet permission, and it is an open-source application.\n\n5. The Passkey: Password Manager application uses encrypted database storage to store your information, and biometric authentication is used to access your information.\n\n6. The Passkey: Password Manager application is provided "as is" without any warranty of any kind, either express or implied, including but not limited to the implied warranties of merchantability and fitness for a particular purpose.\n\n7. Aditya Bhardwaj is not liable for any damages arising from the use of the Passkey: Password Manager application, including but not limited to direct, indirect, incidental, or consequential damages.\n\n8. By downloading and using the Passkey: Password Manager application, you agree to indemnify and hold harmless Aditya Bhardwaj, its officers, employees, agents, and affiliates from any and all claims, damages, losses, liabilities, and expenses arising from your use of the application.\n\n9. Aditya Bhardwaj reserves the right to modify, suspend, or discontinue the Passkey: Password Manager application at any time without prior notice.</string>
@@ -24,6 +38,8 @@
 
     <!--    To Be translated    -->
     <!--    Main Screens    -->
+    <string name="no_previews_found">No entries yet</string>
+    <string name="no_details_found">No details yet</string>
     <string name="banks">Banks</string>
     <string name="mails">Mails</string>
     <string name="apps">Apps</string>
@@ -43,7 +59,6 @@
     <string name="export_data">Export Data</string>
 
     <!--    Edit Text Hints    -->
-    <string name="type_here">Type here…</string>
     <string name="type_your_title_here">Type your title here…</string>
     <string name="type_your_response_here">Type your response here…</string>
     <string name="type_your_heading_here">Type your heading here…</string>
@@ -58,12 +73,7 @@
 
     <!--    Authentication Screen    -->
     <string name="welcome_to_pass_key">Welcome to PassKey Manager</string>
-    <string name="authentication_failed">Authentication Failed.</string>
     <string name="something_went_wrong">Something Went Wrong..</string>
-    <string name="set_password">Please set password for your device first.</string>
-    <string name="permission_required">Storage access is required to export database.</string>
-    <string name="permission_denied">Permission Denied</string>
-    <string name="ok">OK</string>
 
     <!--    Dialogs and Requests    -->
     <string name="change">Change</string>
@@ -85,15 +95,11 @@
     <!-- Password Health Report -->
     <string name="analyze_passwords">Safety Status</string>
     <string name="security_analysis">Security Analysis</string>
-    <string name="security_score">Security Score</string>
     <string name="weak_passwords">Weak Passwords</string>
     <string name="reused_passwords">Reused Passwords</string>
-    <string name="safe_passwords">Safe Passwords</string>
     <string name="excellent">Excellent</string>
     <string name="needs_attention">Needs Attention</string>
     <string name="critical">Critical</string>
-    <string name="found_weak">Found %1$d weak passwords</string>
-    <string name="found_reused">Found %1$d reused passwords</string>
     <string name="used_times">Used %1$d times</string>
     <string name="no_issues">No issues found. Good job!</string>
 

@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="no_previews_found">এখনও কোনো এন্ট্রি নেই</string>
+    <string name="no_details_found">এখনও কোনো বিবরণ নেই</string>
+    <!--    Splash Screen    -->
+    <string name="app_version">অ্যাপ সংস্করণ <xliff:g id="version" example="5.5.1">%1$s</xliff:g></string>
+    <string name="app_description">আপনার প্রয়োজনীয় একমাত্র পাসওয়ার্ড ম্যানেজার</string>
+
+    <!--    OnBoarding Screens    -->
+    <!--    Keep the 
+ line breaks and the [[ ]] highlight markers.    -->
+    <string name="skip">এড়িয়ে যান</string>
+    <string name="next">পরবর্তী</string>
+    <string name="first_heading">তৈরি করুন\n[[সুরক্ষিত]]\nপাসওয়ার্ড।</string>
+    <string name="second_heading">আপনার সব\n[[পাসওয়ার্ড]]\nএখানেই।</string>
+    <string name="third_heading">টাইপ নয়,\nতথ্য [[স্বয়ংক্রিয়ভাবে]]\nপূরণ করুন।</string>
+    <string name="first_description">আপনার অনলাইন অ্যাকাউন্টে দুর্বল পাসওয়ার্ড ব্যবহার করা বন্ধ করুন, PassKey দিয়ে এক ধাপ এগিয়ে যান। সবচেয়ে সুরক্ষিত ও ভাঙা কঠিন পাসওয়ার্ড পান।</string>
+    <string name="second_description">এক জায়গা থেকেই আপনার সব পাসওয়ার্ড সংরক্ষণ ও পরিচালনা করুন। শত শত পাসওয়ার্ড নয়, শুধু একটি মনে রাখুন।</string>
+    <string name="third_description">প্রকাশ্যে টাইপ করে আপনার পাসওয়ার্ড ঝুঁকিতে ফেলবেন না, PassKey-কে সেগুলি স্বয়ংক্রিয়ভাবে পূরণ করতে দিন এবং আপনার তথ্য সুরক্ষিত রাখুন।</string>
+
     <!-- Main Screens -->
     <string name="banks">ব্যাংক</string>
     <string name="mails">মেইল</string>
@@ -20,7 +38,6 @@
     <string name="export_data">তথ্য রপ্তানি</string>
 
     <!-- Edit Text Hints -->
-    <string name="type_here">এখানে লিখুন…</string>
     <string name="type_your_title_here">আপনার শিরোনাম এখানে লিখুন…</string>
     <string name="type_your_response_here">আপনার প্রতিক্রিয়া এখানে লিখুন…</string>
     <string name="type_your_heading_here">আপনার শিরোনাম এখানে লিখুন…</string>
@@ -35,12 +52,7 @@
 
     <!-- Authentication Screen -->
     <string name="welcome_to_pass_key">PassKey ম্যানেজারে আপনাকে স্বাগতম</string>
-    <string name="authentication_failed">প্রাধিকারীকরণ ব্যর্থ হয়েছে।</string>
     <string name="something_went_wrong">কিছু ভুল হয়েছে..</string>
-    <string name="set_password">দয়া করে আপনার ডিভাইসের জন্য পাসওয়ার্ড সেট করুন।</string>
-    <string name="permission_required">ডেটাবেস রপ্তানির জন্য সংগ্রহ অ্যাক্সেস প্রয়োজন।</string>
-    <string name="permission_denied">অনুমতি অস্বীকৃত</string>
-    <string name="ok">ঠিক আছে</string>
 
     <!-- Dialogs and Requests -->
     <string name="change">পরিবর্তন</string>
@@ -62,15 +74,11 @@
     <!-- Password Health Report -->
     <string name="analyze_passwords">নিরাপত্তা স্থিতি</string>
     <string name="security_analysis">নিরাপত্তা বিশ্লেষণ</string>
-    <string name="security_score">নিরাপত্তা স্কোর</string>
     <string name="weak_passwords">দুর্বল পাসওয়ার্ড</string>
     <string name="reused_passwords">পুনঃব্যবহৃত পাসওয়ার্ড</string>
-    <string name="safe_passwords">নিরাপদ পাসওয়ার্ড</string>
     <string name="excellent">চমৎকার</string>
     <string name="needs_attention">মনোযোগ প্রয়োজন</string>
     <string name="critical">জটিল</string>
-    <string name="found_weak">%1$d টি দুর্বল পাসওয়ার্ড পাওয়া গেছে</string>
-    <string name="found_reused">%1$d টি পুনঃব্যবহৃত পাসওয়ার্ড পাওয়া গেছে</string>
     <string name="used_times">%1$d বার ব্যবহৃত হয়েছে</string>
     <string name="no_issues">কোনো সমস্যা পাওয়া যায়নি। দারুণ!</string>
 </resources>

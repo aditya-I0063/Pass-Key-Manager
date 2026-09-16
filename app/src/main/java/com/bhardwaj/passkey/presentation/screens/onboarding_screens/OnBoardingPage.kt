@@ -26,8 +26,7 @@ import kotlinx.coroutines.launch
 
 data class OnBoardingScreen(
     val title: String,
-    val description: String,
-    val highlightedText: List<String>
+    val description: String
 )
 
 @Composable
@@ -35,21 +34,20 @@ fun OnBoardingScreen(
     onNavigate: (UiEvents.Navigate) -> Unit,
     viewModel: OnBoardingViewModel = hiltViewModel()
 ) {
+    // The emphasised word is marked with [[ ]] inside each heading string resource, so each
+    // translation controls which of its own words is highlighted.
     val pages = listOf(
         OnBoardingScreen(
             title = stringResource(id = R.string.first_heading),
-            description = stringResource(id = R.string.first_description),
-            highlightedText = listOf("Secure")
+            description = stringResource(id = R.string.first_description)
         ),
         OnBoardingScreen(
             title = stringResource(id = R.string.second_heading),
-            description = stringResource(id = R.string.second_description),
-            highlightedText = listOf("Passwords")
+            description = stringResource(id = R.string.second_description)
         ),
         OnBoardingScreen(
             title = stringResource(id = R.string.third_heading),
-            description = stringResource(id = R.string.third_description),
-            highlightedText = listOf("Autofill")
+            description = stringResource(id = R.string.third_description)
         )
     )
 

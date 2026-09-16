@@ -159,7 +159,7 @@ fun DetailScreen(
                             .fillMaxWidth()
                             .padding(16.dp),
                         painter = painterResource(id = R.drawable.icon_empty_list),
-                        contentDescription = "No Previews Found"
+                        contentDescription = stringResource(id = R.string.no_details_found)
                     )
                 } else {
                     LazyColumn(

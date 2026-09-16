@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="no_previews_found">まだ項目がありません</string>
+    <string name="no_details_found">まだ詳細がありません</string>
+    <!--    Splash Screen    -->
+    <string name="app_version">アプリバージョン <xliff:g id="version" example="5.5.1">%1$s</xliff:g></string>
+    <string name="app_description">必要なパスワード管理は、これひとつ</string>
+
+    <!--    OnBoarding Screens    -->
+    <!--    Keep the 
+ line breaks and the [[ ]] highlight markers.    -->
+    <string name="skip">スキップ</string>
+    <string name="next">次へ</string>
+    <string name="first_heading">[[安全な]]\nパスワードを\n作成。</string>
+    <string name="second_heading">すべての\n[[パスワード]]が\nここに。</string>
+    <string name="third_heading">入力せずに\n認証情報を\n[[自動入力]]。</string>
+    <string name="first_description">オンラインアカウントに安全でないパスワードを使うのはやめて、PassKey で一歩先へ。最も安全で解読されにくいパスワードを手に入れましょう。</string>
+    <string name="second_description">すべてのパスワードをひとつの場所で保存・管理。何百ものパスワードではなく、覚えるのはひとつだけ。</string>
+    <string name="third_description">人前で入力してパスワードを危険にさらさないでください。PassKey に自動入力させて、認証情報を安全に保ちましょう。</string>
+
     <!--    Main Screens    -->
     <string name="banks">銀行</string>
     <string name="mails">メール</string>
@@ -20,7 +38,6 @@
     <string name="export_data">データをエクスポート</string>
 
     <!--    Edit Text Hints    -->
-    <string name="type_here">ここに入力…</string>
     <string name="type_your_title_here">ここにタイトルを入力…</string>
     <string name="type_your_response_here">ここに応答を入力…</string>
     <string name="type_your_heading_here">ここに見出しを入力…</string>
@@ -35,12 +52,7 @@
 
     <!--    Authentication Screen    -->
     <string name="welcome_to_pass_key">PassKey Managerへようこそ</string>
-    <string name="authentication_failed">認証に失敗しました。</string>
     <string name="something_went_wrong">何かがうまくいかない..</string>
-    <string name="set_password">まずデバイスのパスワードを設定してください。</string>
-    <string name="permission_required">データベースをエクスポートするにはストレージアクセスが必要です。</string>
-    <string name="permission_denied">許可が拒否されました</string>
-    <string name="ok">OK</string>
 
     <!--    Dialogs and Requests    -->
     <string name="change">変更</string>
@@ -62,15 +74,11 @@
     <!-- Password Health Report -->
     <string name="analyze_passwords">安全性ステータス</string>
     <string name="security_analysis">セキュリティ分析</string>
-    <string name="security_score">セキュリティスコア</string>
     <string name="weak_passwords">脆弱なパスワード</string>
     <string name="reused_passwords">使い回しのパスワード</string>
-    <string name="safe_passwords">安全なパスワード</string>
     <string name="excellent">優秀</string>
     <string name="needs_attention">注意が必要</string>
     <string name="critical">危険</string>
-    <string name="found_weak">%1$d 個の脆弱なパスワードが見つかりました</string>
-    <string name="found_reused">%1$d 個の使い回しパスワードが見つかりました</string>
     <string name="used_times">%1$d 回使用</string>
     <string name="no_issues">問題は見つかりませんでした。素晴らしい！</string>
 </resources>

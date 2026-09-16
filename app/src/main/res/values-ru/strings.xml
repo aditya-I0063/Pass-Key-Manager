@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="no_previews_found">Пока нет записей</string>
+    <string name="no_details_found">Пока нет данных</string>
+    <!--    Splash Screen    -->
+    <string name="app_version">Версия приложения <xliff:g id="version" example="5.5.1">%1$s</xliff:g></string>
+    <string name="app_description">Единственный менеджер паролей, который вам нужен</string>
+
+    <!--    OnBoarding Screens    -->
+    <!--    Keep the 
+ line breaks and the [[ ]] highlight markers.    -->
+    <string name="skip">Пропустить</string>
+    <string name="next">Далее</string>
+    <string name="first_heading">Создавайте\n[[надёжные]]\nпароли.</string>
+    <string name="second_heading">Все ваши\n[[пароли]]\nздесь.</string>
+    <string name="third_heading">Не печатайте,\n[[заполняйте]]\nданные сами.</string>
+    <string name="first_description">Перестаньте использовать ненадёжные пароли для своих аккаунтов — переходите на PassKey. Получайте самые надёжные и трудные для взлома пароли.</string>
+    <string name="second_description">Храните все пароли и управляйте ими в одном месте. Запоминайте не сотни паролей, а всего один.</string>
+    <string name="third_description">Не рискуйте паролями, вводя их на виду у других — позвольте PassKey заполнять их автоматически и хранить ваши данные в безопасности.</string>
+
     <!-- Main Screens -->
     <string name="banks">Банки</string>
     <string name="mails">Почта</string>
@@ -20,7 +38,6 @@
     <string name="export_data">Экспортировать данные</string>
 
     <!-- Edit Text Hints -->
-    <string name="type_here">Введите здесь…</string>
     <string name="type_your_title_here">Введите ваш заголовок здесь…</string>
     <string name="type_your_response_here">Введите ваш ответ здесь…</string>
     <string name="type_your_heading_here">Введите ваш заголовок здесь…</string>
@@ -35,12 +52,7 @@
 
     <!-- Authentication Screen -->
     <string name="welcome_to_pass_key">Добро пожаловать в Менеджер паролей</string>
-    <string name="authentication_failed">Ошибка аутентификации.</string>
     <string name="something_went_wrong">Что-то пошло не так..</string>
-    <string name="set_password">Пожалуйста, сначала установите пароль для вашего устройства.</string>
-    <string name="permission_required">Требуется доступ к хранилищу для экспорта базы данных.</string>
-    <string name="permission_denied">Доступ запрещен</string>
-    <string name="ok">OK</string>
 
     <!-- Dialogs and Requests -->
     <string name="change">Изменить</string>
@@ -62,15 +74,11 @@
     <!-- Password Health Report -->
     <string name="analyze_passwords">Состояние безопасности</string>
     <string name="security_analysis">Анализ безопасности</string>
-    <string name="security_score">Оценка безопасности</string>
     <string name="weak_passwords">Слабые пароли</string>
     <string name="reused_passwords">Повторяющиеся пароли</string>
-    <string name="safe_passwords">Надежные пароли</string>
     <string name="excellent">Отлично</string>
     <string name="needs_attention">Требует внимания</string>
     <string name="critical">Критично</string>
-    <string name="found_weak">Найдено %1$d слабых паролей</string>
-    <string name="found_reused">Найдено %1$d повторяющихся паролей</string>
     <string name="used_times">Использовано %1$d раз</string>
     <string name="no_issues">Проблем не обнаружено. Отличная работа!</string>
 </resources>

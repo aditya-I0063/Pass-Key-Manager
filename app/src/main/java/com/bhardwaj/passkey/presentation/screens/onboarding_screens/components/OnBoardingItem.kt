@@ -33,12 +33,11 @@ fun OnBoardingItem(
     ) {
         Image(
             painter = painterResource(id = R.drawable.icon_logo),
-            contentDescription = "App Logo"
+            contentDescription = null
         )
         TextHighlighter(
             modifier = Modifier.padding(top = 72.dp),
-            fullText = screen.title,
-            highlightedText = screen.highlightedText
+            markedUpText = screen.title
         )
         Text(
             modifier = Modifier.padding(top = 24.dp),

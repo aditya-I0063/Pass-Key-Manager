@@ -132,7 +132,12 @@ class PreviewViewModel @Inject constructor(
                         newPreview.heading,
                         newPreview.categoryName.toString()
                     )
-                    if (existingPreview != null) {
+                    // When editing, the lookup finds the very row being edited. Treating that as
+                    // a clash meant saving an edit without renaming it reported "heading exists"
+                    // and silently discarded the edit.
+                    val isClashWithAnotherRow =
+                        existingPreview != null && existingPreview.previewId != preview?.previewId
+                    if (isClashWithAnotherRow) {
                         preview = null
                         savedStateHandle[PREVIEW_HEADING] = ""
                         isSheetOpen = false

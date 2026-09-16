@@ -20,8 +20,8 @@ android {
         applicationId = "com.bhardwaj.passkey"
         minSdk = 28
         targetSdk = 36
-        versionCode = 43
-        versionName = "5.5.1"
+        versionCode = 44
+        versionName = "5.5.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -69,6 +69,19 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+    }
+    lint {
+        // The onboarding strings shipped in English to all 16 locales for several releases
+        // because they were marked translatable="false", which also suppressed this check.
+        // Failing the build is what stops that recurring.
+        error += setOf(
+            "MissingTranslation",
+            "ExtraTranslation",
+            "ImpliedQuantity",
+            "StringFormatInvalid",
+            "StringFormatMatches"
+        )
+        abortOnError = true
     }
     packaging {
         resources {

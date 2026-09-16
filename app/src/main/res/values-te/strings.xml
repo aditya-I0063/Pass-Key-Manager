@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="no_previews_found">ఇంకా ఎంట్రీలు లేవు</string>
+    <string name="no_details_found">ఇంకా వివరాలు లేవు</string>
+    <!--    Splash Screen    -->
+    <string name="app_version">యాప్ వెర్షన్ <xliff:g id="version" example="5.5.1">%1$s</xliff:g></string>
+    <string name="app_description">మీకు కావలసిన ఏకైక పాస్‌వర్డ్ మేనేజర్</string>
+
+    <!--    OnBoarding Screens    -->
+    <!--    Keep the 
+ line breaks and the [[ ]] highlight markers.    -->
+    <string name="skip">దాటవేయి</string>
+    <string name="next">తదుపరి</string>
+    <string name="first_heading">[[సురక్షిత]]\nపాస్‌వర్డ్‌లను\nసృష్టించండి.</string>
+    <string name="second_heading">మీ అన్ని\n[[పాస్‌వర్డ్‌లు]]\nఇక్కడే.</string>
+    <string name="third_heading">టైప్ చేయవద్దు,\nవివరాలను\n[[ఆటోఫిల్]] చేయండి.</string>
+    <string name="first_description">మీ ఆన్‌లైన్ ఖాతాలకు అసురక్షిత పాస్‌వర్డ్‌లను ఉపయోగించడం ఆపండి, PassKey తో ముందుకు సాగండి. అత్యంత సురక్షితమైన, ఛేదించడం కష్టమైన పాస్‌వర్డ్‌లను పొందండి.</string>
+    <string name="second_description">మీ అన్ని పాస్‌వర్డ్‌లను ఒకే చోట నుండి భద్రపరచండి, నిర్వహించండి. వందల పాస్‌వర్డ్‌లు కాదు, ఒక్కటే గుర్తుంచుకోండి.</string>
+    <string name="third_description">బహిరంగంగా టైప్ చేసి మీ పాస్‌వర్డ్‌లను ప్రమాదంలో పెట్టవద్దు, PassKey వాటిని ఆటోఫిల్ చేసి మీ వివరాలను సురక్షితంగా ఉంచనివ్వండి.</string>
+
     <!-- Main Screens -->
     <string name="banks">బ్యాంకులు</string>
     <string name="mails">మెయిల్‌లు</string>
@@ -20,7 +38,6 @@
     <string name="export_data">డేటా ఎగురుతున్నది</string>
 
     <!-- Edit Text Hints -->
-    <string name="type_here">ఇక్కడ టైప్ చేయండి…</string>
     <string name="type_your_title_here">మీ శీర్షికను ఇక్కడ టైప్ చేయండి…</string>
     <string name="type_your_response_here">మీ సమాధానం ఇక్కడ టైప్ చేయండి…</string>
     <string name="type_your_heading_here">మీ శీర్షికను ఇక్కడ టైప్ చేయండి…</string>
@@ -35,12 +52,7 @@
 
     <!-- Authentication Screen -->
     <string name="welcome_to_pass_key">పాస్‌కీ మేనేజర్‌కు స్వాగతం</string>
-    <string name="authentication_failed">ప్రమాణీకరణ విఫలమైంది.</string>
     <string name="something_went_wrong">ఏదో తప్పు జరిగింది..</string>
-    <string name="set_password">దయచేసి మీ ఉపకరణానికి మొదటిసారిగా పాస్‌వర్డ్‌ను సెట్ చేయండి.</string>
-    <string name="permission_required">పరిమితితములు యిక్కడి ప్రవేశించి డేటాబేస్‌ను ఎగురుతున్నాయి.</string>
-    <string name="permission_denied">అనుమతి తప్పబడింది</string>
-    <string name="ok">సరే</string>
 
     <!-- Dialogs and Requests -->
     <string name="change">మార్చు</string>
@@ -62,15 +74,11 @@
     <!-- Password Health Report -->
     <string name="analyze_passwords">భద్రతా స్థితి</string>
     <string name="security_analysis">భద్రతా విశ్లేషణ</string>
-    <string name="security_score">భద్రతా స్కోర్</string>
     <string name="weak_passwords">బలహీనమైన పాస్‌వర్డ్‌లు</string>
     <string name="reused_passwords">తిరిగి ఉపయోగించిన పాస్‌వర్డ్‌లు</string>
-    <string name="safe_passwords">సురక్షిత పాస్‌వర్డ్‌లు</string>
     <string name="excellent">అద్భుతం</string>
     <string name="needs_attention">శ్రద్ధ అవసరం</string>
     <string name="critical">క్లిష్టమైన</string>
-    <string name="found_weak">%1$d బలహీనమైన పాస్‌వర్డ్‌లు కనుగొనబడ్డాయి</string>
-    <string name="found_reused">%1$d తిరిగి ఉపయోగించిన పాస్‌వర్డ్‌లు కనుగొనబడ్డాయి</string>
     <string name="used_times">%1$d సార్లు ఉపయోగించబడింది</string>
     <string name="no_issues">ఎటువంటి సమస్యలు కనుగొనబడలేదు. బాగా చేసారు!</string>
 </resources>

@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="no_previews_found">لا توجد إدخالات بعد</string>
+    <string name="no_details_found">لا توجد تفاصيل بعد</string>
+    <!--    Splash Screen    -->
+    <string name="app_version">إصدار التطبيق <xliff:g id="version" example="5.5.1">%1$s</xliff:g></string>
+    <string name="app_description">مدير كلمات المرور الوحيد الذي ستحتاج إليه</string>
+
+    <!--    OnBoarding Screens    -->
+    <!--    Keep the 
+ line breaks and the [[ ]] highlight markers.    -->
+    <string name="skip">تخطٍّ</string>
+    <string name="next">التالي</string>
+    <string name="first_heading">أنشئ\nكلمات مرور\n[[آمنة]].</string>
+    <string name="second_heading">كل\n[[كلمات مرورك]]\nهنا.</string>
+    <string name="third_heading">لا تكتبها،\n[[املأ]] بياناتك\nتلقائيًا.</string>
+    <string name="first_description">توقّف عن استخدام كلمات مرور ضعيفة لحساباتك على الإنترنت، وارتقِ بها مع PassKey. احصل على كلمات مرور آمنة يصعب اختراقها.</string>
+    <string name="second_description">احفظ كل كلمات مرورك وأدرها من مكان واحد. لا تحفظ مئات كلمات المرور، بل واحدة فقط.</string>
+    <string name="third_description">لا تُعرّض كلمات مرورك للخطر بكتابتها أمام الآخرين، دع PassKey يملأها تلقائيًا ويحافظ على أمان بياناتك.</string>
+
     <!-- Main Screens -->
     <string name="banks">البنوك</string>
     <string name="mails">البريد</string>
@@ -20,7 +38,6 @@
     <string name="export_data">تصدير البيانات</string>
 
     <!-- Edit Text Hints -->
-    <string name="type_here">اكتب هنا…</string>
     <string name="type_your_title_here">اكتب عنوانك هنا…</string>
     <string name="type_your_response_here">اكتب ردك هنا…</string>
     <string name="type_your_heading_here">اكتب عنوانك هنا…</string>
@@ -35,12 +52,7 @@
 
     <!-- Authentication Screen -->
     <string name="welcome_to_pass_key">مرحبًا بك في مدير PassKey</string>
-    <string name="authentication_failed">فشل التوثيق.</string>
     <string name="something_went_wrong">حدث خطأ ما..</string>
-    <string name="set_password">يرجى تعيين كلمة مرور لجهازك أولاً.</string>
-    <string name="permission_required">الوصول إلى التخزين مطلوب لتصدير قاعدة البيانات.</string>
-    <string name="permission_denied">تم رفض الإذن</string>
-    <string name="ok">حسنًا</string>
 
     <!-- Dialogs and Requests -->
     <string name="change">تغيير</string>
@@ -62,15 +74,11 @@
     <!-- Password Health Report -->
     <string name="analyze_passwords">حالة الأمان</string>
     <string name="security_analysis">تحليل الأمان</string>
-    <string name="security_score">درجة الأمان</string>
     <string name="weak_passwords">كلمات مرور ضعيفة</string>
     <string name="reused_passwords">كلمات مرور مكررة</string>
-    <string name="safe_passwords">كلمات مرور آمنة</string>
     <string name="excellent">ممتاز</string>
     <string name="needs_attention">يحتاج إلى انتباه</string>
     <string name="critical">حرج</string>
-    <string name="found_weak">تم العثور على %1$d كلمات مرور ضعيفة</string>
-    <string name="found_reused">تم العثور على %1$d كلمات مرور مكررة</string>
     <string name="used_times">مستخدمة %1$d مرات</string>
     <string name="no_issues">لم يتم العثور على مشاكل. أحسنت!</string>
 </resources>

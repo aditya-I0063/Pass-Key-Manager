@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="no_previews_found">Noch keine Einträge</string>
+    <string name="no_details_found">Noch keine Details</string>
+    <!--    Splash Screen    -->
+    <string name="app_version">App-Version <xliff:g id="version" example="5.5.1">%1$s</xliff:g></string>
+    <string name="app_description">Der einzige Passwort-Manager, den du je brauchst</string>
+
+    <!--    OnBoarding Screens    -->
+    <!--    Keep the 
+ line breaks and the [[ ]] highlight markers.    -->
+    <string name="skip">Überspringen</string>
+    <string name="next">Weiter</string>
+    <string name="first_heading">Erstelle\n[[sichere]]\nPasswörter.</string>
+    <string name="second_heading">All deine\n[[Passwörter]]\nan einem Ort.</string>
+    <string name="third_heading">Nicht tippen,\nZugangsdaten\n[[automatisch]] füllen.</string>
+    <string name="first_description">Verwende keine unsicheren Passwörter mehr für deine Online-Konten – mit PassKey geht es besser. Hol dir besonders sichere und schwer zu knackende Passwörter.</string>
+    <string name="second_description">Speichere und verwalte all deine Passwörter an einem Ort. Merke dir nicht Hunderte von Passwörtern, sondern nur eines.</string>
+    <string name="third_description">Gefährde deine Passwörter nicht, indem du sie in der Öffentlichkeit eintippst – lass sie PassKey automatisch ausfüllen und halte deine Zugangsdaten sicher.</string>
+
     <!--    Main Screens-->
     <string name="banks">Banken</string>
     <string name="mails">E-Mails</string>
@@ -20,7 +38,6 @@
     <string name="export_data">Daten exportieren</string>
 
     <!--    Edit Text Hints-->
-    <string name="type_here">Hier eingeben…</string>
     <string name="type_your_title_here">Geben Sie hier Ihren Titel ein…</string>
     <string name="type_your_response_here">Geben Sie hier Ihre Antwort ein…</string>
     <string name="type_your_heading_here">Geben Sie hier Ihre Überschrift ein…</string>
@@ -35,12 +52,7 @@
 
     <!--    Authentication Screen-->
     <string name="welcome_to_pass_key">Willkommen beim PassKey Manager</string>
-    <string name="authentication_failed">Authentifizierung fehlgeschlagen.</string>
     <string name="something_went_wrong">Etwas ist schiefgegangen..</string>
-    <string name="set_password">Bitte legen Sie zuerst ein Passwort für Ihr Gerät fest.</string>
-    <string name="permission_required">Speicherzugriff ist erforderlich, um die Datenbank zu exportieren.</string>
-    <string name="permission_denied">Berechtigung verweigert</string>
-    <string name="ok">OK</string>
 
     <!--    Dialogs and Requests-->
     <string name="change">Ändern</string>
@@ -62,15 +74,11 @@
     <!-- Password Health Report -->
     <string name="analyze_passwords">Sicherheitsstatus</string>
     <string name="security_analysis">Sicherheitsanalyse</string>
-    <string name="security_score">Sicherheitsbewertung</string>
     <string name="weak_passwords">Schwache Passwörter</string>
     <string name="reused_passwords">Wiederverwendete Passwörter</string>
-    <string name="safe_passwords">Sichere Passwörter</string>
     <string name="excellent">Ausgezeichnet</string>
     <string name="needs_attention">Aufmerksamkeit erforderlich</string>
     <string name="critical">Kritisch</string>
-    <string name="found_weak">%1$d schwache Passwörter gefunden</string>
-    <string name="found_reused">%1$d wiederverwendete Passwörter gefunden</string>
     <string name="used_times">%1$d mal verwendet</string>
     <string name="no_issues">Keine Probleme gefunden. Gut gemacht!</string>
 </resources>
