@@ -217,11 +217,15 @@ class PreviewViewModel @Inject constructor(
                         preview.copy(sequence = index.toLong())
                     }
 
-                    updatedList.forEach { preview ->
-                        repository.updatePreviewSequence(
-                            previewId = preview.previewId!!,
-                            sequence = preview.sequence
-                        )
+                    // One transaction, not N separate writes: a reorder interrupted midway
+                    // used to leave the list in a partially renumbered state.
+                    repository.runInTransaction {
+                        updatedList.forEach { preview ->
+                            repository.updatePreviewSequence(
+                                previewId = preview.previewId!!,
+                                sequence = preview.sequence
+                            )
+                        }
                     }
                 }
             }

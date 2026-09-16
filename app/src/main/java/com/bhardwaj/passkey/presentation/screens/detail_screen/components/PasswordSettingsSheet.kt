@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.ui.window.SecureFlagPolicy
+import androidx.compose.material3.ModalBottomSheetProperties
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Switch
@@ -44,6 +46,9 @@ fun PasswordSettingsSheet(
     val sheetState = rememberModalBottomSheetState()
 
     ModalBottomSheet(
+        properties = ModalBottomSheetProperties(
+            securePolicy = SecureFlagPolicy.SecureOn
+        ),
         sheetState = sheetState,
         onDismissRequest = { onDismissPasswordSettings() },
         dragHandle = { },

@@ -44,7 +44,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideTodoRepository(db: PassKeyDatabase): PasskeyRepository {
-        return PasskeyRepositoryImpl(db.previewDao, db.detailsDao)
+        return PasskeyRepositoryImpl(db, db.previewDao, db.detailsDao)
     }
 
     @Provides

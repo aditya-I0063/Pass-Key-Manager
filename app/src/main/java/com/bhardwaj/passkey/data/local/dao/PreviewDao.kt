@@ -27,4 +27,7 @@ interface PreviewDao {
 
     @Query("UPDATE $PREVIEW_TABLE SET sequence=:sequence WHERE previewId=:previewId")
     suspend fun updatePreviewSequence(previewId: Long, sequence: Long)
+
+    @Query("DELETE FROM $PREVIEW_TABLE")
+    suspend fun deleteAllPreviews()
 }

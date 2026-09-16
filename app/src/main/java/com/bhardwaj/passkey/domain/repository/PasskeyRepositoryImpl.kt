@@ -1,5 +1,7 @@
 package com.bhardwaj.passkey.domain.repository
 
+import androidx.room.withTransaction
+import com.bhardwaj.passkey.data.local.PassKeyDatabase
 import com.bhardwaj.passkey.data.local.dao.DetailsDao
 import com.bhardwaj.passkey.data.local.dao.PreviewDao
 import com.bhardwaj.passkey.data.local.entity.Details
@@ -8,9 +10,18 @@ import com.bhardwaj.passkey.data.repository.PasskeyRepository
 import kotlinx.coroutines.flow.Flow
 
 class PasskeyRepositoryImpl(
+    private val database: PassKeyDatabase,
     private val previewDao: PreviewDao,
     private val detailsDao: DetailsDao
 ) : PasskeyRepository {
+
+    override suspend fun <R> runInTransaction(block: suspend () -> R): R =
+        database.withTransaction { block() }
+
+    override suspend fun deleteAll() {
+        detailsDao.deleteAllDetails()
+        previewDao.deleteAllPreviews()
+    }
     override fun getDetails(): Flow<List<Details>> {
         return detailsDao.getDetails()
     }

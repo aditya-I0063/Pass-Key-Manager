@@ -20,6 +20,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.ui.window.SecureFlagPolicy
+import androidx.compose.material3.ModalBottomSheetProperties
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -122,6 +124,9 @@ fun SettingsScreen(
                 if (viewModel.isSheetOpen) {
                     val sheetState = rememberModalBottomSheetState()
                     ModalBottomSheet(
+                        properties = ModalBottomSheetProperties(
+                            securePolicy = SecureFlagPolicy.SecureOn
+                        ),
                         sheetState = sheetState,
                         onDismissRequest = { viewModel.onEvent(SettingsEvents.OnDismissBottomSheet) },
                         dragHandle = {},

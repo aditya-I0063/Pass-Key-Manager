@@ -29,6 +29,8 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.ui.window.SecureFlagPolicy
+import androidx.compose.material3.ModalBottomSheetProperties
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -64,6 +66,9 @@ fun AnalysisBottomSheet(
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     ModalBottomSheet(
+        properties = ModalBottomSheetProperties(
+            securePolicy = SecureFlagPolicy.SecureOn
+        ),
         sheetState = sheetState,
         onDismissRequest = { onDismiss() },
         containerColor = MaterialTheme.colorScheme.background

@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.ui.window.SecureFlagPolicy
+import androidx.compose.material3.ModalBottomSheetProperties
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -41,6 +43,9 @@ fun PreviewBottomSheet(
 ) {
     val sheetState = rememberModalBottomSheetState()
     ModalBottomSheet(
+        properties = ModalBottomSheetProperties(
+            securePolicy = SecureFlagPolicy.SecureOn
+        ),
         sheetState = sheetState,
         onDismissRequest = { onDismiss() },
         dragHandle = {},

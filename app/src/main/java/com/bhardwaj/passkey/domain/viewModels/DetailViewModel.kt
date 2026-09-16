@@ -12,8 +12,6 @@ import com.bhardwaj.passkey.data.local.entity.Details
 import com.bhardwaj.passkey.data.repository.PasskeyRepository
 import com.bhardwaj.passkey.domain.events.DetailEvents
 import com.bhardwaj.passkey.utils.Constants.Companion.BOTTOM_SHEET_HEADING
-import com.bhardwaj.passkey.utils.Constants.Companion.DETAIL_RESPONSE
-import com.bhardwaj.passkey.utils.Constants.Companion.DETAIL_TITLE
 import com.bhardwaj.passkey.utils.PasswordGenerator
 import com.bhardwaj.passkey.utils.UiEvents
 import com.bhardwaj.passkey.utils.UiText
@@ -37,8 +35,16 @@ class DetailViewModel @Inject constructor(
     private val _uiEvents = Channel<UiEvents>()
     val uiEvents = _uiEvents.receiveAsFlow()
 
-    val detailTitle = savedStateHandle.getStateFlow(DETAIL_TITLE, "")
-    val detailResponse = savedStateHandle.getStateFlow(DETAIL_RESPONSE, "")
+    // Deliberately NOT in SavedStateHandle. That is serialized into the saved-instance-state
+    // bundle, which the system writes to disk under /data/system_ce/<user>/ for task
+    // persistence - so the in-progress secret, including a freshly generated password, would be
+    // stored in cleartext outside the encrypted database. Losing a half-typed entry to process
+    // death is the correct trade here.
+    private val _detailTitle = MutableStateFlow("")
+    val detailTitle = _detailTitle.asStateFlow()
+
+    private val _detailResponse = MutableStateFlow("")
+    val detailResponse = _detailResponse.asStateFlow()
     /** true = editing an existing row, false = adding. Resolved to text by the UI. */
     val isEditingSheet = savedStateHandle.getStateFlow(BOTTOM_SHEET_HEADING, false)
     val previewId = savedStateHandle.get<Long>("previewId") ?: -1
@@ -95,8 +101,8 @@ class DetailViewModel @Inject constructor(
             }
 
             DetailEvents.OnDismissBottomSheet -> {
-                savedStateHandle[DETAIL_TITLE] = ""
-                savedStateHandle[DETAIL_RESPONSE] = ""
+                _detailTitle.value = ""
+                _detailResponse.value = ""
                 isSheetOpen = false
             }
 
@@ -106,27 +112,27 @@ class DetailViewModel @Inject constructor(
                     repository.getDetailById(event.details.detailsId!!)?.let { detail ->
                         isSheetOpen = true
                         savedStateHandle[BOTTOM_SHEET_HEADING] = true
-                        savedStateHandle[DETAIL_TITLE] = event.details.question
-                        savedStateHandle[DETAIL_RESPONSE] = event.details.answer
+                        _detailTitle.value = event.details.question
+                        _detailResponse.value = event.details.answer
                         this@DetailViewModel.detail = detail
                     }
                 }
             }
 
             is DetailEvents.OnTitleChange -> {
-                savedStateHandle[DETAIL_TITLE] = event.newTitle
+                _detailTitle.value = event.newTitle
             }
 
             is DetailEvents.OnDescriptionChange -> {
-                savedStateHandle[DETAIL_RESPONSE] = event.newDescription
+                _detailResponse.value = event.newDescription
             }
 
             DetailEvents.OnSaveClick -> {
                 viewModelScope.launch {
                     if (detailTitle.value.isBlank() or detailResponse.value.isBlank()) {
                         isSheetOpen = false
-                        savedStateHandle[DETAIL_TITLE] = ""
-                        savedStateHandle[DETAIL_RESPONSE] = ""
+                        _detailTitle.value = ""
+                        _detailResponse.value = ""
                         sendUiEvents(
                             UiEvents.ShowSnackBar(
                                 message = UiText.StringResource(R.string.enter_valid_title_n_response)
@@ -162,8 +168,8 @@ class DetailViewModel @Inject constructor(
                     } ?: repository.upsertDetails(newDetail)
 
                     detail = null
-                    savedStateHandle[DETAIL_TITLE] = ""
-                    savedStateHandle[DETAIL_RESPONSE] = ""
+                    _detailTitle.value = ""
+                    _detailResponse.value = ""
                     isSheetOpen = false
                 }
             }
@@ -215,11 +221,13 @@ class DetailViewModel @Inject constructor(
                         detail.copy(sequence = index.toLong())
                     }
 
-                    updatedList.forEach { detail ->
-                        repository.updateDetailSequence(
-                            detailId = detail.detailsId!!,
-                            sequence = detail.sequence
-                        )
+                    repository.runInTransaction {
+                        updatedList.forEach { detail ->
+                            repository.updateDetailSequence(
+                                detailId = detail.detailsId!!,
+                                sequence = detail.sequence
+                            )
+                        }
                     }
                 }
             }
@@ -232,7 +240,7 @@ class DetailViewModel @Inject constructor(
                     includeNumbers = includeNumbers,
                     includeSpecial = includeSpecial
                 )
-                savedStateHandle[DETAIL_RESPONSE] = newPassword
+                _detailResponse.value = newPassword
             }
 
             DetailEvents.OnPasswordSettingsClick -> {

@@ -34,4 +34,18 @@ interface PasskeyRepository {
     suspend fun deletePreview(previews: Preview)
 
     suspend fun updatePreviewSequence(previewId: Long, sequence: Long)
+
+    // Cross-cutting
+
+    /**
+     * Runs [block] inside a single database transaction.
+     *
+     * Import previously wrote row by row with no transaction, so a malformed row part-way
+     * through a file left the vault half-populated with no way back. Reordering had the same
+     * problem: N separate sequence writes that could be interrupted between any two.
+     */
+    suspend fun <R> runInTransaction(block: suspend () -> R): R
+
+    /** Removes every entry. Only meaningful inside [runInTransaction]. */
+    suspend fun deleteAll()
 }

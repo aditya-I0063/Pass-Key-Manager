@@ -15,8 +15,6 @@ class Constants {
         // SaveState Constants.
         const val PREVIEW_HEADING = "preview_heading"
         const val PREVIEW_CATEGORY_NAME = "preview_category_name"
-        const val DETAIL_TITLE = "detail_title"
-        const val DETAIL_RESPONSE = "detail_response"
         const val BOTTOM_SHEET_HEADING = "bottom_sheet_heading"
 
         // DataStore Prefs Constants.

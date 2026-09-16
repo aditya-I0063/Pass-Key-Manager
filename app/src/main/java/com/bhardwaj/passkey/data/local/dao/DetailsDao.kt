@@ -33,4 +33,8 @@ interface DetailsDao {
 
     @Query("UPDATE $DETAILS_TABLE SET sequence=:sequence WHERE detailsId=:detailsId")
     suspend fun updateDetailSequence(detailsId: Long, sequence: Long)
+
+    @Query("DELETE FROM $DETAILS_TABLE")
+    suspend fun deleteAllDetails()
+
 }

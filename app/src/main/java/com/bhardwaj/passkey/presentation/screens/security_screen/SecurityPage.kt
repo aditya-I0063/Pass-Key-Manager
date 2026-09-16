@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.compose.ui.window.SecureFlagPolicy
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -126,6 +127,7 @@ fun SecurityScreen(
             if (viewModel.needToOpenAlertDialog) {
                 Dialog(
                     onDismissRequest = {}, properties = DialogProperties(
+                        securePolicy = SecureFlagPolicy.SecureOn,
                         dismissOnBackPress = false,
                         dismissOnClickOutside = false
                     )
