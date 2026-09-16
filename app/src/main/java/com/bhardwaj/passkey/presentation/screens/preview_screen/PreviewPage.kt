@@ -59,9 +59,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.bhardwaj.passkey.presentation.screens.common.ObserveAsEvents
+import com.bhardwaj.passkey.presentation.navigation.NavRoute
 import com.bhardwaj.passkey.R
 import com.bhardwaj.passkey.presentation.screens.common.labelRes
-import com.bhardwaj.passkey.presentation.screens.preview_screen.PreviewEvents
 import com.bhardwaj.passkey.presentation.screens.preview_screen.PreviewViewModel
 import com.bhardwaj.passkey.presentation.screens.common.PassKeyButton
 import com.bhardwaj.passkey.presentation.screens.common.PasskeySearchBar
@@ -82,21 +82,17 @@ import sh.calvin.reorderable.rememberReorderableLazyListState
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PreviewScreen(
-    onNavigate: (UiEvents.Navigate) -> Unit,
+    onNavigate: (NavRoute) -> Unit,
     viewModel: PreviewViewModel = hiltViewModel()
 ) {
-    val categoryName by viewModel.categoryName.collectAsStateWithLifecycle()
     // Localized display names come from Category.labelRes, which the bottom navigation
     // also uses, so the two can no longer drift apart.
     val categoryNameMap = Category.entries.associate { it.name to stringResource(it.labelRes()) }
 
-    val previewHeading by viewModel.previewHeading.collectAsStateWithLifecycle()
-    val isEditingSheet by viewModel.isEditingSheet.collectAsStateWithLifecycle()
-    // Resolved here rather than in the ViewModel so it follows the app locale.
-    val bottomSheetHeading =
-        stringResource(if (isEditingSheet) R.string.edit else R.string.add)
-    val searchText by viewModel.searchText.collectAsStateWithLifecycle()
-    val previews by viewModel.previews.collectAsStateWithLifecycle()
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    // A bound method reference allocates a new object on every recomposition, so the lambda
+    // parameter was never equal and every visible row recomposed on each keystroke.
+    val onIntent = remember(viewModel) { viewModel::onIntent }
 
     var selectedIndex by rememberSaveable { mutableIntStateOf(0) }
 
@@ -105,7 +101,7 @@ fun PreviewScreen(
     val view = LocalView.current
     val lazyListState = rememberLazyListState()
     val reorderableLazyColumnState = rememberReorderableLazyListState(lazyListState) { from, to ->
-        viewModel.onEvent(PreviewEvents.OnReorderPreview(from, to))
+        onIntent(PreviewIntent.Moved(from.index, to.index))
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             view.performHapticFeedback(HapticFeedbackConstants.SEGMENT_FREQUENT_TICK)
         }
@@ -113,18 +109,17 @@ fun PreviewScreen(
 
     val context = LocalContext.current
 
-    ObserveAsEvents(viewModel.uiEvents) { event ->
+    ObserveAsEvents(viewModel.effects) { event ->
             when (event) {
-                is UiEvents.Navigate -> onNavigate(event)
-                is UiEvents.ShowSnackBar -> {
+                is PreviewEffect.Navigate -> onNavigate(event.route)
+                is PreviewEffect.ShowSnackbar -> {
                     scope.launch {
                         snackBarHostState.showSnackbar(
-                            message = event.message.asString(context),
-                            actionLabel = event.action?.asString(context)
+                            message = event.message.asString(context)
                         )
                     }
                 }
-                is UiEvents.CopyToClipboard -> {
+                is PreviewEffect.CopyToClipboard -> {
                     SecureClipboard.copy(
                         context = context,
                         text = event.value,
@@ -154,7 +149,7 @@ fun PreviewScreen(
                 MainBottomNavigation(
                     selectedIndex = selectedIndex,
                     onItemClick = { newIndex, newTitle ->
-                        viewModel.onEvent(PreviewEvents.OnBottomNavigationClick(newTitle))
+                        onIntent(PreviewIntent.CategorySelected(Category.valueOf(newTitle)))
                         selectedIndex = newIndex
                     }
                 )
@@ -164,7 +159,7 @@ fun PreviewScreen(
         floatingActionButton = {
             FloatingActionButton(
                 modifier = Modifier.offset(y = 64.dp),
-                onClick = { viewModel.onEvent(PreviewEvents.OnAddPreviewClick) },
+                onClick = { onIntent(PreviewIntent.AddClicked) },
                 shape = CircleShape,
                 containerColor = MaterialTheme.colorScheme.primary,
                 content = {
@@ -203,11 +198,11 @@ fun PreviewScreen(
                             .clickable(
                                 indication = null,
                                 interactionSource = remember { MutableInteractionSource() },
-                                onClick = { viewModel.onEvent(PreviewEvents.OnSettingsClick) }
+                                onClick = { onIntent(PreviewIntent.SettingsClicked) }
                             )
                     )
                 }
-                categoryNameMap[categoryName]?.let {
+                categoryNameMap[state.category.name]?.let {
                     Text(
                         text = it,
                         fontFamily = BebasNeue,
@@ -216,20 +211,20 @@ fun PreviewScreen(
                     )
                 }
 
-                if (searchText.isNotBlank() || previews.isNotEmpty()) {
+                if (state.query.isNotBlank() || state.items.isNotEmpty()) {
                     PasskeySearchBar(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 8.dp, bottom = 16.dp),
-                        query = searchText,
-                        onQueryChange = { viewModel.onEvent(PreviewEvents.OnSearchTextUpdate(newText = it)) },
+                        query = state.query,
+                        onQueryChange = { onIntent(PreviewIntent.QueryChanged(it)) },
                         onTrailingIconClick = {
-                            viewModel.onEvent(PreviewEvents.OnSearchTextUpdate(newText = ""))
+                            onIntent(PreviewIntent.QueryChanged(""))
                         }
                     )
                 }
 
-                if (previews.isEmpty()) {
+                if (state.showEmptyState) {
                     Image(
                         modifier = Modifier
                             .weight(1F)
@@ -243,13 +238,13 @@ fun PreviewScreen(
                         state = lazyListState,
                     ) {
                         items(
-                            items = previews,
+                            items = state.items,
                             key = { item -> item.id }
                         ) { preview ->
-                            if (searchText.isNotBlank()) {
+                            if (state.query.isNotBlank()) {
                                 PreviewItem(
                                     preview = preview,
-                                    onEvent = viewModel::onEvent
+                                    onIntent = onIntent
                                 )
                             } else {
                                 val state = rememberSwipeToDismissBoxState(
@@ -259,7 +254,7 @@ fun PreviewScreen(
 
                                 LaunchedEffect(state.currentValue) {
                                     if (state.currentValue == SwipeToDismissBoxValue.EndToStart) {
-                                        viewModel.onEvent(PreviewEvents.OnSwipedLeft(preview))
+                                        onIntent(PreviewIntent.SwipedToDelete(preview))
                                         state.snapTo(SwipeToDismissBoxValue.Settled)
                                     }
                                 }
@@ -290,7 +285,7 @@ fun PreviewScreen(
                                             PreviewItem(
                                                 scope = this@ReorderableItem,
                                                 preview = preview,
-                                                onEvent = viewModel::onEvent
+                                                onIntent = onIntent
                                             )
                                         },
                                         enableDismissFromEndToStart = true,
@@ -302,35 +297,37 @@ fun PreviewScreen(
                     }
                 }
             }
-            if (viewModel.isSheetOpen) {
+            state.editor?.let { editor ->
                 PreviewBottomSheet(
-                    bottomSheetHeading = bottomSheetHeading,
-                    previewHeading = previewHeading,
+                    bottomSheetHeading = stringResource(
+                        if (editor.isEdit) R.string.edit else R.string.add
+                    ),
+                    previewHeading = editor.heading,
                     onDismiss = {
-                        viewModel.onEvent(PreviewEvents.OnDismissBottomSheet)
+                        onIntent(PreviewIntent.EditorDismissed)
                     },
                     onHeadingChange = {
-                        viewModel.onEvent(PreviewEvents.OnHeadingChange(it))
+                        onIntent(PreviewIntent.HeadingChanged(it))
                     },
                     onSave = {
-                        viewModel.onEvent(PreviewEvents.OnSaveClick)
+                        onIntent(PreviewIntent.SaveClicked)
                     }
                 )
             }
         }
-        if (viewModel.isAlertOpen) {
+        if (state.pendingDelete != null) {
             AlertDialog(
                 properties = DialogProperties(securePolicy = SecureFlagPolicy.SecureOn),
                 containerColor = MaterialTheme.colorScheme.background,
                 onDismissRequest = {
-                    viewModel.onEvent(PreviewEvents.OnDismissAlertDialog)
+                    onIntent(PreviewIntent.DeleteCancelled)
                 },
                 title = { Text(text = stringResource(id = R.string.confirm_delete_title)) },
                 text = { Text(text = stringResource(id = R.string.confirm_delete_description_heading)) },
                 confirmButton = {
                     PassKeyButton(
                         onClick = {
-                            viewModel.onEvent(PreviewEvents.OnDeleteClick)
+                            onIntent(PreviewIntent.DeleteConfirmed)
                         },
                         text = stringResource(id = R.string.delete),
                         buttonType = ButtonType.DEFAULT
@@ -339,7 +336,7 @@ fun PreviewScreen(
                 dismissButton = {
                     PassKeyButton(
                         onClick = {
-                            viewModel.onEvent(PreviewEvents.OnCancelClick)
+                            onIntent(PreviewIntent.DeleteCancelled)
                         },
                         text = stringResource(id = R.string.cancel),
                         buttonType = ButtonType.OUTLINED

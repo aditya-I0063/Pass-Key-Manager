@@ -1,5 +1,7 @@
 package com.bhardwaj.passkey.presentation.screens.preview_screen.components
 
+import com.bhardwaj.passkey.domain.model.Preview
+import com.bhardwaj.passkey.presentation.screens.preview_screen.PreviewIntent
 import android.os.Build
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.background
@@ -31,7 +33,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bhardwaj.passkey.R
-import com.bhardwaj.passkey.presentation.screens.preview_screen.PreviewEvents
 import com.bhardwaj.passkey.presentation.theme.Poppins
 import sh.calvin.reorderable.ReorderableCollectionItemScope
 import com.bhardwaj.passkey.domain.model.Preview as PreviewEntity
@@ -40,8 +41,8 @@ import com.bhardwaj.passkey.domain.model.Preview as PreviewEntity
 fun PreviewItem(
     modifier: Modifier = Modifier,
     scope: ReorderableCollectionItemScope? = null,
-    preview: PreviewEntity,
-    onEvent: (PreviewEvents) -> Unit,
+    preview: Preview,
+    onIntent: (PreviewIntent) -> Unit,
 ) {
     val view = LocalView.current
     Box(modifier = modifier.fillMaxWidth()) {
@@ -87,10 +88,10 @@ fun PreviewItem(
                     .weight(1F)
                     .combinedClickable(
                         onClick = {
-                            onEvent(PreviewEvents.OnPreviewClick(preview.id))
+                            onIntent(PreviewIntent.ItemClicked(preview.id))
                         },
                         onLongClick = {
-                            onEvent(PreviewEvents.OnLongPress(preview.heading))
+                            onIntent(PreviewIntent.ItemLongPressed(preview.heading))
                         },
                         indication = null,
                         interactionSource = remember { MutableInteractionSource() }
@@ -106,7 +107,7 @@ fun PreviewItem(
                 Icon(
                     modifier = Modifier.clickable(
                         onClick = {
-                            onEvent(PreviewEvents.OnChangeClick(preview))
+                            onIntent(PreviewIntent.EditClicked(preview))
                         },
                         indication = null,
                         interactionSource = remember { MutableInteractionSource() }

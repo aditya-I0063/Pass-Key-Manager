@@ -31,7 +31,7 @@ fun NavGraph(navController: NavHostController) {
         }
 
         composable<NavRoute.Previews> {
-            PreviewScreen(onNavigate = { navController.navigate(it.route) })
+            PreviewScreen(onNavigate = { navController.navigate(it) })
         }
 
         composable<NavRoute.Details> {
