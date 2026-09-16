@@ -195,8 +195,9 @@ class SettingsViewModel @Inject constructor(
             SettingsEvents.OnAnalyzePasswordsClick -> {
                 viewModelScope.launch {
                     val allDetails = repository.getDetails().first()
+                    val keywords = secretFieldKeywords()
                     val result = withContext(Dispatchers.IO) {
-                        PasswordAnalyzer.analyze(allDetails)
+                        PasswordAnalyzer.analyze(allDetails, keywords)
                     }
                     analysisResult = result
                     isAnalysisSheetOpen = true
@@ -234,6 +235,20 @@ class SettingsViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    /**
+     * Union of the default-locale and current-locale keyword lists. A vault may hold entries
+     * labelled before the user switched language, so matching only the current locale would
+     * silently stop classifying them.
+     */
+    private fun secretFieldKeywords(): Set<String> {
+        val current = appContext.resources.getStringArray(R.array.secret_field_keywords).toSet()
+        val defaultLocaleConfig = android.content.res.Configuration(appContext.resources.configuration)
+        defaultLocaleConfig.setLocale(java.util.Locale.ENGLISH)
+        val fallback = appContext.createConfigurationContext(defaultLocaleConfig)
+            .resources.getStringArray(R.array.secret_field_keywords).toSet()
+        return current + fallback
     }
 
     private fun sendUiEvents(events: UiEvents) {

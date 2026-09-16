@@ -126,4 +126,12 @@
     <string name="auto_lock_5_minutes">5 நிமிடங்களுக்குப் பிறகு</string>
     <string name="auto_lock_never">ஒருபோதும் இல்லை</string>
     <string name="auto_lock_never_warning">ஆப்ஸை மூடும் வரை பெட்டகம் திறந்தே இருக்கும். உங்கள் திறந்த ஃபோன் யாரிடம் இருந்தாலும் கடவுச்சொற்களைப் படிக்க முடியும்.</string>
+    <string-array name="secret_field_keywords">
+        <item>கடவுச்சொல்</item>
+        <item>பின்</item>
+        <item>குறியீடு</item>
+        <item>ரகசியம்</item>
+        <item>சாவி</item>
+        <item>உள்நுழைவு</item>
+    </string-array>
 </resources>

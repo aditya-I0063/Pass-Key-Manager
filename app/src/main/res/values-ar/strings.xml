@@ -130,4 +130,13 @@
     <string name="auto_lock_5_minutes">بعد 5 دقائق</string>
     <string name="auto_lock_never">أبدًا</string>
     <string name="auto_lock_never_warning">ستبقى الخزنة مفتوحة حتى تغلق التطبيق. يمكن لأي شخص يحمل هاتفك المفتوح قراءة كلمات مرورك.</string>
+    <string-array name="secret_field_keywords">
+        <item>كلمة المرور</item>
+        <item>كلمة السر</item>
+        <item>رمز</item>
+        <item>الرقم السري</item>
+        <item>سر</item>
+        <item>مفتاح</item>
+        <item>تسجيل الدخول</item>
+    </string-array>
 </resources>

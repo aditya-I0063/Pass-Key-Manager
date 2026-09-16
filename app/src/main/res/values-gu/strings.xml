@@ -126,4 +126,12 @@
     <string name="auto_lock_5_minutes">5 મિનિટ પછી</string>
     <string name="auto_lock_never">ક્યારેય નહીં</string>
     <string name="auto_lock_never_warning">ઍપ બંધ ન કરો ત્યાં સુધી વૉલ્ટ ખુલ્લી રહેશે. તમારો અનલૉક કરેલો ફોન જેની પાસે હશે તે તમારા પાસવર્ડ વાંચી શકશે.</string>
+    <string-array name="secret_field_keywords">
+        <item>પાસવર્ડ</item>
+        <item>પિન</item>
+        <item>કોડ</item>
+        <item>ગુપ્ત</item>
+        <item>ચાવી</item>
+        <item>લૉગિન</item>
+    </string-array>
 </resources>

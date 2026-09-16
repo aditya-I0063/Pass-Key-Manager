@@ -125,4 +125,13 @@
     <string name="auto_lock_5_minutes">5분 후</string>
     <string name="auto_lock_never">안 함</string>
     <string name="auto_lock_never_warning">앱을 닫을 때까지 보관함이 열린 채로 유지됩니다. 잠금 해제된 기기를 가진 사람은 누구나 비밀번호를 볼 수 있습니다.</string>
+    <string-array name="secret_field_keywords">
+        <item>비밀번호</item>
+        <item>암호</item>
+        <item>핀</item>
+        <item>코드</item>
+        <item>비밀</item>
+        <item>키</item>
+        <item>로그인</item>
+    </string-array>
 </resources>

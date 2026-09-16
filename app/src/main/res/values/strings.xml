@@ -162,4 +162,21 @@
     <string name="auto_lock_5_minutes">After 5 minutes</string>
     <string name="auto_lock_never">Never</string>
     <string name="auto_lock_never_warning">The vault will stay unlocked until you close the app. Anyone with your unlocked phone can read your passwords.</string>
+
+    <!--
+        Translators: words that identify a field as holding a secret. Match how
+        people actually label these fields in your language; add variants freely.
+        Matching is case- and accent-insensitive and is a substring test.
+    -->
+    <string-array name="secret_field_keywords">
+        <item>password</item>
+        <item>pass</item>
+        <item>pin</item>
+        <item>passcode</item>
+        <item>secret</item>
+        <item>code</item>
+        <item>key</item>
+        <item>login</item>
+        <item>credential</item>
+    </string-array>
 </resources>

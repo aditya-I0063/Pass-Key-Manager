@@ -13,5 +13,11 @@ data class Details(
     val previewId: Long,
     val question: String,
     val answer: String,
-    val sequence: Long = 0
+    val sequence: Long = 0,
+    /**
+     * Whether this row holds a secret (password, PIN, recovery code) rather than a username or
+     * note. Set explicitly when the value comes from the generator; older rows default to false
+     * and fall back to keyword matching in PasswordAnalyzer.
+     */
+    val isSecret: Boolean = false
 )

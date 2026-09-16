@@ -126,4 +126,13 @@
     <string name="auto_lock_5_minutes">৫ মিনিট পরে</string>
     <string name="auto_lock_never">কখনও নয়</string>
     <string name="auto_lock_never_warning">অ্যাপ বন্ধ না করা পর্যন্ত ভল্ট আনলক থাকবে। আপনার আনলক করা ফোন যার হাতে থাকবে সে পাসওয়ার্ড দেখতে পারবে।</string>
+    <string-array name="secret_field_keywords">
+        <item>পাসওয়ার্ড</item>
+        <item>পিন</item>
+        <item>কোড</item>
+        <item>গোপন</item>
+        <item>গুপ্ত</item>
+        <item>চাবি</item>
+        <item>লগইন</item>
+    </string-array>
 </resources>

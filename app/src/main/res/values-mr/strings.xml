@@ -126,4 +126,13 @@
     <string name="auto_lock_5_minutes">5 मिनिटांनी</string>
     <string name="auto_lock_never">कधीही नाही</string>
     <string name="auto_lock_never_warning">ॲप बंद करेपर्यंत व्हॉल्ट उघडी राहील. तुमचा अनलॉक केलेला फोन ज्याच्याकडे असेल तो तुमचे पासवर्ड वाचू शकतो.</string>
+    <string-array name="secret_field_keywords">
+        <item>पासवर्ड</item>
+        <item>पिन</item>
+        <item>कोड</item>
+        <item>गुप्त</item>
+        <item>गोपनीय</item>
+        <item>किल्ली</item>
+        <item>लॉगिन</item>
+    </string-array>
 </resources>

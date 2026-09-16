@@ -126,4 +126,14 @@
     <string name="auto_lock_5_minutes">Nach 5 Minuten</string>
     <string name="auto_lock_never">Nie</string>
     <string name="auto_lock_never_warning">Der Tresor bleibt offen, bis du die App schließt. Wer dein entsperrtes Telefon hat, kann deine Passwörter lesen.</string>
+    <string-array name="secret_field_keywords">
+        <item>passwort</item>
+        <item>kennwort</item>
+        <item>pin</item>
+        <item>code</item>
+        <item>geheim</item>
+        <item>schlüssel</item>
+        <item>zugangsdaten</item>
+        <item>anmeldung</item>
+    </string-array>
 </resources>

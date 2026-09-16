@@ -125,4 +125,13 @@
     <string name="auto_lock_5_minutes">5 分钟后</string>
     <string name="auto_lock_never">永不</string>
     <string name="auto_lock_never_warning">在你关闭应用之前密码库将保持解锁。任何拿到你已解锁手机的人都能读取你的密码。</string>
+    <string-array name="secret_field_keywords">
+        <item>密码</item>
+        <item>口令</item>
+        <item>密钥</item>
+        <item>验证码</item>
+        <item>代码</item>
+        <item>秘密</item>
+        <item>登录</item>
+    </string-array>
 </resources>

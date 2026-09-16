@@ -126,5 +126,13 @@
     <string name="auto_lock_5_minutes">5 నిమిషాల తర్వాత</string>
     <string name="auto_lock_never">ఎప్పుడూ కాదు</string>
     <string name="auto_lock_never_warning">యాప్ మూసే వరకు వాల్ట్ తెరిచే ఉంటుంది. మీ అన్‌లాక్ చేసిన ఫోన్ ఎవరి దగ్గర ఉన్నా మీ పాస్‌వర్డ్‌లు చదవగలరు.</string>
+    <string-array name="secret_field_keywords">
+        <item>పాస్‌వర్డ్</item>
+        <item>పిన్</item>
+        <item>కోడ్</item>
+        <item>రహస్యం</item>
+        <item>కీ</item>
+        <item>లాగిన్</item>
+    </string-array>
 </resources>
 

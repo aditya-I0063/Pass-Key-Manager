@@ -125,4 +125,12 @@
     <string name="auto_lock_5_minutes">5 分後</string>
     <string name="auto_lock_never">しない</string>
     <string name="auto_lock_never_warning">アプリを閉じるまで保管庫は開いたままになります。ロック解除された端末を手にした人は誰でもパスワードを見られます。</string>
+    <string-array name="secret_field_keywords">
+        <item>パスワード</item>
+        <item>暗証番号</item>
+        <item>コード</item>
+        <item>秘密</item>
+        <item>鍵</item>
+        <item>ログイン</item>
+    </string-array>
 </resources>

@@ -127,4 +127,13 @@
     <string name="auto_lock_5_minutes">Dopo 5 minuti</string>
     <string name="auto_lock_never">Mai</string>
     <string name="auto_lock_never_warning">La cassaforte resterà aperta finché non chiudi l\'app. Chi ha il tuo telefono sbloccato potrà leggere le tue password.</string>
+    <string-array name="secret_field_keywords">
+        <item>password</item>
+        <item>parola d\'ordine</item>
+        <item>pin</item>
+        <item>codice</item>
+        <item>segreto</item>
+        <item>chiave</item>
+        <item>accesso</item>
+    </string-array>
 </resources>

@@ -128,4 +128,12 @@
     <string name="auto_lock_5_minutes">Через 5 минут</string>
     <string name="auto_lock_never">Никогда</string>
     <string name="auto_lock_never_warning">Хранилище останется разблокированным, пока вы не закроете приложение. Любой, у кого окажется разблокированный телефон, увидит ваши пароли.</string>
+    <string-array name="secret_field_keywords">
+        <item>пароль</item>
+        <item>пин</item>
+        <item>код</item>
+        <item>секрет</item>
+        <item>ключ</item>
+        <item>вход</item>
+    </string-array>
 </resources>

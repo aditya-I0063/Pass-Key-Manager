@@ -127,4 +127,13 @@
     <string name="auto_lock_5_minutes">Après 5 minutes</string>
     <string name="auto_lock_never">Jamais</string>
     <string name="auto_lock_never_warning">Le coffre restera déverrouillé jusqu\'à la fermeture de l\'application. Toute personne ayant votre téléphone déverrouillé pourra lire vos mots de passe.</string>
+    <string-array name="secret_field_keywords">
+        <item>mot de passe</item>
+        <item>code</item>
+        <item>pin</item>
+        <item>secret</item>
+        <item>clé</item>
+        <item>identifiant</item>
+        <item>connexion</item>
+    </string-array>
 </resources>

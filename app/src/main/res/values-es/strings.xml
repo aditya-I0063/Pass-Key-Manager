@@ -127,4 +127,13 @@
     <string name="auto_lock_5_minutes">Tras 5 minutos</string>
     <string name="auto_lock_never">Nunca</string>
     <string name="auto_lock_never_warning">La caja fuerte seguirá abierta hasta que cierres la app. Quien tenga tu teléfono desbloqueado podrá leer tus contraseñas.</string>
+    <string-array name="secret_field_keywords">
+        <item>contraseña</item>
+        <item>clave</item>
+        <item>pin</item>
+        <item>código</item>
+        <item>secreto</item>
+        <item>llave</item>
+        <item>acceso</item>
+    </string-array>
 </resources>
