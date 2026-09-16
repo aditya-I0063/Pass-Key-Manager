@@ -169,4 +169,11 @@
     <string name="autofill_save_failed">Impossible d\'enregistrer ces identifiants.</string>
     <string name="autofill_save_locked">Déverrouille PassKey pour enregistrer ces identifiants.</string>
     <string name="autofill_unsupported">La saisie automatique n\'est pas disponible sur cet appareil.</string>
+    <string name="authenticator">Authentificateur</string>
+    <string name="add_authenticator">Ajouter un authentificateur</string>
+    <string name="authenticator_input_hint">Colle un lien otpauth:// ou saisis la clé secrète</string>
+    <string name="authenticator_invalid">Cette clé d\'authentificateur n\'est pas valide.</string>
+    <string name="password_history">Historique des mots de passe</string>
+    <string name="password_history_empty">Ce mot de passe n\'a pas encore été modifié.</string>
+    <string name="cd_remove_authenticator">Supprimer l\'authentificateur</string>
 </resources>

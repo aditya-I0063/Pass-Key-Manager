@@ -167,4 +167,11 @@
     <string name="autofill_save_failed">આ લૉગિન સાચવી શકાયું નહીં.</string>
     <string name="autofill_save_locked">આ લૉગિન સાચવવા માટે PassKey અનલૉક કરો.</string>
     <string name="autofill_unsupported">આ ઉપકરણ પર ઑટોફિલ ઉપલબ્ધ નથી.</string>
+    <string name="authenticator">ઑથેન્ટિકેટર</string>
+    <string name="add_authenticator">ઑથેન્ટિકેટર ઉમેરો</string>
+    <string name="authenticator_input_hint">otpauth:// લિંક પેસ્ટ કરો અથવા ગુપ્ત કી લખો</string>
+    <string name="authenticator_invalid">આ માન્ય ઑથેન્ટિકેટર કી નથી.</string>
+    <string name="password_history">પાસવર્ડ ઇતિહાસ</string>
+    <string name="password_history_empty">આ પાસવર્ડ હજી બદલાયો નથી.</string>
+    <string name="cd_remove_authenticator">ઑથેન્ટિકેટર દૂર કરો</string>
 </resources>

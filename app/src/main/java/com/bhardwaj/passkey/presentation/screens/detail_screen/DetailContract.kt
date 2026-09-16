@@ -2,7 +2,9 @@ package com.bhardwaj.passkey.presentation.screens.detail_screen
 
 import com.bhardwaj.passkey.domain.model.Detail
 import com.bhardwaj.passkey.domain.model.PasswordCharacterClass
+import com.bhardwaj.passkey.domain.model.PasswordHistoryEntry
 import com.bhardwaj.passkey.domain.model.PasswordPolicy
+import com.bhardwaj.passkey.domain.model.TotpEntry
 import com.bhardwaj.passkey.utils.UiText
 
 data class DetailState(
@@ -14,8 +16,16 @@ data class DetailState(
     /** Non-null means the delete confirmation is showing; the row is hidden but not deleted. */
     val pendingDelete: Detail? = null,
     val policy: PasswordPolicy = PasswordPolicy(),
-    val isPolicySheetOpen: Boolean = false
+    val isPolicySheetOpen: Boolean = false,
+    val authenticators: List<TotpEntry> = emptyList(),
+    /** Non-null means the add-authenticator dialog is open. */
+    val totpEditor: TotpEditor? = null,
+    /** Non-null means the history sheet is showing this secret's past values. */
+    val history: History? = null
 ) {
+    data class TotpEditor(val input: String = "", val isInvalid: Boolean = false)
+
+    data class History(val detail: Detail, val entries: List<PasswordHistoryEntry>)
     data class Editor(
         val question: String = "",
         val answer: String = "",
@@ -60,6 +70,19 @@ sealed interface DetailIntent {
         val enabled: Boolean
     ) : DetailIntent
     data object GenerateClicked : DetailIntent
+
+    // Authenticator codes
+    data object AddAuthenticatorClicked : DetailIntent
+    data class AuthenticatorInputChanged(val input: String) : DetailIntent
+    data object AuthenticatorSaveClicked : DetailIntent
+    data object AuthenticatorEditorDismissed : DetailIntent
+    data class AuthenticatorDeleteClicked(val entry: TotpEntry) : DetailIntent
+    /** The code is generated in the UI, which is where the per-second clock lives. */
+    data class AuthenticatorCodeCopied(val code: String) : DetailIntent
+
+    // Password history
+    data class HistoryClicked(val detail: Detail) : DetailIntent
+    data object HistoryDismissed : DetailIntent
 }
 
 sealed interface DetailEffect {

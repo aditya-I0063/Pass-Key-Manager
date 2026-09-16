@@ -167,4 +167,11 @@
     <string name="autofill_save_failed">இந்த உள்நுழைவைச் சேமிக்க முடியவில்லை.</string>
     <string name="autofill_save_locked">இந்த உள்நுழைவைச் சேமிக்க PassKey ஐத் திறக்கவும்.</string>
     <string name="autofill_unsupported">இந்தச் சாதனத்தில் தானியங்கு நிரப்புதல் கிடைக்கவில்லை.</string>
+    <string name="authenticator">அங்கீகரிப்பான்</string>
+    <string name="add_authenticator">அங்கீகரிப்பானைச் சேர்</string>
+    <string name="authenticator_input_hint">otpauth:// இணைப்பை ஒட்டவும் அல்லது ரகசியச் சாவியை உள்ளிடவும்</string>
+    <string name="authenticator_invalid">இது செல்லுபடியாகும் அங்கீகரிப்புச் சாவி அல்ல.</string>
+    <string name="password_history">கடவுச்சொல் வரலாறு</string>
+    <string name="password_history_empty">இந்தக் கடவுச்சொல் இதுவரை மாற்றப்படவில்லை.</string>
+    <string name="cd_remove_authenticator">அங்கீகரிப்பானை நீக்கு</string>
 </resources>

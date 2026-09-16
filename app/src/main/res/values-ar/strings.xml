@@ -172,4 +172,11 @@
     <string name="autofill_save_failed">تعذر حفظ بيانات تسجيل الدخول.</string>
     <string name="autofill_save_locked">افتح قفل PassKey لحفظ بيانات تسجيل الدخول.</string>
     <string name="autofill_unsupported">الملء التلقائي غير متوفر على هذا الجهاز.</string>
+    <string name="authenticator">المصادقة</string>
+    <string name="add_authenticator">إضافة مصادقة</string>
+    <string name="authenticator_input_hint">الصق رابط otpauth:// أو اكتب المفتاح السري</string>
+    <string name="authenticator_invalid">هذا ليس مفتاح مصادقة صالحًا.</string>
+    <string name="password_history">سجل كلمات المرور</string>
+    <string name="password_history_empty">لم يتم تغيير كلمة المرور هذه بعد.</string>
+    <string name="cd_remove_authenticator">إزالة المصادقة</string>
 </resources>

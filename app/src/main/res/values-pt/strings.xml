@@ -169,4 +169,11 @@
     <string name="autofill_save_failed">Não foi possível salvar este login.</string>
     <string name="autofill_save_locked">Desbloqueie o PassKey para salvar este login.</string>
     <string name="autofill_unsupported">O preenchimento automático não está disponível neste dispositivo.</string>
+    <string name="authenticator">Autenticador</string>
+    <string name="add_authenticator">Adicionar autenticador</string>
+    <string name="authenticator_input_hint">Cole um link otpauth:// ou digite a chave secreta</string>
+    <string name="authenticator_invalid">Essa não é uma chave de autenticador válida.</string>
+    <string name="password_history">Histórico de senhas</string>
+    <string name="password_history_empty">Esta senha ainda não foi alterada.</string>
+    <string name="cd_remove_authenticator">Remover autenticador</string>
 </resources>

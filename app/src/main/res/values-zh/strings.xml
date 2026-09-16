@@ -167,4 +167,11 @@
     <string name="autofill_save_failed">无法保存此登录信息。</string>
     <string name="autofill_save_locked">请解锁 PassKey 以保存此登录信息。</string>
     <string name="autofill_unsupported">此设备不支持自动填充。</string>
+    <string name="authenticator">身份验证器</string>
+    <string name="add_authenticator">添加身份验证器</string>
+    <string name="authenticator_input_hint">粘贴 otpauth:// 链接或输入密钥</string>
+    <string name="authenticator_invalid">这不是有效的身份验证密钥。</string>
+    <string name="password_history">密码历史</string>
+    <string name="password_history_empty">此密码尚未更改过。</string>
+    <string name="cd_remove_authenticator">移除身份验证器</string>
 </resources>

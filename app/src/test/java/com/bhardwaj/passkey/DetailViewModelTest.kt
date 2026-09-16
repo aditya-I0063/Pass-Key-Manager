@@ -4,6 +4,8 @@ import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.bhardwaj.passkey.domain.model.Detail
 import com.bhardwaj.passkey.domain.model.PasswordCharacterClass
+import com.bhardwaj.passkey.domain.totp.Base32
+import com.bhardwaj.passkey.domain.totp.TotpAlgorithm
 import com.bhardwaj.passkey.presentation.screens.detail_screen.DetailEffect
 import com.bhardwaj.passkey.presentation.screens.detail_screen.DetailIntent
 import com.bhardwaj.passkey.presentation.screens.detail_screen.DetailViewModel
@@ -266,5 +268,132 @@ class DetailViewModelTest {
 
         val ordered: List<Detail> = repository.currentDetails().sortedBy { it.sequence }
         assertThat(ordered.map { it.question }).containsExactly("B", "C", "A").inOrder()
+    }
+
+    @Test
+    fun `an otpauth link becomes an authenticator with its own parameters`() = runTest(dispatcher) {
+        val vm = viewModel()
+        vm.state.test {
+            awaitItem()
+            vm.onIntent(DetailIntent.AddAuthenticatorClicked)
+            vm.onIntent(
+                DetailIntent.AuthenticatorInputChanged(
+                    "otpauth://totp/GitHub:alice?secret=GEZDGNBVGY3TQOJQ&algorithm=SHA256&digits=8"
+                )
+            )
+            vm.onIntent(DetailIntent.AuthenticatorSaveClicked)
+            assertThat(expectMostRecentItem().totpEditor).isNull()
+            cancelAndIgnoreRemainingEvents()
+        }
+
+        val entry = repository.currentTotps().single()
+        assertThat(entry.label).isEqualTo("GitHub")
+        assertThat(entry.config.algorithm).isEqualTo(TotpAlgorithm.SHA256)
+        assertThat(entry.config.digits).isEqualTo(8)
+        assertThat(entry.config.secret).isEqualTo(Base32.decode("GEZDGNBVGY3TQOJQ"))
+    }
+
+    @Test
+    fun `a bare secret typed by hand is accepted too`() = runTest(dispatcher) {
+        // Every setup page that shows a QR code also prints this, which is why the app needs no
+        // camera permission to add an authenticator.
+        val vm = viewModel()
+        vm.state.test {
+            awaitItem()
+            vm.onIntent(DetailIntent.AddAuthenticatorClicked)
+            vm.onIntent(DetailIntent.AuthenticatorInputChanged("gezd gnbv gy3t qojq"))
+            vm.onIntent(DetailIntent.AuthenticatorSaveClicked)
+            cancelAndIgnoreRemainingEvents()
+        }
+        assertThat(repository.currentTotps()).hasSize(1)
+    }
+
+    @Test
+    fun `invalid input marks the dialog rather than storing an unusable secret`() =
+        runTest(dispatcher) {
+            val vm = viewModel()
+            vm.state.test {
+                awaitItem()
+                vm.onIntent(DetailIntent.AddAuthenticatorClicked)
+                vm.onIntent(DetailIntent.AuthenticatorInputChanged("not a key!"))
+                vm.onIntent(DetailIntent.AuthenticatorSaveClicked)
+
+                val editor = expectMostRecentItem().totpEditor
+                assertThat(editor).isNotNull()
+                assertThat(editor!!.isInvalid).isTrue()
+                cancelAndIgnoreRemainingEvents()
+            }
+            assertThat(repository.currentTotps()).isEmpty()
+        }
+
+    @Test
+    fun `typing again clears the error so the user is not told off while correcting it`() =
+        runTest(dispatcher) {
+            val vm = viewModel()
+            vm.state.test {
+                awaitItem()
+                vm.onIntent(DetailIntent.AddAuthenticatorClicked)
+                vm.onIntent(DetailIntent.AuthenticatorInputChanged("nope!"))
+                vm.onIntent(DetailIntent.AuthenticatorSaveClicked)
+                vm.onIntent(DetailIntent.AuthenticatorInputChanged("GEZDGNBVGY3TQOJQ"))
+                assertThat(expectMostRecentItem().totpEditor?.isInvalid).isFalse()
+                cancelAndIgnoreRemainingEvents()
+            }
+        }
+
+    @Test
+    fun `copying a code marks it sensitive`() = runTest(dispatcher) {
+        val vm = viewModel()
+        vm.state.test { awaitItem(); cancelAndIgnoreRemainingEvents() }
+        vm.effects.test {
+            vm.onIntent(DetailIntent.AuthenticatorCodeCopied("123456"))
+            assertThat(awaitItem())
+                .isEqualTo(DetailEffect.CopyToClipboard("123456", isSensitive = true))
+        }
+    }
+
+    @Test
+    fun `editing a secret records what it used to be`() = runTest(dispatcher) {
+        val id = repository.createDetail(
+            previewId = PREVIEW_ID, question = "Password", answer = "old", isSecret = true
+        )
+        val vm = viewModel()
+
+        vm.state.test {
+            awaitItem()
+            val row = repository.currentDetails().single { it.id == id }
+            vm.onIntent(DetailIntent.EditClicked(row))
+            vm.onIntent(DetailIntent.AnswerChanged("new"))
+            vm.onIntent(DetailIntent.SaveClicked)
+            expectMostRecentItem()
+
+            vm.onIntent(DetailIntent.HistoryClicked(repository.currentDetails().single()))
+            val history = expectMostRecentItem().history
+            assertThat(history).isNotNull()
+            assertThat(history!!.entries.map { it.answer }).containsExactly("old")
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
+
+    @Test
+    fun `a non-secret detail records no history`() = runTest(dispatcher) {
+        // Usernames and notes change without consequence; keeping every version of one is
+        // storing plaintext nobody asked to keep.
+        val id = repository.createDetail(
+            previewId = PREVIEW_ID, question = "Username", answer = "alice"
+        )
+        val vm = viewModel()
+
+        vm.state.test {
+            awaitItem()
+            vm.onIntent(DetailIntent.EditClicked(repository.currentDetails().single { it.id == id }))
+            vm.onIntent(DetailIntent.AnswerChanged("bob"))
+            vm.onIntent(DetailIntent.SaveClicked)
+            expectMostRecentItem()
+
+            vm.onIntent(DetailIntent.HistoryClicked(repository.currentDetails().single()))
+            assertThat(expectMostRecentItem().history?.entries).isEmpty()
+            cancelAndIgnoreRemainingEvents()
+        }
     }
 }

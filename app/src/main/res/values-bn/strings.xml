@@ -168,4 +168,11 @@
     <string name="autofill_save_failed">এই লগইন সংরক্ষণ করা যায়নি।</string>
     <string name="autofill_save_locked">এই লগইন সংরক্ষণ করতে PassKey আনলক করুন।</string>
     <string name="autofill_unsupported">এই ডিভাইসে স্বয়ংক্রিয় পূরণ উপলব্ধ নেই।</string>
+    <string name="authenticator">প্রমাণীকরণকারী</string>
+    <string name="add_authenticator">প্রমাণীকরণকারী যোগ করুন</string>
+    <string name="authenticator_input_hint">otpauth:// লিঙ্ক পেস্ট করুন বা গোপন কী টাইপ করুন</string>
+    <string name="authenticator_invalid">এটি একটি বৈধ প্রমাণীকরণ কী নয়।</string>
+    <string name="password_history">পাসওয়ার্ডের ইতিহাস</string>
+    <string name="password_history_empty">এই পাসওয়ার্ডটি এখনও পরিবর্তন করা হয়নি।</string>
+    <string name="cd_remove_authenticator">প্রমাণীকরণকারী সরান</string>
 </resources>

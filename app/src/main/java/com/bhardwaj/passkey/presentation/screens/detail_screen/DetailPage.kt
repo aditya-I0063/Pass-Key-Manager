@@ -18,9 +18,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -54,6 +56,9 @@ import com.bhardwaj.passkey.presentation.screens.common.PassKeyButton
 import com.bhardwaj.passkey.presentation.screens.common.PasskeySearchBar
 import com.bhardwaj.passkey.presentation.screens.detail_screen.components.DetailsBottomSheet
 import com.bhardwaj.passkey.presentation.screens.detail_screen.components.DetailsItem
+import com.bhardwaj.passkey.presentation.screens.detail_screen.components.AuthenticatorCard
+import com.bhardwaj.passkey.presentation.screens.detail_screen.components.AuthenticatorDialog
+import com.bhardwaj.passkey.presentation.screens.detail_screen.components.PasswordHistorySheet
 import com.bhardwaj.passkey.presentation.screens.detail_screen.components.PasswordSettingsSheet
 import com.bhardwaj.passkey.presentation.theme.BebasNeue
 import com.bhardwaj.passkey.utils.ButtonType
@@ -119,19 +124,34 @@ fun DetailScreen(
     Scaffold(
         snackbarHost = { SnackbarHost(snackBarHostState) },
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = {
-                    onIntent(DetailIntent.AddClicked)
-                },
-                shape = CircleShape,
-                containerColor = MaterialTheme.colorScheme.primary,
-                content = {
-                    Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = stringResource(R.string.cd_add_detail),
-                    )
-                },
-            )
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                SmallFloatingActionButton(
+                    modifier = Modifier.padding(bottom = 12.dp),
+                    onClick = { onIntent(DetailIntent.AddAuthenticatorClicked) },
+                    shape = CircleShape,
+                    containerColor = MaterialTheme.colorScheme.background,
+                    contentColor = MaterialTheme.colorScheme.primary,
+                    content = {
+                        Icon(
+                            imageVector = Icons.Default.Timer,
+                            contentDescription = stringResource(R.string.add_authenticator),
+                        )
+                    },
+                )
+                FloatingActionButton(
+                    onClick = {
+                        onIntent(DetailIntent.AddClicked)
+                    },
+                    shape = CircleShape,
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    content = {
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = stringResource(R.string.cd_add_detail),
+                        )
+                    },
+                )
+            }
         }
     ) { paddingValues ->
         Box(
@@ -153,6 +173,14 @@ fun DetailScreen(
                     fontSize = 64.sp,
                     color = MaterialTheme.colorScheme.secondary
                 )
+
+                state.authenticators.forEach { entry ->
+                    AuthenticatorCard(
+                        entry = entry,
+                        onCopy = { onIntent(DetailIntent.AuthenticatorCodeCopied(it)) },
+                        onDelete = { onIntent(DetailIntent.AuthenticatorDeleteClicked(entry)) }
+                    )
+                }
 
                 if (state.query.isNotBlank() || state.items.isNotEmpty()) {
                     PasskeySearchBar(
@@ -266,6 +294,21 @@ fun DetailScreen(
                     }
                 )
             }
+        }
+        state.totpEditor?.let { editor ->
+            AuthenticatorDialog(
+                editor = editor,
+                onInputChange = { onIntent(DetailIntent.AuthenticatorInputChanged(it)) },
+                onDismiss = { onIntent(DetailIntent.AuthenticatorEditorDismissed) },
+                onSave = { onIntent(DetailIntent.AuthenticatorSaveClicked) }
+            )
+        }
+        state.history?.let { history ->
+            PasswordHistorySheet(
+                history = history,
+                onCopy = { onIntent(DetailIntent.LongPressed(it)) },
+                onDismiss = { onIntent(DetailIntent.HistoryDismissed) }
+            )
         }
         if (state.isPolicySheetOpen) {
             PasswordSettingsSheet(

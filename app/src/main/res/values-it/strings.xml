@@ -169,4 +169,11 @@
     <string name="autofill_save_failed">Impossibile salvare queste credenziali.</string>
     <string name="autofill_save_locked">Sblocca PassKey per salvare queste credenziali.</string>
     <string name="autofill_unsupported">La compilazione automatica non è disponibile su questo dispositivo.</string>
+    <string name="authenticator">Autenticatore</string>
+    <string name="add_authenticator">Aggiungi autenticatore</string>
+    <string name="authenticator_input_hint">Incolla un link otpauth:// o digita la chiave segreta</string>
+    <string name="authenticator_invalid">Questa non è una chiave di autenticazione valida.</string>
+    <string name="password_history">Cronologia password</string>
+    <string name="password_history_empty">Questa password non è ancora stata cambiata.</string>
+    <string name="cd_remove_authenticator">Rimuovi autenticatore</string>
 </resources>

@@ -169,4 +169,11 @@
     <string name="autofill_save_failed">No se pudo guardar este inicio de sesión.</string>
     <string name="autofill_save_locked">Desbloquea PassKey para guardar este inicio de sesión.</string>
     <string name="autofill_unsupported">Autocompletar no está disponible en este dispositivo.</string>
+    <string name="authenticator">Autenticador</string>
+    <string name="add_authenticator">Añadir autenticador</string>
+    <string name="authenticator_input_hint">Pega un enlace otpauth:// o escribe la clave secreta</string>
+    <string name="authenticator_invalid">Esa no es una clave de autenticador válida.</string>
+    <string name="password_history">Historial de contraseñas</string>
+    <string name="password_history_empty">Esta contraseña aún no se ha cambiado.</string>
+    <string name="cd_remove_authenticator">Quitar autenticador</string>
 </resources>

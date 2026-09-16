@@ -168,4 +168,11 @@
     <string name="autofill_save_failed">हे लॉगिन जतन करता आले नाही.</string>
     <string name="autofill_save_locked">हे लॉगिन जतन करण्यासाठी PassKey अनलॉक करा.</string>
     <string name="autofill_unsupported">या डिव्हाइसवर ऑटोफिल उपलब्ध नाही.</string>
+    <string name="authenticator">ऑथेंटिकेटर</string>
+    <string name="add_authenticator">ऑथेंटिकेटर जोडा</string>
+    <string name="authenticator_input_hint">otpauth:// दुवा पेस्ट करा किंवा गुप्त की टाइप करा</string>
+    <string name="authenticator_invalid">ही वैध ऑथेंटिकेटर की नाही.</string>
+    <string name="password_history">पासवर्ड इतिहास</string>
+    <string name="password_history_empty">हा पासवर्ड अद्याप बदललेला नाही.</string>
+    <string name="cd_remove_authenticator">ऑथेंटिकेटर काढा</string>
 </resources>

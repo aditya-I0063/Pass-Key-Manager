@@ -169,4 +169,11 @@
     <string name="autofill_save_failed">Diese Anmeldedaten konnten nicht gespeichert werden.</string>
     <string name="autofill_save_locked">Entsperre PassKey, um diese Anmeldedaten zu speichern.</string>
     <string name="autofill_unsupported">Automatisches Ausfüllen ist auf diesem Gerät nicht verfügbar.</string>
+    <string name="authenticator">Authenticator</string>
+    <string name="add_authenticator">Authenticator hinzufügen</string>
+    <string name="authenticator_input_hint">otpauth://-Link einfügen oder geheimen Schlüssel eingeben</string>
+    <string name="authenticator_invalid">Das ist kein gültiger Authenticator-Schlüssel.</string>
+    <string name="password_history">Passwortverlauf</string>
+    <string name="password_history_empty">Dieses Passwort wurde noch nicht geändert.</string>
+    <string name="cd_remove_authenticator">Authenticator entfernen</string>
 </resources>

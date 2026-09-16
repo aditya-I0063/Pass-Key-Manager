@@ -168,4 +168,11 @@
     <string name="autofill_save_failed">यह लॉगिन सहेजा नहीं जा सका।</string>
     <string name="autofill_save_locked">यह लॉगिन सहेजने के लिए PassKey अनलॉक करें।</string>
     <string name="autofill_unsupported">इस डिवाइस पर ऑटोफ़िल उपलब्ध नहीं है।</string>
+    <string name="authenticator">ऑथेंटिकेटर</string>
+    <string name="add_authenticator">ऑथेंटिकेटर जोड़ें</string>
+    <string name="authenticator_input_hint">otpauth:// लिंक पेस्ट करें या गुप्त कुंजी लिखें</string>
+    <string name="authenticator_invalid">यह मान्य ऑथेंटिकेटर कुंजी नहीं है।</string>
+    <string name="password_history">पासवर्ड इतिहास</string>
+    <string name="password_history_empty">यह पासवर्ड अभी तक बदला नहीं गया है।</string>
+    <string name="cd_remove_authenticator">ऑथेंटिकेटर हटाएँ</string>
 </resources>

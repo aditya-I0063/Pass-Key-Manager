@@ -242,4 +242,11 @@ Questions: contact <xliff:g id="email" example="name@example.com">yrkkh.cclub@gm
     <string name="autofill_save_failed">Could not save this login.</string>
     <string name="autofill_save_locked">Unlock PassKey to save this login.</string>
     <string name="autofill_unsupported">Autofill is not available on this device.</string>
+    <string name="authenticator">Authenticator</string>
+    <string name="add_authenticator">Add authenticator</string>
+    <string name="authenticator_input_hint">Paste an otpauth:// link or type the secret key</string>
+    <string name="authenticator_invalid">That is not a valid authenticator key.</string>
+    <string name="password_history">Password history</string>
+    <string name="password_history_empty">This password has not been changed yet.</string>
+    <string name="cd_remove_authenticator">Remove authenticator</string>
 </resources>

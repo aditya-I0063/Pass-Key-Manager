@@ -167,4 +167,11 @@
     <string name="autofill_save_failed">이 로그인 정보를 저장하지 못했습니다.</string>
     <string name="autofill_save_locked">이 로그인 정보를 저장하려면 PassKey의 잠금을 해제하세요.</string>
     <string name="autofill_unsupported">이 기기에서는 자동 완성을 사용할 수 없습니다.</string>
+    <string name="authenticator">인증기</string>
+    <string name="add_authenticator">인증기 추가</string>
+    <string name="authenticator_input_hint">otpauth:// 링크를 붙여넣거나 비밀 키를 입력하세요</string>
+    <string name="authenticator_invalid">유효한 인증 키가 아닙니다.</string>
+    <string name="password_history">비밀번호 기록</string>
+    <string name="password_history_empty">이 비밀번호는 아직 변경되지 않았습니다.</string>
+    <string name="cd_remove_authenticator">인증기 제거</string>
 </resources>

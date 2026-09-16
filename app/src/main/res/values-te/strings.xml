@@ -167,5 +167,12 @@
     <string name="autofill_save_failed">ఈ లాగిన్‌ను సేవ్ చేయలేకపోయాం.</string>
     <string name="autofill_save_locked">ఈ లాగిన్‌ను సేవ్ చేయడానికి PassKey అన్‌లాక్ చేయండి.</string>
     <string name="autofill_unsupported">ఈ పరికరంలో ఆటోఫిల్ అందుబాటులో లేదు.</string>
+    <string name="authenticator">ప్రామాణీకరణి</string>
+    <string name="add_authenticator">ప్రామాణీకరణిని జోడించు</string>
+    <string name="authenticator_input_hint">otpauth:// లింక్‌ను అతికించండి లేదా రహస్య కీని టైప్ చేయండి</string>
+    <string name="authenticator_invalid">ఇది చెల్లుబాటు అయ్యే ప్రామాణీకరణ కీ కాదు.</string>
+    <string name="password_history">పాస్‌వర్డ్ చరిత్ర</string>
+    <string name="password_history_empty">ఈ పాస్‌వర్డ్ ఇంకా మార్చబడలేదు.</string>
+    <string name="cd_remove_authenticator">ప్రామాణీకరణిని తీసివేయి</string>
 </resources>
 

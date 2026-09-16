@@ -17,6 +17,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Apps
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.History
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -106,6 +107,23 @@ fun DetailsItem(
                 fontSize = 18.sp,
                 color = MaterialTheme.colorScheme.onBackground,
             )
+
+            // History only exists for secrets, and only the repository writes it, so the icon
+            // appears exactly where there is something behind it.
+            if (scope != null && detail.isSecret) {
+                Icon(
+                    modifier = Modifier
+                        .padding(end = 12.dp)
+                        .clickable(
+                            onClick = { onIntent(DetailIntent.HistoryClicked(detail)) },
+                            indication = null,
+                            interactionSource = remember { MutableInteractionSource() }
+                        ),
+                    imageVector = Icons.Default.History,
+                    contentDescription = stringResource(R.string.password_history),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
 
             if (scope != null) {
                 Icon(

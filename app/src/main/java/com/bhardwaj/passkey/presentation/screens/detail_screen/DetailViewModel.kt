@@ -7,6 +7,10 @@ import androidx.navigation.toRoute
 import com.bhardwaj.passkey.R
 import com.bhardwaj.passkey.domain.model.Detail
 import com.bhardwaj.passkey.domain.model.PasswordPolicy
+import com.bhardwaj.passkey.domain.model.TotpEntry
+import com.bhardwaj.passkey.domain.totp.Base32
+import com.bhardwaj.passkey.domain.totp.OtpAuthUri
+import com.bhardwaj.passkey.domain.totp.TotpConfig
 import com.bhardwaj.passkey.domain.repository.PasskeyRepository
 import com.bhardwaj.passkey.presentation.navigation.NavRoute
 import com.bhardwaj.passkey.utils.PasswordGenerator
@@ -17,6 +21,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -49,14 +54,17 @@ class DetailViewModel @Inject constructor(
         val editor: DetailState.Editor? = null,
         val pendingDelete: Detail? = null,
         val policy: PasswordPolicy = PasswordPolicy(),
-        val isPolicySheetOpen: Boolean = false
+        val isPolicySheetOpen: Boolean = false,
+        val totpEditor: DetailState.TotpEditor? = null,
+        val history: DetailState.History? = null
     )
 
     val state: StateFlow<DetailState> = combine(
         query,
         transient,
-        repository.getDetailsByPreviewId(previewId)
-    ) { currentQuery, ui, items ->
+        repository.getDetailsByPreviewId(previewId),
+        repository.getTotpByPreviewId(previewId)
+    ) { currentQuery, ui, items, authenticators ->
         DetailState(
             query = currentQuery,
             items = items
@@ -70,7 +78,10 @@ class DetailViewModel @Inject constructor(
             editor = ui.editor,
             pendingDelete = ui.pendingDelete,
             policy = ui.policy,
-            isPolicySheetOpen = ui.isPolicySheetOpen
+            isPolicySheetOpen = ui.isPolicySheetOpen,
+            authenticators = authenticators,
+            totpEditor = ui.totpEditor,
+            history = ui.history
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), DetailState())
 
@@ -150,6 +161,34 @@ class DetailViewModel @Inject constructor(
                 it.copy(policy = it.policy.toggle(intent.characterClass, intent.enabled))
             }
 
+            DetailIntent.AddAuthenticatorClicked ->
+                transient.update { it.copy(totpEditor = DetailState.TotpEditor()) }
+
+            is DetailIntent.AuthenticatorInputChanged -> transient.update {
+                it.copy(totpEditor = it.totpEditor?.copy(input = intent.input, isInvalid = false))
+            }
+
+            DetailIntent.AuthenticatorEditorDismissed ->
+                transient.update { it.copy(totpEditor = null) }
+
+            DetailIntent.AuthenticatorSaveClicked -> addAuthenticator()
+
+            is DetailIntent.AuthenticatorDeleteClicked -> viewModelScope.launch {
+                repository.deleteTotp(intent.entry)
+            }
+
+            is DetailIntent.AuthenticatorCodeCopied ->
+                emit(DetailEffect.CopyToClipboard(intent.code, isSensitive = true))
+
+            is DetailIntent.HistoryClicked -> viewModelScope.launch {
+                val entries = repository.getHistoryForDetail(intent.detail.id).first()
+                transient.update {
+                    it.copy(history = DetailState.History(intent.detail, entries))
+                }
+            }
+
+            DetailIntent.HistoryDismissed -> transient.update { it.copy(history = null) }
+
             DetailIntent.GenerateClicked -> transient.update {
                 val policy = it.policy
                 val generated = PasswordGenerator.generate(
@@ -164,6 +203,29 @@ class DetailViewModel @Inject constructor(
                         .copy(answer = generated, wasGenerated = true)
                 )
             }
+        }
+    }
+
+    /**
+     * Accepts either the `otpauth://` link behind a QR code or the Base32 secret printed beside
+     * it, because those are the two things a setup page actually offers.
+     */
+    private fun addAuthenticator() {
+        val input = transient.value.totpEditor?.input?.trim().orEmpty()
+        val config = OtpAuthUri.parse(input)
+            ?: Base32.decode(input)?.let { TotpConfig(secret = it) }
+
+        if (config == null) {
+            transient.update { it.copy(totpEditor = it.totpEditor?.copy(isInvalid = true)) }
+            return
+        }
+
+        viewModelScope.launch {
+            val label = config.issuer?.takeIf { it.isNotBlank() }
+                ?: config.account?.takeIf { it.isNotBlank() }
+                ?: DEFAULT_AUTHENTICATOR_LABEL
+            repository.createTotp(previewId = previewId, label = label, config = config)
+            transient.update { it.copy(totpEditor = null) }
         }
     }
 
@@ -224,6 +286,11 @@ class DetailViewModel @Inject constructor(
 
     private fun emit(effect: DetailEffect) {
         viewModelScope.launch { _effects.send(effect) }
+    }
+
+    private companion object {
+        /** Only reached by a hand-typed secret, which carries no issuer or account. */
+        const val DEFAULT_AUTHENTICATOR_LABEL = "Authenticator"
     }
 }
 

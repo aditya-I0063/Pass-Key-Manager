@@ -166,4 +166,11 @@
     <string name="autofill_save_failed">このログイン情報を保存できませんでした。</string>
     <string name="autofill_save_locked">このログイン情報を保存するには PassKey のロックを解除してください。</string>
     <string name="autofill_unsupported">このデバイスでは自動入力を利用できません。</string>
+    <string name="authenticator">認証アプリ</string>
+    <string name="add_authenticator">認証アプリを追加</string>
+    <string name="authenticator_input_hint">otpauth:// リンクを貼り付けるか、秘密鍵を入力してください</string>
+    <string name="authenticator_invalid">有効な認証キーではありません。</string>
+    <string name="password_history">パスワード履歴</string>
+    <string name="password_history_empty">このパスワードはまだ変更されていません。</string>
+    <string name="cd_remove_authenticator">認証アプリを削除</string>
 </resources>

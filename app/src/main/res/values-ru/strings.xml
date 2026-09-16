@@ -169,4 +169,11 @@
     <string name="autofill_save_failed">Не удалось сохранить эти данные для входа.</string>
     <string name="autofill_save_locked">Разблокируйте PassKey, чтобы сохранить эти данные для входа.</string>
     <string name="autofill_unsupported">Автозаполнение недоступно на этом устройстве.</string>
+    <string name="authenticator">Аутентификатор</string>
+    <string name="add_authenticator">Добавить аутентификатор</string>
+    <string name="authenticator_input_hint">Вставьте ссылку otpauth:// или введите секретный ключ</string>
+    <string name="authenticator_invalid">Это недействительный ключ аутентификатора.</string>
+    <string name="password_history">История паролей</string>
+    <string name="password_history_empty">Этот пароль ещё не менялся.</string>
+    <string name="cd_remove_authenticator">Удалить аутентификатор</string>
 </resources>
