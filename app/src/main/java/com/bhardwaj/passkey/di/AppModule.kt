@@ -30,7 +30,14 @@ object AppModule {
             name = Constants.PASS_KEY_DATABASE
         )
             .addMigrations(MIGRATION_1_2)
-            .openHelperFactory(factory = SupportOpenHelperFactory(BuildConfig.PASS_PHRASE.toByteArray()))
+            // FIXME(5.7.0): this is a single build-time constant, identical for every install
+            //  and recoverable from the APK, so the database is encrypted against a filesystem
+            //  thief and nothing else. It is replaced in 5.7.0 by a per-install random key
+            //  wrapped by an AndroidKeyStore key; this value then survives only to open and
+            //  re-key pre-5.7 databases.
+            .openHelperFactory(
+                factory = SupportOpenHelperFactory(BuildConfig.LEGACY_PASS_PHRASE.toByteArray())
+            )
             .build()
     }
 

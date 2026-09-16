@@ -1,54 +1,52 @@
 [versions]
 # Plugin versions
-android_gradle_plugin = "8.13.1"
-kotlin_plugin = "2.2.21"
-hilt_plugin = "2.57.2"
-ksp_plugin = "2.2.21-2.0.4"
-google_services_plugin = "4.4.4"
-firebase_crashlytics_plugin = "3.0.6"
+android_gradle_plugin = "9.4.0"
+kotlin_plugin = "2.3.21"
+hilt_plugin = "2.60.1"
+ksp_plugin = "2.3.12"
+google_services_plugin = "4.5.0"
+firebase_crashlytics_plugin = "3.0.8"
 firebase_perf_plugin = "2.0.2"
 
 # Dependency versions
-core_ktx = "1.17.0"
-activity_compose = "1.11.0"
-compose_bom = "2025.11.00"
-appcompat = "1.7.1"
-lifecycle_runtime_ktx = "2.9.4"
-lifecycle_viewmodel_compose = "2.9.4"
-navigation_compose = "2.9.6"
+core_ktx = "1.19.0"
+activity_compose = "1.13.0"
+compose_bom = "2026.09.00"
+appcompat = "1.8.0"
+lifecycle_runtime_ktx = "2.11.0"
+lifecycle_viewmodel_compose = "2.11.0"
+navigation_compose = "2.10.1"
 
 # Coroutines
-coroutines_core = "1.10.2"
-coroutines_android = "1.10.2"
+coroutines_core = "1.11.0"
+coroutines_android = "1.11.0"
 
 # Dagger - Hilt
-hilt_android = "2.57.2"
-hilt_compiler = "1.3.0"
+hilt_android = "2.60.1"
+hilt_compiler = "1.4.0"
 
-# Splash Screen
-splash_screen = "1.2.0"
 
 # DataStore Preferences
-datastore_preferences = "1.1.7"
+datastore_preferences = "1.2.1"
 
 # Biometric Authentication
 biometric = "1.1.0"
 
 # Room
-room = "2.8.3"
+room = "2.8.5"
 
 # SQL Cipher
-sqlcipherAndroid = "4.11.0"
-sqlcipherSqlite = "2.6.1"
+sqlcipherAndroid = "4.19.0"
+sqlcipherSqlite = "2.7.1"
 
 # Open CSV - Import/ Export Data
 opencsv = "5.12.0"
 
 # Reordering Lazy Columns
-reorderable = "3.0.0"
+reorderable = "3.1.0"
 
 # Firebase
-firebase_bom = "34.6.0"
+firebase_bom = "34.19.0"
 
 # In App Updates
 inAppUpdate = "2.1.0"
@@ -58,7 +56,11 @@ junit = "4.13.2"
 test_ext_junit = "1.3.0"
 espresso_core = "3.7.0"
 compose_ui_test = "1.9.4"
+# material-icons-extended is frozen upstream at 1.7.8 and is no longer BOM-managed.
+material_icons = "1.7.8"
 truth = "1.4.5"
+mockk = "1.14.11"
+turbine = "1.2.1"
 
 [plugins]
 # Plugin definitions
@@ -81,10 +83,11 @@ androidx_compose_ui = { module = "androidx.compose.ui:ui" }
 androidx_compose_ui_graphics = { module = "androidx.compose.ui:ui-graphics" }
 androidx_compose_ui_tooling_preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 androidx_compose_material3 = { module = "androidx.compose.material3:material3" }
-androidx_compose_material_icons_extended = { module = "androidx.compose.material:material-icons-extended" }
+androidx_compose_material_icons_extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "material_icons" }
 androidx_appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx_lifecycle_runtime_ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle_runtime_ktx" }
 androidx_lifecycle_viewmodel_compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle_viewmodel_compose" }
+androidx_lifecycle_runtime_compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle_runtime_ktx" }
 androidx_navigation_compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation_compose" }
 
 # Coroutines
@@ -97,8 +100,6 @@ hilt_android_compiler = { module = "com.google.dagger:hilt-android-compiler", ve
 hilt_compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hilt_compiler" }
 hilt_navigation_compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt_compiler" }
 
-# Splash Screen
-androidx_core_splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "splash_screen" }
 
 # DataStore Preferences
 datastore_preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore_preferences" }
@@ -138,5 +139,8 @@ test_ext_junit = { module = "androidx.test.ext:junit", version.ref = "test_ext_j
 espresso_core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso_core" }
 compose_ui_test_junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 google_truth = { module = "com.google.truth:truth", version.ref = "truth" }
+kotlinx_coroutines_test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines_core" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 compose_ui_tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose_ui_test_manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose_ui_test" }
