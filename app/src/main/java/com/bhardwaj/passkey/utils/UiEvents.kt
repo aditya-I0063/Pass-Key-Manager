@@ -1,9 +1,11 @@
 package com.bhardwaj.passkey.utils
 
+import com.bhardwaj.passkey.presentation.navigation.NavRoute
+
 sealed interface UiEvents {
     data object PopBackStack : UiEvents
 
-    data class Navigate(val route: String) : UiEvents
+    data class Navigate(val route: NavRoute) : UiEvents
 
     /**
      * Carries [UiText] rather than a resolved String so the message is localized at the call

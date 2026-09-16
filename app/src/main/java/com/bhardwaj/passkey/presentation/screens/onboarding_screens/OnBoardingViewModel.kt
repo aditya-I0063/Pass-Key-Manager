@@ -1,10 +1,10 @@
 package com.bhardwaj.passkey.presentation.screens.onboarding_screens
 
+import com.bhardwaj.passkey.presentation.navigation.NavRoute
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bhardwaj.passkey.domain.repository.PreferencesRepository
 import com.bhardwaj.passkey.presentation.screens.onboarding_screens.OnBoardingEvents
-import com.bhardwaj.passkey.presentation.navigation.Routes
 import com.bhardwaj.passkey.utils.UiEvents
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -28,7 +28,7 @@ class OnBoardingViewModel @Inject constructor(
             is OnBoardingEvents.OnBoardingComplete -> {
                 viewModelScope.launch {
                     preferences.setOnboardingCompleted(true)
-                    _uiEvents.send(UiEvents.Navigate(Routes.SECURITY_PAGE))
+                    _uiEvents.send(UiEvents.Navigate(NavRoute.Security))
                 }
             }
         }

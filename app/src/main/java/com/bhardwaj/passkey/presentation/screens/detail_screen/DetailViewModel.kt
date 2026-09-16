@@ -1,5 +1,7 @@
 package com.bhardwaj.passkey.presentation.screens.detail_screen
 
+import androidx.navigation.toRoute
+import com.bhardwaj.passkey.presentation.navigation.NavRoute
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -53,7 +55,10 @@ class DetailViewModel @Inject constructor(
     val detailResponse = _detailResponse.asStateFlow()
     /** true = editing an existing row, false = adding. Resolved to text by the UI. */
     val isEditingSheet = savedStateHandle.getStateFlow(BOTTOM_SHEET_HEADING, false)
-    val previewId = savedStateHandle.get<Long>("previewId") ?: -1
+    // toRoute decodes the typed argument. The old form read a stringly-named key and fell back
+    // to -1, which is why a "something went wrong" branch existed below for an id that could
+    // never legitimately arrive.
+    val previewId: Long = savedStateHandle.toRoute<NavRoute.Details>().previewId
 
     private val _searchText = MutableStateFlow("")
     val searchText = _searchText.asStateFlow()
@@ -142,15 +147,6 @@ class DetailViewModel @Inject constructor(
                         sendUiEvents(
                             UiEvents.ShowSnackBar(
                                 message = UiText.StringResource(R.string.enter_valid_title_n_response)
-                            )
-                        )
-                        return@launch
-                    }
-                    if (previewId.toInt() == -1) {
-                        isSheetOpen = false
-                        sendUiEvents(
-                            UiEvents.ShowSnackBar(
-                                message = UiText.StringResource(R.string.something_went_wrong)
                             )
                         )
                         return@launch

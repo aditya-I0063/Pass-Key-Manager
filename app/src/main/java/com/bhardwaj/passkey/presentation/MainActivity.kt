@@ -1,5 +1,6 @@
 package com.bhardwaj.passkey.presentation
 
+import com.bhardwaj.passkey.presentation.navigation.NavRoute
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.compose.setContent
@@ -17,7 +18,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.LaunchedEffect
 import com.bhardwaj.passkey.data.security.AppLockObserver
 import com.bhardwaj.passkey.data.security.LockReason
-import com.bhardwaj.passkey.presentation.navigation.Routes
 import kotlinx.coroutines.delay
 import com.bhardwaj.passkey.data.security.VaultSession
 import com.bhardwaj.passkey.presentation.screens.splash_screen.SplashViewModel
@@ -140,7 +140,7 @@ class MainActivity : FragmentActivity() {
                                 // ColdStart is the initial value and means "never unlocked yet",
                                 // so it must not yank the user out of onboarding.
                                 if (!isUnlocked && lockReason != LockReason.ColdStart) {
-                                    navController.navigate(Routes.SECURITY_PAGE) {
+                                    navController.navigate(NavRoute.Security) {
                                         // Drop every screen holding vault content, which also
                                         // destroys their nav-scoped ViewModels.
                                         popUpTo(0) { inclusive = true }
@@ -148,10 +148,7 @@ class MainActivity : FragmentActivity() {
                                 }
                             }
 
-                            NavGraph(
-                                navController = navController,
-                                startDestination = splashViewModel.startDestination
-                            )
+                            NavGraph(navController = navController)
                             if (updateState == AppUpdateController.State.ReadyToInstall) {
                                 UpdateReadyBanner(
                                     modifier = Modifier.align(Alignment.BottomCenter),

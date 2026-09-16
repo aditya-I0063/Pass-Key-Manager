@@ -1,5 +1,6 @@
 package com.bhardwaj.passkey.presentation.screens.settings_screen
 
+import com.bhardwaj.passkey.presentation.navigation.NavRoute
 import com.bhardwaj.passkey.domain.model.AutoLockTimeout
 import android.content.ContentResolver
 import android.content.Context
@@ -71,7 +72,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun SettingsScreen(
     onPopBackStack: () -> Unit,
-    onNavigate: (String) -> Unit,
+    onNavigate: (NavRoute) -> Unit,
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
     val snackBarHostState = remember { SnackbarHostState() }

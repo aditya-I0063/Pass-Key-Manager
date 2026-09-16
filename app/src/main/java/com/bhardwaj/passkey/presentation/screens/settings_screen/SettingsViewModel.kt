@@ -1,5 +1,6 @@
 package com.bhardwaj.passkey.presentation.screens.settings_screen
 
+import com.bhardwaj.passkey.presentation.navigation.NavRoute
 import android.app.Application
 import android.app.LocaleManager
 import android.content.Intent
@@ -22,7 +23,6 @@ import com.bhardwaj.passkey.data.security.DatabaseKeyManager
 import com.bhardwaj.passkey.domain.repository.PreferencesRepository
 import com.bhardwaj.passkey.domain.repository.PasskeyRepository
 import com.bhardwaj.passkey.presentation.screens.settings_screen.SettingsEvents
-import com.bhardwaj.passkey.presentation.navigation.Routes
 import com.bhardwaj.passkey.utils.AlertBy.ABOUT
 import com.bhardwaj.passkey.utils.AlertBy.PRIVACY
 import com.bhardwaj.passkey.utils.AlertBy.TERMS_N_CONDITIONS
@@ -263,9 +263,7 @@ class SettingsViewModel @Inject constructor(
             is SettingsEvents.OnAnalysisItemClick -> {
                 isAnalysisSheetOpen = false
                 sendUiEvents(
-                    UiEvents.Navigate(
-                        Routes.DETAILS_PAGE + "?previewId=${event.detail.previewId}"
-                    )
+                    UiEvents.Navigate(NavRoute.Details(previewId = event.detail.previewId))
                 )
             }
         }

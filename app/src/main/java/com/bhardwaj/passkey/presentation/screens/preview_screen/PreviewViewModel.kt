@@ -1,5 +1,6 @@
 package com.bhardwaj.passkey.presentation.screens.preview_screen
 
+import com.bhardwaj.passkey.presentation.navigation.NavRoute
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -10,7 +11,6 @@ import com.bhardwaj.passkey.R
 import com.bhardwaj.passkey.domain.model.Preview
 import com.bhardwaj.passkey.domain.repository.PasskeyRepository
 import com.bhardwaj.passkey.presentation.screens.preview_screen.PreviewEvents
-import com.bhardwaj.passkey.presentation.navigation.Routes
 import com.bhardwaj.passkey.domain.model.Category
 import com.bhardwaj.passkey.utils.Constants.Companion.BOTTOM_SHEET_HEADING
 import com.bhardwaj.passkey.utils.Constants.Companion.PREVIEW_CATEGORY_NAME
@@ -155,7 +155,7 @@ class PreviewViewModel @Inject constructor(
 
             is PreviewEvents.OnPreviewClick -> {
                 _searchText.value = ""
-                sendUiEvents(UiEvents.Navigate(Routes.DETAILS_PAGE + "?previewId=${event.previewId}"))
+                sendUiEvents(UiEvents.Navigate(NavRoute.Details(previewId = event.previewId)))
             }
 
             is PreviewEvents.OnLongPress -> {
@@ -164,7 +164,7 @@ class PreviewViewModel @Inject constructor(
 
             PreviewEvents.OnSettingsClick -> {
                 _searchText.value = ""
-                sendUiEvents(UiEvents.Navigate(Routes.SETTINGS_PAGE))
+                sendUiEvents(UiEvents.Navigate(NavRoute.Settings))
             }
 
             is PreviewEvents.OnSwipedLeft -> {
