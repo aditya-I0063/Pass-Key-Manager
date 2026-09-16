@@ -163,4 +163,10 @@
     <string name="migration_export_first">Exportar una copia primero</string>
     <string name="migration_export_now">Exportar mi caja fuerte ahora</string>
     <string name="store_unavailable">Google Play no está disponible en este dispositivo.</string>
+    <string name="autofill">Autocompletar</string>
+    <string name="autofill_unlock">Desbloquea para completar</string>
+    <string name="autofill_open_app">Abre PassKey para terminar de configurar tu caja fuerte y vuelve a intentarlo.</string>
+    <string name="autofill_save_failed">No se pudo guardar este inicio de sesión.</string>
+    <string name="autofill_save_locked">Desbloquea PassKey para guardar este inicio de sesión.</string>
+    <string name="autofill_unsupported">Autocompletar no está disponible en este dispositivo.</string>
 </resources>

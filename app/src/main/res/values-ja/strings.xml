@@ -160,4 +160,10 @@
     <string name="migration_export_first">先にバックアップを書き出す</string>
     <string name="migration_export_now">今すぐ保管庫を書き出す</string>
     <string name="store_unavailable">このデバイスでは Google Play を利用できません。</string>
+    <string name="autofill">自動入力</string>
+    <string name="autofill_unlock">ロックを解除して入力</string>
+    <string name="autofill_open_app">PassKey を開いて保管庫の設定を完了してから、もう一度お試しください。</string>
+    <string name="autofill_save_failed">このログイン情報を保存できませんでした。</string>
+    <string name="autofill_save_locked">このログイン情報を保存するには PassKey のロックを解除してください。</string>
+    <string name="autofill_unsupported">このデバイスでは自動入力を利用できません。</string>
 </resources>

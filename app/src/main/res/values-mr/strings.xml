@@ -162,4 +162,10 @@
     <string name="migration_export_first">आधी बॅकअप घ्या</string>
     <string name="migration_export_now">माझी व्हॉल्ट आता निर्यात करा</string>
     <string name="store_unavailable">या डिव्हाइसवर Google Play उपलब्ध नाही.</string>
+    <string name="autofill">ऑटोफिल</string>
+    <string name="autofill_unlock">भरण्यासाठी अनलॉक करा</string>
+    <string name="autofill_open_app">तुमचे व्हॉल्ट सेटअप पूर्ण करण्यासाठी PassKey उघडा, नंतर पुन्हा प्रयत्न करा.</string>
+    <string name="autofill_save_failed">हे लॉगिन जतन करता आले नाही.</string>
+    <string name="autofill_save_locked">हे लॉगिन जतन करण्यासाठी PassKey अनलॉक करा.</string>
+    <string name="autofill_unsupported">या डिव्हाइसवर ऑटोफिल उपलब्ध नाही.</string>
 </resources>

@@ -162,4 +162,10 @@
     <string name="migration_export_first">আগে ব্যাকআপ নিন</string>
     <string name="migration_export_now">এখনই আমার ভল্ট রপ্তানি করুন</string>
     <string name="store_unavailable">এই ডিভাইসে Google Play উপলব্ধ নেই।</string>
+    <string name="autofill">স্বয়ংক্রিয় পূরণ</string>
+    <string name="autofill_unlock">পূরণ করতে আনলক করুন</string>
+    <string name="autofill_open_app">ভল্ট সেটআপ শেষ করতে PassKey খুলুন, তারপর আবার চেষ্টা করুন।</string>
+    <string name="autofill_save_failed">এই লগইন সংরক্ষণ করা যায়নি।</string>
+    <string name="autofill_save_locked">এই লগইন সংরক্ষণ করতে PassKey আনলক করুন।</string>
+    <string name="autofill_unsupported">এই ডিভাইসে স্বয়ংক্রিয় পূরণ উপলব্ধ নেই।</string>
 </resources>

@@ -163,4 +163,10 @@
     <string name="migration_export_first">Exportar um backup antes</string>
     <string name="migration_export_now">Exportar meu cofre agora</string>
     <string name="store_unavailable">O Google Play não está disponível neste dispositivo.</string>
+    <string name="autofill">Preenchimento automático</string>
+    <string name="autofill_unlock">Desbloqueie para preencher</string>
+    <string name="autofill_open_app">Abra o PassKey para concluir a configuração do cofre e tente novamente.</string>
+    <string name="autofill_save_failed">Não foi possível salvar este login.</string>
+    <string name="autofill_save_locked">Desbloqueie o PassKey para salvar este login.</string>
+    <string name="autofill_unsupported">O preenchimento automático não está disponível neste dispositivo.</string>
 </resources>

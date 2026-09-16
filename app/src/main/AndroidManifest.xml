@@ -35,6 +35,34 @@
             </intent-filter>
         </activity>
 
+        <!--
+            Autofill. BIND_AUTOFILL_SERVICE is held by the system, not requested by the app: it
+            is what guarantees only the framework can bind to this service.
+        -->
+        <service
+            android:name=".presentation.autofill.PasskeyAutofillService"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_AUTOFILL_SERVICE">
+            <meta-data
+                android:name="android.autofill"
+                android:resource="@xml/autofill_service" />
+
+            <intent-filter>
+                <action android:name="android.service.autofill.AutofillService" />
+            </intent-filter>
+        </service>
+
+        <!--
+            Launched by the framework from the autofill suggestion list when the vault is locked.
+            Not exported: only the PendingIntent the service hands out can start it.
+        -->
+        <activity
+            android:name=".presentation.autofill.AutofillUnlockActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:theme="@style/Theme.PassKey" />
+
         <service
             android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
             android:enabled="false"

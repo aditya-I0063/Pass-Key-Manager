@@ -161,4 +161,10 @@
     <string name="migration_export_first">પહેલાં બૅકઅપ લો</string>
     <string name="migration_export_now">હમણાં મારી વૉલ્ટ નિકાસ કરો</string>
     <string name="store_unavailable">આ ઉપકરણ પર Google Play ઉપલબ્ધ નથી.</string>
+    <string name="autofill">ઑટોફિલ</string>
+    <string name="autofill_unlock">ભરવા માટે અનલૉક કરો</string>
+    <string name="autofill_open_app">તમારું વૉલ્ટ સેટઅપ પૂરું કરવા PassKey ખોલો, પછી ફરી પ્રયાસ કરો.</string>
+    <string name="autofill_save_failed">આ લૉગિન સાચવી શકાયું નહીં.</string>
+    <string name="autofill_save_locked">આ લૉગિન સાચવવા માટે PassKey અનલૉક કરો.</string>
+    <string name="autofill_unsupported">આ ઉપકરણ પર ઑટોફિલ ઉપલબ્ધ નથી.</string>
 </resources>

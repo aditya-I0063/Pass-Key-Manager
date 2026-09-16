@@ -104,6 +104,8 @@ class SettingsViewModel @Inject constructor(
 
             SettingsIntent.RateAppClicked -> emit(SettingsEffect.OpenStoreListing)
 
+            SettingsIntent.AutofillClicked -> emit(SettingsEffect.OpenAutofillSettings)
+
             is SettingsIntent.ExportFileChosen -> viewModelScope.launch {
                 val result = backupRepository.export(intent.uri, intent.password)
                 Arrays.fill(intent.password, Char(0))

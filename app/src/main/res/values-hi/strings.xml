@@ -162,4 +162,10 @@
     <string name="migration_export_first">पहले बैकअप निर्यात करें</string>
     <string name="migration_export_now">मेरी वॉल्ट अभी निर्यात करें</string>
     <string name="store_unavailable">इस डिवाइस पर Google Play उपलब्ध नहीं है।</string>
+    <string name="autofill">ऑटोफ़िल</string>
+    <string name="autofill_unlock">भरने के लिए अनलॉक करें</string>
+    <string name="autofill_open_app">अपना वॉल्ट सेटअप पूरा करने के लिए PassKey खोलें, फिर दोबारा कोशिश करें।</string>
+    <string name="autofill_save_failed">यह लॉगिन सहेजा नहीं जा सका।</string>
+    <string name="autofill_save_locked">यह लॉगिन सहेजने के लिए PassKey अनलॉक करें।</string>
+    <string name="autofill_unsupported">इस डिवाइस पर ऑटोफ़िल उपलब्ध नहीं है।</string>
 </resources>

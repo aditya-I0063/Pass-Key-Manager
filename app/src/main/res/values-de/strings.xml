@@ -163,4 +163,10 @@
     <string name="migration_export_first">Zuerst ein Backup exportieren</string>
     <string name="migration_export_now">Tresor jetzt exportieren</string>
     <string name="store_unavailable">Google Play ist auf diesem Gerät nicht verfügbar.</string>
+    <string name="autofill">Automatisches Ausfüllen</string>
+    <string name="autofill_unlock">Zum Ausfüllen entsperren</string>
+    <string name="autofill_open_app">Öffne PassKey, um die Einrichtung des Tresors abzuschließen, und versuche es erneut.</string>
+    <string name="autofill_save_failed">Diese Anmeldedaten konnten nicht gespeichert werden.</string>
+    <string name="autofill_save_locked">Entsperre PassKey, um diese Anmeldedaten zu speichern.</string>
+    <string name="autofill_unsupported">Automatisches Ausfüllen ist auf diesem Gerät nicht verfügbar.</string>
 </resources>

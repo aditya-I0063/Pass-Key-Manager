@@ -161,4 +161,10 @@
     <string name="migration_export_first">先导出备份</string>
     <string name="migration_export_now">立即导出我的密码库</string>
     <string name="store_unavailable">此设备上无法使用 Google Play。</string>
+    <string name="autofill">自动填充</string>
+    <string name="autofill_unlock">解锁以填充</string>
+    <string name="autofill_open_app">请打开 PassKey 完成保险库设置，然后重试。</string>
+    <string name="autofill_save_failed">无法保存此登录信息。</string>
+    <string name="autofill_save_locked">请解锁 PassKey 以保存此登录信息。</string>
+    <string name="autofill_unsupported">此设备不支持自动填充。</string>
 </resources>

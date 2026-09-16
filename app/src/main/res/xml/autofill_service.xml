@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    No settingsActivity: everything this service needs is in the app's own Settings screen, and
+    pointing the system's "Autofill service settings" at a screen behind a biometric prompt is a
+    dead end for the user.
+-->
+<autofill-service xmlns:android="http://schemas.android.com/apk/res/android" />

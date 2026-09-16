@@ -161,5 +161,11 @@
     <string name="migration_export_first">ముందు బ్యాకప్ తీసుకోండి</string>
     <string name="migration_export_now">నా వాల్ట్‌ను ఇప్పుడే ఎగుమతి చేయి</string>
     <string name="store_unavailable">ఈ పరికరంలో Google Play అందుబాటులో లేదు.</string>
+    <string name="autofill">ఆటోఫిల్</string>
+    <string name="autofill_unlock">నింపడానికి అన్‌లాక్ చేయండి</string>
+    <string name="autofill_open_app">మీ వాల్ట్ సెటప్ పూర్తి చేయడానికి PassKey తెరిచి, మళ్లీ ప్రయత్నించండి.</string>
+    <string name="autofill_save_failed">ఈ లాగిన్‌ను సేవ్ చేయలేకపోయాం.</string>
+    <string name="autofill_save_locked">ఈ లాగిన్‌ను సేవ్ చేయడానికి PassKey అన్‌లాక్ చేయండి.</string>
+    <string name="autofill_unsupported">ఈ పరికరంలో ఆటోఫిల్ అందుబాటులో లేదు.</string>
 </resources>
 

@@ -163,4 +163,10 @@
     <string name="migration_export_first">Esporta prima un backup</string>
     <string name="migration_export_now">Esporta la mia cassaforte ora</string>
     <string name="store_unavailable">Google Play non è disponibile su questo dispositivo.</string>
+    <string name="autofill">Compilazione automatica</string>
+    <string name="autofill_unlock">Sblocca per compilare</string>
+    <string name="autofill_open_app">Apri PassKey per completare la configurazione della cassaforte, poi riprova.</string>
+    <string name="autofill_save_failed">Impossibile salvare queste credenziali.</string>
+    <string name="autofill_save_locked">Sblocca PassKey per salvare queste credenziali.</string>
+    <string name="autofill_unsupported">La compilazione automatica non è disponibile su questo dispositivo.</string>
 </resources>

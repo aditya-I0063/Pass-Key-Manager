@@ -236,4 +236,10 @@ Questions: contact <xliff:g id="email" example="name@example.com">yrkkh.cclub@gm
     <string name="migration_export_first">Export a backup first</string>
     <string name="migration_export_now">Export my vault now</string>
     <string name="store_unavailable">Google Play is not available on this device.</string>
+    <string name="autofill">Autofill</string>
+    <string name="autofill_unlock">Unlock to fill</string>
+    <string name="autofill_open_app">Open PassKey to finish setting up your vault, then try again.</string>
+    <string name="autofill_save_failed">Could not save this login.</string>
+    <string name="autofill_save_locked">Unlock PassKey to save this login.</string>
+    <string name="autofill_unsupported">Autofill is not available on this device.</string>
 </resources>

@@ -1,9 +1,10 @@
 package com.bhardwaj.passkey.presentation.screens.settings_screen
 
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.provider.Settings
+import android.view.autofill.AutofillManager
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -182,6 +183,25 @@ fun SettingsScreen(
 
             // Started from the Activity context, and guarded: a device without the Play Store
             // used to take an unhandled ActivityNotFoundException straight to a crash.
+            // The system's autofill picker. There is no API to enable a service directly,
+            // which is the right restriction for something that can read other apps' forms.
+            SettingsEffect.OpenAutofillSettings -> {
+                val manager = context.getSystemService(AutofillManager::class.java)
+                val opened = manager?.isAutofillSupported == true && runCatching {
+                    context.startActivity(
+                        Intent(Settings.ACTION_REQUEST_SET_AUTOFILL_SERVICE)
+                            .setData("package:${context.packageName}".toUri())
+                    )
+                }.isSuccess
+                if (!opened) {
+                    scope.launch {
+                        snackBarHostState.showSnackbar(
+                            UiText.StringResource(R.string.autofill_unsupported).asString(context)
+                        )
+                    }
+                }
+            }
+
             SettingsEffect.OpenStoreListing -> {
                 val opened = runCatching {
                     context.startActivity(
@@ -273,6 +293,9 @@ fun SettingsScreen(
                             }
                             SettingsText(text = stringResource(id = R.string.rate_app)) {
                                 onIntent(SettingsIntent.RateAppClicked)
+                            }
+                            SettingsText(text = stringResource(id = R.string.autofill)) {
+                                onIntent(SettingsIntent.AutofillClicked)
                             }
                             SettingsText(text = stringResource(id = R.string.auto_lock)) {
                                 onIntent(SettingsIntent.AutoLockClicked)

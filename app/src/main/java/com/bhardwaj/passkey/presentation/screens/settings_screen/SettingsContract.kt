@@ -44,6 +44,7 @@ sealed interface SettingsIntent {
     data object SheetDismissed : SettingsIntent
 
     data object RateAppClicked : SettingsIntent
+    data object AutofillClicked : SettingsIntent
 
     data class ExportFileChosen(val uri: Uri, val password: CharArray) : SettingsIntent {
         override fun equals(other: Any?) = this === other ||
@@ -104,4 +105,7 @@ sealed interface SettingsEffect {
      * handled the device having no Play Store, which threw ActivityNotFoundException.
      */
     data object OpenStoreListing : SettingsEffect
+
+    /** Android owns the autofill service picker; the app can only ask for it to be shown. */
+    data object OpenAutofillSettings : SettingsEffect
 }

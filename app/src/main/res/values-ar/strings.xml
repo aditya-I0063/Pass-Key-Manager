@@ -166,4 +166,10 @@
     <string name="migration_export_first">صدّر نسخة احتياطية أولًا</string>
     <string name="migration_export_now">صدّر خزنتي الآن</string>
     <string name="store_unavailable">خدمة Google Play غير متوفرة على هذا الجهاز.</string>
+    <string name="autofill">الملء التلقائي</string>
+    <string name="autofill_unlock">افتح القفل للملء</string>
+    <string name="autofill_open_app">افتح PassKey لإكمال إعداد خزنتك، ثم أعد المحاولة.</string>
+    <string name="autofill_save_failed">تعذر حفظ بيانات تسجيل الدخول.</string>
+    <string name="autofill_save_locked">افتح قفل PassKey لحفظ بيانات تسجيل الدخول.</string>
+    <string name="autofill_unsupported">الملء التلقائي غير متوفر على هذا الجهاز.</string>
 </resources>

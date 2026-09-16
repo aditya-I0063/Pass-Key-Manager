@@ -163,4 +163,10 @@
     <string name="migration_export_first">Exporter une sauvegarde d\'abord</string>
     <string name="migration_export_now">Exporter mon coffre maintenant</string>
     <string name="store_unavailable">Google Play n\'est pas disponible sur cet appareil.</string>
+    <string name="autofill">Saisie automatique</string>
+    <string name="autofill_unlock">Déverrouiller pour remplir</string>
+    <string name="autofill_open_app">Ouvre PassKey pour terminer la configuration de ton coffre, puis réessaie.</string>
+    <string name="autofill_save_failed">Impossible d\'enregistrer ces identifiants.</string>
+    <string name="autofill_save_locked">Déverrouille PassKey pour enregistrer ces identifiants.</string>
+    <string name="autofill_unsupported">La saisie automatique n\'est pas disponible sur cet appareil.</string>
 </resources>
