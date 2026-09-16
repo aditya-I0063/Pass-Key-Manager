@@ -18,11 +18,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.bhardwaj.passkey.presentation.screens.common.ObserveAsEvents
 import com.bhardwaj.passkey.R
-import com.bhardwaj.passkey.presentation.screens.onboarding_screens.OnBoardingEvents
 import com.bhardwaj.passkey.presentation.screens.onboarding_screens.OnBoardingViewModel
 import com.bhardwaj.passkey.presentation.screens.onboarding_screens.components.OnBoardingItem
 import com.bhardwaj.passkey.presentation.screens.onboarding_screens.components.OnBoardingPageIndicator
-import com.bhardwaj.passkey.utils.UiEvents
+import com.bhardwaj.passkey.presentation.navigation.NavRoute
 import kotlinx.coroutines.launch
 
 data class OnBoardingScreen(
@@ -32,7 +31,7 @@ data class OnBoardingScreen(
 
 @Composable
 fun OnBoardingScreen(
-    onNavigate: (UiEvents.Navigate) -> Unit,
+    onNavigate: (NavRoute) -> Unit,
     viewModel: OnBoardingViewModel = hiltViewModel()
 ) {
     // The emphasised word is marked with [[ ]] inside each heading string resource, so each
@@ -52,11 +51,10 @@ fun OnBoardingScreen(
         )
     )
 
-    ObserveAsEvents(viewModel.uiEvents) { event ->
-            when (event) {
-                is UiEvents.Navigate -> onNavigate(event)
-                else -> Unit
-            }
+    ObserveAsEvents(viewModel.effects) { effect ->
+        when (effect) {
+            is OnBoardingEffect.Navigate -> onNavigate(effect.route)
+        }
     }
     Column(
         modifier = Modifier
@@ -79,11 +77,11 @@ fun OnBoardingScreen(
             currentPage = pagerState.currentPage,
             totalPages = pages.size,
             onSkipClick = {
-                viewModel.onEvent(OnBoardingEvents.OnBoardingComplete)
+                viewModel.onIntent(OnBoardingIntent.Finished)
             },
             onNextClick = { index ->
                 if (index == pagerState.pageCount) {
-                    viewModel.onEvent(OnBoardingEvents.OnBoardingComplete)
+                    viewModel.onIntent(OnBoardingIntent.Finished)
                 } else {
                     scope.launch {
                         pagerState.animateScrollToPage(index)

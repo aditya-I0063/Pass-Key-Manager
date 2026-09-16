@@ -19,11 +19,11 @@ fun NavGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = NavRoute.Splash) {
 
         composable<NavRoute.Splash> {
-            SplashPage(onNavigate = { navController.replaceWith(it.route) })
+            SplashPage(onNavigate = { navController.replaceWith(it) })
         }
 
         composable<NavRoute.Onboarding> {
-            OnBoardingScreen(onNavigate = { navController.replaceWith(it.route) })
+            OnBoardingScreen(onNavigate = { navController.replaceWith(it) })
         }
 
         composable<NavRoute.Security> {

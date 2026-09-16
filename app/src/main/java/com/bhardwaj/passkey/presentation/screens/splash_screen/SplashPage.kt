@@ -30,26 +30,24 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.bhardwaj.passkey.presentation.screens.common.ObserveAsEvents
 import com.bhardwaj.passkey.R
-import com.bhardwaj.passkey.presentation.screens.splash_screen.SplashEvents
 import com.bhardwaj.passkey.presentation.screens.splash_screen.SplashViewModel
 import com.bhardwaj.passkey.presentation.theme.Poppins
-import com.bhardwaj.passkey.utils.UiEvents
+import com.bhardwaj.passkey.presentation.navigation.NavRoute
 import kotlinx.coroutines.delay
 
 @Composable
 fun SplashPage(
-    onNavigate: (UiEvents.Navigate) -> Unit,
+    onNavigate: (NavRoute) -> Unit,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
     val scale = remember {
         Animatable(0.3F)
     }
 
-    ObserveAsEvents(viewModel.uiEvents) { event ->
-            when (event) {
-                is UiEvents.Navigate -> onNavigate(event)
-                else -> Unit
-            }
+    ObserveAsEvents(viewModel.effects) { effect ->
+        when (effect) {
+            is SplashEffect.Navigate -> onNavigate(effect.route)
+        }
     }
 
     LaunchedEffect(key1 = true) {
@@ -63,7 +61,7 @@ fun SplashPage(
             )
         )
         delay(700)
-        viewModel.onEvent(SplashEvents.OnLoadingComplete)
+        viewModel.onIntent(SplashIntent.LoadingFinished)
     }
 
     Scaffold { innerPadding ->

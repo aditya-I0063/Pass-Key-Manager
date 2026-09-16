@@ -74,7 +74,6 @@ import com.bhardwaj.passkey.domain.model.Category
 import com.bhardwaj.passkey.utils.asString
 import com.bhardwaj.passkey.utils.SecureClipboard
 import com.bhardwaj.passkey.utils.UiText
-import com.bhardwaj.passkey.utils.UiEvents
 import kotlinx.coroutines.launch
 import sh.calvin.reorderable.ReorderableItem
 import sh.calvin.reorderable.rememberReorderableLazyListState
@@ -134,9 +133,6 @@ fun PreviewScreen(
                         }
                     }
                 }
-
-
-                else -> Unit
             }
     }
 

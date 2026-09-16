@@ -8,8 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bhardwaj.passkey.domain.repository.PreferencesRepository
 import kotlinx.coroutines.flow.first
-import com.bhardwaj.passkey.presentation.screens.splash_screen.SplashEvents
-import com.bhardwaj.passkey.utils.UiEvents
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -24,19 +22,19 @@ class SplashViewModel @Inject constructor(
     // BUFFERED, not the RENDEZVOUS default: with lifecycle-aware collection a backgrounded
     // screen has no active collector, and a rendezvous channel would suspend the coroutine
     // that emitted the effect until the user came back.
-    private val _uiEvents = Channel<UiEvents>(Channel.BUFFERED)
-    val uiEvents = _uiEvents.receiveAsFlow()
+    private val _effects = Channel<SplashEffect>(Channel.BUFFERED)
+    val effects = _effects.receiveAsFlow()
 
-    fun onEvent(event: SplashEvents) {
-        when (event) {
-            SplashEvents.OnLoadingComplete -> {
+    fun onIntent(intent: SplashIntent) {
+        when (intent) {
+            SplashIntent.LoadingFinished -> {
                 viewModelScope.launch {
                     // first(), not collect(): a DataStore flow never completes, so collecting
                     // it re-sent a Navigate effect on every later preference change - including a
                     // language switch.
                     val completed = preferences.onboardingCompleted.first()
-                    _uiEvents.send(
-                        UiEvents.Navigate(
+                    _effects.send(
+                        SplashEffect.Navigate(
                             if (completed) NavRoute.Security else NavRoute.Onboarding
                         )
                     )
