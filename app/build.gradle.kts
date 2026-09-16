@@ -191,8 +191,9 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockk)
     testImplementation(libs.turbine)
-    // Only DetailViewModelTest needs this: SavedStateHandle.toRoute builds an android.os.Bundle
-    // internally, which a plain JVM test cannot. Every other unit test runs without it.
+    // Two tests need this: DetailViewModelTest, because SavedStateHandle.toRoute builds an
+    // android.os.Bundle internally, and BackupRepositoryTest, for a working ContentResolver.
+    // Every other unit test runs on a plain JVM.
     testImplementation(libs.robolectric)
     androidTestImplementation(libs.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
