@@ -3,7 +3,7 @@ package com.bhardwaj.passkey.presentation.screens.settings_screen
 import android.net.Uri
 import com.bhardwaj.passkey.data.backup.ImportMode
 import com.bhardwaj.passkey.domain.model.AutoLockTimeout
-import com.bhardwaj.passkey.domain.model.Language
+import com.bhardwaj.passkey.domain.model.AppLanguage
 import com.bhardwaj.passkey.presentation.navigation.NavRoute
 import com.bhardwaj.passkey.utils.AlertBy
 import com.bhardwaj.passkey.utils.PasswordAnalysisResult
@@ -36,7 +36,7 @@ enum class RecoveryChangeStep { CURRENT_PASSWORD, NEW_PASSWORD }
 
 sealed interface SettingsIntent {
     data object LanguageClicked : SettingsIntent
-    data class LanguageSelected(val language: Language) : SettingsIntent
+    data class LanguageSelected(val language: AppLanguage) : SettingsIntent
 
     data object PrivacyClicked : SettingsIntent
     data object TermsClicked : SettingsIntent

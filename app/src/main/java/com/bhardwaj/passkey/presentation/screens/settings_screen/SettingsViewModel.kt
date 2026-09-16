@@ -99,7 +99,7 @@ class SettingsViewModel @Inject constructor(
 
             is SettingsIntent.LanguageSelected -> {
                 transient.update { it.copy(sheet = null) }
-                viewModelScope.launch { localeManager.apply(intent.language.languageId) }
+                viewModelScope.launch { localeManager.apply(intent.language.tag) }
             }
 
             SettingsIntent.RateAppClicked -> emit(SettingsEffect.OpenStoreListing)

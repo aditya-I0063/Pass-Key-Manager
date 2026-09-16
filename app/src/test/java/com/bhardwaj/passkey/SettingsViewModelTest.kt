@@ -12,7 +12,7 @@ import com.bhardwaj.passkey.data.locale.AppLocaleManager
 import com.bhardwaj.passkey.data.security.DatabaseKeyManager
 import com.bhardwaj.passkey.domain.model.AutoLockTimeout
 import com.bhardwaj.passkey.domain.model.Category
-import com.bhardwaj.passkey.domain.model.Language
+import com.bhardwaj.passkey.domain.model.AppLanguage
 import com.bhardwaj.passkey.domain.repository.PreferencesRepository
 import com.bhardwaj.passkey.presentation.navigation.NavRoute
 import com.bhardwaj.passkey.presentation.screens.settings_screen.RecoveryChangeStep
@@ -104,11 +104,7 @@ class SettingsViewModelTest {
         vm.state.test {
             awaitItem()
             vm.onIntent(SettingsIntent.LanguageClicked)
-            vm.onIntent(
-                SettingsIntent.LanguageSelected(
-                    Language(languageId = "hi", languageName = "हिन्दी", languageNameInEnglish = "Hindi")
-                )
-            )
+            vm.onIntent(SettingsIntent.LanguageSelected(AppLanguage.HINDI))
             assertThat(expectMostRecentItem().sheet).isNull()
             cancelAndIgnoreRemainingEvents()
         }

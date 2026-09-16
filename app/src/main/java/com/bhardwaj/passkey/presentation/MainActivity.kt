@@ -1,6 +1,7 @@
 package com.bhardwaj.passkey.presentation
 
 import com.bhardwaj.passkey.presentation.navigation.NavRoute
+import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.compose.setContent
@@ -100,6 +101,11 @@ class MainActivity : FragmentActivity() {
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
         )
+        // FLAG_SECURE already blacks out the recents thumbnail, but only as a side effect of
+        // blocking screen capture. This says so explicitly, so the two survive independently.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            setRecentsScreenshotEnabled(false)
+        }
         setContent {
             PassKeyTheme {
                 Surface(

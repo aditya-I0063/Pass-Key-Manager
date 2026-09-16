@@ -119,6 +119,20 @@ android {
     }
 }
 
+/**
+ * Fails the build if a bottom sheet is created without FLAG_SECURE.
+ *
+ * Wired to `check` rather than left as a script: a guard nobody runs is not a guard.
+ */
+val checkSecureBottomSheets by tasks.registering(Exec::class) {
+    group = "verification"
+    description = "Fails if ModalBottomSheet is called outside SecureModalBottomSheet."
+    workingDir = rootDir
+    commandLine("sh", "scripts/check-modal-bottom-sheet.sh")
+}
+
+tasks.named("check") { dependsOn(checkSecureBottomSheets) }
+
 dependencies {
     // Android Essentials
     implementation(libs.androidx.core.ktx)

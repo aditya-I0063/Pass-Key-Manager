@@ -22,14 +22,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bhardwaj.passkey.R
-import com.bhardwaj.passkey.domain.model.Language
+import com.bhardwaj.passkey.domain.model.AppLanguage
 import com.bhardwaj.passkey.presentation.theme.Poppins
 
 @Composable
 fun LanguageItem(
     modifier: Modifier = Modifier,
-    language: Language,
-    onLanguageChange: (Language) -> Unit
+    language: AppLanguage,
+    onLanguageChange: (AppLanguage) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -40,7 +40,7 @@ fun LanguageItem(
     ) {
         Text(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp),
-            text = language.languageName,
+            text = language.endonym,
             fontFamily = Poppins,
             fontWeight = FontWeight.Bold,
             fontSize = 16.sp,
@@ -48,7 +48,7 @@ fun LanguageItem(
         )
         Text(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
-            text = language.languageNameInEnglish,
+            text = language.englishName,
             fontFamily = Poppins,
             fontWeight = FontWeight.Normal,
             fontSize = 14.sp,
@@ -62,96 +62,8 @@ fun LanguageItem(
 fun LanguageBottomSheet(
     modifier: Modifier = Modifier,
     onBackIconClick: () -> Unit,
-    onLanguageChange: (Language) -> Unit,
+    onLanguageChange: (AppLanguage) -> Unit,
 ) {
-    val languageList = arrayListOf(
-        Language(
-            languageId = "ar",
-            languageName = "عربي",
-            languageNameInEnglish = "Arabic"
-        ),
-        Language(
-            languageId = "bn",
-            languageName = "বাংলা",
-            languageNameInEnglish = "Bengali"
-        ),
-        Language(
-            languageId = "zh",
-            languageName = "中文",
-            languageNameInEnglish = "Chinese"
-        ),
-        Language(
-            languageId = "en",
-            languageName = "English",
-            languageNameInEnglish = "English"
-        ),
-        Language(
-            languageId = "fr",
-            languageName = "Français",
-            languageNameInEnglish = "French"
-        ),
-        Language(
-            languageId = "de",
-            languageName = "Deutsch",
-            languageNameInEnglish = "German"
-        ),
-        Language(
-            languageId = "gu",
-            languageName = "ગુજરાતી",
-            languageNameInEnglish = "Gujarati"
-        ),
-        Language(
-            languageId = "hi",
-            languageName = "हिन्दी",
-            languageNameInEnglish = "Hindi"
-        ),
-        Language(
-            languageId = "it",
-            languageName = "Italiano",
-            languageNameInEnglish = "Italian"
-        ),
-        Language(
-            languageId = "ja",
-            languageName = "日本語",
-            languageNameInEnglish = "Japanese"
-        ),
-        Language(
-            languageId = "ko",
-            languageName = "한국어",
-            languageNameInEnglish = "Korean"
-        ),
-        Language(
-            languageId = "mr",
-            languageName = "मराठी",
-            languageNameInEnglish = "Marathi"
-        ),
-        Language(
-            languageId = "pt",
-            languageName = "Português",
-            languageNameInEnglish = "Portuguese"
-        ),
-        Language(
-            languageId = "ru",
-            languageName = "Русский",
-            languageNameInEnglish = "Russian"
-        ),
-        Language(
-            languageId = "es",
-            languageName = "Español",
-            languageNameInEnglish = "Spanish"
-        ),
-        Language(
-            languageId = "ta",
-            languageName = "தமிழ்",
-            languageNameInEnglish = "Tamil"
-        ),
-        Language(
-            languageId = "te",
-            languageName = "తెలుగు",
-            languageNameInEnglish = "Telugu"
-        ),
-    )
-
     Column(modifier = modifier.background(MaterialTheme.colorScheme.background)) {
         Icon(
             modifier = Modifier
@@ -184,7 +96,7 @@ fun LanguageBottomSheet(
             color = MaterialTheme.colorScheme.onBackground
         )
         LazyColumn {
-            items(languageList) { single ->
+            items(AppLanguage.entries) { single ->
                 LanguageItem(language = single, onLanguageChange = onLanguageChange)
             }
         }
