@@ -24,16 +24,45 @@
     <string name="third_description">Don’t compromise your passwords by typing them in public, let PassKey autofill those and keep your credentials secure.</string>
 
     <!--    Dialogs and Requests    -->
-    <!--
-        about_message / privacy_message / terms_n_condition_message are intentionally still
-        translatable="false". Their current text is factually inaccurate (it claims no internet
-        permission and no third-party sharing, while Firebase Analytics/Crashlytics/Performance
-        and Play in-app-updates are linked). Rewrite them first, then translate — translating
-        incorrect legal copy into 16 languages would multiply the problem.
-    -->
-    <string name="about_message" translatable="false">Welcome to Passkey: Password Manager, the ultimate solution for managing all your passwords and private information securely!\n\nAre you tired of remembering multiple passwords or annoyed of forgetting them? Passkey: Password Manager helps you store all your logins, passwords, and other private information safe and secure in an encrypted database.\n\nPasskey: Password Manager is an open-source application developed by Aditya Bhardwaj. It is designed to provide a secure way to manage all your passwords without worrying about data leaks. With Passkey: Password Manager, you can store your passwords locally on your device, and the application does not require internet permissions, making it even more secure.\n\nPasskey: Password Manager features an encrypted database to store your passwords, and biometric authentication is used to access your information. The application supports dark mode, and screenshot blocking features to ensure that your information is not accessible by unauthorized persons.\n\nThe application uses Drag &amp; Drop and Swipe to Delete features, providing a user-friendly interface to manage all your passwords easily. The application also has a Separation of Content feature, which allows you to categorize your passwords into different sections for easy management.\n\nPasskey: Password Manager uses LiveData and MVVM architecture to ensure that the application is scalable, maintainable, and easy to use. SQL Cipher is used for Room DB Backup Encryption and Decryption, and Dagger-Hilt is used for dependency injection.\n\nIn conclusion, Passkey: Password Manager is a must-have application for everyone who wants to manage their passwords securely. With its features and user-friendly interface, you can keep all your passwords and private information safe and secure. Download Passkey: Password Manager now, and never worry about forgetting your passwords again!</string>
-    <string name="privacy_message" translatable="false">At Passkey: Password Manager, we are committed to protecting your privacy. This privacy policy explains how we collect, use, and share your personal information when you use our application.\n\nInformation we collect: We do not collect any of your passwords or private information that you store in the Passkey: Password Manager application. Your information is stored locally on your phone and encrypted for added security.\n\nHow we use your information: We use your information to store your passwords and private information securely in an encrypted database. We do not share your information with any third-party.\n\nHow we protect your information: We use encrypted database storage to protect your information, and biometric authentication is used to access your information.\n\nHow we share your information: We do not share your information with any third-party.\n\nChanges to our privacy policy: We reserve the right to modify this privacy policy at any time without prior notice.\n\nIf you have any questions or concerns about our terms and conditions or privacy policy, please contact us at yrkkh.cclub@gmail.com\n\nWe hope you enjoy using Passkey: Password Manager to store your passwords and private information securely.</string>
-    <string name="terms_n_condition_message" translatable="false">Welcome to Passkey: Password Manager! By downloading and using this application, you agree to comply with and be bound by the following terms and conditions:\n\n1. Passkey: Password Manager is an application developed by Aditya Bhardwaj, and the intellectual property rights are owned by Aditya Bhardwaj.\n\n2. The Passkey: Password Manager application is designed to store your passwords and private information securely in an encrypted database.\n\n3. The Passkey: Password Manager application does not store your credentials on servers, so your passwords and private information are in your hands.\n\n4. The Passkey: Password Manager application does not require any internet permission, and it is an open-source application.\n\n5. The Passkey: Password Manager application uses encrypted database storage to store your information, and biometric authentication is used to access your information.\n\n6. The Passkey: Password Manager application is provided "as is" without any warranty of any kind, either express or implied, including but not limited to the implied warranties of merchantability and fitness for a particular purpose.\n\n7. Aditya Bhardwaj is not liable for any damages arising from the use of the Passkey: Password Manager application, including but not limited to direct, indirect, incidental, or consequential damages.\n\n8. By downloading and using the Passkey: Password Manager application, you agree to indemnify and hold harmless Aditya Bhardwaj, its officers, employees, agents, and affiliates from any and all claims, damages, losses, liabilities, and expenses arising from your use of the application.\n\n9. Aditya Bhardwaj reserves the right to modify, suspend, or discontinue the Passkey: Password Manager application at any time without prior notice.</string>
+    <string name="about_message">PassKey stores your logins, passwords and other private notes in an encrypted database on your device.
+
+Your vault never leaves your phone. There is no account, no sync and no PassKey server: the app makes no network requests of its own, and your entries are never transmitted anywhere.
+
+The database is encrypted with SQLCipher and unlocked with your device biometrics or screen lock. The vault re-locks automatically when you leave the app, screenshots are blocked, and copied passwords are marked sensitive and cleared from the clipboard shortly after.
+
+You can organise entries into categories, reorder them by dragging, generate strong passwords, and check your vault for weak or reused ones. Backups are exported as a single file encrypted with a password you choose, and can be restored on any device.
+
+PassKey is free and open source, developed by Aditya Bhardwaj. The full source is available on GitHub.</string>
+    <string name="privacy_message">Your vault stays on your device.
+
+What we never collect: PassKey does not collect, transmit or store the passwords, usernames, notes or any other entries you save. They live only in an encrypted database on your phone. We cannot read them, and we cannot recover them for you.
+
+What the app does send: PassKey includes Google Firebase Crashlytics, Analytics and Performance Monitoring, and Google Play in-app updates. These send crash diagnostics, app usage events, performance traces, and device and installation identifiers including an advertising ID to Google. They never have access to your vault contents. Because of these services the app requires the internet permission, and their data handling is governed by Google\'s privacy policy.
+
+Backups: when you export a backup, the file is encrypted with a password you choose and written wherever you tell the system to put it. That file is then yours to manage; anyone who obtains both the file and its password can read it. We keep no copy.
+
+Device backup: PassKey is excluded from Android cloud backup and device-to-device transfer, so your vault is not uploaded to your Google account.
+
+Changes: this policy may be updated; material changes will be noted in the app\'s release notes.
+
+Questions: contact <xliff:g id="email" example="name@example.com">yrkkh.cclub@gmail.com</xliff:g>.</string>
+    <string name="terms_n_condition_message">By using PassKey you agree to the following.
+
+1. PassKey is free, open-source software developed by Aditya Bhardwaj.
+
+2. Your vault is stored only on your device. There is no server-side copy, and therefore no way for anyone to recover your data if you lose your device, uninstall the app, or forget a backup password.
+
+3. Keeping backups is your responsibility. Export them regularly and store the backup password somewhere safe and separate.
+
+4. The app relies on your device\'s biometric or screen-lock security. If your device lock is weak, removed or compromised, the protection PassKey provides is reduced accordingly.
+
+5. PassKey includes Google Firebase and Google Play services as described in the Privacy Policy.
+
+6. The application is provided \"as is\", without warranty of any kind, express or implied, including merchantability and fitness for a particular purpose.
+
+7. To the extent permitted by law, the developer is not liable for any damages arising from use of the application, including loss of data.
+
+8. The application may be modified or discontinued at any time.</string>
 
 
     <!--    To Be translated    -->

@@ -30,22 +30,43 @@ design -> https://www.figma.com/community/file/1116675775484733517
 
 ## 🤩 Features:
 
-- Kotlin & Jetpack Compose.
-- Clean Architecture.
-- Kotlin Flows.
-- Dark Mode Support.
-- Biometric Authentication.
-- Dagger-Hilt (Dependency Injection).
-- DataStore Preferences.
-- Encrypted Database.
-- Screenshot Blocked.
-- Open Source.
-- Drag & Drop to reorder list.
-- Swipe to Delete Feature.
-- Separation of content.
-- Import / Export data to and from storage.
-- SQL Cipher (For Room DB Encryption and Decryption).
-- Fully Offline : No internet permission required.
+- Kotlin & Jetpack Compose, Material 3.
+- Clean architecture with Kotlin Flows and Dagger-Hilt.
+- Encrypted database (Room + SQLCipher).
+- Biometric / device-credential unlock, with automatic re-lock on background and idle.
+- Screenshot blocking, including dialogs and bottom sheets.
+- Clipboard entries marked sensitive and cleared automatically.
+- Password generator backed by SecureRandom.
+- Vault analysis for weak and reused passwords.
+- Password-protected encrypted backup and restore, written wherever you choose.
+- Excluded from Android cloud backup and device-to-device transfer.
+- Drag & drop reordering, swipe to delete, category separation.
+- Dark mode and 17 languages.
+- Open source.
+
+## 🔐 Security model:
+
+- The vault is a Room database encrypted with SQLCipher, stored only on the device.
+- It is unlocked with device biometrics or the screen lock, and re-locks automatically after a
+  configurable idle period.
+- Backups are encrypted with AES-256-GCM under a key derived from a password you choose
+  (PBKDF2-HMAC-SHA512), written through the system file picker.
+- The app performs no network requests of its own and has no server or account.
+
+> **Known limitation, being addressed in 5.7.0:** the database key is currently a single
+> build-time constant shared by every install, so the database is encrypted against someone who
+> obtains the file alone, and not against someone who also has the APK. 5.7.0 replaces it with a
+> per-install random key wrapped by an Android Keystore key and unlocked via a biometric
+> `CryptoObject`, with a password-based recovery slot.
+
+## 🌐 Network and privacy:
+
+The app itself makes no network calls, but it bundles Google Firebase (Crashlytics, Analytics,
+Performance Monitoring) and Google Play in-app updates. These require the `INTERNET` permission
+and send crash diagnostics, usage events, performance traces and device/installation identifiers
+— including an advertising ID — to Google. They never have access to vault contents. See
+[Privacy Policy.md](Privacy%20Policy.md).
+
 
 ## 🌎 Released Android Application:
 
