@@ -30,7 +30,7 @@ Your vault never leaves your phone. There is no account, no sync and no PassKey 
 
 The database is encrypted with SQLCipher and unlocked with your device biometrics or screen lock. The vault re-locks automatically when you leave the app, screenshots are blocked, and copied passwords are marked sensitive and cleared from the clipboard shortly after.
 
-You can organise entries into categories, reorder them by dragging, generate strong passwords, and check your vault for weak or reused ones. Backups are exported as a single file encrypted with a password you choose, and can be restored on any device.
+You can organise entries into categories, reorder them by dragging, generate strong passwords, and check your vault for weak or reused ones. PassKey can fill your logins into other apps and websites, hold your two-factor authenticator codes, and keep a history of each password you change. Backups are exported as a single file encrypted with a password you choose, and can be restored on any device.
 
 PassKey is free and open source, developed by Aditya Bhardwaj. The full source is available on GitHub.</string>
     <string name="privacy_message">Your vault stays on your device.

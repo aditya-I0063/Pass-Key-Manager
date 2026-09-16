@@ -20,8 +20,8 @@ android {
         applicationId = "com.bhardwaj.passkey"
         minSdk = 28
         targetSdk = 36
-        versionCode = 46
-        versionName = "5.7.0"
+        versionCode = 47
+        versionName = "5.8.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

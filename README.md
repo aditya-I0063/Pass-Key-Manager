@@ -36,6 +36,11 @@ design -> https://www.figma.com/community/file/1116675775484733517
 - Biometric / device-credential unlock, with automatic re-lock on background and idle.
 - Screenshot blocking, including dialogs and bottom sheets.
 - Clipboard entries marked sensitive and cleared automatically.
+- Autofill service: fills usernames and passwords into other apps and web pages, and offers to
+  save new logins.
+- Built-in authenticator: RFC 6238 time-based codes, added from an `otpauth://` link or a typed
+  secret. No camera permission.
+- Password history per entry, so a change can be traced or copied back.
 - Password generator backed by SecureRandom.
 - Vault analysis for weak and reused passwords.
 - Password-protected encrypted backup and restore, written wherever you choose.
@@ -53,19 +58,25 @@ design -> https://www.figma.com/community/file/1116675775484733517
   (PBKDF2-HMAC-SHA512), written through the system file picker.
 - The app performs no network requests of its own and has no server or account.
 
-> **Known limitation, being addressed in 5.7.0:** the database key is currently a single
-> build-time constant shared by every install, so the database is encrypted against someone who
-> obtains the file alone, and not against someone who also has the APK. 5.7.0 replaces it with a
-> per-install random key wrapped by an Android Keystore key and unlocked via a biometric
-> `CryptoObject`, with a password-based recovery slot.
+- The database key is a per-install random key, never a build-time constant. It is wrapped three
+  independent ways - by a biometric-bound Keystore key unlocked through a `CryptoObject`, by a
+  device-credential-bound one, and by a recovery password - so losing any one of them, including
+  by re-enrolling a fingerprint, does not lose the vault.
+- Vaults created before 5.7.0 are re-keyed once, on first launch, by exporting through
+  `sqlcipher_export()` into a sidecar file that only replaces the original after it verifies.
+- Autofill never reveals entry names before the vault is unlocked: a locked vault offers a single
+  "unlock" suggestion and nothing else.
 
 ## 🌐 Network and privacy:
 
 The app itself makes no network calls, but it bundles Google Firebase (Crashlytics, Analytics,
 Performance Monitoring) and Google Play in-app updates. These require the `INTERNET` permission
 and send crash diagnostics, usage events, performance traces and device/installation identifiers
-— including an advertising ID — to Google. They never have access to vault contents. See
-[Privacy Policy.md](Privacy%20Policy.md).
+— including an advertising ID — to Google. They never have access to vault contents.
+
+Autofill runs entirely on the device: Android shows the app the structure of the form being
+filled so it can offer matching entries, and nothing about that form or those entries is
+transmitted or logged. See [Privacy Policy.md](Privacy%20Policy.md).
 
 
 ## 🌎 Released Android Application:
