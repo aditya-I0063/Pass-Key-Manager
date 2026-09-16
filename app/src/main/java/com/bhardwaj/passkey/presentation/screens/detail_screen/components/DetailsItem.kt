@@ -33,7 +33,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bhardwaj.passkey.R
-import com.bhardwaj.passkey.data.local.entity.Details
+import com.bhardwaj.passkey.domain.model.Detail
 import com.bhardwaj.passkey.presentation.screens.detail_screen.DetailEvents
 import com.bhardwaj.passkey.presentation.theme.BebasNeue
 import com.bhardwaj.passkey.presentation.theme.Poppins
@@ -43,7 +43,7 @@ import sh.calvin.reorderable.ReorderableCollectionItemScope
 fun DetailsItem(
     modifier: Modifier = Modifier,
     scope: ReorderableCollectionItemScope? = null,
-    details: Details,
+    details: Detail,
     onEvent: (DetailEvents) -> Unit,
 ) {
     val view = LocalView.current

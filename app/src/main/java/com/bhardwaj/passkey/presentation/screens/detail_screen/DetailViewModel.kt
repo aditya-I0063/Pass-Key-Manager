@@ -8,7 +8,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bhardwaj.passkey.R
-import com.bhardwaj.passkey.data.local.entity.Details
+import com.bhardwaj.passkey.domain.model.Detail
 import com.bhardwaj.passkey.domain.repository.PasskeyRepository
 import com.bhardwaj.passkey.presentation.screens.detail_screen.DetailEvents
 import com.bhardwaj.passkey.utils.Constants.Companion.BOTTOM_SHEET_HEADING
@@ -55,7 +55,7 @@ class DetailViewModel @Inject constructor(
     private val _searchText = MutableStateFlow("")
     val searchText = _searchText.asStateFlow()
 
-    val details: StateFlow<List<Details>> = repository.getDetailsByPreviewId(previewId = previewId)
+    val details: StateFlow<List<Detail>> = repository.getDetailsByPreviewId(previewId = previewId)
         .combine(searchText) { details, text ->
             if (text.isBlank()) {
                 details
@@ -76,7 +76,7 @@ class DetailViewModel @Inject constructor(
     var isAlertOpen by mutableStateOf(false)
         private set
 
-    var detail by mutableStateOf<Details?>(null)
+    var detail by mutableStateOf<Detail?>(null)
         private set
 
     var isPasswordSettingsOpen by mutableStateOf(false)
@@ -93,7 +93,7 @@ class DetailViewModel @Inject constructor(
     var includeSpecial by mutableStateOf(false)
         private set
 
-    private var deletedDetail: Details? = null
+    private var deletedDetail: Detail? = null
 
     fun onEvent(event: DetailEvents) {
         when (event) {
@@ -112,13 +112,13 @@ class DetailViewModel @Inject constructor(
             is DetailEvents.OnChangeClick -> {
                 viewModelScope.launch {
                     _searchText.value = ""
-                    repository.getDetailById(event.details.detailsId!!)?.let { detail ->
-                        isSheetOpen = true
-                        savedStateHandle[BOTTOM_SHEET_HEADING] = true
-                        _detailTitle.value = event.details.question
-                        _detailResponse.value = event.details.answer
-                        this@DetailViewModel.detail = detail
-                    }
+                    // The row is already a fully-formed domain object; re-reading it by id was
+                    // a needless round trip.
+                    isSheetOpen = true
+                    savedStateHandle[BOTTOM_SHEET_HEADING] = true
+                    _detailTitle.value = event.details.question
+                    _detailResponse.value = event.details.answer
+                    detail = event.details
                 }
             }
 
@@ -152,27 +152,27 @@ class DetailViewModel @Inject constructor(
                         )
                         return@launch
                     }
-                    val newDetail = Details(
+                    val question = detailTitle.value.trim()
+                    val answer = detailResponse.value.trim()
+
+                    detail?.let {
+                        repository.updateDetail(
+                            it.copy(
+                                // Trimmed on edit too. A trailing space in a stored password
+                                // fails silently wherever it is pasted.
+                                question = question,
+                                answer = answer,
+                                isSecret = it.isSecret || wasGenerated
+                            )
+                        )
+                    } ?: repository.createDetail(
                         previewId = previewId,
-                        question = detailTitle.value.trim(),
-                        answer = detailResponse.value.trim(),
+                        question = question,
+                        answer = answer,
                         // A value that came out of the generator is unambiguously a secret, so
                         // the analyser never has to guess for it.
                         isSecret = wasGenerated
                     )
-
-                    detail?.let {
-                        repository.upsertDetails(
-                            it.copy(
-                                previewId = previewId,
-                                // Trimmed to match the create path above. A trailing space in a
-                                // stored password fails silently wherever it is pasted.
-                                question = newDetail.question,
-                                answer = newDetail.answer,
-                                isSecret = it.isSecret || wasGenerated,
-                            )
-                        )
-                    } ?: repository.upsertDetails(newDetail)
 
                     detail = null
                     _detailTitle.value = ""
@@ -196,7 +196,7 @@ class DetailViewModel @Inject constructor(
             DetailEvents.OnDismissAlertDialog -> {
                 viewModelScope.launch {
                     isAlertOpen = false
-                    deletedDetail?.let { repository.upsertDetails(it) }
+                    deletedDetail?.let { repository.updateDetail(it) }
                     deletedDetail = null
                 }
             }
@@ -204,7 +204,7 @@ class DetailViewModel @Inject constructor(
             DetailEvents.OnCancelClick -> {
                 viewModelScope.launch {
                     isAlertOpen = false
-                    deletedDetail?.let { repository.upsertDetails(it) }
+                    deletedDetail?.let { repository.updateDetail(it) }
                     deletedDetail = null
                 }
             }
@@ -231,7 +231,7 @@ class DetailViewModel @Inject constructor(
                     repository.runInTransaction {
                         updatedList.forEach { detail ->
                             repository.updateDetailSequence(
-                                detailId = detail.detailsId!!,
+                                detailId = detail.id,
                                 sequence = detail.sequence
                             )
                         }

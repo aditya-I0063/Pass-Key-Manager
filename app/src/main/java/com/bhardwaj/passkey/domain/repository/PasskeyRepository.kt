@@ -1,39 +1,62 @@
 package com.bhardwaj.passkey.domain.repository
 
-import com.bhardwaj.passkey.data.local.entity.Details
-import com.bhardwaj.passkey.data.local.entity.Preview
+import com.bhardwaj.passkey.domain.model.Category
+import com.bhardwaj.passkey.domain.model.Detail
+import com.bhardwaj.passkey.domain.model.Preview
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * The vault, in domain terms. Room entities no longer cross this boundary.
+ */
 interface PasskeyRepository {
-    // Details
-    fun getDetails(): Flow<List<Details>>
 
-    fun getDetailsByPreviewId(previewId: Long): Flow<List<Details>>
+    // Previews
 
-    suspend fun getDetailById(detailId: Long): Details?
-
-    suspend fun getDetailByContent(previewId: Long, question: String, answer: String): Details?
-
-    suspend fun upsertDetails(details: Details): Long
-
-    suspend fun deleteDetail(details: Details)
-
-    suspend fun deleteDetailByPreviewId(previewId: Long)
-
-    suspend fun updateDetailSequence(detailId: Long, sequence: Long)
-
-    // Preview
     fun getPreviews(): Flow<List<Preview>>
+
+    /**
+     * Filtering in SQL rather than in the ViewModel. Reordering used to renumber a list that had
+     * already been filtered by category *and* search text, while the query ordered globally, so
+     * sequences collided across categories and the order was quietly unstable.
+     */
+    fun getPreviewsByCategory(category: Category): Flow<List<Preview>>
 
     suspend fun getPreviewById(previewId: Long): Preview?
 
-    suspend fun getPreviewByHeading(previewHeading: String, categoryName: String): Preview?
+    suspend fun getPreviewByHeading(heading: String, category: Category): Preview?
 
-    suspend fun upsertPreview(previews: Preview): Long
+    /** Returns the new row id. */
+    suspend fun createPreview(heading: String, category: Category, sequence: Long = 0): Long
 
-    suspend fun deletePreview(previews: Preview)
+    suspend fun updatePreview(preview: Preview)
+
+    suspend fun deletePreview(preview: Preview)
 
     suspend fun updatePreviewSequence(previewId: Long, sequence: Long)
+
+    // Details
+
+    fun getDetails(): Flow<List<Detail>>
+
+    fun getDetailsByPreviewId(previewId: Long): Flow<List<Detail>>
+
+    suspend fun getDetailByContent(previewId: Long, question: String, answer: String): Detail?
+
+    suspend fun createDetail(
+        previewId: Long,
+        question: String,
+        answer: String,
+        sequence: Long = 0,
+        isSecret: Boolean = false
+    ): Long
+
+    suspend fun updateDetail(detail: Detail)
+
+    suspend fun deleteDetail(detail: Detail)
+
+    suspend fun deleteDetailsByPreviewId(previewId: Long)
+
+    suspend fun updateDetailSequence(detailId: Long, sequence: Long)
 
     // Cross-cutting
 
@@ -41,8 +64,7 @@ interface PasskeyRepository {
      * Runs [block] inside a single database transaction.
      *
      * Import previously wrote row by row with no transaction, so a malformed row part-way
-     * through a file left the vault half-populated with no way back. Reordering had the same
-     * problem: N separate sequence writes that could be interrupted between any two.
+     * through a file left the vault half-populated with no way back.
      */
     suspend fun <R> runInTransaction(block: suspend () -> R): R
 

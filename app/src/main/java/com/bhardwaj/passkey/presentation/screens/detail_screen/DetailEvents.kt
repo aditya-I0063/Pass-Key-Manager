@@ -1,7 +1,7 @@
 package com.bhardwaj.passkey.presentation.screens.detail_screen
 
 import androidx.compose.foundation.lazy.LazyListItemInfo
-import com.bhardwaj.passkey.data.local.entity.Details
+import com.bhardwaj.passkey.domain.model.Detail
 
 sealed interface DetailEvents {
     // Dialogs.
@@ -16,8 +16,8 @@ sealed interface DetailEvents {
     // Single Item.
     data class OnLongPress(val detailsDescription: String) : DetailEvents
     data class OnReorderDetails(val from: LazyListItemInfo, val to: LazyListItemInfo) : DetailEvents
-    data class OnChangeClick(val details: Details) : DetailEvents
-    data class OnSwipedLeft(val details: Details) : DetailEvents
+    data class OnChangeClick(val details: Detail) : DetailEvents
+    data class OnSwipedLeft(val details: Detail) : DetailEvents
 
     // Floating Action Button
     data object OnAddDetailClick : DetailEvents

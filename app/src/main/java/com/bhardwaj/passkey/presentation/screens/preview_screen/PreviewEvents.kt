@@ -1,7 +1,7 @@
 package com.bhardwaj.passkey.presentation.screens.preview_screen
 
 import androidx.compose.foundation.lazy.LazyListItemInfo
-import com.bhardwaj.passkey.data.local.entity.Preview
+import com.bhardwaj.passkey.domain.model.Preview
 
 sealed interface PreviewEvents {
     // Dialogs.

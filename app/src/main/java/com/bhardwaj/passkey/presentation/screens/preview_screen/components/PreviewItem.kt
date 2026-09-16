@@ -34,7 +34,7 @@ import com.bhardwaj.passkey.R
 import com.bhardwaj.passkey.presentation.screens.preview_screen.PreviewEvents
 import com.bhardwaj.passkey.presentation.theme.Poppins
 import sh.calvin.reorderable.ReorderableCollectionItemScope
-import com.bhardwaj.passkey.data.local.entity.Preview as PreviewEntity
+import com.bhardwaj.passkey.domain.model.Preview as PreviewEntity
 
 @Composable
 fun PreviewItem(
@@ -87,7 +87,7 @@ fun PreviewItem(
                     .weight(1F)
                     .combinedClickable(
                         onClick = {
-                            onEvent(PreviewEvents.OnPreviewClick(preview.previewId!!))
+                            onEvent(PreviewEvents.OnPreviewClick(preview.id))
                         },
                         onLongClick = {
                             onEvent(PreviewEvents.OnLongPress(preview.heading))

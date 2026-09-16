@@ -7,7 +7,7 @@ import com.bhardwaj.passkey.utils.Constants.Companion.DETAILS_TABLE
 
 @Keep
 @Entity(tableName = DETAILS_TABLE)
-data class Details(
+data class DetailsEntity(
     @PrimaryKey(autoGenerate = true)
     val detailsId: Long? = null,
     val previewId: Long,

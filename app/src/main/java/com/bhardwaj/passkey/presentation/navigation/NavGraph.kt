@@ -12,7 +12,7 @@ import com.bhardwaj.passkey.presentation.screens.preview_screen.PreviewScreen
 import com.bhardwaj.passkey.presentation.screens.security_screen.VaultGateScreen
 import com.bhardwaj.passkey.presentation.screens.settings_screen.SettingsScreen
 import com.bhardwaj.passkey.presentation.screens.splash_screen.SplashPage
-import com.bhardwaj.passkey.utils.Categories
+import com.bhardwaj.passkey.domain.model.Category
 
 @Composable
 fun NavGraph(
@@ -40,7 +40,7 @@ fun NavGraph(
             route = NavScreens.PreviewPage.route + "?categoryName={categoryName}",
             arguments = listOf(navArgument(name = "categoryName") {
                 type = NavType.StringType
-                defaultValue = Categories.BANKS.name
+                defaultValue = Category.BANKS.name
             }),
         ) {
             PreviewScreen(onNavigate = { navController.navigate(it.route) })

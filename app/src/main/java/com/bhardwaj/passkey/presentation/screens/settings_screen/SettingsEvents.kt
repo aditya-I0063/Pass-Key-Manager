@@ -3,7 +3,7 @@ package com.bhardwaj.passkey.presentation.screens.settings_screen
 import android.net.Uri
 import com.bhardwaj.passkey.data.backup.ImportMode
 import com.bhardwaj.passkey.domain.model.AutoLockTimeout
-import com.bhardwaj.passkey.data.local.entity.Details
+import com.bhardwaj.passkey.domain.model.Detail
 import com.bhardwaj.passkey.domain.model.Language
 
 sealed interface SettingsEvents {
@@ -35,7 +35,7 @@ sealed interface SettingsEvents {
         }
     }
 
-    data class OnAnalysisItemClick(val detail: Details) : SettingsEvents
+    data class OnAnalysisItemClick(val detail: Detail) : SettingsEvents
     data object OnLanguageClick : SettingsEvents
     data object OnDismissBottomSheet : SettingsEvents
     data object OnRateAppClick : SettingsEvents

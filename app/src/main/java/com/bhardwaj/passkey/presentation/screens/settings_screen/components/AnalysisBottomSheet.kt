@@ -51,7 +51,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bhardwaj.passkey.R
-import com.bhardwaj.passkey.data.local.entity.Details
+import com.bhardwaj.passkey.domain.model.Detail
 import com.bhardwaj.passkey.presentation.theme.BebasNeue
 import com.bhardwaj.passkey.presentation.theme.Poppins
 import com.bhardwaj.passkey.utils.PasswordAnalysisResult
@@ -61,7 +61,7 @@ import com.bhardwaj.passkey.utils.PasswordAnalysisResult
 fun AnalysisBottomSheet(
     result: PasswordAnalysisResult,
     onDismiss: () -> Unit,
-    onDetailClick: (Details) -> Unit
+    onDetailClick: (Detail) -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
@@ -249,7 +249,7 @@ fun AnalysisSectionHeader(title: String, icon: ImageVector, color: Color) {
 }
 
 @Composable
-fun SimpleAnalysisItem(detail: Details, onClick: () -> Unit) {
+fun SimpleAnalysisItem(detail: Detail, onClick: () -> Unit) {
     Card(
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
@@ -299,8 +299,8 @@ fun SimpleAnalysisItem(detail: Details, onClick: () -> Unit) {
 fun ReusedAnalysisItem(
     password: String,
     count: Int,
-    examples: List<Details>,
-    onDetailClick: (Details) -> Unit
+    examples: List<Detail>,
+    onDetailClick: (Detail) -> Unit
 ) {
     Card(
         shape = RoundedCornerShape(8.dp),

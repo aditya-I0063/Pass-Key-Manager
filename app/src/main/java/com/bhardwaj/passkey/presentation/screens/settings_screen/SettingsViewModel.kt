@@ -26,7 +26,7 @@ import com.bhardwaj.passkey.presentation.navigation.Routes
 import com.bhardwaj.passkey.utils.AlertBy.ABOUT
 import com.bhardwaj.passkey.utils.AlertBy.PRIVACY
 import com.bhardwaj.passkey.utils.AlertBy.TERMS_N_CONDITIONS
-import com.bhardwaj.passkey.utils.Categories
+import com.bhardwaj.passkey.domain.model.Category
 import com.bhardwaj.passkey.utils.PasswordAnalysisResult
 import com.bhardwaj.passkey.utils.PasswordAnalyzer
 import com.bhardwaj.passkey.utils.UiEvents

@@ -4,11 +4,11 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.bhardwaj.passkey.data.local.dao.DetailsDao
 import com.bhardwaj.passkey.data.local.dao.PreviewDao
-import com.bhardwaj.passkey.data.local.entity.Details
-import com.bhardwaj.passkey.data.local.entity.Preview
+import com.bhardwaj.passkey.data.local.entity.DetailsEntity
+import com.bhardwaj.passkey.data.local.entity.PreviewEntity
 
 @Database(
-    entities = [Preview::class, Details::class],
+    entities = [PreviewEntity::class, DetailsEntity::class],
     version = 3,
     exportSchema = true
 )

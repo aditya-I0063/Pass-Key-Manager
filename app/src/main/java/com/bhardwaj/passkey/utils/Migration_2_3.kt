@@ -5,7 +5,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.bhardwaj.passkey.utils.Constants.Companion.DETAILS_TABLE
 
 /**
- * Adds Details.isSecret.
+ * Adds Detail.isSecret.
  *
  * Purely additive with a default, so no table rebuild and nothing to roll back. Existing rows
  * stay 0 and keep being classified by keyword matching; only newly created or edited rows carry

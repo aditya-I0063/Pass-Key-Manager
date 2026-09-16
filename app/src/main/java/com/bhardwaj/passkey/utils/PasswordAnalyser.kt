@@ -1,13 +1,13 @@
 package com.bhardwaj.passkey.utils
 
-import com.bhardwaj.passkey.data.local.entity.Details
+import com.bhardwaj.passkey.domain.model.Detail
 import java.text.Normalizer
 import java.util.Locale
 
 data class PasswordAnalysisResult(
     val totalPasswords: Int = 0,
-    val weakPasswords: List<Details> = emptyList(),
-    val reusedPasswords: Map<String, List<Details>> = emptyMap(),
+    val weakPasswords: List<Detail> = emptyList(),
+    val reusedPasswords: Map<String, List<Detail>> = emptyMap(),
     val strengthScore: Int = 0
 )
 
@@ -22,7 +22,7 @@ object PasswordAnalyzer {
      * locales nothing matched: totalPasswords came back 0, the score came back 100, and users
      * were told their vault was perfect. That is worse than having no feature at all.
      */
-    fun analyze(details: List<Details>, secretKeywords: Set<String>): PasswordAnalysisResult {
+    fun analyze(details: List<Detail>, secretKeywords: Set<String>): PasswordAnalysisResult {
         val normalizedKeywords = secretKeywords.map { it.normalizeForMatch() }.filter { it.isNotBlank() }
 
         val passwordEntries = details.filter { detail ->

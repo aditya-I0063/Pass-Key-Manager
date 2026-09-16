@@ -1,6 +1,6 @@
 package com.bhardwaj.passkey
 
-import com.bhardwaj.passkey.data.local.entity.Details
+import com.bhardwaj.passkey.domain.model.Detail
 import com.bhardwaj.passkey.utils.PasswordAnalyzer
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
@@ -12,8 +12,8 @@ class PasswordAnalyzerTest {
 
     private fun detail(
         id: Long, question: String, answer: String, isSecret: Boolean = false
-    ) = Details(
-        detailsId = id, previewId = 1, question = question, answer = answer, isSecret = isSecret
+    ) = Detail(
+        id = id, previewId = 1, question = question, answer = answer, isSecret = isSecret
     )
 
     @Test
@@ -63,7 +63,7 @@ class PasswordAnalyzerTest {
             detail(5, "Password 5", "Str0ng!Pass") // fine
         )
         val result = PasswordAnalyzer.analyze(details, english)
-        assertThat(result.weakPasswords.map { it.detailsId }).containsExactly(1L, 2L, 3L, 4L)
+        assertThat(result.weakPasswords.map { it.id }).containsExactly(1L, 2L, 3L, 4L)
     }
 
     @Test

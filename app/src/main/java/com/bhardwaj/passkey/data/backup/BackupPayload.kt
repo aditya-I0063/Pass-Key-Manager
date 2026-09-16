@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 /**
  * The decrypted contents of a backup.
  *
- * Details are nested under their preview rather than carrying `previewId`, so no install-local
+ * Detail are nested under their preview rather than carrying `previewId`, so no install-local
  * row id crosses the file boundary and a restore into a different install cannot collide.
  */
 @Serializable

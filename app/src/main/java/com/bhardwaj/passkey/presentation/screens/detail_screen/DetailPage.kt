@@ -194,7 +194,7 @@ fun DetailScreen(
                     ) {
                         items(
                             items = details,
-                            key = { item -> "${item.detailsId}" }
+                            key = { item -> item.id }
                         ) { detail ->
                             if (searchText.isNotBlank()) {
                                 DetailsItem(details = detail, onEvent = viewModel::onEvent)
@@ -212,7 +212,7 @@ fun DetailScreen(
                                 }
                                 ReorderableItem(
                                     reorderableLazyColumnState,
-                                    "${detail.detailsId}"
+                                    "${detail.id}"
                                 ) {
                                     SwipeToDismissBox(
                                         state = state,

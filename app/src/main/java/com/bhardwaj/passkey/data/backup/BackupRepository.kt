@@ -3,10 +3,10 @@ package com.bhardwaj.passkey.data.backup
 import android.content.Context
 import android.net.Uri
 import com.bhardwaj.passkey.BuildConfig
-import com.bhardwaj.passkey.data.local.entity.Details
-import com.bhardwaj.passkey.data.local.entity.Preview
+import com.bhardwaj.passkey.domain.model.Category
+import com.bhardwaj.passkey.domain.model.Detail
+import com.bhardwaj.passkey.domain.model.Preview
 import com.bhardwaj.passkey.domain.repository.PasskeyRepository
-import com.bhardwaj.passkey.utils.Categories
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
@@ -56,9 +56,9 @@ class BackupRepository @Inject constructor(
             repository.getPreviews().first().map { preview ->
                 BackupPreview(
                     heading = preview.heading,
-                    categoryName = preview.categoryName.name,
+                    categoryName = preview.category.name,
                     sequence = preview.sequence,
-                    details = repository.getDetailsByPreviewId(preview.previewId!!).first()
+                    details = repository.getDetailsByPreviewId(preview.id).first()
                         .map { BackupDetail(it.question, it.answer, it.sequence) }
                 )
             }
@@ -177,14 +177,12 @@ class BackupRepository @Inject constructor(
                         skipped++
                         return@forEach
                     }
-                    val category = backupPreview.categoryName.toCategoryOrOther()
-                    val existing = repository.getPreviewByHeading(heading, category.name)
-                    val previewId = existing?.previewId ?: repository.upsertPreview(
-                        Preview(
-                            heading = heading,
-                            categoryName = category,
-                            sequence = backupPreview.sequence
-                        )
+                    val category = Category.fromNameOrOther(backupPreview.categoryName)
+                    val existing = repository.getPreviewByHeading(heading, category)
+                    val previewId = existing?.id ?: repository.createPreview(
+                        heading = heading,
+                        category = category,
+                        sequence = backupPreview.sequence
                     ).also { previewsAdded++ }
 
                     backupPreview.details.forEach { detail ->
@@ -198,13 +196,11 @@ class BackupRepository @Inject constructor(
                             return@forEach
                         }
                         if (repository.getDetailByContent(previewId, question, answer) == null) {
-                            repository.upsertDetails(
-                                Details(
-                                    previewId = previewId,
-                                    question = question,
-                                    answer = answer,
-                                    sequence = detail.sequence
-                                )
+                            repository.createDetail(
+                                previewId = previewId,
+                                question = question,
+                                answer = answer,
+                                sequence = detail.sequence
                             )
                             detailsAdded++
                         }
@@ -251,9 +247,6 @@ class BackupRepository @Inject constructor(
 class BackupException(val error: BackupError) : Exception(error.toString())
 
 /**
- * Never [Categories.valueOf]: it throws on unknown input, and the previous importer let that
+ * Never [Category.valueOf]: it throws on unknown input, and the previous importer let that
  * escape into a broad catch that silently abandoned the rest of the file.
  */
-internal fun String.toCategoryOrOther(): Categories =
-    Categories.entries.firstOrNull { it.name.equals(this.trim(), ignoreCase = true) }
-        ?: Categories.OTHERS

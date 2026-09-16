@@ -27,10 +27,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.unit.dp
-import com.bhardwaj.passkey.utils.Categories
+import com.bhardwaj.passkey.domain.model.Category
+import com.bhardwaj.passkey.presentation.screens.common.labelRes
 
 data class BottomNavigationItem(
-    val category: Categories,
+    val category: Category,
     val icon: ImageVector,
     val isVisible: Boolean = true
 ) {
@@ -40,26 +41,26 @@ data class BottomNavigationItem(
 
 val bottomNavigationList = listOf(
     BottomNavigationItem(
-        category = Categories.BANKS,
+        category = Category.BANKS,
         icon = Icons.Filled.AccountBalance
     ),
     BottomNavigationItem(
-        category = Categories.APPS,
+        category = Category.APPS,
         icon = Icons.Filled.Gamepad
     ),
     // Invisible spacer that reserves room for the centre FAB notch. It is not a destination.
     BottomNavigationItem(
-        category = Categories.BANKS,
+        category = Category.BANKS,
         icon = Icons.Filled.AccountBalance,
         isVisible = false,
     ),
 
     BottomNavigationItem(
-        category = Categories.MAILS,
+        category = Category.MAILS,
         icon = Icons.Filled.Email
     ),
     BottomNavigationItem(
-        category = Categories.OTHERS,
+        category = Category.OTHERS,
         icon = Icons.AutoMirrored.Filled.Article
     )
 )
@@ -84,7 +85,7 @@ fun MainBottomNavigation(
                 imageVector = item.icon,
                 // Previously the raw enum name ("BANKS"), announced in English in every locale.
                 contentDescription = if (item.isVisible) {
-                    stringResource(id = item.category.labelRes)
+                    stringResource(id = item.category.labelRes())
                 } else {
                     null
                 },
