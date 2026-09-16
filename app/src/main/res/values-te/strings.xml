@@ -113,5 +113,10 @@
     <string name="restore_password_title">బ్యాకప్‌ను పునరుద్ధరించు</string>
     <string name="restore_password_message">ఈ బ్యాకప్ ఫైల్‌ను సృష్టించినప్పుడు ఎంచుకున్న పాస్‌వర్డ్‌ను నమోదు చేయండి.</string>
     <string name="backup_confirm">కొనసాగించు</string>
+    <string name="update_required_title">అప్‌డేట్ అవసరం</string>
+    <string name="update_required_message">PassKey ఈ వెర్షన్‌కు ఇకపై మద్దతు లేదు. మీ వాల్ట్‌ను వాడటం కొనసాగించడానికి అప్‌డేట్ చేయండి.</string>
+    <string name="update_now">ఇప్పుడే అప్‌డేట్ చేయి</string>
+    <string name="update_ready_message">ఒక అప్‌డేట్ ఇన్‌స్టాల్ చేయడానికి సిద్ధంగా ఉంది.</string>
+    <string name="update_restart">పునఃప్రారంభించు</string>
 </resources>
 

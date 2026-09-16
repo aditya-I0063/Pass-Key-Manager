@@ -114,4 +114,9 @@
     <string name="restore_password_title">Restaurar backup</string>
     <string name="restore_password_message">Digite a senha escolhida ao criar este arquivo de backup.</string>
     <string name="backup_confirm">Continuar</string>
+    <string name="update_required_title">Atualização necessária</string>
+    <string name="update_required_message">Esta versão do PassKey não é mais compatível. Atualize para continuar usando seu cofre.</string>
+    <string name="update_now">Atualizar agora</string>
+    <string name="update_ready_message">Uma atualização está pronta para instalar.</string>
+    <string name="update_restart">Reiniciar</string>
 </resources>

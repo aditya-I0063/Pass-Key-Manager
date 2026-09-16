@@ -114,4 +114,9 @@
     <string name="restore_password_title">Ripristina backup</string>
     <string name="restore_password_message">Inserisci la password scelta quando hai creato questo file di backup.</string>
     <string name="backup_confirm">Continua</string>
+    <string name="update_required_title">Aggiornamento necessario</string>
+    <string name="update_required_message">Questa versione di PassKey non è più supportata. Aggiorna per continuare a usare la tua cassaforte.</string>
+    <string name="update_now">Aggiorna ora</string>
+    <string name="update_ready_message">Un aggiornamento è pronto per l\'installazione.</string>
+    <string name="update_restart">Riavvia</string>
 </resources>

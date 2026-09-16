@@ -113,4 +113,9 @@
     <string name="restore_password_title">Backup wiederherstellen</string>
     <string name="restore_password_message">Gib das Passwort ein, das du beim Erstellen dieser Backup-Datei gewählt hast.</string>
     <string name="backup_confirm">Weiter</string>
+    <string name="update_required_title">Update erforderlich</string>
+    <string name="update_required_message">Diese PassKey-Version wird nicht mehr unterstützt. Aktualisiere, um deinen Tresor weiter zu nutzen.</string>
+    <string name="update_now">Jetzt aktualisieren</string>
+    <string name="update_ready_message">Ein Update kann installiert werden.</string>
+    <string name="update_restart">Neu starten</string>
 </resources>

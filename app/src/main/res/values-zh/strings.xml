@@ -112,4 +112,9 @@
     <string name="restore_password_title">恢复备份</string>
     <string name="restore_password_message">请输入创建此备份文件时设置的密码。</string>
     <string name="backup_confirm">继续</string>
+    <string name="update_required_title">需要更新</string>
+    <string name="update_required_message">此版本的 PassKey 已不再受支持。请更新后继续使用你的密码库。</string>
+    <string name="update_now">立即更新</string>
+    <string name="update_ready_message">有一个更新已准备好安装。</string>
+    <string name="update_restart">重启</string>
 </resources>

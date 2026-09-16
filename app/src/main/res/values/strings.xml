@@ -145,4 +145,11 @@
     <string name="restore_password_title">Restore backup</string>
     <string name="restore_password_message">Enter the password you chose when you created this backup file.</string>
     <string name="backup_confirm">Continue</string>
+
+    <!--    App updates    -->
+    <string name="update_required_title">Update required</string>
+    <string name="update_required_message">This version of PassKey is no longer supported. Update to continue using your vault.</string>
+    <string name="update_now">Update now</string>
+    <string name="update_ready_message">An update is ready to install.</string>
+    <string name="update_restart">Restart</string>
 </resources>

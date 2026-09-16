@@ -113,4 +113,9 @@
     <string name="restore_password_title">બૅકઅપ પુનઃસ્થાપિત કરો</string>
     <string name="restore_password_message">આ બૅકઅપ ફાઇલ બનાવતી વખતે પસંદ કરેલો પાસવર્ડ દાખલ કરો.</string>
     <string name="backup_confirm">ચાલુ રાખો</string>
+    <string name="update_required_title">અપડેટ જરૂરી છે</string>
+    <string name="update_required_message">PassKey નું આ સંસ્કરણ હવે સમર્થિત નથી. તમારી વૉલ્ટ વાપરવાનું ચાલુ રાખવા અપડેટ કરો.</string>
+    <string name="update_now">હમણાં અપડેટ કરો</string>
+    <string name="update_ready_message">એક અપડેટ ઇન્સ્ટોલ કરવા તૈયાર છે.</string>
+    <string name="update_restart">ફરી શરૂ કરો</string>
 </resources>

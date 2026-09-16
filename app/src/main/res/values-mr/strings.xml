@@ -113,4 +113,9 @@
     <string name="restore_password_title">बॅकअप पुनर्संचयित करा</string>
     <string name="restore_password_message">ही बॅकअप फाइल तयार करताना निवडलेला पासवर्ड टाका.</string>
     <string name="backup_confirm">सुरू ठेवा</string>
+    <string name="update_required_title">अपडेट आवश्यक</string>
+    <string name="update_required_message">PassKey ची ही आवृत्ती आता समर्थित नाही. तुमची व्हॉल्ट वापरत राहण्यासाठी अपडेट करा.</string>
+    <string name="update_now">आता अपडेट करा</string>
+    <string name="update_ready_message">एक अपडेट इंस्टॉलसाठी तयार आहे.</string>
+    <string name="update_restart">पुन्हा सुरू करा</string>
 </resources>

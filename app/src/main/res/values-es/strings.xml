@@ -114,4 +114,9 @@
     <string name="restore_password_title">Restaurar copia de seguridad</string>
     <string name="restore_password_message">Introduce la contraseña que elegiste al crear este archivo.</string>
     <string name="backup_confirm">Continuar</string>
+    <string name="update_required_title">Actualización necesaria</string>
+    <string name="update_required_message">Esta versión de PassKey ya no es compatible. Actualiza para seguir usando tu caja fuerte.</string>
+    <string name="update_now">Actualizar ahora</string>
+    <string name="update_ready_message">Hay una actualización lista para instalar.</string>
+    <string name="update_restart">Reiniciar</string>
 </resources>

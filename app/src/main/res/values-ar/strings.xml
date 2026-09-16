@@ -117,4 +117,9 @@
     <string name="restore_password_title">استعادة النسخة الاحتياطية</string>
     <string name="restore_password_message">أدخل كلمة المرور التي اخترتها عند إنشاء ملف النسخة الاحتياطية.</string>
     <string name="backup_confirm">متابعة</string>
+    <string name="update_required_title">التحديث مطلوب</string>
+    <string name="update_required_message">لم يعد هذا الإصدار من PassKey مدعومًا. حدّث التطبيق لمتابعة استخدام خزنتك.</string>
+    <string name="update_now">حدّث الآن</string>
+    <string name="update_ready_message">التحديث جاهز للتثبيت.</string>
+    <string name="update_restart">إعادة التشغيل</string>
 </resources>

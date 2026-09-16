@@ -131,6 +131,7 @@ firebase_bom = { module = "com.google.firebase:firebase-bom", version.ref = "fir
 firebase_crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase_analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase_perf = { module = "com.google.firebase:firebase-perf" }
+firebase_config = { module = "com.google.firebase:firebase-config" }
 
 # In App Updates
 app-update = { module = "com.google.android.play:app-update", version.ref = "inAppUpdate" }

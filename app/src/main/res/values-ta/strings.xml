@@ -113,4 +113,9 @@
     <string name="restore_password_title">காப்புப்பிரதியை மீட்டெடு</string>
     <string name="restore_password_message">இந்தக் கோப்பை உருவாக்கியபோது தேர்ந்தெடுத்த கடவுச்சொல்லை உள்ளிடவும்.</string>
     <string name="backup_confirm">தொடர்க</string>
+    <string name="update_required_title">புதுப்பிப்பு தேவை</string>
+    <string name="update_required_message">PassKey இன் இந்தப் பதிப்பு இனி ஆதரிக்கப்படாது. உங்கள் பெட்டகத்தைத் தொடர்ந்து பயன்படுத்த புதுப்பிக்கவும்.</string>
+    <string name="update_now">இப்போது புதுப்பி</string>
+    <string name="update_ready_message">ஒரு புதுப்பிப்பு நிறுவத் தயாராக உள்ளது.</string>
+    <string name="update_restart">மீண்டும் தொடங்கு</string>
 </resources>

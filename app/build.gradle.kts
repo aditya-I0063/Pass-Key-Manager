@@ -170,6 +170,7 @@ dependencies {
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.perf)
+    implementation(libs.firebase.config)
 
     // In App Updates
     implementation(libs.app.update)

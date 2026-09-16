@@ -115,4 +115,9 @@
     <string name="restore_password_title">Восстановление копии</string>
     <string name="restore_password_message">Введите пароль, выбранный при создании этого файла.</string>
     <string name="backup_confirm">Продолжить</string>
+    <string name="update_required_title">Требуется обновление</string>
+    <string name="update_required_message">Эта версия PassKey больше не поддерживается. Обновите приложение, чтобы продолжить пользоваться хранилищем.</string>
+    <string name="update_now">Обновить</string>
+    <string name="update_ready_message">Обновление готово к установке.</string>
+    <string name="update_restart">Перезапустить</string>
 </resources>

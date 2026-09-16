@@ -113,4 +113,9 @@
     <string name="restore_password_title">ব্যাকআপ পুনরুদ্ধার</string>
     <string name="restore_password_message">ব্যাকআপ ফাইল তৈরির সময় যে পাসওয়ার্ড বেছেছিলেন তা লিখুন।</string>
     <string name="backup_confirm">চালিয়ে যান</string>
+    <string name="update_required_title">আপডেট প্রয়োজন</string>
+    <string name="update_required_message">PassKey-এর এই সংস্করণ আর সমর্থিত নয়। আপনার ভল্ট ব্যবহার চালিয়ে যেতে আপডেট করুন।</string>
+    <string name="update_now">এখনই আপডেট করুন</string>
+    <string name="update_ready_message">একটি আপডেট ইনস্টলের জন্য প্রস্তুত।</string>
+    <string name="update_restart">পুনরায় চালু করুন</string>
 </resources>

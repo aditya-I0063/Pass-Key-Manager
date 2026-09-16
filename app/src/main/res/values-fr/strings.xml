@@ -114,4 +114,9 @@
     <string name="restore_password_title">Restaurer la sauvegarde</string>
     <string name="restore_password_message">Saisissez le mot de passe choisi lors de la création de ce fichier.</string>
     <string name="backup_confirm">Continuer</string>
+    <string name="update_required_title">Mise à jour requise</string>
+    <string name="update_required_message">Cette version de PassKey n\'est plus prise en charge. Mettez à jour pour continuer à utiliser votre coffre.</string>
+    <string name="update_now">Mettre à jour</string>
+    <string name="update_ready_message">Une mise à jour est prête à être installée.</string>
+    <string name="update_restart">Redémarrer</string>
 </resources>

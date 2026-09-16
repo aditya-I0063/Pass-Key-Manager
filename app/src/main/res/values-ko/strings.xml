@@ -112,4 +112,9 @@
     <string name="restore_password_title">백업 복원</string>
     <string name="restore_password_message">이 백업 파일을 만들 때 정한 비밀번호를 입력하세요.</string>
     <string name="backup_confirm">계속</string>
+    <string name="update_required_title">업데이트 필요</string>
+    <string name="update_required_message">이 버전의 PassKey는 더 이상 지원되지 않습니다. 보관함을 계속 사용하려면 업데이트하세요.</string>
+    <string name="update_now">지금 업데이트</string>
+    <string name="update_ready_message">설치할 업데이트가 준비되었습니다.</string>
+    <string name="update_restart">다시 시작</string>
 </resources>
