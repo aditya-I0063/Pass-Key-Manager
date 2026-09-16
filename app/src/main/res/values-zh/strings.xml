@@ -137,4 +137,19 @@
     <string name="about_message">PassKey 将你的登录信息、密码和其他私密备注保存在设备上的加密数据库中。\n\n你的密码库永远不会离开手机。没有账号、没有同步、也没有 PassKey 服务器：应用本身不发起任何网络请求，你的条目不会被传输到任何地方。\n\n数据库使用 SQLCipher 加密，通过设备的生物识别或屏幕锁解锁。离开应用后密码库会自动重新锁定，截图被禁用，复制的密码会被标记为敏感内容并在稍后从剪贴板清除。\n\n你可以按类别整理条目、拖动排序、生成高强度密码，并检查密码库中是否存在弱密码或重复使用的密码。备份会导出为单个文件，使用你自己设定的密码加密，可在任意设备上恢复。\n\nPassKey 由 Aditya Bhardwaj 开发，免费且开源，完整源代码可在 GitHub 上获取。</string>
     <string name="privacy_message">你的密码库保留在你的设备上。\n\n我们从不收集的内容：PassKey 不会收集、传输或存储你保存的密码、用户名、备注或任何其他条目。它们只存在于你手机上的加密数据库中。我们既无法读取，也无法替你恢复。\n\n应用确实会发送的内容：PassKey 集成了 Google Firebase Crashlytics、Analytics 和 Performance Monitoring，以及 Google Play 应用内更新。这些服务会向 Google 发送崩溃诊断、使用事件、性能数据，以及包含广告 ID 在内的设备和安装标识符。它们始终无法访问你的密码库内容。由于这些服务，应用需要网络权限，其数据处理受 Google 隐私政策约束。\n\n备份：导出备份时，文件会使用你设定的密码加密，并保存到你指定的位置。此后该文件由你自行保管；同时获得文件和密码的人即可读取其内容。我们不保留任何副本。\n\n设备备份：PassKey 已排除在 Android 云备份和设备间转移之外，因此你的密码库不会上传到你的 Google 账号。\n\n变更：本政策可能更新，重大变更会在应用的版本说明中注明。\n\n如有疑问，请联系 <xliff:g id="email" example="name@example.com">yrkkh.cclub@gmail.com</xliff:g>。</string>
     <string name="terms_n_condition_message">使用 PassKey 即表示你同意以下条款。\n\n1. PassKey 是由 Aditya Bhardwaj 开发的免费开源软件。\n\n2. 你的密码库仅存储在你的设备上。不存在服务器端副本，因此如果你丢失设备、卸载应用或忘记备份密码，将无法恢复数据。\n\n3. 保留备份是你的责任。请定期导出，并将备份密码保存在安全且独立的地方。\n\n4. 本应用依赖你设备的生物识别或屏幕锁安全性。若该锁定较弱、被移除或已被攻破，PassKey 提供的保护也会相应降低。\n\n5. PassKey 包含隐私政策中所述的 Google Firebase 和 Google Play 服务。\n\n6. 本应用按\"现状\"提供，不作任何明示或暗示的保证，包括适销性和特定用途适用性。\n\n7. 在法律允许的范围内，开发者不对因使用本应用而产生的任何损害负责，包括数据丢失。\n\n8. 本应用可能随时被修改或停止提供。</string>
+    <string name="recovery_setup_title">设置恢复密码</string>
+    <string name="recovery_setup_message_new">PassKey 通过指纹或屏幕锁解锁。此恢复密码是备用入口——更换指纹或移除设备锁时会用到。它无法重置，请妥善保管。</string>
+    <string name="recovery_setup_message_upgrade">此次更新会用本设备专属的密钥重新加密你的密码库。请先设置恢复密码：若更换指纹或移除设备锁，它是唯一的入口。它无法重置。</string>
+    <string name="recovery_unlock_title">输入你的恢复密码</string>
+    <string name="recovery_unlock_message">设备的生物识别或屏幕锁已更改，PassKey 需要你的恢复密码才能解锁密码库。</string>
+    <string name="recovery_unlock_wrong">该密码无效，请重试。</string>
+    <string name="migration_title">正在保护你的密码库</string>
+    <string name="migration_message">正在用本设备专属的密钥重新加密你的条目，请保持应用开启。</string>
+    <string name="migration_failed_title">未能完成密码库的保护</string>
+    <string name="migration_failed_message">没有任何数据丢失，你的条目保持不变。请重试，或稍后重新打开应用。</string>
+    <string name="migration_failed_message_can_export">没有任何数据丢失——你的密码库完好且可读。请重试，或先从设置中导出备份。</string>
+    <string name="migration_retry">重试</string>
+    <string name="device_lock_required_title">需要设备锁</string>
+    <string name="device_lock_required_message">PassKey 使用设备的屏幕锁保护你的密码库。请设置 PIN、图案、密码或生物识别以继续。</string>
+    <string name="device_lock_open_settings">打开设置</string>
 </resources>

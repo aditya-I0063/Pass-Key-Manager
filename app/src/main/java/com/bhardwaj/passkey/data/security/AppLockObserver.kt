@@ -3,6 +3,7 @@ package com.bhardwaj.passkey.data.security
 import android.content.Context
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import com.bhardwaj.passkey.data.local.VaultDatabaseProvider
 import com.bhardwaj.passkey.data.repository.DataStoreRepository
 import com.bhardwaj.passkey.utils.SecureClipboard
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -24,6 +25,7 @@ import javax.inject.Singleton
 class AppLockObserver @Inject constructor(
     @param:ApplicationContext private val context: Context,
     private val session: VaultSession,
+    private val vault: VaultDatabaseProvider,
     private val dataStoreRepository: DataStoreRepository
 ) : DefaultLifecycleObserver {
 
@@ -61,7 +63,12 @@ class AppLockObserver @Inject constructor(
     fun lockNow(reason: LockReason) {
         // Clear any copied secret first: once locked there is no UI left to offer a "clear" action.
         SecureClipboard.clearIfOurs(context)
-        session.lock(reason)
+        scope.launch {
+            // Closing the database is the part that actually revokes access: it drops the
+            // SQLCipher handle and zeroes the key bytes, so locking is no longer just a boolean.
+            vault.closeAndWipe()
+            session.lock(reason)
+        }
     }
 
     suspend fun timeout(): AutoLockTimeout = AutoLockTimeout.fromMillis(

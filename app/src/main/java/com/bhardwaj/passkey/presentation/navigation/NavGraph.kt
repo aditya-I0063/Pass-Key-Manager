@@ -9,7 +9,7 @@ import androidx.navigation.navArgument
 import com.bhardwaj.passkey.presentation.screens.detail_screen.DetailScreen
 import com.bhardwaj.passkey.presentation.screens.onboarding_screens.OnBoardingScreen
 import com.bhardwaj.passkey.presentation.screens.preview_screen.PreviewScreen
-import com.bhardwaj.passkey.presentation.screens.security_screen.SecurityScreen
+import com.bhardwaj.passkey.presentation.screens.security_screen.VaultGateScreen
 import com.bhardwaj.passkey.presentation.screens.settings_screen.SettingsScreen
 import com.bhardwaj.passkey.presentation.screens.splash_screen.SplashPage
 import com.bhardwaj.passkey.utils.Categories
@@ -60,7 +60,14 @@ fun NavGraph(
                 onNavigate = { route -> navController.navigate(route) })
         }
         composable(route = NavScreens.SecurityPage.route) {
-            SecurityScreen(navController = navController)
+            VaultGateScreen(
+                onUnlocked = {
+                    navController.navigate(NavScreens.PreviewPage.route) {
+                        // Nothing behind the gate should survive it.
+                        popUpTo(0) { inclusive = true }
+                    }
+                }
+            )
         }
     }
 }

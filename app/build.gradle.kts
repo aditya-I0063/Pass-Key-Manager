@@ -163,6 +163,9 @@ dependencies {
     // Backup payload serialization
     implementation(libs.kotlinx.serialization.json)
 
+    // Argon2id for the recovery-password key slot
+    implementation(libs.argon2kt)
+
     // Reordering Lazy Columns
     implementation(libs.reorderable)
 

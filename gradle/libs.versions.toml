@@ -62,6 +62,7 @@ truth = "1.4.5"
 mockk = "1.14.11"
 turbine = "1.2.1"
 kotlinx_serialization = "1.11.0"
+argon2kt = "1.6.0"
 
 [plugins]
 # Plugin definitions
@@ -123,6 +124,7 @@ sqlcipher-sqlite = { module = "androidx.sqlite:sqlite", version.ref = "sqlcipher
 # Open CSV - Import/ Export Data
 opencsv = { module = "com.opencsv:opencsv", version.ref = "opencsv" }
 kotlinx_serialization_json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx_serialization" }
+argon2kt = { module = "com.lambdapioneer.argon2kt:argon2kt", version.ref = "argon2kt" }
 
 # Reordering Lazy Columns
 reorderable = { module = "sh.calvin.reorderable:reorderable", version.ref = "reorderable" }
