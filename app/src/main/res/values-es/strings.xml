@@ -119,4 +119,12 @@
     <string name="update_now">Actualizar ahora</string>
     <string name="update_ready_message">Hay una actualización lista para instalar.</string>
     <string name="update_restart">Reiniciar</string>
+    <string name="auto_lock">Bloqueo automático</string>
+    <string name="auto_lock_immediately">Inmediatamente</string>
+    <string name="auto_lock_15_seconds">Tras 15 segundos</string>
+    <string name="auto_lock_30_seconds">Tras 30 segundos</string>
+    <string name="auto_lock_1_minute">Tras 1 minuto</string>
+    <string name="auto_lock_5_minutes">Tras 5 minutos</string>
+    <string name="auto_lock_never">Nunca</string>
+    <string name="auto_lock_never_warning">La caja fuerte seguirá abierta hasta que cierres la app. Quien tenga tu teléfono desbloqueado podrá leer tus contraseñas.</string>
 </resources>

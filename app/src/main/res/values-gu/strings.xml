@@ -118,4 +118,12 @@
     <string name="update_now">હમણાં અપડેટ કરો</string>
     <string name="update_ready_message">એક અપડેટ ઇન્સ્ટોલ કરવા તૈયાર છે.</string>
     <string name="update_restart">ફરી શરૂ કરો</string>
+    <string name="auto_lock">ઑટો-લૉક</string>
+    <string name="auto_lock_immediately">તરત જ</string>
+    <string name="auto_lock_15_seconds">15 સેકન્ડ પછી</string>
+    <string name="auto_lock_30_seconds">30 સેકન્ડ પછી</string>
+    <string name="auto_lock_1_minute">1 મિનિટ પછી</string>
+    <string name="auto_lock_5_minutes">5 મિનિટ પછી</string>
+    <string name="auto_lock_never">ક્યારેય નહીં</string>
+    <string name="auto_lock_never_warning">ઍપ બંધ ન કરો ત્યાં સુધી વૉલ્ટ ખુલ્લી રહેશે. તમારો અનલૉક કરેલો ફોન જેની પાસે હશે તે તમારા પાસવર્ડ વાંચી શકશે.</string>
 </resources>

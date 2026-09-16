@@ -122,4 +122,12 @@
     <string name="update_now">حدّث الآن</string>
     <string name="update_ready_message">التحديث جاهز للتثبيت.</string>
     <string name="update_restart">إعادة التشغيل</string>
+    <string name="auto_lock">القفل التلقائي</string>
+    <string name="auto_lock_immediately">فورًا</string>
+    <string name="auto_lock_15_seconds">بعد 15 ثانية</string>
+    <string name="auto_lock_30_seconds">بعد 30 ثانية</string>
+    <string name="auto_lock_1_minute">بعد دقيقة</string>
+    <string name="auto_lock_5_minutes">بعد 5 دقائق</string>
+    <string name="auto_lock_never">أبدًا</string>
+    <string name="auto_lock_never_warning">ستبقى الخزنة مفتوحة حتى تغلق التطبيق. يمكن لأي شخص يحمل هاتفك المفتوح قراءة كلمات مرورك.</string>
 </resources>

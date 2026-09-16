@@ -14,7 +14,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.runtime.LaunchedEffect
+import com.bhardwaj.passkey.data.security.AppLockObserver
+import com.bhardwaj.passkey.data.security.LockReason
+import com.bhardwaj.passkey.presentation.navigation.Routes
+import kotlinx.coroutines.delay
+import com.bhardwaj.passkey.data.security.VaultSession
 import com.bhardwaj.passkey.domain.viewModels.SplashViewModel
+import javax.inject.Inject
 import com.bhardwaj.passkey.presentation.navigation.NavGraph
 import com.bhardwaj.passkey.presentation.theme.PassKeyTheme
 import com.google.android.play.core.appupdate.AppUpdateManager
@@ -29,6 +36,28 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : FragmentActivity() {
+
+    private companion object {
+        const val IDLE_POLL_INTERVAL_MS = 5_000L
+    }
+
+
+    @Inject
+    lateinit var vaultSession: VaultSession
+
+    @Inject
+    lateinit var appLockObserver: AppLockObserver
+
+    /**
+     * Activity.onUserInteraction is dispatched before the window handles the event, so it sees
+     * touches and key presses without competing with Compose gesture consumption - far more
+     * robust than wrapping the tree in a pointerInput.
+     */
+    override fun onUserInteraction() {
+        super.onUserInteraction()
+        vaultSession.touch()
+    }
+
     private val splashViewModel: SplashViewModel by viewModels()
     private lateinit var appUpdateManager: AppUpdateManager
     private lateinit var updateController: AppUpdateController
@@ -92,6 +121,33 @@ class MainActivity : FragmentActivity() {
                     } else {
                         Box(modifier = Modifier.fillMaxSize()) {
                             val navController = rememberNavController()
+                            val isUnlocked by vaultSession.isUnlocked
+                                .collectAsStateWithLifecycle()
+                            val lockReason by vaultSession.lockReason
+                                .collectAsStateWithLifecycle()
+
+                            // Foreground idle timer. onStop covers backgrounding; this covers
+                            // the app being left open and untouched on an unlocked phone.
+                            LaunchedEffect(isUnlocked) {
+                                if (!isUnlocked) return@LaunchedEffect
+                                while (true) {
+                                    delay(IDLE_POLL_INTERVAL_MS)
+                                    appLockObserver.lockIfIdle()
+                                }
+                            }
+
+                            LaunchedEffect(isUnlocked, lockReason) {
+                                // ColdStart is the initial value and means "never unlocked yet",
+                                // so it must not yank the user out of onboarding.
+                                if (!isUnlocked && lockReason != LockReason.ColdStart) {
+                                    navController.navigate(Routes.SECURITY_PAGE) {
+                                        // Drop every screen holding vault content, which also
+                                        // destroys their nav-scoped ViewModels.
+                                        popUpTo(0) { inclusive = true }
+                                    }
+                                }
+                            }
+
                             NavGraph(
                                 navController = navController,
                                 startDestination = splashViewModel.startDestination

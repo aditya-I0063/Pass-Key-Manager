@@ -118,4 +118,12 @@
     <string name="update_now">Jetzt aktualisieren</string>
     <string name="update_ready_message">Ein Update kann installiert werden.</string>
     <string name="update_restart">Neu starten</string>
+    <string name="auto_lock">Automatisch sperren</string>
+    <string name="auto_lock_immediately">Sofort</string>
+    <string name="auto_lock_15_seconds">Nach 15 Sekunden</string>
+    <string name="auto_lock_30_seconds">Nach 30 Sekunden</string>
+    <string name="auto_lock_1_minute">Nach 1 Minute</string>
+    <string name="auto_lock_5_minutes">Nach 5 Minuten</string>
+    <string name="auto_lock_never">Nie</string>
+    <string name="auto_lock_never_warning">Der Tresor bleibt offen, bis du die App schließt. Wer dein entsperrtes Telefon hat, kann deine Passwörter lesen.</string>
 </resources>

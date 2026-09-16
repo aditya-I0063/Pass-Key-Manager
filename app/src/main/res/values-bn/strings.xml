@@ -118,4 +118,12 @@
     <string name="update_now">এখনই আপডেট করুন</string>
     <string name="update_ready_message">একটি আপডেট ইনস্টলের জন্য প্রস্তুত।</string>
     <string name="update_restart">পুনরায় চালু করুন</string>
+    <string name="auto_lock">স্বয়ংক্রিয় লক</string>
+    <string name="auto_lock_immediately">সঙ্গে সঙ্গে</string>
+    <string name="auto_lock_15_seconds">১৫ সেকেন্ড পরে</string>
+    <string name="auto_lock_30_seconds">৩০ সেকেন্ড পরে</string>
+    <string name="auto_lock_1_minute">১ মিনিট পরে</string>
+    <string name="auto_lock_5_minutes">৫ মিনিট পরে</string>
+    <string name="auto_lock_never">কখনও নয়</string>
+    <string name="auto_lock_never_warning">অ্যাপ বন্ধ না করা পর্যন্ত ভল্ট আনলক থাকবে। আপনার আনলক করা ফোন যার হাতে থাকবে সে পাসওয়ার্ড দেখতে পারবে।</string>
 </resources>

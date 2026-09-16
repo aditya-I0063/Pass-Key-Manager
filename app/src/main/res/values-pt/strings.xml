@@ -119,4 +119,12 @@
     <string name="update_now">Atualizar agora</string>
     <string name="update_ready_message">Uma atualização está pronta para instalar.</string>
     <string name="update_restart">Reiniciar</string>
+    <string name="auto_lock">Bloqueio automático</string>
+    <string name="auto_lock_immediately">Imediatamente</string>
+    <string name="auto_lock_15_seconds">Após 15 segundos</string>
+    <string name="auto_lock_30_seconds">Após 30 segundos</string>
+    <string name="auto_lock_1_minute">Após 1 minuto</string>
+    <string name="auto_lock_5_minutes">Após 5 minutos</string>
+    <string name="auto_lock_never">Nunca</string>
+    <string name="auto_lock_never_warning">O cofre ficará aberto até você fechar o app. Quem tiver seu celular desbloqueado poderá ler suas senhas.</string>
 </resources>

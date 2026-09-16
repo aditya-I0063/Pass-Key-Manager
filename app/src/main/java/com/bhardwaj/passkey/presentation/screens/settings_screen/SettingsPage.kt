@@ -50,6 +50,8 @@ import com.bhardwaj.passkey.presentation.screens.settings_screen.components.Back
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.bhardwaj.passkey.presentation.screens.settings_screen.components.AutoLockDialog
 import com.bhardwaj.passkey.R
 import com.bhardwaj.passkey.domain.events.SettingsEvents
 import com.bhardwaj.passkey.domain.viewModels.SettingsViewModel
@@ -101,6 +103,15 @@ fun SettingsScreen(
                 )
             }
         }
+    }
+
+    val autoLockTimeout by viewModel.autoLockTimeout.collectAsStateWithLifecycle()
+    if (viewModel.isAutoLockDialogOpen) {
+        AutoLockDialog(
+            current = autoLockTimeout,
+            onDismiss = { viewModel.onEvent(SettingsEvents.OnDismissAutoLockDialog) },
+            onSelect = { viewModel.onEvent(SettingsEvents.OnAutoLockTimeoutChange(it)) }
+        )
     }
 
     pendingExportUri?.let { uri ->
@@ -234,6 +245,9 @@ fun SettingsScreen(
                             }
                             SettingsText(text = stringResource(id = R.string.rate_app)) {
                                 viewModel.onEvent(SettingsEvents.OnRateAppClick)
+                            }
+                            SettingsText(text = stringResource(id = R.string.auto_lock)) {
+                                viewModel.onEvent(SettingsEvents.OnAutoLockClick)
                             }
                             SettingsText(text = stringResource(id = R.string.import_data)) {
                                 importLauncher.launch(arrayOf("*/*"))

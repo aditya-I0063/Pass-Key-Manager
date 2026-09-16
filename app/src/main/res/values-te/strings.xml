@@ -118,5 +118,13 @@
     <string name="update_now">ఇప్పుడే అప్‌డేట్ చేయి</string>
     <string name="update_ready_message">ఒక అప్‌డేట్ ఇన్‌స్టాల్ చేయడానికి సిద్ధంగా ఉంది.</string>
     <string name="update_restart">పునఃప్రారంభించు</string>
+    <string name="auto_lock">ఆటో-లాక్</string>
+    <string name="auto_lock_immediately">వెంటనే</string>
+    <string name="auto_lock_15_seconds">15 సెకన్ల తర్వాత</string>
+    <string name="auto_lock_30_seconds">30 సెకన్ల తర్వాత</string>
+    <string name="auto_lock_1_minute">1 నిమిషం తర్వాత</string>
+    <string name="auto_lock_5_minutes">5 నిమిషాల తర్వాత</string>
+    <string name="auto_lock_never">ఎప్పుడూ కాదు</string>
+    <string name="auto_lock_never_warning">యాప్ మూసే వరకు వాల్ట్ తెరిచే ఉంటుంది. మీ అన్‌లాక్ చేసిన ఫోన్ ఎవరి దగ్గర ఉన్నా మీ పాస్‌వర్డ్‌లు చదవగలరు.</string>
 </resources>
 

@@ -117,4 +117,12 @@
     <string name="update_now">今すぐ更新</string>
     <string name="update_ready_message">アップデートをインストールできます。</string>
     <string name="update_restart">再起動</string>
+    <string name="auto_lock">自動ロック</string>
+    <string name="auto_lock_immediately">すぐに</string>
+    <string name="auto_lock_15_seconds">15 秒後</string>
+    <string name="auto_lock_30_seconds">30 秒後</string>
+    <string name="auto_lock_1_minute">1 分後</string>
+    <string name="auto_lock_5_minutes">5 分後</string>
+    <string name="auto_lock_never">しない</string>
+    <string name="auto_lock_never_warning">アプリを閉じるまで保管庫は開いたままになります。ロック解除された端末を手にした人は誰でもパスワードを見られます。</string>
 </resources>

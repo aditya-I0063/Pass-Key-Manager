@@ -90,6 +90,7 @@ androidx_appcompat = { module = "androidx.appcompat:appcompat", version.ref = "a
 androidx_lifecycle_runtime_ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle_runtime_ktx" }
 androidx_lifecycle_viewmodel_compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle_viewmodel_compose" }
 androidx_lifecycle_runtime_compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle_runtime_ktx" }
+androidx_lifecycle_process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "lifecycle_runtime_ktx" }
 androidx_navigation_compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation_compose" }
 
 # Coroutines

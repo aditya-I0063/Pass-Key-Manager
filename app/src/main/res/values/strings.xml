@@ -152,4 +152,14 @@
     <string name="update_now">Update now</string>
     <string name="update_ready_message">An update is ready to install.</string>
     <string name="update_restart">Restart</string>
+
+    <!--    Auto-lock    -->
+    <string name="auto_lock">Auto-lock</string>
+    <string name="auto_lock_immediately">Immediately</string>
+    <string name="auto_lock_15_seconds">After 15 seconds</string>
+    <string name="auto_lock_30_seconds">After 30 seconds</string>
+    <string name="auto_lock_1_minute">After 1 minute</string>
+    <string name="auto_lock_5_minutes">After 5 minutes</string>
+    <string name="auto_lock_never">Never</string>
+    <string name="auto_lock_never_warning">The vault will stay unlocked until you close the app. Anyone with your unlocked phone can read your passwords.</string>
 </resources>

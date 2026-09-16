@@ -118,4 +118,12 @@
     <string name="update_now">இப்போது புதுப்பி</string>
     <string name="update_ready_message">ஒரு புதுப்பிப்பு நிறுவத் தயாராக உள்ளது.</string>
     <string name="update_restart">மீண்டும் தொடங்கு</string>
+    <string name="auto_lock">தானியங்கு பூட்டு</string>
+    <string name="auto_lock_immediately">உடனடியாக</string>
+    <string name="auto_lock_15_seconds">15 வினாடிகளுக்குப் பிறகு</string>
+    <string name="auto_lock_30_seconds">30 வினாடிகளுக்குப் பிறகு</string>
+    <string name="auto_lock_1_minute">1 நிமிடத்திற்குப் பிறகு</string>
+    <string name="auto_lock_5_minutes">5 நிமிடங்களுக்குப் பிறகு</string>
+    <string name="auto_lock_never">ஒருபோதும் இல்லை</string>
+    <string name="auto_lock_never_warning">ஆப்ஸை மூடும் வரை பெட்டகம் திறந்தே இருக்கும். உங்கள் திறந்த ஃபோன் யாரிடம் இருந்தாலும் கடவுச்சொற்களைப் படிக்க முடியும்.</string>
 </resources>

@@ -119,4 +119,12 @@
     <string name="update_now">Mettre à jour</string>
     <string name="update_ready_message">Une mise à jour est prête à être installée.</string>
     <string name="update_restart">Redémarrer</string>
+    <string name="auto_lock">Verrouillage auto</string>
+    <string name="auto_lock_immediately">Immédiatement</string>
+    <string name="auto_lock_15_seconds">Après 15 secondes</string>
+    <string name="auto_lock_30_seconds">Après 30 secondes</string>
+    <string name="auto_lock_1_minute">Après 1 minute</string>
+    <string name="auto_lock_5_minutes">Après 5 minutes</string>
+    <string name="auto_lock_never">Jamais</string>
+    <string name="auto_lock_never_warning">Le coffre restera déverrouillé jusqu\'à la fermeture de l\'application. Toute personne ayant votre téléphone déverrouillé pourra lire vos mots de passe.</string>
 </resources>

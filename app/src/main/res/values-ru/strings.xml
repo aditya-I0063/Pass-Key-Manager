@@ -120,4 +120,12 @@
     <string name="update_now">Обновить</string>
     <string name="update_ready_message">Обновление готово к установке.</string>
     <string name="update_restart">Перезапустить</string>
+    <string name="auto_lock">Автоблокировка</string>
+    <string name="auto_lock_immediately">Сразу</string>
+    <string name="auto_lock_15_seconds">Через 15 секунд</string>
+    <string name="auto_lock_30_seconds">Через 30 секунд</string>
+    <string name="auto_lock_1_minute">Через 1 минуту</string>
+    <string name="auto_lock_5_minutes">Через 5 минут</string>
+    <string name="auto_lock_never">Никогда</string>
+    <string name="auto_lock_never_warning">Хранилище останется разблокированным, пока вы не закроете приложение. Любой, у кого окажется разблокированный телефон, увидит ваши пароли.</string>
 </resources>

@@ -17,5 +17,6 @@ class Constants {
         const val PASSKEY_PREFS = "passkey_pref"
         const val ONBOARDING_COMPLETE = "onboarding_complete"
         const val CURRENT_LANGUAGE = "current_language"
+        const val AUTO_LOCK_TIMEOUT = "auto_lock_timeout_ms"
     }
 }

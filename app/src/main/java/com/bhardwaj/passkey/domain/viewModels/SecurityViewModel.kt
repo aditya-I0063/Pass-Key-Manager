@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bhardwaj.passkey.data.security.VaultSession
 import com.bhardwaj.passkey.domain.events.SecurityEvents
 import com.bhardwaj.passkey.presentation.navigation.Routes
 import com.bhardwaj.passkey.utils.UiEvents
@@ -15,7 +16,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SecurityViewModel @Inject constructor() : ViewModel() {
+class SecurityViewModel @Inject constructor(
+    private val vaultSession: VaultSession
+) : ViewModel() {
     private val _uiEvents = Channel<UiEvents>()
     val uiEvents = _uiEvents.receiveAsFlow()
 
@@ -37,6 +40,9 @@ class SecurityViewModel @Inject constructor() : ViewModel() {
             }
 
             SecurityEvents.OnAuthenticationSucceeded -> {
+                // Previously isAuthenticated was written and never read, so navigation was the
+                // only gate. The session is now the thing the rest of the app observes.
+                vaultSession.onUnlocked()
                 isAuthenticated = true
                 needToOpenAlertDialog = false
                 sendUiEvents(UiEvents.Navigate(Routes.PREVIEW_PAGE))

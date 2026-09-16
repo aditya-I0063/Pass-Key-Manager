@@ -117,4 +117,12 @@
     <string name="update_now">立即更新</string>
     <string name="update_ready_message">有一个更新已准备好安装。</string>
     <string name="update_restart">重启</string>
+    <string name="auto_lock">自动锁定</string>
+    <string name="auto_lock_immediately">立即</string>
+    <string name="auto_lock_15_seconds">15 秒后</string>
+    <string name="auto_lock_30_seconds">30 秒后</string>
+    <string name="auto_lock_1_minute">1 分钟后</string>
+    <string name="auto_lock_5_minutes">5 分钟后</string>
+    <string name="auto_lock_never">永不</string>
+    <string name="auto_lock_never_warning">在你关闭应用之前密码库将保持解锁。任何拿到你已解锁手机的人都能读取你的密码。</string>
 </resources>

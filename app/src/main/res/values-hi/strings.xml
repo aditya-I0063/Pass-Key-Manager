@@ -118,4 +118,12 @@
     <string name="update_now">अभी अपडेट करें</string>
     <string name="update_ready_message">एक अपडेट इंस्टॉल के लिए तैयार है।</string>
     <string name="update_restart">पुनः आरंभ करें</string>
+    <string name="auto_lock">अपने आप लॉक</string>
+    <string name="auto_lock_immediately">तुरंत</string>
+    <string name="auto_lock_15_seconds">15 सेकंड बाद</string>
+    <string name="auto_lock_30_seconds">30 सेकंड बाद</string>
+    <string name="auto_lock_1_minute">1 मिनट बाद</string>
+    <string name="auto_lock_5_minutes">5 मिनट बाद</string>
+    <string name="auto_lock_never">कभी नहीं</string>
+    <string name="auto_lock_never_warning">ऐप बंद करने तक वॉल्ट खुली रहेगी। जिसके पास आपका अनलॉक फ़ोन होगा वह आपके पासवर्ड पढ़ सकता है।</string>
 </resources>

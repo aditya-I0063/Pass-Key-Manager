@@ -119,4 +119,12 @@
     <string name="update_now">Aggiorna ora</string>
     <string name="update_ready_message">Un aggiornamento è pronto per l\'installazione.</string>
     <string name="update_restart">Riavvia</string>
+    <string name="auto_lock">Blocco automatico</string>
+    <string name="auto_lock_immediately">Immediatamente</string>
+    <string name="auto_lock_15_seconds">Dopo 15 secondi</string>
+    <string name="auto_lock_30_seconds">Dopo 30 secondi</string>
+    <string name="auto_lock_1_minute">Dopo 1 minuto</string>
+    <string name="auto_lock_5_minutes">Dopo 5 minuti</string>
+    <string name="auto_lock_never">Mai</string>
+    <string name="auto_lock_never_warning">La cassaforte resterà aperta finché non chiudi l\'app. Chi ha il tuo telefono sbloccato potrà leggere le tue password.</string>
 </resources>
