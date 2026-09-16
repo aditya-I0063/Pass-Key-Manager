@@ -79,6 +79,24 @@
     <string name="excellent">চমৎকার</string>
     <string name="needs_attention">মনোযোগ প্রয়োজন</string>
     <string name="critical">জটিল</string>
-    <string name="used_times">%1$d বার ব্যবহৃত হয়েছে</string>
     <string name="no_issues">কোনো সমস্যা পাওয়া যায়নি। দারুণ!</string>
+    <string name="cd_drag_handle">পুনরায় সাজান</string>
+    <string name="cd_edit">সম্পাদনা</string>
+    <string name="cd_delete">মুছুন</string>
+    <string name="cd_add_detail">বিবরণ যোগ করুন</string>
+    <string name="cd_add_entry">এন্ট্রি যোগ করুন</string>
+    <string name="cd_settings">সেটিংস</string>
+    <string name="cd_generate_password">পাসওয়ার্ড তৈরি করুন</string>
+    <string name="cd_password_options">পাসওয়ার্ড বিকল্প</string>
+    <string name="cd_clear_search">অনুসন্ধান মুছুন</string>
+    <string name="cd_open">খুলুন</string>
+    <string name="cd_back">ফিরে যান</string>
+    <string name="password_settings">পাসওয়ার্ড সেটিংস</string>
+    <string name="password_length">দৈর্ঘ্য: %1$d</string>
+    <string name="security_score_percent">%1$d%%</string>
+    <string name="invalid_file_selected">অবৈধ ফাইল নির্বাচিত হয়েছে।</string>
+    <plurals name="password_used_times">
+        <item quantity="one">%1$d বার ব্যবহৃত</item>
+        <item quantity="other">%1$d বার ব্যবহৃত</item>
+    </plurals>
 </resources>

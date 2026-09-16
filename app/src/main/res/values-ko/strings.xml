@@ -79,6 +79,23 @@
     <string name="excellent">훌륭함</string>
     <string name="needs_attention">주의 필요</string>
     <string name="critical">심각함</string>
-    <string name="used_times">%1$d회 사용됨</string>
     <string name="no_issues">문제가 발견되지 않았습니다. 잘하셨습니다!</string>
+    <string name="cd_drag_handle">순서 변경</string>
+    <string name="cd_edit">편집</string>
+    <string name="cd_delete">삭제</string>
+    <string name="cd_add_detail">세부 정보 추가</string>
+    <string name="cd_add_entry">항목 추가</string>
+    <string name="cd_settings">설정</string>
+    <string name="cd_generate_password">비밀번호 생성</string>
+    <string name="cd_password_options">비밀번호 옵션</string>
+    <string name="cd_clear_search">검색 지우기</string>
+    <string name="cd_open">열기</string>
+    <string name="cd_back">뒤로</string>
+    <string name="password_settings">비밀번호 설정</string>
+    <string name="password_length">길이: %1$d</string>
+    <string name="security_score_percent">%1$d%%</string>
+    <string name="invalid_file_selected">잘못된 파일을 선택했습니다.</string>
+    <plurals name="password_used_times">
+        <item quantity="other">%1$d회 사용됨</item>
+    </plurals>
 </resources>

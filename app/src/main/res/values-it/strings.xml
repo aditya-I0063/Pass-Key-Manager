@@ -79,6 +79,25 @@
     <string name="excellent">Eccellente</string>
     <string name="needs_attention">Richiede Attenzione</string>
     <string name="critical">Critico</string>
-    <string name="used_times">Usata %1$d volte</string>
     <string name="no_issues">Nessun problema trovato. Ottimo lavoro!</string>
+    <string name="cd_drag_handle">Riordina</string>
+    <string name="cd_edit">Modifica</string>
+    <string name="cd_delete">Elimina</string>
+    <string name="cd_add_detail">Aggiungi dettaglio</string>
+    <string name="cd_add_entry">Aggiungi voce</string>
+    <string name="cd_settings">Impostazioni</string>
+    <string name="cd_generate_password">Genera password</string>
+    <string name="cd_password_options">Opzioni password</string>
+    <string name="cd_clear_search">Cancella ricerca</string>
+    <string name="cd_open">Apri</string>
+    <string name="cd_back">Indietro</string>
+    <string name="password_settings">Impostazioni password</string>
+    <string name="password_length">Lunghezza: %1$d</string>
+    <string name="security_score_percent">%1$d%%</string>
+    <string name="invalid_file_selected">File selezionato non valido.</string>
+    <plurals name="password_used_times">
+        <item quantity="one">Usata %1$d volta</item>
+        <item quantity="many">Usata %1$d volte</item>
+        <item quantity="other">Usata %1$d volte</item>
+    </plurals>
 </resources>

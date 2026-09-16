@@ -20,10 +20,12 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.bhardwaj.passkey.R
 import com.bhardwaj.passkey.presentation.theme.BebasNeue
 import com.bhardwaj.passkey.presentation.theme.Poppins
 
@@ -55,7 +57,7 @@ fun PasswordSettingsSheet(
                 .padding(bottom = 32.dp)
         ) {
             Text(
-                text = "Password Settings",
+                text = stringResource(R.string.password_settings),
                 fontFamily = BebasNeue,
                 fontSize = 32.sp,
                 color = MaterialTheme.colorScheme.secondary,
@@ -63,7 +65,7 @@ fun PasswordSettingsSheet(
             )
 
             Text(
-                text = "Length: ${length.toInt()}",
+                text = stringResource(R.string.password_length, length.toInt()),
                 fontFamily = Poppins,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onBackground

@@ -79,6 +79,28 @@
     <string name="excellent">ممتاز</string>
     <string name="needs_attention">يحتاج إلى انتباه</string>
     <string name="critical">حرج</string>
-    <string name="used_times">مستخدمة %1$d مرات</string>
     <string name="no_issues">لم يتم العثور على مشاكل. أحسنت!</string>
+    <string name="cd_drag_handle">إعادة ترتيب</string>
+    <string name="cd_edit">تعديل</string>
+    <string name="cd_delete">حذف</string>
+    <string name="cd_add_detail">إضافة تفصيل</string>
+    <string name="cd_add_entry">إضافة إدخال</string>
+    <string name="cd_settings">الإعدادات</string>
+    <string name="cd_generate_password">إنشاء كلمة مرور</string>
+    <string name="cd_password_options">خيارات كلمة المرور</string>
+    <string name="cd_clear_search">مسح البحث</string>
+    <string name="cd_open">فتح</string>
+    <string name="cd_back">رجوع</string>
+    <string name="password_settings">إعدادات كلمة المرور</string>
+    <string name="password_length">الطول: %1$d</string>
+    <string name="security_score_percent">%1$d%%</string>
+    <string name="invalid_file_selected">الملف المحدد غير صالح.</string>
+    <plurals name="password_used_times">
+        <item quantity="zero">لم تُستخدم</item>
+        <item quantity="one">استُخدمت مرة واحدة</item>
+        <item quantity="two">استُخدمت مرتين</item>
+        <item quantity="few">استُخدمت %1$d مرات</item>
+        <item quantity="many">استُخدمت %1$d مرة</item>
+        <item quantity="other">استُخدمت %1$d مرة</item>
+    </plurals>
 </resources>

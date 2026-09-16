@@ -100,7 +100,33 @@
     <string name="excellent">Excellent</string>
     <string name="needs_attention">Needs Attention</string>
     <string name="critical">Critical</string>
-    <string name="used_times">Used %1$d times</string>
     <string name="no_issues">No issues found. Good job!</string>
 
+
+    <!--    Accessibility and misc UI    -->
+    <string name="cd_drag_handle">Reorder</string>
+    <string name="cd_edit">Edit</string>
+    <string name="cd_delete">Delete</string>
+    <string name="cd_add_detail">Add detail</string>
+    <string name="cd_add_entry">Add entry</string>
+    <string name="cd_settings">Settings</string>
+    <string name="cd_generate_password">Generate password</string>
+    <string name="cd_password_options">Password options</string>
+    <string name="cd_clear_search">Clear search</string>
+    <string name="cd_open">Open</string>
+    <string name="cd_back">Back</string>
+    <string name="password_settings">Password settings</string>
+    <string name="password_length">Length: %1$d</string>
+    <string name="security_score_percent">%1$d%%</string>
+    <string name="invalid_file_selected">Invalid file selected.</string>
+
+    <!--
+        Translators: quantity classes are NOT uniform across languages. Arabic needs
+        zero/one/two/few/many/other, Russian one/few/many/other, and Japanese/Korean/Chinese
+        only "other". Do not mirror the English two-form shape.
+    -->
+    <plurals name="password_used_times">
+        <item quantity="one">Used %1$d time</item>
+        <item quantity="other">Used %1$d times</item>
+    </plurals>
 </resources>

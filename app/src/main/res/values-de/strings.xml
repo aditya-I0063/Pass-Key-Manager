@@ -79,6 +79,24 @@
     <string name="excellent">Ausgezeichnet</string>
     <string name="needs_attention">Aufmerksamkeit erforderlich</string>
     <string name="critical">Kritisch</string>
-    <string name="used_times">%1$d mal verwendet</string>
     <string name="no_issues">Keine Probleme gefunden. Gut gemacht!</string>
+    <string name="cd_drag_handle">Neu anordnen</string>
+    <string name="cd_edit">Bearbeiten</string>
+    <string name="cd_delete">Löschen</string>
+    <string name="cd_add_detail">Detail hinzufügen</string>
+    <string name="cd_add_entry">Eintrag hinzufügen</string>
+    <string name="cd_settings">Einstellungen</string>
+    <string name="cd_generate_password">Passwort generieren</string>
+    <string name="cd_password_options">Passwortoptionen</string>
+    <string name="cd_clear_search">Suche löschen</string>
+    <string name="cd_open">Öffnen</string>
+    <string name="cd_back">Zurück</string>
+    <string name="password_settings">Passworteinstellungen</string>
+    <string name="password_length">Länge: %1$d</string>
+    <string name="security_score_percent">%1$d %%</string>
+    <string name="invalid_file_selected">Ungültige Datei ausgewählt.</string>
+    <plurals name="password_used_times">
+        <item quantity="one">%1$d Mal verwendet</item>
+        <item quantity="other">%1$d Mal verwendet</item>
+    </plurals>
 </resources>

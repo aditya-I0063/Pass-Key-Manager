@@ -50,7 +50,7 @@ fun PasskeySearchBar(
     ) {
         Icon(
             imageVector = Icons.Default.Search,
-            contentDescription = "Search Icon",
+            contentDescription = null,
             tint = MaterialTheme.colorScheme.outline
         )
 
@@ -89,7 +89,7 @@ fun PasskeySearchBar(
                     interactionSource = remember { MutableInteractionSource() },
                 ),
                 imageVector = Icons.Default.Close,
-                contentDescription = "Close Icon",
+                contentDescription = stringResource(R.string.cd_clear_search),
                 tint = MaterialTheme.colorScheme.outline
             )
         }

@@ -1,9 +1,5 @@
 package com.bhardwaj.passkey.domain.viewModels
 
-import android.app.Application
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -36,7 +32,6 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val repository: PasskeyRepository,
-    private val appContext: Application,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _uiEvents = Channel<UiEvents>()
@@ -44,7 +39,8 @@ class DetailViewModel @Inject constructor(
 
     val detailTitle = savedStateHandle.getStateFlow(DETAIL_TITLE, "")
     val detailResponse = savedStateHandle.getStateFlow(DETAIL_RESPONSE, "")
-    val bottomSheetHeading = savedStateHandle.getStateFlow(BOTTOM_SHEET_HEADING, "")
+    /** true = editing an existing row, false = adding. Resolved to text by the UI. */
+    val isEditingSheet = savedStateHandle.getStateFlow(BOTTOM_SHEET_HEADING, false)
     val previewId = savedStateHandle.get<Long>("previewId") ?: -1
 
     private val _searchText = MutableStateFlow("")
@@ -93,8 +89,7 @@ class DetailViewModel @Inject constructor(
     fun onEvent(event: DetailEvents) {
         when (event) {
             DetailEvents.OnAddDetailClick -> {
-                savedStateHandle[BOTTOM_SHEET_HEADING] =
-                    UiText.StringResource(R.string.add).asString(context = appContext)
+                savedStateHandle[BOTTOM_SHEET_HEADING] = false
                 isSheetOpen = true
                 _searchText.value = ""
             }
@@ -110,8 +105,7 @@ class DetailViewModel @Inject constructor(
                     _searchText.value = ""
                     repository.getDetailById(event.details.detailsId!!)?.let { detail ->
                         isSheetOpen = true
-                        savedStateHandle[BOTTOM_SHEET_HEADING] =
-                            UiText.StringResource(R.string.edit).asString(context = appContext)
+                        savedStateHandle[BOTTOM_SHEET_HEADING] = true
                         savedStateHandle[DETAIL_TITLE] = event.details.question
                         savedStateHandle[DETAIL_RESPONSE] = event.details.answer
                         this@DetailViewModel.detail = detail
@@ -136,7 +130,6 @@ class DetailViewModel @Inject constructor(
                         sendUiEvents(
                             UiEvents.ShowSnackBar(
                                 message = UiText.StringResource(R.string.enter_valid_title_n_response)
-                                    .asString(context = appContext)
                             )
                         )
                         return@launch
@@ -146,7 +139,6 @@ class DetailViewModel @Inject constructor(
                         sendUiEvents(
                             UiEvents.ShowSnackBar(
                                 message = UiText.StringResource(R.string.something_went_wrong)
-                                    .asString(context = appContext)
                             )
                         )
                         return@launch
@@ -177,17 +169,7 @@ class DetailViewModel @Inject constructor(
             }
 
             is DetailEvents.OnLongPress -> {
-                val clipboardManager =
-                    appContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                val clipData =
-                    ClipData.newPlainText("Text Copied Successfully.", event.detailsDescription)
-                clipboardManager.setPrimaryClip(clipData)
-                sendUiEvents(
-                    UiEvents.ShowSnackBar(
-                        message = UiText.StringResource(R.string.copied)
-                            .asString(context = appContext)
-                    )
-                )
+                sendUiEvents(UiEvents.CopyToClipboard(value = event.detailsDescription, isSensitive = true))
             }
 
             is DetailEvents.OnSwipedLeft -> {

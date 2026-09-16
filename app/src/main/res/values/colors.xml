@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources />
+<resources>
+    <!--
+        Cold-start window background. This is what the system draws before Compose renders, so
+        it should match MaterialTheme.colorScheme.background as closely as possible; otherwise
+        launching the app flashes the wrong colour. The night variant lives in values-night.
+    -->
+    <color name="window_background">#FFFBFE</color>
+</resources>

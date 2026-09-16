@@ -118,7 +118,6 @@ class SettingsViewModel @Inject constructor(
                     sendUiEvents(
                         UiEvents.ShowSnackBar(
                             message = UiText.StringResource(R.string.coming_soon)
-                                .asString(context = appContext)
                         )
                     )
                 } else {
@@ -148,17 +147,13 @@ class SettingsViewModel @Inject constructor(
                     if (exportDataToStorage(fileName)) {
                         sendUiEvents(
                             UiEvents.ShowSnackBar(
-                                message = UiText.StringResource(
-                                    R.string.export_download
-                                ).asString(appContext)
+                                message = UiText.StringResource(R.string.export_download)
                             )
                         )
                     } else {
                         sendUiEvents(
                             UiEvents.ShowSnackBar(
-                                message = UiText.StringResource(
-                                    R.string.something_went_wrong
-                                ).asString(appContext)
+                                message = UiText.StringResource(R.string.something_went_wrong)
                             )
                         )
                     }
@@ -170,17 +165,13 @@ class SettingsViewModel @Inject constructor(
                     if (importDateFromStorage(event.content)) {
                         sendUiEvents(
                             UiEvents.ShowSnackBar(
-                                message = UiText.StringResource(
-                                    R.string.import_success
-                                ).asString(appContext)
+                                message = UiText.StringResource(R.string.import_success)
                             )
                         )
                     } else {
                         sendUiEvents(
                             UiEvents.ShowSnackBar(
-                                message = UiText.StringResource(
-                                    R.string.import_failed
-                                ).asString(appContext)
+                                message = UiText.StringResource(R.string.import_failed)
                             )
                         )
                     }

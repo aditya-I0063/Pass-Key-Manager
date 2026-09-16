@@ -79,7 +79,25 @@
     <string name="excellent">అద్భుతం</string>
     <string name="needs_attention">శ్రద్ధ అవసరం</string>
     <string name="critical">క్లిష్టమైన</string>
-    <string name="used_times">%1$d సార్లు ఉపయోగించబడింది</string>
     <string name="no_issues">ఎటువంటి సమస్యలు కనుగొనబడలేదు. బాగా చేసారు!</string>
+    <string name="cd_drag_handle">క్రమం మార్చు</string>
+    <string name="cd_edit">సవరించు</string>
+    <string name="cd_delete">తొలగించు</string>
+    <string name="cd_add_detail">వివరం జోడించు</string>
+    <string name="cd_add_entry">ఎంట్రీ జోడించు</string>
+    <string name="cd_settings">సెట్టింగ్‌లు</string>
+    <string name="cd_generate_password">పాస్‌వర్డ్ సృష్టించు</string>
+    <string name="cd_password_options">పాస్‌వర్డ్ ఎంపికలు</string>
+    <string name="cd_clear_search">శోధనను తొలగించు</string>
+    <string name="cd_open">తెరువు</string>
+    <string name="cd_back">వెనుకకు</string>
+    <string name="password_settings">పాస్‌వర్డ్ సెట్టింగ్‌లు</string>
+    <string name="password_length">పొడవు: %1$d</string>
+    <string name="security_score_percent">%1$d%%</string>
+    <string name="invalid_file_selected">చెల్లని ఫైల్ ఎంపిక చేయబడింది.</string>
+    <plurals name="password_used_times">
+        <item quantity="one">%1$d సారి ఉపయోగించబడింది</item>
+        <item quantity="other">%1$d సార్లు ఉపయోగించబడింది</item>
+    </plurals>
 </resources>
 

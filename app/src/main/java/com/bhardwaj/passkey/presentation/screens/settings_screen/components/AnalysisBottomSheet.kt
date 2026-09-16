@@ -42,6 +42,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -202,7 +203,7 @@ fun ScoreCircularIndicator(
         }
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
-                text = "$score%",
+                text = stringResource(R.string.security_score_percent, score),
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
                 fontFamily = Poppins,
@@ -281,7 +282,7 @@ fun SimpleAnalysisItem(detail: Details, onClick: () -> Unit) {
             }
             Icon(
                 imageVector = Icons.AutoMirrored.Rounded.OpenInNew,
-                contentDescription = "Open",
+                contentDescription = stringResource(R.string.cd_open),
                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.size(20.dp)
             )
@@ -307,7 +308,7 @@ fun ReusedAnalysisItem(
                 modifier = Modifier.padding(bottom = 8.dp)
             ) {
                 Text(
-                    text = stringResource(R.string.used_times, count),
+                    text = pluralStringResource(R.plurals.password_used_times, count, count),
                     fontFamily = Poppins,
                     fontWeight = FontWeight.Bold,
                     fontSize = 14.sp,

@@ -48,6 +48,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
@@ -66,6 +67,9 @@ import com.bhardwaj.passkey.presentation.screens.preview_screen.components.Previ
 import com.bhardwaj.passkey.presentation.theme.BebasNeue
 import com.bhardwaj.passkey.utils.ButtonType
 import com.bhardwaj.passkey.utils.Categories
+import com.bhardwaj.passkey.utils.asString
+import com.bhardwaj.passkey.utils.SecureClipboard
+import com.bhardwaj.passkey.utils.UiText
 import com.bhardwaj.passkey.utils.UiEvents
 import kotlinx.coroutines.launch
 import sh.calvin.reorderable.ReorderableItem
@@ -83,7 +87,10 @@ fun PreviewScreen(
     val categoryNameMap = Categories.entries.associate { it.name to stringResource(it.labelRes) }
 
     val previewHeading by viewModel.previewHeading.collectAsState()
-    val bottomSheetHeading by viewModel.bottomSheetHeading.collectAsState()
+    val isEditingSheet by viewModel.isEditingSheet.collectAsState()
+    // Resolved here rather than in the ViewModel so it follows the app locale.
+    val bottomSheetHeading =
+        stringResource(if (isEditingSheet) R.string.edit else R.string.add)
     val searchText by viewModel.searchText.collectAsState()
     val previews by viewModel.previews.collectAsState()
 
@@ -100,6 +107,8 @@ fun PreviewScreen(
         }
     }
 
+    val context = LocalContext.current
+
     LaunchedEffect(key1 = true) {
         viewModel.uiEvents.collect { event ->
             when (event) {
@@ -107,11 +116,27 @@ fun PreviewScreen(
                 is UiEvents.ShowSnackBar -> {
                     scope.launch {
                         snackBarHostState.showSnackbar(
-                            message = event.message,
-                            actionLabel = event.action
+                            message = event.message.asString(context),
+                            actionLabel = event.action?.asString(context)
                         )
                     }
                 }
+                is UiEvents.CopyToClipboard -> {
+                    SecureClipboard.copy(
+                        context = context,
+                        text = event.value,
+                        isSensitive = event.isSensitive
+                    )
+                    // Android 13+ shows its own copy confirmation, so a second one is noise.
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                        scope.launch {
+                            snackBarHostState.showSnackbar(
+                                message = UiText.StringResource(R.string.copied).asString(context)
+                            )
+                        }
+                    }
+                }
+
 
                 else -> Unit
             }
@@ -143,7 +168,7 @@ fun PreviewScreen(
                 content = {
                     Icon(
                         imageVector = Icons.Default.Add,
-                        contentDescription = "Add Preview",
+                        contentDescription = stringResource(R.string.cd_add_entry),
                     )
                 }
             )
@@ -164,12 +189,12 @@ fun PreviewScreen(
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.icon_logo),
-                        contentDescription = "App Icon",
+                        contentDescription = null,
                         tint = MaterialTheme.colorScheme.primary
                     )
                     Icon(
                         imageVector = Icons.Default.Settings,
-                        contentDescription = "Settings Icon",
+                        contentDescription = stringResource(R.string.cd_settings),
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier
                             .padding(8.dp)
@@ -253,7 +278,7 @@ fun PreviewScreen(
                                             ) {
                                                 Icon(
                                                     imageVector = Icons.Default.Delete,
-                                                    contentDescription = "Icon Delete",
+                                                    contentDescription = stringResource(R.string.cd_delete),
                                                     modifier = Modifier.align(Alignment.CenterEnd),
                                                     tint = MaterialTheme.colorScheme.background
                                                 )

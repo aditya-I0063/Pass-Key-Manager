@@ -79,6 +79,26 @@
     <string name="excellent">Отлично</string>
     <string name="needs_attention">Требует внимания</string>
     <string name="critical">Критично</string>
-    <string name="used_times">Использовано %1$d раз</string>
     <string name="no_issues">Проблем не обнаружено. Отличная работа!</string>
+    <string name="cd_drag_handle">Изменить порядок</string>
+    <string name="cd_edit">Изменить</string>
+    <string name="cd_delete">Удалить</string>
+    <string name="cd_add_detail">Добавить деталь</string>
+    <string name="cd_add_entry">Добавить запись</string>
+    <string name="cd_settings">Настройки</string>
+    <string name="cd_generate_password">Создать пароль</string>
+    <string name="cd_password_options">Параметры пароля</string>
+    <string name="cd_clear_search">Очистить поиск</string>
+    <string name="cd_open">Открыть</string>
+    <string name="cd_back">Назад</string>
+    <string name="password_settings">Настройки пароля</string>
+    <string name="password_length">Длина: %1$d</string>
+    <string name="security_score_percent">%1$d %%</string>
+    <string name="invalid_file_selected">Выбран недопустимый файл.</string>
+    <plurals name="password_used_times">
+        <item quantity="one">Использован %1$d раз</item>
+        <item quantity="few">Использован %1$d раза</item>
+        <item quantity="many">Использован %1$d раз</item>
+        <item quantity="other">Использован %1$d раза</item>
+    </plurals>
 </resources>

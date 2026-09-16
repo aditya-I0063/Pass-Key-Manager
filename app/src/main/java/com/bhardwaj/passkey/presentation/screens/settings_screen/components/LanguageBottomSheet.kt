@@ -182,7 +182,7 @@ fun LanguageBottomSheet(
                     onClick = { onBackIconClick() }
                 ),
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-            contentDescription = "Back Icon"
+            contentDescription = stringResource(R.string.cd_back)
         )
         Text(
             modifier = Modifier.padding(start = 16.dp),

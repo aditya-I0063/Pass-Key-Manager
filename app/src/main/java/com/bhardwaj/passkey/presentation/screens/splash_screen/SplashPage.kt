@@ -77,7 +77,7 @@ fun SplashPage(
         ) {
             Image(
                 painter = painterResource(id = R.drawable.splash_logo),
-                contentDescription = "App Logo",
+                contentDescription = null,
                 modifier = Modifier
                     .fillMaxSize()
                     .scale(scale.value)

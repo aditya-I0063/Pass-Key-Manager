@@ -79,6 +79,23 @@
     <string name="excellent">优秀</string>
     <string name="needs_attention">需要注意</string>
     <string name="critical">严重</string>
-    <string name="used_times">已使用 %1$d 次</string>
     <string name="no_issues">未发现问题。干得好！</string>
+    <string name="cd_drag_handle">重新排序</string>
+    <string name="cd_edit">编辑</string>
+    <string name="cd_delete">删除</string>
+    <string name="cd_add_detail">添加详情</string>
+    <string name="cd_add_entry">添加条目</string>
+    <string name="cd_settings">设置</string>
+    <string name="cd_generate_password">生成密码</string>
+    <string name="cd_password_options">密码选项</string>
+    <string name="cd_clear_search">清除搜索</string>
+    <string name="cd_open">打开</string>
+    <string name="cd_back">返回</string>
+    <string name="password_settings">密码设置</string>
+    <string name="password_length">长度：%1$d</string>
+    <string name="security_score_percent">%1$d%%</string>
+    <string name="invalid_file_selected">选择的文件无效。</string>
+    <plurals name="password_used_times">
+        <item quantity="other">已使用 %1$d 次</item>
+    </plurals>
 </resources>

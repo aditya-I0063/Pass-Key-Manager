@@ -1,9 +1,5 @@
 package com.bhardwaj.passkey.domain.viewModels
 
-import android.app.Application
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -36,7 +32,6 @@ import javax.inject.Inject
 @HiltViewModel
 class PreviewViewModel @Inject constructor(
     private val repository: PasskeyRepository,
-    private val appContext: Application,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _uiEvents = Channel<UiEvents>()
@@ -44,7 +39,8 @@ class PreviewViewModel @Inject constructor(
 
     val categoryName = savedStateHandle.getStateFlow(PREVIEW_CATEGORY_NAME, Categories.BANKS.name)
     val previewHeading = savedStateHandle.getStateFlow(PREVIEW_HEADING, "")
-    val bottomSheetHeading = savedStateHandle.getStateFlow(BOTTOM_SHEET_HEADING, "")
+    /** true = editing an existing row, false = adding. Resolved to text by the UI. */
+    val isEditingSheet = savedStateHandle.getStateFlow(BOTTOM_SHEET_HEADING, false)
 
     private val _searchText = MutableStateFlow("")
     val searchText = _searchText.asStateFlow()
@@ -82,8 +78,7 @@ class PreviewViewModel @Inject constructor(
             }
 
             PreviewEvents.OnAddPreviewClick -> {
-                savedStateHandle[BOTTOM_SHEET_HEADING] =
-                    UiText.StringResource(R.string.add).asString(context = appContext)
+                savedStateHandle[BOTTOM_SHEET_HEADING] = false
                 isSheetOpen = true
                 _searchText.value = ""
             }
@@ -98,8 +93,7 @@ class PreviewViewModel @Inject constructor(
                     _searchText.value = ""
                     repository.getPreviewById(event.preview.previewId!!)?.let { preview ->
                         isSheetOpen = true
-                        savedStateHandle[BOTTOM_SHEET_HEADING] =
-                            UiText.StringResource(R.string.edit).asString(context = appContext)
+                        savedStateHandle[BOTTOM_SHEET_HEADING] = true
                         savedStateHandle[PREVIEW_HEADING] = event.preview.heading
                         this@PreviewViewModel.preview = preview
                     }
@@ -117,7 +111,6 @@ class PreviewViewModel @Inject constructor(
                         sendUiEvents(
                             UiEvents.ShowSnackBar(
                                 message = UiText.StringResource(R.string.enter_valid_heading)
-                                    .asString(context = appContext)
                             )
                         )
                         return@launch
@@ -144,7 +137,6 @@ class PreviewViewModel @Inject constructor(
                         sendUiEvents(
                             UiEvents.ShowSnackBar(
                                 message = UiText.StringResource(R.string.heading_exists)
-                                    .asString(context = appContext)
                             )
                         )
                         return@launch
@@ -171,17 +163,7 @@ class PreviewViewModel @Inject constructor(
             }
 
             is PreviewEvents.OnLongPress -> {
-                val clipboardManager =
-                    appContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                val clipData =
-                    ClipData.newPlainText("Text Copied Successfully.", event.previewHeading)
-                clipboardManager.setPrimaryClip(clipData)
-                sendUiEvents(
-                    UiEvents.ShowSnackBar(
-                        message = UiText.StringResource(R.string.copied)
-                            .asString(context = appContext)
-                    )
-                )
+                sendUiEvents(UiEvents.CopyToClipboard(value = event.previewHeading, isSensitive = false))
             }
 
             PreviewEvents.OnSettingsClick -> {

@@ -4,6 +4,12 @@
     <style name="Theme.PassKey" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">@color/window_background</item>
+        <!--
+            windowLightStatusBar is deliberately NOT set here. MainActivity calls
+            enableEdgeToEdge(), whose default SystemBarStyle.auto resolves bar icon contrast
+            from the current configuration. Hardcoding it fought that and left dark icons on a
+            dark status bar in night mode.
+        -->
     </style>
 </resources>

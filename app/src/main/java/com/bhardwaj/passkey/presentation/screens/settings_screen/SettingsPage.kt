@@ -49,6 +49,7 @@ import com.bhardwaj.passkey.presentation.screens.settings_screen.components.Sett
 import com.bhardwaj.passkey.presentation.theme.BebasNeue
 import com.bhardwaj.passkey.presentation.theme.Poppins
 import com.bhardwaj.passkey.utils.Constants.Companion.FILE_TYPE
+import com.bhardwaj.passkey.utils.asString
 import com.bhardwaj.passkey.utils.UiEvents
 import kotlinx.coroutines.launch
 
@@ -64,6 +65,8 @@ fun SettingsScreen(
     val scaffoldState = rememberBottomSheetScaffoldState()
 
     val context = LocalContext.current
+    val invalidFileMessage = stringResource(R.string.invalid_file_selected)
+
     val importDataLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.OpenDocument()
     ) { document ->
@@ -75,7 +78,9 @@ fun SettingsScreen(
                 }
             } else {
                 scope.launch {
-                    snackBarHostState.showSnackbar(message = "Invalid file selected.")
+                    snackBarHostState.showSnackbar(
+                        message = invalidFileMessage
+                    )
                 }
             }
         }
@@ -92,11 +97,13 @@ fun SettingsScreen(
                 is UiEvents.ShowSnackBar -> {
                     scope.launch {
                         snackBarHostState.showSnackbar(
-                            message = event.message,
-                            actionLabel = event.action
+                            message = event.message.asString(context),
+                            actionLabel = event.action?.asString(context)
                         )
                     }
                 }
+
+                else -> Unit
             }
         }
     }
@@ -154,7 +161,7 @@ fun SettingsScreen(
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_logo),
-                            contentDescription = "App Icon",
+                            contentDescription = null,
                             tint = MaterialTheme.colorScheme.primary
                         )
                         Text(

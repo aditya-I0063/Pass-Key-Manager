@@ -131,7 +131,7 @@ fun DetailsBottomSheet(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Key,
-                            contentDescription = "Refresh",
+                            contentDescription = stringResource(R.string.cd_generate_password),
                             tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
@@ -148,7 +148,7 @@ fun DetailsBottomSheet(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Settings,
-                            contentDescription = "Settings",
+                            contentDescription = stringResource(R.string.cd_password_options),
                             tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }

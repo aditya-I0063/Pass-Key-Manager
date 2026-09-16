@@ -79,6 +79,23 @@
     <string name="excellent">優秀</string>
     <string name="needs_attention">注意が必要</string>
     <string name="critical">危険</string>
-    <string name="used_times">%1$d 回使用</string>
     <string name="no_issues">問題は見つかりませんでした。素晴らしい！</string>
+    <string name="cd_drag_handle">並べ替え</string>
+    <string name="cd_edit">編集</string>
+    <string name="cd_delete">削除</string>
+    <string name="cd_add_detail">詳細を追加</string>
+    <string name="cd_add_entry">項目を追加</string>
+    <string name="cd_settings">設定</string>
+    <string name="cd_generate_password">パスワードを生成</string>
+    <string name="cd_password_options">パスワードのオプション</string>
+    <string name="cd_clear_search">検索をクリア</string>
+    <string name="cd_open">開く</string>
+    <string name="cd_back">戻る</string>
+    <string name="password_settings">パスワード設定</string>
+    <string name="password_length">長さ: %1$d</string>
+    <string name="security_score_percent">%1$d%%</string>
+    <string name="invalid_file_selected">選択したファイルは無効です。</string>
+    <plurals name="password_used_times">
+        <item quantity="other">%1$d 回使用</item>
+    </plurals>
 </resources>
