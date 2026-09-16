@@ -17,8 +17,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.bhardwaj.passkey.R
-import com.bhardwaj.passkey.domain.events.OnBoardingEvents
-import com.bhardwaj.passkey.domain.viewModels.OnBoardingViewModel
+import com.bhardwaj.passkey.presentation.screens.onboarding_screens.OnBoardingEvents
+import com.bhardwaj.passkey.presentation.screens.onboarding_screens.OnBoardingViewModel
 import com.bhardwaj.passkey.presentation.screens.onboarding_screens.components.OnBoardingItem
 import com.bhardwaj.passkey.presentation.screens.onboarding_screens.components.OnBoardingPageIndicator
 import com.bhardwaj.passkey.utils.UiEvents

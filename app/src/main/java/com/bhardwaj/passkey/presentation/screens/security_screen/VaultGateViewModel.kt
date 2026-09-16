@@ -1,4 +1,4 @@
-package com.bhardwaj.passkey.domain.viewModels
+package com.bhardwaj.passkey.presentation.screens.security_screen
 
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel

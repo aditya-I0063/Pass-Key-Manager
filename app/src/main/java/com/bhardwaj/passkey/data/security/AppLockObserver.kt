@@ -1,10 +1,11 @@
 package com.bhardwaj.passkey.data.security
 
+import com.bhardwaj.passkey.domain.model.AutoLockTimeout
 import android.content.Context
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import com.bhardwaj.passkey.data.local.VaultDatabaseProvider
-import com.bhardwaj.passkey.data.repository.DataStoreRepository
+import com.bhardwaj.passkey.domain.repository.PreferencesRepository
 import com.bhardwaj.passkey.utils.SecureClipboard
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
@@ -26,7 +27,7 @@ class AppLockObserver @Inject constructor(
     @param:ApplicationContext private val context: Context,
     private val session: VaultSession,
     private val vault: VaultDatabaseProvider,
-    private val dataStoreRepository: DataStoreRepository
+    private val preferences: PreferencesRepository
 ) : DefaultLifecycleObserver {
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
@@ -71,10 +72,5 @@ class AppLockObserver @Inject constructor(
         }
     }
 
-    suspend fun timeout(): AutoLockTimeout = AutoLockTimeout.fromMillis(
-        dataStoreRepository.readPreference(
-            key = DataStoreRepository.autoLockTimeoutKey,
-            defaultValue = AutoLockTimeout.DEFAULT.millis
-        ).first()
-    )
+    suspend fun timeout(): AutoLockTimeout = preferences.autoLockTimeout.first()
 }

@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bhardwaj.passkey.R
-import com.bhardwaj.passkey.domain.models.Language
+import com.bhardwaj.passkey.domain.model.Language
 import com.bhardwaj.passkey.presentation.theme.Poppins
 
 @Composable

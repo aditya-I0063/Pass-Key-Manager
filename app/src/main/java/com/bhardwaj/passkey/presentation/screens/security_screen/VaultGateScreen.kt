@@ -35,7 +35,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.bhardwaj.passkey.R
-import com.bhardwaj.passkey.domain.viewModels.VaultGateViewModel
+import com.bhardwaj.passkey.presentation.screens.security_screen.VaultGateViewModel
 import com.bhardwaj.passkey.presentation.screens.settings_screen.components.BackupPasswordDialog
 
 /**

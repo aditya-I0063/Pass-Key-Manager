@@ -20,7 +20,7 @@ import com.bhardwaj.passkey.data.security.LockReason
 import com.bhardwaj.passkey.presentation.navigation.Routes
 import kotlinx.coroutines.delay
 import com.bhardwaj.passkey.data.security.VaultSession
-import com.bhardwaj.passkey.domain.viewModels.SplashViewModel
+import com.bhardwaj.passkey.presentation.screens.splash_screen.SplashViewModel
 import javax.inject.Inject
 import com.bhardwaj.passkey.presentation.navigation.NavGraph
 import com.bhardwaj.passkey.presentation.theme.PassKeyTheme

@@ -1,4 +1,4 @@
-package com.bhardwaj.passkey.domain.models
+package com.bhardwaj.passkey.domain.model
 
 data class Language(
     val languageId: String,

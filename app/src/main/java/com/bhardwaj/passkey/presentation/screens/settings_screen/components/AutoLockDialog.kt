@@ -22,7 +22,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.SecureFlagPolicy
 import com.bhardwaj.passkey.R
-import com.bhardwaj.passkey.data.security.AutoLockTimeout
+import com.bhardwaj.passkey.domain.model.AutoLockTimeout
+
+/** Display label for a timeout. Lives here because text is a presentation concern. */
+@androidx.annotation.StringRes
+private fun AutoLockTimeout.labelRes(): Int = when (this) {
+    AutoLockTimeout.IMMEDIATELY -> R.string.auto_lock_immediately
+    AutoLockTimeout.SECONDS_15 -> R.string.auto_lock_15_seconds
+    AutoLockTimeout.SECONDS_30 -> R.string.auto_lock_30_seconds
+    AutoLockTimeout.MINUTE_1 -> R.string.auto_lock_1_minute
+    AutoLockTimeout.MINUTES_5 -> R.string.auto_lock_5_minutes
+    AutoLockTimeout.NEVER -> R.string.auto_lock_never
+}
 
 @Composable
 fun AutoLockDialog(
@@ -52,7 +63,7 @@ fun AutoLockDialog(
                         )
                         Text(
                             modifier = Modifier.padding(start = 8.dp),
-                            text = stringResource(option.labelRes)
+                            text = stringResource(option.labelRes())
                         )
                     }
                 }

@@ -1,9 +1,9 @@
-package com.bhardwaj.passkey.domain.viewModels
+package com.bhardwaj.passkey.presentation.screens.onboarding_screens
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bhardwaj.passkey.data.repository.DataStoreRepository
-import com.bhardwaj.passkey.domain.events.OnBoardingEvents
+import com.bhardwaj.passkey.domain.repository.PreferencesRepository
+import com.bhardwaj.passkey.presentation.screens.onboarding_screens.OnBoardingEvents
 import com.bhardwaj.passkey.presentation.navigation.Routes
 import com.bhardwaj.passkey.utils.UiEvents
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
-    private val repository: DataStoreRepository
+    private val preferences: PreferencesRepository
 ) : ViewModel() {
 
     private val _uiEvents = Channel<UiEvents>()
@@ -24,7 +24,7 @@ class OnBoardingViewModel @Inject constructor(
         when (event) {
             is OnBoardingEvents.OnBoardingComplete -> {
                 viewModelScope.launch {
-                    repository.savePreference(key = DataStoreRepository.onBoardingKey, value = true)
+                    preferences.setOnboardingCompleted(true)
                     _uiEvents.send(UiEvents.Navigate(Routes.SECURITY_PAGE))
                 }
             }

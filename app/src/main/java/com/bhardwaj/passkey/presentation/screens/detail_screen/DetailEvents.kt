@@ -1,4 +1,4 @@
-package com.bhardwaj.passkey.domain.events
+package com.bhardwaj.passkey.presentation.screens.detail_screen
 
 import androidx.compose.foundation.lazy.LazyListItemInfo
 import com.bhardwaj.passkey.data.local.entity.Details

@@ -1,16 +1,16 @@
-package com.bhardwaj.passkey.domain.repository
+package com.bhardwaj.passkey.data.repository
 
 import androidx.room.withTransaction
 import com.bhardwaj.passkey.data.local.VaultDatabaseProvider
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
-import com.bhardwaj.passkey.data.local.PassKeyDatabase
+import com.bhardwaj.passkey.data.local.PasskeyDatabase
 import com.bhardwaj.passkey.data.local.dao.DetailsDao
 import com.bhardwaj.passkey.data.local.dao.PreviewDao
 import com.bhardwaj.passkey.data.local.entity.Details
 import com.bhardwaj.passkey.data.local.entity.Preview
-import com.bhardwaj.passkey.data.repository.PasskeyRepository
+import com.bhardwaj.passkey.domain.repository.PasskeyRepository
 import kotlinx.coroutines.flow.Flow
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -29,7 +29,7 @@ class PasskeyRepositoryImpl(
      * leave collectors on a closed database and throw
      * "attempt to re-open an already-closed object" on the next emission.
      */
-    private fun <T> vaultFlow(block: (PassKeyDatabase) -> Flow<List<T>>): Flow<List<T>> =
+    private fun <T> vaultFlow(block: (PasskeyDatabase) -> Flow<List<T>>): Flow<List<T>> =
         vault.database.flatMapLatest { db -> db?.let(block) ?: flowOf(emptyList()) }
 
     override suspend fun <R> runInTransaction(block: suspend () -> R): R =

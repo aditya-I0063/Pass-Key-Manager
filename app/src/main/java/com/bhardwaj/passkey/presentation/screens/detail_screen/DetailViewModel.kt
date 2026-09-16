@@ -1,4 +1,4 @@
-package com.bhardwaj.passkey.domain.viewModels
+package com.bhardwaj.passkey.presentation.screens.detail_screen
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bhardwaj.passkey.R
 import com.bhardwaj.passkey.data.local.entity.Details
-import com.bhardwaj.passkey.data.repository.PasskeyRepository
-import com.bhardwaj.passkey.domain.events.DetailEvents
+import com.bhardwaj.passkey.domain.repository.PasskeyRepository
+import com.bhardwaj.passkey.presentation.screens.detail_screen.DetailEvents
 import com.bhardwaj.passkey.utils.Constants.Companion.BOTTOM_SHEET_HEADING
 import com.bhardwaj.passkey.utils.PasswordGenerator
 import com.bhardwaj.passkey.utils.UiEvents

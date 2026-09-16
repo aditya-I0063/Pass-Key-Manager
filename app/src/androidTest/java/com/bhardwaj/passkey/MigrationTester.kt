@@ -4,7 +4,7 @@ import androidx.room.testing.MigrationTestHelper
 import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.bhardwaj.passkey.data.local.PassKeyDatabase
+import com.bhardwaj.passkey.data.local.PasskeyDatabase
 import com.bhardwaj.passkey.utils.Constants.Companion.DETAILS_TABLE
 import com.bhardwaj.passkey.utils.Constants.Companion.PREVIEW_TABLE
 import com.bhardwaj.passkey.utils.MIGRATION_1_2
@@ -22,7 +22,7 @@ class MigrationTester {
     @get:Rule
     val helper = MigrationTestHelper(
         InstrumentationRegistry.getInstrumentation(),
-        PassKeyDatabase::class.java,
+        PasskeyDatabase::class.java,
         listOf(),
         FrameworkSQLiteOpenHelperFactory()
     )

@@ -1,5 +1,6 @@
 package com.bhardwaj.passkey.presentation.screens.settings_screen
 
+import com.bhardwaj.passkey.domain.model.AutoLockTimeout
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
@@ -53,8 +54,8 @@ import java.util.Locale
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.bhardwaj.passkey.presentation.screens.settings_screen.components.AutoLockDialog
 import com.bhardwaj.passkey.R
-import com.bhardwaj.passkey.domain.events.SettingsEvents
-import com.bhardwaj.passkey.domain.viewModels.SettingsViewModel
+import com.bhardwaj.passkey.presentation.screens.settings_screen.SettingsEvents
+import com.bhardwaj.passkey.presentation.screens.settings_screen.SettingsViewModel
 import com.bhardwaj.passkey.presentation.screens.settings_screen.components.AnalysisBottomSheet
 import com.bhardwaj.passkey.presentation.screens.settings_screen.components.FaqItem
 import com.bhardwaj.passkey.presentation.screens.settings_screen.components.LanguageBottomSheet

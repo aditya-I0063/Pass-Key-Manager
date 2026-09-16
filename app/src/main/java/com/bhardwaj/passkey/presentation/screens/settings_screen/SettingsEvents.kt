@@ -1,10 +1,10 @@
-package com.bhardwaj.passkey.domain.events
+package com.bhardwaj.passkey.presentation.screens.settings_screen
 
 import android.net.Uri
 import com.bhardwaj.passkey.data.backup.ImportMode
-import com.bhardwaj.passkey.data.security.AutoLockTimeout
+import com.bhardwaj.passkey.domain.model.AutoLockTimeout
 import com.bhardwaj.passkey.data.local.entity.Details
-import com.bhardwaj.passkey.domain.models.Language
+import com.bhardwaj.passkey.domain.model.Language
 
 sealed interface SettingsEvents {
     data class OnLanguageChange(val newLanguage: Language) : SettingsEvents

@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bhardwaj.passkey.R
 import com.bhardwaj.passkey.data.local.entity.Details
-import com.bhardwaj.passkey.domain.events.DetailEvents
+import com.bhardwaj.passkey.presentation.screens.detail_screen.DetailEvents
 import com.bhardwaj.passkey.presentation.theme.BebasNeue
 import com.bhardwaj.passkey.presentation.theme.Poppins
 import sh.calvin.reorderable.ReorderableCollectionItemScope

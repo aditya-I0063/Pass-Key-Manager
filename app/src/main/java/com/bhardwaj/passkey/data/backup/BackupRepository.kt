@@ -5,7 +5,7 @@ import android.net.Uri
 import com.bhardwaj.passkey.BuildConfig
 import com.bhardwaj.passkey.data.local.entity.Details
 import com.bhardwaj.passkey.data.local.entity.Preview
-import com.bhardwaj.passkey.data.repository.PasskeyRepository
+import com.bhardwaj.passkey.domain.repository.PasskeyRepository
 import com.bhardwaj.passkey.utils.Categories
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers

@@ -59,8 +59,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.bhardwaj.passkey.R
-import com.bhardwaj.passkey.domain.events.PreviewEvents
-import com.bhardwaj.passkey.domain.viewModels.PreviewViewModel
+import com.bhardwaj.passkey.presentation.screens.preview_screen.PreviewEvents
+import com.bhardwaj.passkey.presentation.screens.preview_screen.PreviewViewModel
 import com.bhardwaj.passkey.presentation.screens.common.PassKeyButton
 import com.bhardwaj.passkey.presentation.screens.common.PasskeySearchBar
 import com.bhardwaj.passkey.presentation.screens.preview_screen.components.MainBottomNavigation

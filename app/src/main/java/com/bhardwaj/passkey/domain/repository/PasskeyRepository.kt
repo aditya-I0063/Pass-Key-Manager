@@ -1,4 +1,4 @@
-package com.bhardwaj.passkey.data.repository
+package com.bhardwaj.passkey.domain.repository
 
 import com.bhardwaj.passkey.data.local.entity.Details
 import com.bhardwaj.passkey.data.local.entity.Preview
